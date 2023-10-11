@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6purqvnh5obf"]
+
+[ext_resource type="PackedScene" uid="uid://dycinrmvaxssg" path="res://player.tscn" id="1_a16pe"]
+[ext_resource type="PackedScene" uid="uid://3od58wh8ejq3" path="res://ghoul.tscn" id="2_k5fgf"]
+
+[node name="Level1" type="TileMap"]
+format = 2
+
+[node name="Player" parent="." instance=ExtResource("1_a16pe")]
+
+[node name="Ghoul" parent="." instance=ExtResource("2_k5fgf")]
+position = Vector2(232, 79)
