@@ -3,16 +3,19 @@
 [ext_resource type="Texture2D" uid="uid://cuegnmenh5kun" path="res://Ghoul Sprite Sheet.png" id="1_udybv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_skhs1"]
+size = Vector2(20, 12)
 
 [node name="Ghoul" type="CharacterBody2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4, -32)
 scale = Vector2(2, 2)
 texture = ExtResource("1_udybv")
 hframes = 8
 vframes = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -6)
 shape = SubResource("RectangleShape2D_skhs1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
