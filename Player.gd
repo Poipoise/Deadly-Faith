@@ -3,9 +3,9 @@ extends CharacterBody2D
 signal health_changed
 
 @export var invincible = false
-@export var roll_speed = 125
-var run_speed = 75
-var sprint_speed = 125
+@export var roll_speed = 250
+var run_speed = 125
+var sprint_speed = 250
 var attacking = false
 var health = 5
 enum states {IDLE, MOVING, ATTACKING, DEAD, HURT, ROLLING}
@@ -19,12 +19,16 @@ func _physics_process(delta):
 	
 	
 	if attacking:
+		$AnimationPlayer.speed_scale = 1
 		velocity = Vector2.ZERO
 	elif state == states.ROLLING:
+		$AnimationPlayer.speed_scale = 1
 		velocity = input * roll_speed
 	elif Input.is_action_pressed("sprint"):
+		$AnimationPlayer.speed_scale = 2
 		velocity = input * sprint_speed
 	else:
+		$AnimationPlayer.speed_scale = 1
 		velocity = input * run_speed
 	
 	if not attacking and not rolling:

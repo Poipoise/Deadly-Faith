@@ -1,24 +1,112 @@
-[gd_scene load_steps=3 format=3 uid="uid://3od58wh8ejq3"]
+[gd_scene load_steps=12 format=3 uid="uid://3od58wh8ejq3"]
 
+[ext_resource type="Script" path="res://ghoul.gd" id="1_co546"]
 [ext_resource type="Texture2D" uid="uid://cuegnmenh5kun" path="res://Ghoul Sprite Sheet.png" id="1_udybv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_skhs1"]
+size = Vector2(20, 15)
+
+[sub_resource type="Animation" id="Animation_tahck"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0, 3, 0]
+}
+
+[sub_resource type="Animation" id="Animation_ydbtb"]
+resource_name = "run"
+
+[sub_resource type="Animation" id="Animation_tjcu7"]
+resource_name = "attack"
+
+[sub_resource type="Animation" id="Animation_75b6w"]
+resource_name = "death"
+
+[sub_resource type="Animation" id="Animation_aipc0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fmgr7"]
+_data = {
+"RESET": SubResource("Animation_aipc0"),
+"attack": SubResource("Animation_tjcu7"),
+"death": SubResource("Animation_75b6w"),
+"idle": SubResource("Animation_tahck"),
+"run": SubResource("Animation_ydbtb")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xqayy"]
+radius = 368.005
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qxb75"]
+radius = 49.0408
 
 [node name="Ghoul" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 13
+script = ExtResource("1_co546")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4, -31)
 scale = Vector2(2, 2)
 texture = ExtResource("1_udybv")
 hframes = 8
 vframes = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_skhs1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_fmgr7")
+}
 
 [node name="GhoulHurtBox" type="Area2D" parent="."]
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GhoulHurtBox"]
+
 [node name="Detect" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detect"]
+position = Vector2(2, -20)
+shape = SubResource("CircleShape2D_xqayy")
 
 [node name="Attack" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack"]
+position = Vector2(1, -20)
+shape = SubResource("CircleShape2D_qxb75")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[connection signal="body_entered" from="Detect" to="." method="_on_detect_body_entered"]
+[connection signal="body_exited" from="Detect" to="." method="_on_detect_body_exited"]

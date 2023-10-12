@@ -7,6 +7,7 @@
 format = 2
 
 [node name="Player" parent="." instance=ExtResource("1_a16pe")]
+collision_mask = 13
 
 [node name="Ghoul" parent="." instance=ExtResource("2_k5fgf")]
 position = Vector2(232, 79)
