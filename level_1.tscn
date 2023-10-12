@@ -1,14 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://c6purqvnh5obf"]
+[gd_scene load_steps=10 format=3 uid="uid://c6purqvnh5obf"]
 
-[ext_resource type="Texture2D" uid="uid://l2fh83ywfhtd" path="res://Forest Tileset.png" id="1_0ukfu"]
 [ext_resource type="PackedScene" uid="uid://dycinrmvaxssg" path="res://player.tscn" id="1_a16pe"]
-[ext_resource type="Texture2D" uid="uid://cy3d6qemfhcx2" path="res://Forest Props.png" id="2_1cf7r"]
 [ext_resource type="PackedScene" uid="uid://3od58wh8ejq3" path="res://ghoul.tscn" id="2_k5fgf"]
-[ext_resource type="Texture2D" uid="uid://cd10qncc15e0t" path="res://Forest BETA V3/Water Tileset.png" id="3_qofpm"]
-[ext_resource type="Texture2D" uid="uid://d22pk6gciwanx" path="res://Forest BETA V3/Forest Tilesett.png" id="4_vkqdv"]
+[ext_resource type="Texture2D" uid="uid://wei7tcxr0rgh" path="res://Forest BETA V3/Water Tileset.png" id="3_qofpm"]
+[ext_resource type="Texture2D" uid="uid://bdo26lb8ssmny" path="res://Forest BETA V3/Forest Tilesett.png" id="4_vkqdv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l2423"]
-texture = ExtResource("1_0ukfu")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -2980,7 +2977,6 @@ texture = ExtResource("1_0ukfu")
 20:33/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d4cyi"]
-texture = ExtResource("2_1cf7r")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -5642,7 +5638,6 @@ layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array(3, 1703936, 12, 65539, 1703936, 13, 4, 1769472, 12, 65540, 1769472, 13, 6, 1703936, 14, 65542, 1703936, 15, 7, 1769472, 14, 65543, 1769472, 15)
 
 [node name="Player" parent="." instance=ExtResource("1_a16pe")]
-collision_mask = 13
 
 [node name="Ghoul" parent="." instance=ExtResource("2_k5fgf")]
 position = Vector2(232, 79)

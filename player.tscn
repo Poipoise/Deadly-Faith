@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://dycinrmvaxssg"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_nd4kh"]
-[ext_resource type="Texture2D" uid="uid://b65r0pj5pp4vq" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Idle.png" id="2_58ws2"]
-[ext_resource type="Texture2D" uid="uid://cmy4v6p0lbyts" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Roll.png" id="3_x7nsc"]
-[ext_resource type="Texture2D" uid="uid://2ixroitjyrcr" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Run.png" id="4_cbcwc"]
+[ext_resource type="Texture2D" uid="uid://bei4cprb8piqi" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Idle.png" id="2_58ws2"]
+[ext_resource type="Texture2D" uid="uid://cfknha60qdaqs" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Roll.png" id="3_x7nsc"]
+[ext_resource type="Texture2D" uid="uid://bc1d0c85hn3hh" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Run.png" id="4_cbcwc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sa2ge"]
 size = Vector2(32, 15)
