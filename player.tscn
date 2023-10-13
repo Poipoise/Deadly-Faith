@@ -307,7 +307,7 @@ texture = ExtResource("2_58ws2")
 hframes = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(6, -7.5)
+position = Vector2(1, -7)
 shape = SubResource("RectangleShape2D_sa2ge")
 
 [node name="Camera2D" type="Camera2D" parent="."]

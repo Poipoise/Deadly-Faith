@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var speed = 125
+var speed = 150
 enum states {IDLE, CHASE, ATTACK, DEAD, HURT}
 var state = states.IDLE
 var player
@@ -44,12 +44,19 @@ func hurt(amount, dir):
 	if health <= 0:
 		state = states.DEAD
 
-
-
-
 func _on_detect_body_entered(body):
 	player = body
 	state = states.CHASE
 
 func _on_detect_body_exited(body):
 	state = states.IDLE
+
+
+func _on_attack_body_entered(body):
+	state = states.ATTACK
+
+
+func _on_attack_body_exited(body):
+	if attacking:
+		await $AnimationPlayer.animation_finished
+	state = states.CHASE
