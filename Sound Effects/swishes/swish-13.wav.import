@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bjuj7ps0c3dj3"
+path="res://.godot/imported/swish-13.wav-38fe32f3d0e0cbf8bb893c135c87c64e.sample"
+
+[deps]
+
+source_file="res://Sound Effects/swishes/swish-13.wav"
+dest_files=["res://.godot/imported/swish-13.wav-38fe32f3d0e0cbf8bb893c135c87c64e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

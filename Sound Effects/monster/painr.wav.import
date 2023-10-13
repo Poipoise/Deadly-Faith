@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dc6e2eqerd0bp"
+path="res://.godot/imported/painr.wav-de7d3027c5282fb208c1a7a6814a524f.sample"
+
+[deps]
+
+source_file="res://Sound Effects/monster/painr.wav"
+dest_files=["res://.godot/imported/painr.wav-de7d3027c5282fb208c1a7a6814a524f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

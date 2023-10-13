@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://be76ch17wp05k"
+path="res://.godot/imported/deathd.wav-8730230177871379fa87c5c7c17ac82b.sample"
+
+[deps]
+
+source_file="res://Sound Effects/monster/deathd.wav"
+dest_files=["res://.godot/imported/deathd.wav-8730230177871379fa87c5c7c17ac82b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
