@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://dycinrmvaxssg"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_nd4kh"]
-[ext_resource type="Texture2D" uid="uid://bei4cprb8piqi" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Idle.png" id="2_58ws2"]
-[ext_resource type="Texture2D" uid="uid://cfknha60qdaqs" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Roll.png" id="3_x7nsc"]
-[ext_resource type="Texture2D" uid="uid://bc1d0c85hn3hh" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Run.png" id="4_cbcwc"]
+[ext_resource type="Texture2D" uid="uid://cj5ti1wg6ry8f" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Idle.png" id="2_h6hpf"]
+[ext_resource type="Texture2D" uid="uid://bvtwjq8s0a7ga" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Roll.png" id="3_52pjx"]
+[ext_resource type="Texture2D" uid="uid://dgib3vkg5vq0l" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Run.png" id="4_1sk1w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sa2ge"]
 size = Vector2(32, 15)
@@ -33,7 +33,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_58ws2")]
+"values": [ExtResource("2_h6hpf")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -96,7 +96,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_58ws2")]
+"values": [null]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -171,7 +171,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_x7nsc")]
+"values": [ExtResource("3_52pjx")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -248,7 +248,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_cbcwc")]
+"values": [ExtResource("4_1sk1w")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -303,7 +303,6 @@ invincible = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(9, -81)
-texture = ExtResource("2_58ws2")
 hframes = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -319,10 +318,20 @@ libraries = {
 "": SubResource("AnimationLibrary_2pm27")
 }
 
-[node name="Label" type="Label" parent="."]
+[node name="StateLabel" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="Hurtbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+
+[node name="StaminaLabel" type="Label" parent="."]
+offset_left = -6.0
+offset_top = -98.0
+offset_right = 34.0
+offset_bottom = -75.0
+
+[node name="StaminaCooldown" type="Timer" parent="."]
+
+[node name="EmptyStaminaCooldown" type="Timer" parent="."]

@@ -12,9 +12,12 @@ enum states {IDLE, MOVING, ATTACKING, DEAD, HURT, ROLLING}
 var state = states.IDLE
 var input
 var rolling = false
+var stamina = 100
+var stamina_depletion = 2
 
 func _physics_process(delta):
 	choose_action()
+	$StaminaLabel.text = str(stamina)
 	input = Input.get_vector("left", "right", "up", "down")
 	
 	
@@ -25,8 +28,13 @@ func _physics_process(delta):
 		$AnimationPlayer.speed_scale = 1
 		velocity = input * roll_speed
 	elif Input.is_action_pressed("sprint"):
-		$AnimationPlayer.speed_scale = 2
-		velocity = input * sprint_speed
+		if stamina > 0:
+			$AnimationPlayer.speed_scale = 2
+			velocity = input * sprint_speed
+			stamina = stamina - stamina_depletion
+		else:
+			$AnimationPlayer.speed_scale = 1
+			velocity = input * run_speed
 	else:
 		$AnimationPlayer.speed_scale = 1
 		velocity = input * run_speed
@@ -39,16 +47,18 @@ func _physics_process(delta):
 	if velocity.x != 0:
 		transform.x.x = sign(velocity.x) 
 	move_and_slide()
+	#if stamina = 0:1
 	
 	
 func _input(event):
 	if event.is_action_pressed("attack"):
 		state = states.ATTACKING
-	if event.is_action_pressed("roll"):
+	if event.is_action_pressed("roll") && stamina > 25:
 		state = states.ROLLING
+		stamina = stamina - 25
 		
 func choose_action():
-	$Label.text = states.keys()[state]
+	$StateLabel.text = states.keys()[state]
 	match state:
 		states.DEAD:
 			$AnimationPlayer.play("death")
