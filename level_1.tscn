@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://c6purqvnh5obf"]
+[gd_scene load_steps=13 format=3 uid="uid://c6purqvnh5obf"]
 
+[ext_resource type="Script" path="res://level_1.gd" id="1_22rws"]
 [ext_resource type="PackedScene" uid="uid://dycinrmvaxssg" path="res://player.tscn" id="1_a16pe"]
 [ext_resource type="Texture2D" uid="uid://tlh0o3geeasl" path="res://Forest BETA V3/Forest Tileset (1).png" id="2_80435"]
 [ext_resource type="PackedScene" uid="uid://3od58wh8ejq3" path="res://ghoul.tscn" id="2_k5fgf"]
@@ -5707,6 +5708,7 @@ sources/2 = SubResource("TileSetAtlasSource_k4n1k")
 sources/3 = SubResource("TileSetAtlasSource_m20n5")
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_22rws")
 
 [node name="Player" parent="." instance=ExtResource("1_a16pe")]
 
@@ -5728,3 +5730,14 @@ layer_1/tile_data = PackedInt32Array(3, 1703936, 12, 65539, 1703936, 13, 4, 1769
 
 [node name="Ghoul" parent="." instance=ExtResource("2_k5fgf")]
 position = Vector2(-416, 98)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="StaminaBar" type="ProgressBar" parent="CanvasLayer"]
+modulate = Color(0.0627451, 0.431373, 0.176471, 1)
+offset_left = 34.0
+offset_top = 600.0
+offset_right = 522.0
+offset_bottom = 627.0
+step = 1.0
+show_percentage = false

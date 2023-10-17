@@ -326,12 +326,10 @@ offset_bottom = 23.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 
-[node name="StaminaLabel" type="Label" parent="."]
-offset_left = -6.0
-offset_top = -98.0
-offset_right = 34.0
-offset_bottom = -75.0
-
 [node name="StaminaCooldown" type="Timer" parent="."]
 
 [node name="EmptyStaminaCooldown" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="EmptyStaminaCooldown" to="." method="_on_empty_stamina_cooldown_timeout"]
