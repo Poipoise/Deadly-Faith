@@ -55,7 +55,6 @@ func _on_detect_body_exited(body):
 func _on_attack_body_entered(body):
 	state = states.ATTACK
 
-
 func _on_attack_body_exited(body):
 	if attacking:
 		await $AnimationPlayer.animation_finished
