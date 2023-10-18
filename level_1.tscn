@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c6purqvnh5obf"]
+[gd_scene load_steps=14 format=3 uid="uid://c6purqvnh5obf"]
 
 [ext_resource type="Script" path="res://level_1.gd" id="1_22rws"]
 [ext_resource type="PackedScene" uid="uid://dycinrmvaxssg" path="res://player.tscn" id="1_a16pe"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://60ywyl8vsv1n" path="res://Forest BETA V3/Forest Props.png" id="2_su0f8"]
 [ext_resource type="Texture2D" uid="uid://wei7tcxr0rgh" path="res://Forest BETA V3/Water Tileset.png" id="3_qofpm"]
 [ext_resource type="Texture2D" uid="uid://bdo26lb8ssmny" path="res://Forest BETA V3/Forest Tilesett.png" id="4_vkqdv"]
+[ext_resource type="PackedScene" uid="uid://7yhsfa6r54e2" path="res://fat_goblin.tscn" id="8_jjy12"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l2423"]
 texture = ExtResource("2_80435")
@@ -5729,7 +5730,7 @@ layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array(3, 1703936, 12, 65539, 1703936, 13, 4, 1769472, 12, 65540, 1769472, 13, 6, 1703936, 14, 65542, 1703936, 15, 7, 1769472, 14, 65543, 1769472, 15, -65534, 983041, 16, 2, 983041, 17, -65535, 983041, 16, 1, 983041, 17)
 
 [node name="Ghoul" parent="." instance=ExtResource("2_k5fgf")]
-position = Vector2(-416, 98)
+position = Vector2(-696, -89)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -5738,3 +5739,6 @@ offset_left = 18.0
 offset_top = 585.0
 offset_right = 316.0
 offset_bottom = 625.0
+
+[node name="FatGoblin" parent="." instance=ExtResource("8_jjy12")]
+position = Vector2(335, -363)

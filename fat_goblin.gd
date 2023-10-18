@@ -19,17 +19,17 @@ func choose_action():
 			set_physics_process(false)
 			$CollisionShape2D.disabled = true
 		states.IDLE:
-			$AnimationPlayer.play("idle")
+			$AnimationPlayer.play("Idle")
 			velocity = Vector2.ZERO
 		states.CHASE:
-			$AnimationPlayer.play("run")
+			$AnimationPlayer.play("Walking")
 			velocity = position.direction_to(player.position) * speed
 			if velocity.x != 0:
 				transform.x.x = sign(velocity.x)
 		states.ATTACK:
 			velocity = Vector2.ZERO
 			attacking = true
-			$AnimationPlayer.play("attack")
+			$AnimationPlayer.play("MoneyBagThrow")
 			transform.x.x = sign(position.direction_to(player.position).x)
 			await $AnimationPlayer.animation_finished
 			attacking = false
