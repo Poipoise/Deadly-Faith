@@ -332,4 +332,5 @@ offset_bottom = 23.0
 wait_time = 2.0
 one_shot = true
 
+[connection signal="timeout" from="StaminaCooldown" to="." method="_on_stamina_cooldown_timeout"]
 [connection signal="timeout" from="EmptyStaminaCooldown" to="." method="_on_empty_stamina_cooldown_timeout"]

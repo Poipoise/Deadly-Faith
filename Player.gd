@@ -12,7 +12,8 @@ enum states {IDLE, MOVING, ATTACKING, DEAD, HURT, ROLLING}
 var state = states.IDLE
 var input
 var rolling = false
-var stamina = 100
+var stamina = 100:
+	set = set_stamina
 var stamina_empty = true
 var recharging = false
 var stamina_depletion = 1
@@ -121,8 +122,15 @@ func stamina_check():
 	await $EmptyStaminaCooldown.timeout
 	stamina_empty = true
 
-
+func set_stamina(val):
+	stamina = val
+	$StaminaCooldown.start()
 
 func _on_empty_stamina_cooldown_timeout():
 	print("recharging")
+	recharging = true
+
+
+
+func _on_stamina_cooldown_timeout():
 	recharging = true
