@@ -29,7 +29,7 @@ func choose_action():
 		states.ATTACK:
 			velocity = Vector2.ZERO
 			attacking = true
-			$AnimationPlayer.play("MoneyBagThrow")
+			$AnimationPlayer.play("Jump")
 			transform.x.x = sign(position.direction_to(player.position).x)
 			await $AnimationPlayer.animation_finished
 			attacking = false
