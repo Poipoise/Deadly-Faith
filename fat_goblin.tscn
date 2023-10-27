@@ -268,10 +268,10 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a68i8"]
-radius = 101.005
+radius = 203.522
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3lru5"]
-radius = 70.0
+radius = 241.671
 
 [node name="FatGoblin" type="CharacterBody2D"]
 collision_layer = 4
@@ -286,8 +286,10 @@ hframes = 16
 vframes = 11
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(1.5, -8)
 shape = SubResource("RectangleShape2D_5jot2")
+disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -315,7 +317,12 @@ shape = SubResource("CircleShape2D_3lru5")
 offset_right = 40.0
 offset_bottom = 23.0
 
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [connection signal="body_entered" from="Detect" to="." method="_on_detect_body_entered"]
 [connection signal="body_exited" from="Detect" to="." method="_on_detect_body_exited"]
 [connection signal="body_entered" from="Attack" to="." method="_on_attack_body_entered"]
 [connection signal="body_exited" from="Attack" to="." method="_on_attack_body_exited"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
