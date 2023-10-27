@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c6purqvnh5obf"]
+[gd_scene load_steps=16 format=3 uid="uid://c6purqvnh5obf"]
 
 [ext_resource type="Script" path="res://level_1.gd" id="1_22rws"]
 [ext_resource type="PackedScene" uid="uid://dycinrmvaxssg" path="res://player.tscn" id="1_a16pe"]
@@ -7,7 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://60ywyl8vsv1n" path="res://Forest BETA V3/Forest Props.png" id="2_su0f8"]
 [ext_resource type="Texture2D" uid="uid://wei7tcxr0rgh" path="res://Forest BETA V3/Water Tileset.png" id="3_qofpm"]
 [ext_resource type="Texture2D" uid="uid://bdo26lb8ssmny" path="res://Forest BETA V3/Forest Tilesett.png" id="4_vkqdv"]
+[ext_resource type="Texture2D" uid="uid://cv8moyiaaincg" path="res://image.png" id="8_88mbs"]
 [ext_resource type="PackedScene" uid="uid://7yhsfa6r54e2" path="res://fat_goblin.tscn" id="8_jjy12"]
+[ext_resource type="Texture2D" uid="uid://ckw5tsl3oqu1i" path="res://bar.png" id="9_b8p5r"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l2423"]
 texture = ExtResource("2_80435")
@@ -5737,8 +5739,11 @@ position = Vector2(-696, -89)
 [node name="StaminaBar" type="TextureProgressBar" parent="CanvasLayer"]
 offset_left = 18.0
 offset_top = 585.0
-offset_right = 316.0
-offset_bottom = 625.0
+offset_right = 63.0
+offset_bottom = 595.0
+scale = Vector2(2, 2)
+texture_under = ExtResource("8_88mbs")
+texture_progress = ExtResource("9_b8p5r")
 
 [node name="FatGoblin" parent="." instance=ExtResource("8_jjy12")]
 position = Vector2(335, -363)
