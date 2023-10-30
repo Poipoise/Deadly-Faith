@@ -38,8 +38,8 @@ func choose_action():
 			show()
 			$AttackTimer.start()
 			$AnimationPlayer.play("Landing")
-			await $AnimationPlayer.animation_finished
 			print("landed")
+			await $AnimationPlayer.animation_finished
 			attacking = false
 				
 			
