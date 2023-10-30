@@ -33,15 +33,13 @@ func choose_action():
 			transform.x.x = sign(position.direction_to(player.position).x)
 			await $AnimationPlayer.animation_finished
 			hide()
-			player_pos = player.position
-			await get_tree().create_timer(30).timeout
-			print("landed")
+			await get_tree().create_timer(5).timeout
 			position = player_pos
 			show()
-			CanAttack = false
 			$AttackTimer.start()
 			$AnimationPlayer.play("Landing")
 			await $AnimationPlayer.animation_finished
+			print("landed")
 			attacking = false
 				
 			
@@ -67,12 +65,11 @@ func _on_detect_body_exited(body):
 func _on_attack_body_entered(body):
 	if CanAttack:
 		state = states.ATTACK
-
-
+		player_pos = player.position
+		CanAttack = false
 func _on_attack_body_exited(body):
-	if attacking:
-		await $AnimationPlayer.animation_finished
-	state = states.CHASE
+	if not attacking:
+		state = states.CHASE
 
 
 
