@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dgib3vkg5vq0l" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Run.png" id="4_1sk1w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sa2ge"]
-size = Vector2(32, 15)
+size = Vector2(32, 18.5)
 
 [sub_resource type="Animation" id="Animation_c6spk"]
 resource_name = "Idle"
@@ -306,7 +306,7 @@ position = Vector2(9, -81)
 hframes = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -7)
+position = Vector2(1, -8.75)
 shape = SubResource("RectangleShape2D_sa2ge")
 
 [node name="Camera2D" type="Camera2D" parent="."]

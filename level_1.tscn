@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c6purqvnh5obf"]
+[gd_scene load_steps=17 format=3 uid="uid://c6purqvnh5obf"]
 
 [ext_resource type="Script" path="res://level_1.gd" id="1_22rws"]
 [ext_resource type="PackedScene" uid="uid://dycinrmvaxssg" path="res://player.tscn" id="1_a16pe"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cv8moyiaaincg" path="res://image.png" id="8_88mbs"]
 [ext_resource type="PackedScene" uid="uid://7yhsfa6r54e2" path="res://fat_goblin.tscn" id="8_jjy12"]
 [ext_resource type="Texture2D" uid="uid://ckw5tsl3oqu1i" path="res://bar.png" id="9_b8p5r"]
+[ext_resource type="PackedScene" uid="uid://c6wdr2iwhjccl" path="res://house.tscn" id="11_f0tyv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l2423"]
 texture = ExtResource("2_80435")
@@ -5721,12 +5722,12 @@ scale = Vector2(2.5, 2.5)
 tile_set = SubResource("TileSet_dter5")
 format = 2
 layer_0/name = "Floor"
-layer_0/z_index = -1
+layer_0/z_index = -5
 layer_0/tile_data = PackedInt32Array(-131072, 131072, 2, -65537, 131072, 2, -1, 131072, 2, -65536, 131072, 2, 0, 131072, 2, 1, 131072, 2, -65534, 131072, 2, -131070, 131072, 2, -131071, 131072, 2, -65535, 131072, 2, 65536, 131072, 2, 131071, 131072, 2, 65535, 131072, 2, 2, 131072, 2, 65538, 131072, 2, 131074, 131072, 2, 131075, 131072, 2, 196611, 131072, 2, 131073, 131072, 2, 65537, 131072, 2, 65539, 131072, 2, 3, 131072, 2, -65533, 131072, 2, -131069, 131072, 2, -131068, 131072, 2, -131067, 131072, 2, -65531, 131072, 2, 5, 131072, 2, 65541, 131072, 2, 65540, 131072, 2, 4, 131072, 2, -65532, 131072, 2, -65530, 131072, 2, -65529, 131072, 2, -131066, 131072, 2, -131065, 131072, 2, 7, 131072, 2, 65543, 131072, 2, 65542, 131072, 2, 6, 131072, 2)
 layer_1/name = "Objects"
 layer_1/enabled = true
 layer_1/modulate = Color(1, 1, 1, 1)
-layer_1/y_sort_enabled = false
+layer_1/y_sort_enabled = true
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array(3, 1703936, 12, 65539, 1703936, 13, 4, 1769472, 12, 65540, 1769472, 13, 6, 1703936, 14, 65542, 1703936, 15, 7, 1769472, 14, 65543, 1769472, 15, -65534, 983041, 16, 2, 983041, 17, -65535, 983041, 16, 1, 983041, 17)
@@ -5746,4 +5747,7 @@ texture_under = ExtResource("8_88mbs")
 texture_progress = ExtResource("9_b8p5r")
 
 [node name="FatGoblin" parent="." instance=ExtResource("8_jjy12")]
-position = Vector2(335, -363)
+position = Vector2(-1002, 1032)
+
+[node name="House" parent="." instance=ExtResource("11_f0tyv")]
+position = Vector2(90, -135)
