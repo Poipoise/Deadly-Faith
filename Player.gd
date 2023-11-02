@@ -38,14 +38,23 @@ func _physics_process(delta):
 		velocity = input * roll_speed
 	elif Input.is_action_pressed("sprint"):
 		if stamina > 0:
+			$RunParticles.amount = 50
+			$RunParticles.process_material.initial_velocity_min = 50
+			$RunParticles.process_material.initial_velocity_max = 100
 			recharging = false
 			$AnimationPlayer.speed_scale = 2
 			velocity = input * sprint_speed
 			stamina = stamina - stamina_depletion
 		else:
+			$RunParticles.amount = 8
+			$RunParticles.process_material.initial_velocity_min = 50
+			$RunParticles.process_material.initial_velocity_max = 100
 			$AnimationPlayer.speed_scale = 1
 			velocity = input * run_speed
 	else:
+		$RunParticles.amount = 8
+		$RunParticles.process_material.initial_velocity_min = 50
+		$RunParticles.process_material.initial_velocity_max = 100
 		$AnimationPlayer.speed_scale = 1
 		velocity = input * run_speed
 	
@@ -129,8 +138,6 @@ func set_stamina(val):
 func _on_empty_stamina_cooldown_timeout():
 	print("recharging")
 	recharging = true
-
-
 
 func _on_stamina_cooldown_timeout():
 	recharging = true
