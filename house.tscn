@@ -3,17 +3,19 @@
 [ext_resource type="Texture2D" uid="uid://d35cqufbau7sj" path="res://Forest BETA V3/Sample.png" id="1_orq4y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_erdwe"]
-size = Vector2(237, 85)
+size = Vector2(243, 106.5)
 
 [node name="House" type="StaticBody2D"]
+position = Vector2(-1, -1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -195)
+position = Vector2(2, -175)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_orq4y")
 region_enabled = true
 region_rect = Rect2(229.142, 289.816, 657.863, 787.167)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -62.5)
+y_sort_enabled = true
+position = Vector2(2.5, -52.75)
 shape = SubResource("RectangleShape2D_erdwe")

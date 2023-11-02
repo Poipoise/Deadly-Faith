@@ -5718,6 +5718,7 @@ script = ExtResource("1_22rws")
 
 [node name="Level1" type="TileMap" parent="."]
 y_sort_enabled = true
+position = Vector2(-1, 0)
 scale = Vector2(2.5, 2.5)
 tile_set = SubResource("TileSet_dter5")
 format = 2
@@ -5750,4 +5751,4 @@ texture_progress = ExtResource("9_b8p5r")
 position = Vector2(-1002, 1032)
 
 [node name="House" parent="." instance=ExtResource("11_f0tyv")]
-position = Vector2(90, -135)
+position = Vector2(120, -100)
