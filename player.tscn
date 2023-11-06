@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://dycinrmvaxssg"]
+[gd_scene load_steps=20 format=3 uid="uid://dycinrmvaxssg"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_nd4kh"]
 [ext_resource type="Texture2D" uid="uid://cj5ti1wg6ry8f" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Idle.png" id="2_h6hpf"]
 [ext_resource type="Texture2D" uid="uid://bvtwjq8s0a7ga" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Roll.png" id="3_52pjx"]
 [ext_resource type="Texture2D" uid="uid://dgib3vkg5vq0l" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Run.png" id="4_1sk1w"]
 [ext_resource type="Texture2D" uid="uid://ddnqscesrmf3o" path="res://kenney_smoke-particles/PNG/White puff/whitePuff01.png" id="5_gj1ig"]
+[ext_resource type="Texture2D" uid="uid://dj1jjoup7huql" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Attack.png" id="5_vnsqk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sa2ge"]
 size = Vector2(32, 18.5)
@@ -288,11 +289,31 @@ tracks/3/keys = {
 "values": [10]
 }
 
+[sub_resource type="Animation" id="Animation_y2d6i"]
+resource_name = "attack1"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_vnsqk")]
+}
+
+[sub_resource type="Animation" id="Animation_p8w2r"]
+resource_name = "attack2"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2pm27"]
 _data = {
 "Idle": SubResource("Animation_c6spk"),
 "RESET": SubResource("Animation_f65bp"),
 "Roll": SubResource("Animation_oo8p0"),
+"attack1": SubResource("Animation_y2d6i"),
+"attack2": SubResource("Animation_p8w2r"),
 "run": SubResource("Animation_41evh")
 }
 
