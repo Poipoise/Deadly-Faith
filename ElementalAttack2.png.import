@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dshmjha6wmm4k"
-path="res://.godot/imported/__Attack(1).png-dc6633ca530d7dfa445f2a9ad871ed71.ctex"
+uid="uid://dx8lunkcc5o6s"
+path="res://.godot/imported/ElementalAttack2.png-f58bb9c397955ad25293f0e9541ba538.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://FreeKnight_v1/Colour2/NoOutline/120x80_gifs/__Attack(1).png"
-dest_files=["res://.godot/imported/__Attack(1).png-dc6633ca530d7dfa445f2a9ad871ed71.ctex"]
+source_file="res://ElementalAttack2.png"
+dest_files=["res://.godot/imported/ElementalAttack2.png-f58bb9c397955ad25293f0e9541ba538.ctex"]
 
 [params]
 
