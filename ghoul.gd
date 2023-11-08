@@ -51,12 +51,15 @@ func _on_detect_body_entered(body):
 func _on_detect_body_exited(body):
 	state = states.IDLE
 
-
 func _on_attack_body_entered(body):
 	state = states.ATTACK
-
 
 func _on_attack_body_exited(body):
 	if attacking:
 		await $AnimationPlayer.animation_finished
 	state = states.CHASE
+
+
+
+func _on_ghoul_hurt_box_body_entered(body):
+	body.hurt(1, position.direction_to(body.position))

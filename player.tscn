@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://cj5ti1wg6ry8f" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Idle.png" id="2_h6hpf"]
 [ext_resource type="Texture2D" uid="uid://bvtwjq8s0a7ga" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Roll.png" id="3_52pjx"]
 [ext_resource type="Texture2D" uid="uid://dgib3vkg5vq0l" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Run.png" id="4_1sk1w"]
+[ext_resource type="Texture2D" uid="uid://c3pc6ci3ovsc8" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_AttackNoMovement.png" id="4_ty1js"]
 [ext_resource type="Texture2D" uid="uid://ddnqscesrmf3o" path="res://kenney_smoke-particles/PNG/White puff/whitePuff01.png" id="5_gj1ig"]
-[ext_resource type="Texture2D" uid="uid://dj1jjoup7huql" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Attack.png" id="5_vnsqk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sa2ge"]
 size = Vector2(32, 18.5)
@@ -160,6 +160,18 @@ tracks/6/keys = {
 "update": 1,
 "values": [13]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Hurtbox/CollisionPolygon2D:disabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_oo8p0"]
 resource_name = "Roll"
@@ -236,6 +248,85 @@ tracks/5/keys = {
 "values": [13, 9, 13]
 }
 
+[sub_resource type="Animation" id="Animation_y2d6i"]
+resource_name = "attack1"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_ty1js")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 3]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Hurtbox/CollisionPolygon2D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_p8w2r"]
+resource_name = "attack2"
+
 [sub_resource type="Animation" id="Animation_41evh"]
 resource_name = "run"
 length = 0.7
@@ -288,24 +379,6 @@ tracks/3/keys = {
 "update": 1,
 "values": [10]
 }
-
-[sub_resource type="Animation" id="Animation_y2d6i"]
-resource_name = "attack1"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("5_vnsqk")]
-}
-
-[sub_resource type="Animation" id="Animation_p8w2r"]
-resource_name = "attack2"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2pm27"]
 _data = {
@@ -374,7 +447,10 @@ offset_bottom = 23.0
 
 [node name="Hurtbox" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox"]
+position = Vector2(30, 0)
+polygon = PackedVector2Array(6, -5, 60, -6, 67, -20, 67, -43, 47, -74, 24, -85, -22, -85, -59, -72, -4, -62, 6, -27)
+disabled = true
 
 [node name="StaminaCooldown" type="Timer" parent="."]
 
@@ -389,5 +465,6 @@ process_material = SubResource("ParticleProcessMaterial_rfbw1")
 texture = ExtResource("5_gj1ig")
 lifetime = 0.25
 
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="timeout" from="StaminaCooldown" to="." method="_on_stamina_cooldown_timeout"]
 [connection signal="timeout" from="EmptyStaminaCooldown" to="." method="_on_empty_stamina_cooldown_timeout"]

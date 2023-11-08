@@ -92,7 +92,7 @@ func choose_action():
 				transform.x.x = sign(velocity.x) 
 		states.ATTACKING:
 			attacking = true
-			$AnimationPlayer.play("attack")
+			$AnimationPlayer.play("attack1")
 			await $AnimationPlayer.animation_finished
 			attacking = false
 			if velocity.length() > 0:
@@ -113,7 +113,7 @@ func die():
 	$AnimationPlayer.play("death")
 
 func hurt(amount, dir):
-	if not invincible:
+	if not rolling:
 		var prev_state = state
 		state = states.HURT
 		health -= amount
@@ -140,3 +140,8 @@ func _on_empty_stamina_cooldown_timeout():
 
 func _on_stamina_cooldown_timeout():
 	recharging = true
+
+
+func _on_hurtbox_body_entered(body):
+	print("attacked!")
+	body.hurt(1, position.direction_to(body.position))

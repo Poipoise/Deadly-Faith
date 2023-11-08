@@ -198,6 +198,7 @@ offset_top = 6.0
 offset_right = 51.0
 offset_bottom = 29.0
 
+[connection signal="body_entered" from="GhoulHurtBox" to="." method="_on_ghoul_hurt_box_body_entered"]
 [connection signal="body_entered" from="Detect" to="." method="_on_detect_body_entered"]
 [connection signal="body_exited" from="Detect" to="." method="_on_detect_body_exited"]
 [connection signal="body_entered" from="Attack" to="." method="_on_attack_body_entered"]
