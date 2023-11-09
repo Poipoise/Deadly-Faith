@@ -429,10 +429,12 @@ position = Vector2(9, -81)
 hframes = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(1, -8.75)
 shape = SubResource("RectangleShape2D_sa2ge")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
