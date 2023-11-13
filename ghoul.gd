@@ -62,4 +62,5 @@ func _on_attack_body_exited(body):
 
 
 func _on_ghoul_hurt_box_body_entered(body):
+	print("attacked")
 	body.hurt(1, position.direction_to(body.position))

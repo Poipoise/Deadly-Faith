@@ -138,18 +138,18 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gxy6q"]
-radius = 12.0
+radius = 17.0
 height = 46.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xqayy"]
 radius = 368.005
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qxb75"]
-radius = 36.0
+radius = 32.0156
 
 [node name="Ghoul" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 13
+collision_mask = 15
 script = ExtResource("1_co546")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

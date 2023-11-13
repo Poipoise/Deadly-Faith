@@ -16,7 +16,8 @@ var stamina = 100:
 	set = set_stamina
 var stamina_empty = true
 var recharging = false
-var stamina_depletion = 1
+var stamina_depletion = .5
+var attack_number = 0
 
 func _physics_process(delta):
 	choose_action()
@@ -68,13 +69,16 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func _input(event):
-	if event.is_action_pressed("attack"):
+	if event.is_action_pressed("attack") && not attacking && stamina >= 10:
 		state = states.ATTACKING
-	if event.is_action_pressed("roll") && stamina >= 25 && not rolling:
+		recharging = false
+		attack_number += 1
+		stamina = stamina - 10
+	if event.is_action_pressed("roll") && stamina >= 15 && not rolling:
 		rolling = false
 		recharging = false
 		state = states.ROLLING
-		stamina = stamina - 25
+		stamina = stamina - 15
 		
 func choose_action():
 	$StateLabel.text = states.keys()[state]
@@ -92,8 +96,12 @@ func choose_action():
 				transform.x.x = sign(velocity.x) 
 		states.ATTACKING:
 			attacking = true
-			$AnimationPlayer.play("attack1")
-			await $AnimationPlayer.animation_finished
+			if (attack_number % 2) == 1:
+				$AnimationPlayer.play("attack1")
+				await $AnimationPlayer.animation_finished
+			else: 
+				$AnimationPlayer.play("attack2")
+				await $AnimationPlayer.animation_finished
 			attacking = false
 			if velocity.length() > 0:
 				state = states.MOVING
@@ -132,7 +140,8 @@ func stamina_check():
 
 func set_stamina(val):
 	stamina = val
-	$StaminaCooldown.start()
+	if not rolling or not attacking:
+		$StaminaCooldown.start()
 
 func _on_empty_stamina_cooldown_timeout():
 	print("recharging")
