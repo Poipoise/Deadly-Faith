@@ -1,12 +1,13 @@
 extends CharacterBody2D
-var CanAttack = true
+@export var projectile : PackedScene
 var speed = 135
-enum states {IDLE, CHASE, ATTACK, DEAD, HURT}
+enum states {IDLE, CHASE, ATTACK, DEAD, HURT, RUN}
 var state = states.IDLE
 var player
 var attacking = false
 var health = 3
 var player_pos
+var shoot_direction
 func _physics_process(delta):
 	choose_action()
 	move_and_slide()
@@ -22,25 +23,38 @@ func choose_action():
 			$AnimationPlayer.play("Idle")
 			velocity = Vector2.ZERO
 		states.CHASE:
-			$AnimationPlayer.play("Walking")
-			velocity = position.direction_to(player.position) * speed
+			if not attacking:
+				$AnimationPlayer.play("Walking")
+				velocity = position.direction_to(player.position) * speed
 			if velocity.x != 0:
 				transform.x.x = sign(velocity.x)
 		states.ATTACK:
 			velocity = Vector2.ZERO
-			attacking = true
-			$AnimationPlayer.play("Jump")
-			transform.x.x = sign(position.direction_to(player.position).x)
-			await $AnimationPlayer.animation_finished
-			hide()
-			await get_tree().create_timer(5).timeout
-			position = player_pos
-			show()
-			$AttackTimer.start()
-			$AnimationPlayer.play("Landing")
-			print("landed")
-			await $AnimationPlayer.animation_finished
-			attacking = false
+			shoot_direction = position.direction_to(player.position)
+			if not attacking:
+				$AnimationPlayer.play("MoneyBagThrow")
+				await $AnimationPlayer.animation_finished
+				var Projectile = projectile.instantiate()
+				Projectile.start(position, shoot_direction)
+				get_tree().root.add_child(Projectile)
+				attacking = true
+				$AttackTimer.start()
+		states.RUN:
+			if not attacking:
+				$AnimationPlayer.play("Walking")
+				velocity = position.direction_to(player.position) * speed * 0.6 * -1
+				if velocity.x != 0:
+					transform.x.x = sign(velocity.x)
+			#transform.x.x = sign(position.direction_to(player.position).x)
+			#hide()
+			#await get_tree().create_timer(5).timeout
+			#position = player_pos
+			#show()
+			#$AttackTimer.start()
+			#$AnimationPlayer.play("Landing")
+			#print("landed")
+			#await $AnimationPlayer.animation_finished
+			#attacking = false
 				
 			
 	
@@ -63,15 +77,17 @@ func _on_detect_body_exited(body):
 
 
 func _on_attack_body_entered(body):
-	if CanAttack:
 		state = states.ATTACK
-		player_pos = player.position
-		CanAttack = false
 func _on_attack_body_exited(body):
-	if not attacking:
-		state = states.CHASE
-
-
-
+	state = states.CHASE
+	
 func _on_attack_timer_timeout():
-	CanAttack = true
+	attacking = false
+
+
+func _on_walk_away_body_entered(body):
+	state = states.RUN
+
+
+func _on_walk_away_body_exited(body):
+	state = states.ATTACK

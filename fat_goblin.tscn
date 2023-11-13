@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://7yhsfa6r54e2"]
+[gd_scene load_steps=20 format=3 uid="uid://7yhsfa6r54e2"]
 
 [ext_resource type="Script" path="res://fat_goblin.gd" id="1_bwe1x"]
 [ext_resource type="Texture2D" uid="uid://bwgqvj3q53o84" path="res://Goblin King Sprite Sheet.png" id="1_woogs"]
+[ext_resource type="PackedScene" uid="uid://cawlluvpmqq3f" path="res://money_bag.tscn" id="2_5b88d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5jot2"]
 size = Vector2(55, 15.75)
@@ -268,15 +269,19 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a68i8"]
-radius = 203.522
+radius = 277.088
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3lru5"]
-radius = 241.671
+radius = 346.013
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cnrhu"]
+radius = 128.062
 
 [node name="FatGoblin" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 13
 script = ExtResource("1_bwe1x")
+projectile = ExtResource("2_5b88d")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-2, -70)
@@ -286,7 +291,6 @@ hframes = 16
 vframes = 11
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(1.5, -8)
 shape = SubResource("RectangleShape2D_5jot2")
 disabled = true
@@ -318,11 +322,21 @@ offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="AttackTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 1.2
 one_shot = true
+
+[node name="WalkAway" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WalkAway" groups=["enemy"]]
+position = Vector2(-1, -35)
+shape = SubResource("CircleShape2D_cnrhu")
 
 [connection signal="body_entered" from="Detect" to="." method="_on_detect_body_entered"]
 [connection signal="body_exited" from="Detect" to="." method="_on_detect_body_exited"]
 [connection signal="body_entered" from="Attack" to="." method="_on_attack_body_entered"]
 [connection signal="body_exited" from="Attack" to="." method="_on_attack_body_exited"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="body_entered" from="WalkAway" to="." method="_on_walk_away_body_entered"]
+[connection signal="body_exited" from="WalkAway" to="." method="_on_walk_away_body_exited"]
