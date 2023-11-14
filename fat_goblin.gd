@@ -31,20 +31,21 @@ func choose_action():
 		states.ATTACK:
 			velocity = Vector2.ZERO
 			shoot_direction = position.direction_to(player.position)
+			transform.x.x = sign(shoot_direction.x)
 			if not attacking:
 				$AnimationPlayer.play("MoneyBagThrow")
-				await $AnimationPlayer.animation_finished
+				attacking = true
+				await get_tree().create_timer(0.4).timeout
 				var Projectile = projectile.instantiate()
 				Projectile.start(position, shoot_direction)
 				get_tree().root.add_child(Projectile)
-				attacking = true
 				$AttackTimer.start()
 		states.RUN:
 			if not attacking:
 				$AnimationPlayer.play("Walking")
 				velocity = position.direction_to(player.position) * speed * 0.6 * -1
 				if velocity.x != 0:
-					transform.x.x = sign(velocity.x)
+					transform.x.x = sign(velocity.x) * -1
 			#transform.x.x = sign(position.direction_to(player.position).x)
 			#hide()
 			#await get_tree().create_timer(5).timeout
