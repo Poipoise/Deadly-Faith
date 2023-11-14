@@ -147,7 +147,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -472,7 +472,6 @@ anim_speed_curve = SubResource("CurveTexture_kpvqm")
 collision_layer = 2
 collision_mask = 13
 script = ExtResource("1_nd4kh")
-invincible = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(9, -81)
@@ -497,10 +496,12 @@ offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox"]
 position = Vector2(30, 0)
-polygon = PackedVector2Array(6, -5, 60, -6, 67, -20, 67, -43, 47, -74, 24, -85, -22, -85, -59, -72, -4, -62, 6, -27)
+polygon = PackedVector2Array(-6, -5, 60, -6, 67, -20, 67, -43, 47, -74, 24, -85, -22, -85, -59, -72, -4, -62, -3, -26)
 disabled = true
 
 [node name="StaminaCooldown" type="Timer" parent="."]

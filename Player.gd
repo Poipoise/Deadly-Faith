@@ -84,17 +84,21 @@ func choose_action():
 	$StateLabel.text = states.keys()[state]
 	match state:
 		states.DEAD:
+			$RunParticles.emitting = false
 			$AnimationPlayer.play("death")
 			set_physics_process(false)
 			velocity = Vector2.ZERO
 			$CollisionShape2D.disabled = true
 		states.IDLE:
+			$RunParticles.emitting = false
 			$AnimationPlayer.play("Idle")
 		states.MOVING:
+			$RunParticles.emitting = true
 			$AnimationPlayer.play("run")
 			if velocity.x != 0:
 				transform.x.x = sign(velocity.x) 
 		states.ATTACKING:
+			$RunParticles.emitting = false
 			attacking = true
 			if (attack_number % 2) == 1:
 				$AnimationPlayer.play("attack1")
@@ -108,6 +112,7 @@ func choose_action():
 			if velocity.length() == 0:
 				state = states.IDLE
 		states.ROLLING:
+			$RunParticles.emitting = false
 			rolling = true
 			$AnimationPlayer.play("Roll")
 			await $AnimationPlayer.animation_finished
@@ -121,7 +126,7 @@ func die():
 	$AnimationPlayer.play("death")
 
 func hurt(amount, dir):
-	if not rolling:
+	if not invincible:
 		var prev_state = state
 		state = states.HURT
 		health -= amount

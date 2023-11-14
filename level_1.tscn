@@ -5714,6 +5714,7 @@ sources/3 = SubResource("TileSetAtlasSource_m20n5")
 script = ExtResource("1_22rws")
 
 [node name="Player" parent="." instance=ExtResource("1_a16pe")]
+invincible = false
 
 [node name="Level1" type="TileMap" parent="."]
 y_sort_enabled = true
