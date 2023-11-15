@@ -5,7 +5,7 @@ enum states {IDLE, CHASE, ATTACK, DEAD, HURT, RUN}
 var state = states.IDLE
 var player
 var attacking = false
-var health = 3
+var health = 5
 var player_pos
 var shoot_direction
 func _physics_process(delta):
@@ -16,7 +16,7 @@ func choose_action():
 	$Label.text = states.keys()[state]
 	match state:
 		states.DEAD:
-			$AnimationPlayer.play("death")
+			$AnimationPlayer.play("Death")
 			set_physics_process(false)
 			$CollisionShape2D.disabled = true
 		states.IDLE:
@@ -42,7 +42,7 @@ func choose_action():
 				$AttackTimer.start()
 		states.RUN:
 			if not attacking:
-				$AnimationPlayer.play("Walking")
+				$AnimationPlayer.play("BackwardsWalking")
 				velocity = position.direction_to(player.position) * speed * 0.6 * -1
 				if velocity.x != 0:
 					transform.x.x = sign(velocity.x) * -1
@@ -64,7 +64,8 @@ func hurt(amount, dir):
 	var prev_state = state
 	state = states.HURT
 	velocity = dir * 100
-	await get_tree().create_timer(0.2).timeout
+	$AnimationPlayer.play("Damage")
+	await $AnimationPlayer.animation_finished
 	state = prev_state
 	if health <= 0:
 		state = states.DEAD

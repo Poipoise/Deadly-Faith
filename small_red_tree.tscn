@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://2bsewd6qoqje"]
+
+[ext_resource type="Texture2D" uid="uid://60ywyl8vsv1n" path="res://Forest BETA V3/Forest Props.png" id="1_dsp26"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sycvq"]
+size = Vector2(5, 6)
+
+[node name="Small Red Tree" type="StaticBody2D"]
+scale = Vector2(3, 3)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -14)
+texture = ExtResource("1_dsp26")
+region_enabled = true
+region_rect = Rect2(240, 256, 16, 30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -3)
+shape = SubResource("RectangleShape2D_sycvq")

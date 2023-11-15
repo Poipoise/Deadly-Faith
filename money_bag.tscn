@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cawlluvpmqq3f"]
+[gd_scene load_steps=9 format=3 uid="uid://cq176c44di6ni"]
 
 [ext_resource type="Script" path="res://MoneyBag.gd" id="1_dtckx"]
 [ext_resource type="Texture2D" uid="uid://dpw6xsmsqpci6" path="res://Coin Bag Sprite Sheet.png" id="2_au32v"]
@@ -7,7 +7,7 @@
 size = Vector2(25, 6)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3wkdn"]
-size = Vector2(42, 46)
+size = Vector2(43, 45)
 
 [sub_resource type="Animation" id="Animation_qky68"]
 resource_name = "Hit"
@@ -66,7 +66,7 @@ _data = {
 
 [node name="MoneyBag" type="CharacterBody2D"]
 collision_layer = 0
-collision_mask = 4
+collision_mask = 10
 script = ExtResource("1_dtckx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -79,13 +79,14 @@ vframes = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 2)
 shape = SubResource("RectangleShape2D_l8bxv")
+disabled = true
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 4
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-2, 7)
+position = Vector2(-1.5, 7.5)
 shape = SubResource("RectangleShape2D_3wkdn")
 
 [node name="Timer" type="Timer" parent="."]

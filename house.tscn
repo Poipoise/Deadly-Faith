@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://c6wdr2iwhjccl"]
+[gd_scene load_steps=3 format=3 uid="uid://druniqdoblbc"]
 
 [ext_resource type="Texture2D" uid="uid://d35cqufbau7sj" path="res://Forest BETA V3/Sample.png" id="1_orq4y"]
 
@@ -6,7 +6,6 @@
 size = Vector2(243, 106.5)
 
 [node name="House" type="StaticBody2D"]
-position = Vector2(-1, -1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(2, -175)

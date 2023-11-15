@@ -1,9 +1,10 @@
 extends CharacterBody2D
 
 var direction
-var speed = 350
+var speed = 360
 var bullet_path
 var throw
+var hit = true
 # Called when the node enters the scene tree for the first time.
 func start(_position, _direction):
 	bullet_path = _direction
