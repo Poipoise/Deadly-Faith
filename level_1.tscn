@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c6purqvnh5obf"]
+[gd_scene load_steps=20 format=3 uid="uid://c6purqvnh5obf"]
 
 [ext_resource type="Script" path="res://level_1.gd" id="1_22rws"]
 [ext_resource type="PackedScene" uid="uid://dycinrmvaxssg" path="res://player.tscn" id="1_a16pe"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://druniqdoblbc" path="res://house.tscn" id="11_m4n4m"]
 [ext_resource type="PackedScene" uid="uid://bh78utxcll6qr" path="res://red_tree.tscn" id="12_fe3og"]
 [ext_resource type="PackedScene" uid="uid://2bsewd6qoqje" path="res://small_red_tree.tscn" id="13_qqsdg"]
+[ext_resource type="PackedScene" uid="uid://3knmtkrq66j1" path="res://start_screen.tscn" id="14_6wrdx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l2423"]
 texture = ExtResource("2_80435")
@@ -5769,3 +5770,7 @@ position = Vector2(163, -109)
 
 [node name="Small Red Tree2" parent="Trees" instance=ExtResource("13_qqsdg")]
 position = Vector2(669, 90)
+
+[node name="StartScreen" parent="." instance=ExtResource("14_6wrdx")]
+
+[connection signal="start_game" from="StartScreen" to="." method="_on_start_screen_start_game"]
