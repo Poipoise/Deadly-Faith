@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://3knmtkrq66j1"]
 
 [ext_resource type="Script" path="res://start_screen.gd" id="1_w76tu"]
-[ext_resource type="AudioStream" uid="uid://dk0nh0sr3ngm7" path="res://Pure Vessel - Hollow Knight OST Extended.mp3" id="2_foo6e"]
+[ext_resource type="AudioStream" uid="uid://hlbpbwwmwl5e" path="res://Pure Vessel - Hollow Knight OST Extended.mp3" id="2_foo6e"]
 
 [node name="StartScreen" type="CanvasLayer"]
 script = ExtResource("1_w76tu")
