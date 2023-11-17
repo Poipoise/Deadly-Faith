@@ -23,4 +23,11 @@ stream = ExtResource("2_foo6e")
 volume_db = -5.0
 autoplay = true
 
+[node name="Label" type="Label" parent="."]
+offset_left = 600.0
+offset_top = 256.0
+offset_right = 711.0
+offset_bottom = 282.0
+text = "DEADLY FAITH"
+
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
