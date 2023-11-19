@@ -6,7 +6,12 @@ var state = states.IDLE
 var player
 var attacking = false
 var health = 3
-
+var start_pos
+var start_health
+func _ready():
+	start_pos = position
+	start_health = health
+	
 func _physics_process(delta):
 	choose_action()
 	move_and_slide()
@@ -64,3 +69,9 @@ func _on_attack_body_exited(body):
 func _on_ghoul_hurt_box_body_entered(body):
 	print("attacked")
 	body.hurt(1, position.direction_to(body.position))
+
+
+func _on_death_screen_respawn():
+	position = start_pos
+	health = start_health
+	state = states.IDLE

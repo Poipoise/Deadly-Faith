@@ -5740,6 +5740,7 @@ layer_1/tile_data = PackedInt32Array(3, 1703936, 12, 65539, 1703936, 13, 4, 1769
 position = Vector2(-696, -89)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
 
 [node name="StaminaBar" type="TextureProgressBar" parent="CanvasLayer"]
 offset_left = 18.0
@@ -5772,6 +5773,8 @@ position = Vector2(163, -109)
 position = Vector2(669, 90)
 
 [node name="StartScreen" parent="." instance=ExtResource("14_6wrdx")]
-visible = false
+
+[node name="Ghoul2" parent="." instance=ExtResource("2_k5fgf")]
+position = Vector2(918, 47)
 
 [connection signal="start_game" from="StartScreen" to="Player" method="_on_start_screen_start_game"]

@@ -8,6 +8,13 @@ var attacking = false
 var health = 5
 var player_pos
 var shoot_direction
+var start_pos
+var start_health
+
+func _ready():
+	start_pos = position
+	start_health = health
+	
 func _physics_process(delta):
 	choose_action()
 	move_and_slide()

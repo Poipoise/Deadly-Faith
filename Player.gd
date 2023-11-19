@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 signal health_changed
-
+signal Game_Over
 @export var invincible = false
 @export var roll_speed = 250
 var run_speed = 125
@@ -19,6 +19,13 @@ var recharging = false
 var stamina_depletion = .5
 var attack_number = 0
 var gamestart = false
+var start_pos
+var start_health
+
+func _ready():
+	start_pos = position
+	start_health = health
+	
 func _physics_process(delta):
 	if gamestart:
 		choose_action()
@@ -91,6 +98,8 @@ func choose_action():
 			set_physics_process(false)
 			velocity = Vector2.ZERO
 			$CollisionShape2D.disabled = true
+			await $AnimationPlayer.animation_finished
+			Game_Over.emit()
 		states.IDLE:
 			$RunParticles.emitting = false
 			$AnimationPlayer.play("Idle")
@@ -165,3 +174,13 @@ func _on_hurtbox_body_entered(body):
 
 func _on_start_screen_start_game():
 	gamestart = true
+
+
+func _on_death_screen_respawn():
+	position = start_pos
+	health = start_health
+	health_changed.emit(health)
+	state = states.IDLE
+	set_physics_process(true)
+	$CollisionShape2D.disabled = false
+	

@@ -5,5 +5,4 @@ func _process(delta):
 
 
 
-func _on_start_screen_start_game():
-	pass # Replace with function body.
+func _on_death_screen_respawn():

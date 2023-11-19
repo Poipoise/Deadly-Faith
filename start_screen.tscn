@@ -77,8 +77,8 @@ text = "DEADLY FAITH"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = -1
-position = Vector2(572, 332)
-scale = Vector2(1.11719, 0.648438)
+position = Vector2(575.999, 332)
+scale = Vector2(1.125, 0.648438)
 texture = ExtResource("3_6uc78")
 
 [node name="Boom" type="AudioStreamPlayer" parent="."]
