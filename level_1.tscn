@@ -5772,5 +5772,6 @@ position = Vector2(163, -109)
 position = Vector2(669, 90)
 
 [node name="StartScreen" parent="." instance=ExtResource("14_6wrdx")]
+visible = false
 
-[connection signal="start_game" from="StartScreen" to="." method="_on_start_screen_start_game"]
+[connection signal="start_game" from="StartScreen" to="Player" method="_on_start_screen_start_game"]

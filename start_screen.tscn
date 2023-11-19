@@ -1,7 +1,46 @@
-[gd_scene load_steps=3 format=3 uid="uid://3knmtkrq66j1"]
+[gd_scene load_steps=8 format=3 uid="uid://3knmtkrq66j1"]
 
 [ext_resource type="Script" path="res://start_screen.gd" id="1_w76tu"]
 [ext_resource type="AudioStream" uid="uid://hlbpbwwmwl5e" path="res://Pure Vessel - Hollow Knight OST Extended.mp3" id="2_foo6e"]
+[ext_resource type="Texture2D" uid="uid://bibaamwxn682a" path="res://BetterSampleTitleScreen.png" id="3_6uc78"]
+[ext_resource type="AudioStream" uid="uid://dprjinakf68x5" path="res://boom-dark-percussive-tomas-herudek-1-00-06.mp3" id="4_0bi2f"]
+
+[sub_resource type="Animation" id="Animation_3log2"]
+resource_name = "Fade"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.8, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_j38dp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4hr3t"]
+_data = {
+"Fade": SubResource("Animation_3log2"),
+"RESET": SubResource("Animation_j38dp")
+}
 
 [node name="StartScreen" type="CanvasLayer"]
 script = ExtResource("1_w76tu")
@@ -24,10 +63,30 @@ volume_db = -5.0
 autoplay = true
 
 [node name="Label" type="Label" parent="."]
-offset_left = 600.0
-offset_top = 256.0
-offset_right = 711.0
-offset_bottom = 282.0
+anchors_preset = -1
+anchor_left = 0.504
+anchor_top = 0.062
+anchor_right = 0.504
+anchor_bottom = 0.062
+offset_left = -172.608
+offset_top = -32.176
+offset_right = 173.392
+offset_bottom = 39.824
+theme_override_font_sizes/font_size = 50
 text = "DEADLY FAITH"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(572, 332)
+scale = Vector2(1.11719, 0.648438)
+texture = ExtResource("3_6uc78")
+
+[node name="Boom" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_0bi2f")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4hr3t")
+}
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

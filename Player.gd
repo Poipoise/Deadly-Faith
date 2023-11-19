@@ -18,67 +18,69 @@ var stamina_empty = true
 var recharging = false
 var stamina_depletion = .5
 var attack_number = 0
-
+var gamestart = false
 func _physics_process(delta):
-	choose_action()
-	if stamina == 0 && stamina_empty:
-		stamina_check()
-	input = Input.get_vector("left", "right", "up", "down")
+	if gamestart:
+		choose_action()
+		if stamina == 0 && stamina_empty:
+			stamina_check()
+		input = Input.get_vector("left", "right", "up", "down")
 	
-	if recharging:
-		if stamina < 100:
-			stamina = stamina + stamina_depletion
-		else:
-			recharging = false
+		if recharging:
+			if stamina < 100:
+				stamina = stamina + stamina_depletion
+			else:
+				recharging = false
 	
-	if attacking:
-		$AnimationPlayer.speed_scale = 1
-		velocity = Vector2.ZERO
-	elif state == states.ROLLING:
-		$AnimationPlayer.speed_scale = 1
-		velocity = input * roll_speed
-	elif Input.is_action_pressed("sprint"):
-		if stamina > 0:
-			$RunParticles.amount = 20
-			$RunParticles.process_material.initial_velocity_min = 50
-			$RunParticles.process_material.initial_velocity_max = 100
-			recharging = false
-			$AnimationPlayer.speed_scale = 2
-			velocity = input * sprint_speed
-			stamina = stamina - stamina_depletion
+		if attacking:
+			$AnimationPlayer.speed_scale = 1
+			velocity = Vector2.ZERO
+		elif state == states.ROLLING:
+			$AnimationPlayer.speed_scale = 1
+			velocity = input * roll_speed
+		elif Input.is_action_pressed("sprint"):
+			if stamina > 0:
+				$RunParticles.amount = 20
+				$RunParticles.process_material.initial_velocity_min = 50
+				$RunParticles.process_material.initial_velocity_max = 100
+				recharging = false
+				$AnimationPlayer.speed_scale = 2
+				velocity = input * sprint_speed
+				stamina = stamina - stamina_depletion
+			else:
+				$RunParticles.amount = 4
+				$RunParticles.process_material.initial_velocity_min = 50
+				$RunParticles.process_material.initial_velocity_max = 100
+				$AnimationPlayer.speed_scale = 1
+				velocity = input * run_speed
 		else:
 			$RunParticles.amount = 4
 			$RunParticles.process_material.initial_velocity_min = 50
 			$RunParticles.process_material.initial_velocity_max = 100
 			$AnimationPlayer.speed_scale = 1
 			velocity = input * run_speed
-	else:
-		$RunParticles.amount = 4
-		$RunParticles.process_material.initial_velocity_min = 50
-		$RunParticles.process_material.initial_velocity_max = 100
-		$AnimationPlayer.speed_scale = 1
-		velocity = input * run_speed
 	
-	if not attacking and not rolling:
-		if velocity.length() > 0:
-				state = states.MOVING
-		if velocity.length() == 0:
-				state = states.IDLE
-	if velocity.x != 0:
-		transform.x.x = sign(velocity.x) 
-	move_and_slide()
+		if not attacking and not rolling:
+			if velocity.length() > 0:
+					state = states.MOVING
+			if velocity.length() == 0:
+					state = states.IDLE
+		if velocity.x != 0:
+			transform.x.x = sign(velocity.x) 
+		move_and_slide()
 	
 func _input(event):
-	if event.is_action_pressed("attack") && not attacking && stamina >= 10:
-		state = states.ATTACKING
-		recharging = false
-		attack_number += 1
-		stamina = stamina - 10
-	if event.is_action_pressed("roll") && stamina >= 15 && not rolling:
-		rolling = false
-		recharging = false
-		state = states.ROLLING
-		stamina = stamina - 15
+	if gamestart:
+		if event.is_action_pressed("attack") && not attacking && stamina >= 10:
+			state = states.ATTACKING
+			recharging = false
+			attack_number += 1
+			stamina = stamina - 10
+		if event.is_action_pressed("roll") && stamina >= 15 && not rolling:
+			rolling = false
+			recharging = false
+			state = states.ROLLING
+			stamina = stamina - 15
 		
 func choose_action():
 	$StateLabel.text = states.keys()[state]
@@ -159,3 +161,7 @@ func _on_stamina_cooldown_timeout():
 func _on_hurtbox_body_entered(body):
 	print("attacked!")
 	body.hurt(1, position.direction_to(body.position))
+
+
+func _on_start_screen_start_game():
+	gamestart = true
