@@ -21,6 +21,7 @@ var attack_number = 0
 var gamestart = false
 var start_pos
 var start_health
+var player_hurt = false
 
 func _ready():
 	start_pos = position
@@ -28,7 +29,8 @@ func _ready():
 	
 func _physics_process(delta):
 	if gamestart:
-		choose_action()
+		if not player_hurt:
+			choose_action()
 		if stamina == 0 && stamina_empty:
 			stamina_check()
 		input = Input.get_vector("left", "right", "up", "down")
@@ -139,11 +141,14 @@ func die():
 func hurt(amount, dir):
 	if not invincible:
 		var prev_state = state
+		player_hurt = true
 		state = states.HURT
 		health -= amount
 		health_changed.emit(health)
 		velocity = dir * 100
-		await get_tree().create_timer(0.2).timeout
+		$AnimationPlayer.play("hurt")
+		await $AnimationPlayer.animation_finished
+		player_hurt = false
 		state = prev_state
 		if health <= 0:
 			state = states.DEAD

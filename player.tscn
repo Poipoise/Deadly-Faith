@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dycinrmvaxssg"]
+[gd_scene load_steps=25 format=3 uid="uid://dycinrmvaxssg"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_nd4kh"]
 [ext_resource type="Texture2D" uid="uid://cj5ti1wg6ry8f" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Idle.png" id="2_h6hpf"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ddnqscesrmf3o" path="res://kenney_smoke-particles/PNG/White puff/whitePuff01.png" id="5_gj1ig"]
 [ext_resource type="Texture2D" uid="uid://b63xtpnmjmnr2" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Attack2NoMovement.png" id="5_shmv3"]
 [ext_resource type="Texture2D" uid="uid://gqeh5wtomm17" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Death.png" id="7_won8o"]
+[ext_resource type="Texture2D" uid="uid://btw3p6ehdlxka" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Hit.png" id="8_y0wdp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sa2ge"]
 size = Vector2(32, 18.5)
@@ -173,6 +174,30 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".:self_modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Sprite2D:self_modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_oo8p0"]
@@ -471,6 +496,70 @@ tracks/3/keys = {
 "values": [10]
 }
 
+[sub_resource type="Animation" id="Animation_c6vn2"]
+resource_name = "hurt"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("8_y0wdp")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0.14902, 0.145098, 1), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:invincible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2pm27"]
 _data = {
 "Idle": SubResource("Animation_c6spk"),
@@ -479,6 +568,7 @@ _data = {
 "attack1": SubResource("Animation_y2d6i"),
 "attack2": SubResource("Animation_p8w2r"),
 "death": SubResource("Animation_iu7nq"),
+"hurt": SubResource("Animation_c6vn2"),
 "run": SubResource("Animation_41evh")
 }
 
