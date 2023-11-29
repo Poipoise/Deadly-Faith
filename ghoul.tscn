@@ -35,7 +35,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_tjcu7"]
 resource_name = "attack"
-length = 0.7
+length = 1.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
