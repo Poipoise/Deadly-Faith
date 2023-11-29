@@ -5779,7 +5779,8 @@ position = Vector2(669, 90)
 position = Vector2(918, 47)
 
 [node name="DeathScreen" parent="." instance=ExtResource("15_iip5t")]
-layer = -1
-visible = false
+layer = 0
 
+[connection signal="Game_Over" from="Player" to="DeathScreen" method="_on_player_game_over"]
 [connection signal="start_game" from="StartScreen" to="Player" method="_on_start_screen_start_game"]
+[connection signal="respawn" from="DeathScreen" to="." method="_on_death_screen_respawn"]
