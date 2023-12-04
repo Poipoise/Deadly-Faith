@@ -8,6 +8,7 @@ var attacking = false
 var health = 3
 var start_pos
 var start_health
+var death_scene
 func _ready():
 	start_pos = position
 	start_health = health

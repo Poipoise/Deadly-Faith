@@ -6,4 +6,7 @@ func _process(delta):
 
 
 func _on_death_screen_respawn():
-	get_tree().reload_current_scene()
+	var enemy_nodes = get_tree().get_nodes_in_group("enemy")
+	for enemy in enemy_nodes:
+		get_tree().reload_current_scene()
+		pass

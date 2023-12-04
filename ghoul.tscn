@@ -147,7 +147,7 @@ radius = 368.005
 [sub_resource type="CircleShape2D" id="CircleShape2D_qxb75"]
 radius = 32.0156
 
-[node name="Ghoul" type="CharacterBody2D"]
+[node name="Ghoul" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 4
 collision_mask = 13
 script = ExtResource("1_co546")
