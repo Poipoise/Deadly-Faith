@@ -16,9 +16,11 @@ func _process(delta):
 func _on_player_game_over():
 	$Button.show()
 	$AnimationPlayer.play("Fade in")
+	$DeathMusic.play()
 
 
 func _on_button_pressed():
 	respawn.emit()
 	$AnimationPlayer.play("fade out")
 	$Button.hide()
+	$DeathMusic.stop()

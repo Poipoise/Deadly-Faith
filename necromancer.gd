@@ -39,7 +39,7 @@ func choose_action():
 			shoot_direction = position.direction_to(player.position)
 			transform.x.x = sign(shoot_direction.x)
 			if not attacking:
-				$AnimationPlayer.play("MoneyBagThrow")
+				$AnimationPlayer.play("projectile fire")
 				attacking = true
 				await get_tree().create_timer(0.4).timeout
 				var Projectile = projectile.instantiate()
@@ -52,7 +52,9 @@ func choose_action():
 		states.SUMMONER:
 			velocity = Vector2.ZERO
 			if summon:
+				$AnimationPlayer.play("Summoning")
 				summon = false
+				await get_tree().create_timer(1.3).timeout
 				var enemy_number = randf_range(1, 3)
 				var world_vars = get_node("/root/World")
 				world_vars.summon_state = true
