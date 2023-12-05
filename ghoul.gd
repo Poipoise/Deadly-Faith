@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var speed = 150
-enum states {IDLE, CHASE, ATTACK, DEAD, HURT}
+enum states {IDLE, CHASE, ATTACK, DEAD, HURT,SUMMONING}
 var state = states.IDLE
 var player
 var attacking = false
@@ -9,6 +9,7 @@ var health = 3
 var start_pos
 var start_health
 var death_scene
+var summoned = false
 func _ready():
 	start_pos = position
 	start_health = health
@@ -24,6 +25,9 @@ func choose_action():
 			$AnimationPlayer.play("death")
 			set_physics_process(false)
 			$CollisionShape2D.disabled = true
+			await $AnimationPlayer.animation_finished
+			await get_tree().create_timer(3).timeout
+			$AnimationPlayer.play("disapear")
 		states.IDLE:
 			$AnimationPlayer.play("idle")
 			velocity = Vector2.ZERO
@@ -76,3 +80,21 @@ func respawn():
 	position = start_pos
 	health = start_health
 	state = states.IDLE
+	if summoned:
+		queue_free()
+
+func summon():
+	$CollisionShape2D.disabled = true
+	$Detect/CollisionShape2D.disabled = true
+	$Attack/CollisionShape2D.disabled = true
+	state = states.SUMMONING
+	#position = pos
+	#position.x -= 100
+	summoned = true
+	state = states.SUMMONING
+	$AnimationPlayer.play("revive")
+	await $AnimationPlayer.animation_finished
+	state = states.IDLE 
+	$CollisionShape2D.disabled = false
+	$Detect/CollisionShape2D.disabled = false
+	$Attack/CollisionShape2D.disabled = false

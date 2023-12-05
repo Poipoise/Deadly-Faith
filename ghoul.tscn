@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://3od58wh8ejq3"]
+[gd_scene load_steps=16 format=3 uid="uid://3od58wh8ejq3"]
 
 [ext_resource type="Script" path="res://ghoul.gd" id="1_co546"]
 [ext_resource type="Texture2D" uid="uid://bvr8mb1uhhtl8" path="res://Ghoul Sprite Sheet.png" id="1_udybv"]
@@ -31,6 +31,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_tjcu7"]
@@ -127,13 +139,46 @@ tracks/0/keys = {
 "values": [8, 16]
 }
 
+[sub_resource type="Animation" id="Animation_a2d36"]
+resource_name = "revive"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [37, 32]
+}
+
+[sub_resource type="Animation" id="Animation_5l386"]
+resource_name = "disapear"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fmgr7"]
 _data = {
 "RESET": SubResource("Animation_aipc0"),
 "attack": SubResource("Animation_tjcu7"),
 "death": SubResource("Animation_75b6w"),
+"disapear": SubResource("Animation_5l386"),
 "hurt": SubResource("Animation_48t0i"),
 "idle": SubResource("Animation_tahck"),
+"revive": SubResource("Animation_a2d36"),
 "run": SubResource("Animation_ydbtb")
 }
 
