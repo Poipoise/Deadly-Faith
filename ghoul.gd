@@ -72,7 +72,7 @@ func _on_ghoul_hurt_box_body_entered(body):
 	body.hurt(1, position.direction_to(body.position))
 
 
-func _on_death_screen_respawn():
+func respawn():
 	position = start_pos
 	health = start_health
 	state = states.IDLE

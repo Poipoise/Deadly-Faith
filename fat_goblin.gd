@@ -100,3 +100,8 @@ func _on_walk_away_body_entered(body):
 
 func _on_walk_away_body_exited(body):
 	state = states.ATTACK
+
+func respawn():
+	position = start_pos
+	health = start_health
+	state = states.IDLE

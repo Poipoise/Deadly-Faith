@@ -343,7 +343,7 @@ one_shot = true
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WalkAway" groups=["enemy"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WalkAway"]
 position = Vector2(-1, -35)
 shape = SubResource("CircleShape2D_cnrhu")
 
