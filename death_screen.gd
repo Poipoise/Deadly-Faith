@@ -21,3 +21,4 @@ func _on_player_game_over():
 func _on_button_pressed():
 	respawn.emit()
 	$AnimationPlayer.play("fade out")
+	$Button.hide()
