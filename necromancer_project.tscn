@@ -1,34 +1,80 @@
-[gd_scene load_steps=5 format=3 uid="uid://x1dqtfjt4eic"]
+[gd_scene load_steps=8 format=3 uid="uid://x1dqtfjt4eic"]
 
 [ext_resource type="Script" path="res://necromancer_project.gd" id="1_06g0m"]
 [ext_resource type="Texture2D" uid="uid://cruvb1jo8molm" path="res://Magic Orb.png" id="2_tsrru"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7jwvj"]
-size = Vector2(16, 19)
+size = Vector2(45.5, 53)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g3ioy"]
 size = Vector2(14, 4)
+
+[sub_resource type="Animation" id="Animation_1lvme"]
+resource_name = "flying"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 4]
+}
+
+[sub_resource type="Animation" id="Animation_qdgni"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lrqll"]
+_data = {
+"RESET": SubResource("Animation_qdgni"),
+"flying": SubResource("Animation_1lvme")
+}
 
 [node name="NecromancerProject" type="CharacterBody2D"]
 script = ExtResource("1_06g0m")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.6, 1.6)
 texture = ExtResource("2_tsrru")
+hframes = 2
+vframes = 3
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 4.5)
+position = Vector2(11.25, 10.5)
 shape = SubResource("RectangleShape2D_7jwvj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1)
+position = Vector2(10, 3)
 shape = SubResource("RectangleShape2D_g3ioy")
 disabled = true
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lrqll")
+}
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

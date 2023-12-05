@@ -18,14 +18,14 @@ func start(_position, _direction):
 func _physics_process(delta):
 	move_and_slide()
 	transform.x.x = sign(velocity.x)
-	
+	$AnimationPlayer.play("flying")
 	
 
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("enemy"):
 		pass
 	else:
-		#$AnimationPlayer.play("Hit")
+		
 		#await $AnimationPlayer.animation_finished
 		queue_free()
 		body.hurt(1, position.direction_to(body.position))
