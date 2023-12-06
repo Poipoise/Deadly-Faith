@@ -3,6 +3,7 @@ signal respawn
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$AnimatedSprite2D.hide()
 	$Button.hide()
 	
 
@@ -16,6 +17,7 @@ func _process(delta):
 func _on_player_game_over():
 	$Button.show()
 	$AnimationPlayer.play("Fade in")
+	$AnimatedSprite2D.show()
 	$DeathMusic.play()
 
 

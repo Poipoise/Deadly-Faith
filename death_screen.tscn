@@ -1,8 +1,59 @@
-[gd_scene load_steps=11 format=3 uid="uid://n47lx2mec8fh"]
+[gd_scene load_steps=19 format=3 uid="uid://n47lx2mec8fh"]
 
 [ext_resource type="Script" path="res://death_screen.gd" id="1_gdqf4"]
 [ext_resource type="AudioStream" uid="uid://8xihlr10k27h" path="res://sounds/Undertale OST_ 011 - Determination.mp3" id="2_oigir"]
+[ext_resource type="Texture2D" uid="uid://cc8ypsp412hdk" path="res://You died screen.png" id="2_ua8ck"]
 [ext_resource type="AudioStream" uid="uid://ddiixpj68xjle" path="res://sounds/084373_heal-36672.mp3" id="3_1edmo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_by4tf"]
+atlas = ExtResource("2_ua8ck")
+region = Rect2(0, 0, 400, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iki4n"]
+atlas = ExtResource("2_ua8ck")
+region = Rect2(400, 0, 400, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whvxh"]
+atlas = ExtResource("2_ua8ck")
+region = Rect2(0, 200, 400, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_akqv1"]
+atlas = ExtResource("2_ua8ck")
+region = Rect2(400, 200, 400, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ivwf8"]
+atlas = ExtResource("2_ua8ck")
+region = Rect2(0, 400, 400, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y114g"]
+atlas = ExtResource("2_ua8ck")
+region = Rect2(400, 400, 400, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dbnau"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_by4tf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iki4n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whvxh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_akqv1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ivwf8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y114g")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
 
 [sub_resource type="Animation" id="Animation_s1ksf"]
 resource_name = "Fade in"
@@ -10,19 +61,19 @@ length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Title:self_modulate")
+tracks/0/path = NodePath("Label:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.8),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 1.4, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Label:self_modulate")
+tracks/1/path = NodePath("Button:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -34,22 +85,10 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Button:self_modulate")
+tracks/2/path = NodePath("ColorRect:self_modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 1.4, 3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("ColorRect:self_modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
@@ -61,7 +100,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Title:self_modulate")
+tracks/0/path = NodePath("Label:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -73,7 +112,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Label:self_modulate")
+tracks/1/path = NodePath("Button:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -85,22 +124,10 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Button:self_modulate")
+tracks/2/path = NodePath("ColorRect:self_modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("ColorRect:self_modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -125,7 +152,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Title:self_modulate")
+tracks/1/path = NodePath("Label:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -137,22 +164,10 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Label:self_modulate")
+tracks/2/path = NodePath("Button:self_modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 1.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Button:self_modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0, 1.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
@@ -178,6 +193,13 @@ bg_color = Color(0.235294, 0.0588235, 0.0156863, 1)
 [node name="DeathScreen" type="CanvasLayer"]
 script = ExtResource("1_gdqf4")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+position = Vector2(536, 228)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_dbnau")
+autoplay = "default"
+
 [node name="ColorRect" type="ColorRect" parent="."]
 self_modulate = Color(1, 1, 1, 0)
 offset_right = 1160.0
@@ -188,23 +210,6 @@ color = Color(0, 0, 0, 1)
 libraries = {
 "": SubResource("AnimationLibrary_hhqik")
 }
-
-[node name="Title" type="Label" parent="."]
-self_modulate = Color(1, 1, 1, 0)
-anchors_preset = -1
-anchor_left = 0.488
-anchor_top = 0.327
-anchor_right = 0.488
-anchor_bottom = 0.327
-offset_left = -210.176
-offset_top = -75.896
-offset_right = 210.824
-offset_bottom = 76.104
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_font_sizes/font_size = 53
-text = "YOUR FAITH 
-HAS FAILED YOU"
-horizontal_alignment = 1
 
 [node name="Label" type="Label" parent="."]
 self_modulate = Color(1, 1, 1, 0)
