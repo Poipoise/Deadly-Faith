@@ -1,9 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://bhejo4nwyug7"]
+[gd_scene load_steps=21 format=3 uid="uid://bhejo4nwyug7"]
 
 [ext_resource type="Texture2D" uid="uid://do6gtai3nmkq7" path="res://Necromancer_creativekind-Sheet.png" id="1_cl322"]
 [ext_resource type="Script" path="res://necromancer.gd" id="1_qulxr"]
 [ext_resource type="PackedScene" uid="uid://x1dqtfjt4eic" path="res://necromancer_project.tscn" id="2_r74i8"]
 [ext_resource type="PackedScene" uid="uid://3od58wh8ejq3" path="res://ghoul.tscn" id="3_jpuqj"]
+[ext_resource type="AudioStream" uid="uid://b1535r53p64cy" path="res://sounds/fireball-whoosh-1-179125.mp3" id="5_0j2m7"]
+[ext_resource type="AudioStream" uid="uid://cjnr3fybp6iih" path="res://sounds/fireball-whoosh-2-179126.mp3" id="6_lvpr5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4mhco"]
 size = Vector2(32, 53.5)
@@ -270,13 +272,20 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_llfqt"]
-radius = 327.014
+radius = 502.1
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qbgmq"]
-radius = 219.0
+radius = 259.002
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ib6an"]
-radius = 80.0
+radius = 85.0059
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bhub3"]
+streams_count = 2
+stream_0/stream = ExtResource("5_0j2m7")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("6_lvpr5")
+stream_1/weight = 1.0
 
 [node name="Necromancer" type="CharacterBody2D"]
 collision_layer = 4
@@ -326,15 +335,20 @@ position = Vector2(0, -26)
 shape = SubResource("CircleShape2D_ib6an")
 
 [node name="SummonTimer" type="Timer" parent="."]
-wait_time = 120.0
+wait_time = 10.0
 one_shot = true
 
 [node name="AttackTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
 
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Idle"
+
+[node name="Fireball" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_bhub3")
 
 [connection signal="body_entered" from="Summon" to="." method="_on_summon_body_entered"]
 [connection signal="body_exited" from="Summon" to="." method="_on_summon_body_exited"]

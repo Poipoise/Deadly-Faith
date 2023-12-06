@@ -7743,7 +7743,7 @@ position = Vector2(-152, 698)
 layer = 0
 
 [node name="Necromancer" parent="." instance=ExtResource("16_3bj3y")]
-position = Vector2(993, 79)
+position = Vector2(1249, 77)
 
 [connection signal="Game_Over" from="Player" to="DeathScreen" method="_on_player_game_over"]
 [connection signal="start_game" from="StartScreen" to="Player" method="_on_start_screen_start_game"]

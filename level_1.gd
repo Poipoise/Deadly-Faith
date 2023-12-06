@@ -4,11 +4,12 @@ var summon_position
 var summon_amount = 0
 var summon_state = false
 var counter = 0
+var direction
 func _process(delta):
 	$CanvasLayer/StaminaBar.value = $Player.stamina
 	if summon_state:
 		summon_state = false
-		summon_position.x -= 100
+		summon_position.x -= 250
 		while counter < summon_amount:
 			var enemy_number = randi_range(-150, 150)
 			summon_position.y = enemy_number

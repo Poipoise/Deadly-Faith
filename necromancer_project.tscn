@@ -1,13 +1,30 @@
-[gd_scene load_steps=8 format=3 uid="uid://x1dqtfjt4eic"]
+[gd_scene load_steps=11 format=3 uid="uid://x1dqtfjt4eic"]
 
 [ext_resource type="Script" path="res://necromancer_project.gd" id="1_06g0m"]
 [ext_resource type="Texture2D" uid="uid://cruvb1jo8molm" path="res://Magic Orb.png" id="2_tsrru"]
+[ext_resource type="AudioStream" uid="uid://b1535r53p64cy" path="res://sounds/fireball-whoosh-1-179125.mp3" id="3_2uflp"]
+[ext_resource type="AudioStream" uid="uid://cjnr3fybp6iih" path="res://sounds/fireball-whoosh-2-179126.mp3" id="4_ns22e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7jwvj"]
 size = Vector2(45.5, 53)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g3ioy"]
 size = Vector2(14, 4)
+
+[sub_resource type="Animation" id="Animation_qdgni"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_1lvme"]
 resource_name = "flying"
@@ -26,26 +43,18 @@ tracks/0/keys = {
 "values": [0, 4]
 }
 
-[sub_resource type="Animation" id="Animation_qdgni"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lrqll"]
 _data = {
 "RESET": SubResource("Animation_qdgni"),
 "flying": SubResource("Animation_1lvme")
 }
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_diyfo"]
+streams_count = 2
+stream_0/stream = ExtResource("3_2uflp")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("4_ns22e")
+stream_1/weight = 1.0
 
 [node name="NecromancerProject" type="CharacterBody2D"]
 script = ExtResource("1_06g0m")
@@ -57,7 +66,7 @@ hframes = 2
 vframes = 3
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 0
+collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
@@ -75,6 +84,9 @@ disabled = true
 libraries = {
 "": SubResource("AnimationLibrary_lrqll")
 }
+
+[node name="Fireball" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_diyfo")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

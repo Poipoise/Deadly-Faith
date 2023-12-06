@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dycinrmvaxssg"]
+[gd_scene load_steps=38 format=3 uid="uid://dycinrmvaxssg"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_nd4kh"]
 [ext_resource type="Texture2D" uid="uid://cj5ti1wg6ry8f" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Idle.png" id="2_h6hpf"]
@@ -9,6 +9,17 @@
 [ext_resource type="Texture2D" uid="uid://b63xtpnmjmnr2" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Attack2NoMovement.png" id="5_shmv3"]
 [ext_resource type="Texture2D" uid="uid://gqeh5wtomm17" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Death.png" id="7_won8o"]
 [ext_resource type="Texture2D" uid="uid://btw3p6ehdlxka" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Hit.png" id="8_y0wdp"]
+[ext_resource type="AudioStream" uid="uid://wjsayo7uiau1" path="res://sounds/Step(1).wav" id="10_4x3p2"]
+[ext_resource type="AudioStream" uid="uid://ky2ca2gcbnrh" path="res://sounds/step(2).wav" id="11_xq6nl"]
+[ext_resource type="AudioStream" uid="uid://lx4jraie7c3u" path="res://sounds/step(3).wav" id="12_rq2p3"]
+[ext_resource type="AudioStream" uid="uid://dkpuuknheppys" path="res://sounds/step(4).wav" id="13_gfqd4"]
+[ext_resource type="AudioStream" uid="uid://5u3aihkf4t6x" path="res://sounds/step(5).wav" id="14_1imvr"]
+[ext_resource type="AudioStream" uid="uid://bwpbv53uufvom" path="res://sounds/HeavySwordSwing.wav" id="15_k21me"]
+[ext_resource type="AudioStream" uid="uid://dcg5n525fjyh7" path="res://sounds/mixkit-fast-sword-whoosh-2792.wav" id="16_cghf2"]
+[ext_resource type="AudioStream" uid="uid://whnmlrbvusdc" path="res://sounds/QuickSwordSwing.wav" id="17_87l4c"]
+[ext_resource type="AudioStream" uid="uid://dy2wqkb13nqdk" path="res://sounds/slash-21834 (1).mp3" id="18_3hkdw"]
+[ext_resource type="AudioStream" uid="uid://dmelkoimi4gst" path="res://sounds/Swordswing2.wav" id="19_ibgw6"]
+[ext_resource type="AudioStream" uid="uid://cp3ck17ldxnxm" path="res://sounds/SwordSwing.wav" id="20_fup70"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sa2ge"]
 size = Vector2(32, 18.5)
@@ -600,6 +611,34 @@ scale_max = 0.05
 color_ramp = SubResource("GradientTexture1D_phift")
 anim_speed_curve = SubResource("CurveTexture_kpvqm")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0yuwd"]
+streams_count = 5
+stream_0/stream = ExtResource("10_4x3p2")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("11_xq6nl")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("12_rq2p3")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("13_gfqd4")
+stream_3/weight = 1.0
+stream_4/stream = ExtResource("14_1imvr")
+stream_4/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_lre8w"]
+streams_count = 6
+stream_0/stream = ExtResource("15_k21me")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("16_cghf2")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("17_87l4c")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("18_3hkdw")
+stream_3/weight = 1.0
+stream_4/stream = ExtResource("19_ibgw6")
+stream_4/weight = 1.0
+stream_5/stream = ExtResource("20_fup70")
+stream_5/weight = 1.0
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 13
@@ -648,6 +687,13 @@ rotation = 0.760964
 process_material = SubResource("ParticleProcessMaterial_rfbw1")
 texture = ExtResource("5_gj1ig")
 lifetime = 0.25
+
+[node name="Walking" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_0yuwd")
+
+[node name="swing" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_lre8w")
+volume_db = -4.0
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="timeout" from="StaminaCooldown" to="." method="_on_stamina_cooldown_timeout"]

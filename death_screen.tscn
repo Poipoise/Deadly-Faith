@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://n47lx2mec8fh"]
+[gd_scene load_steps=11 format=3 uid="uid://n47lx2mec8fh"]
 
 [ext_resource type="Script" path="res://death_screen.gd" id="1_gdqf4"]
-[ext_resource type="AudioStream" uid="uid://8xihlr10k27h" path="res://Undertale OST_ 011 - Determination.mp3" id="2_41e2e"]
+[ext_resource type="AudioStream" uid="uid://8xihlr10k27h" path="res://sounds/Undertale OST_ 011 - Determination.mp3" id="2_oigir"]
+[ext_resource type="AudioStream" uid="uid://ddiixpj68xjle" path="res://sounds/084373_heal-36672.mp3" id="3_1edmo"]
 
 [sub_resource type="Animation" id="Animation_s1ksf"]
 resource_name = "Fade in"
@@ -244,6 +245,10 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_aa2ed")
 text = "Respawn"
 
 [node name="DeathMusic" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_41e2e")
+stream = ExtResource("2_oigir")
+
+[node name="Respawn" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_1edmo")
+volume_db = 7.0
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

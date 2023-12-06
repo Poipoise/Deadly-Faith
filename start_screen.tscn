@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://3knmtkrq66j1"]
 
 [ext_resource type="Script" path="res://start_screen.gd" id="1_w76tu"]
-[ext_resource type="AudioStream" uid="uid://hlbpbwwmwl5e" path="res://Pure Vessel - Hollow Knight OST Extended.mp3" id="2_foo6e"]
+[ext_resource type="AudioStream" uid="uid://hlbpbwwmwl5e" path="res://sounds/Pure Vessel - Hollow Knight OST Extended.mp3" id="2_avu18"]
 [ext_resource type="Texture2D" uid="uid://bibaamwxn682a" path="res://BetterSampleTitleScreen.png" id="3_6uc78"]
-[ext_resource type="AudioStream" uid="uid://dprjinakf68x5" path="res://boom-dark-percussive-tomas-herudek-1-00-06.mp3" id="4_0bi2f"]
+[ext_resource type="AudioStream" uid="uid://dprjinakf68x5" path="res://sounds/boom-dark-percussive-tomas-herudek-1-00-06.mp3" id="4_30ea8"]
 
 [sub_resource type="Animation" id="Animation_3log2"]
 resource_name = "Fade"
@@ -58,7 +58,7 @@ offset_bottom = 57.08
 text = "START"
 
 [node name="TitleScreenMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_foo6e")
+stream = ExtResource("2_avu18")
 volume_db = -5.0
 autoplay = true
 
@@ -82,7 +82,7 @@ scale = Vector2(1.125, 0.648438)
 texture = ExtResource("3_6uc78")
 
 [node name="Boom" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_0bi2f")
+stream = ExtResource("4_30ea8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

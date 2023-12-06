@@ -7,7 +7,7 @@ signal Game_Over
 var run_speed = 125
 var sprint_speed = 250
 var attacking = false
-var health = 5
+var health = 999
 enum states {IDLE, MOVING, ATTACKING, DEAD, HURT, ROLLING}
 var state = states.IDLE
 var input
@@ -81,6 +81,7 @@ func _physics_process(delta):
 func _input(event):
 	if gamestart:
 		if event.is_action_pressed("attack") && not attacking && stamina >= 10:
+			$swing.play()
 			state = states.ATTACKING
 			recharging = false
 			attack_number += 1
@@ -105,9 +106,11 @@ func choose_action():
 		states.IDLE:
 			$RunParticles.emitting = false
 			$AnimationPlayer.play("Idle")
+			
 		states.MOVING:
 			$RunParticles.emitting = true
 			$AnimationPlayer.play("run")
+			#$Walking.play()
 			if velocity.x != 0:
 				transform.x.x = sign(velocity.x) 
 		states.ATTACKING:

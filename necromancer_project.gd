@@ -12,6 +12,7 @@ func start(_position, _direction):
 	throw = sign(bullet_path.x) * 30
 	position.x += throw
 	velocity = bullet_path * speed
+	$Fireball.play()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
