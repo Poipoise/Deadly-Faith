@@ -22,7 +22,8 @@ var gamestart = false
 var start_pos
 var start_health
 var player_hurt = false
-
+var play = true
+var soundTime = 0.35
 func _ready():
 	start_pos = position
 	start_health = health
@@ -40,7 +41,12 @@ func _physics_process(delta):
 				stamina = stamina + stamina_depletion
 			else:
 				recharging = false
-	
+		if velocity.length() != 0 and play:
+			play = false
+			$Walking.play()
+			await get_tree().create_timer(soundTime).timeout
+			play = true
+
 		if attacking:
 			$AnimationPlayer.speed_scale = 1
 			velocity = Vector2.ZERO
@@ -49,6 +55,7 @@ func _physics_process(delta):
 			velocity = input * roll_speed
 		elif Input.is_action_pressed("sprint"):
 			if stamina > 0:
+				soundTime = 0.6
 				$RunParticles.amount = 20
 				$RunParticles.process_material.initial_velocity_min = 50
 				$RunParticles.process_material.initial_velocity_max = 100
@@ -57,6 +64,7 @@ func _physics_process(delta):
 				velocity = input * sprint_speed
 				stamina = stamina - stamina_depletion
 			else:
+				soundTime = 0.35
 				$RunParticles.amount = 4
 				$RunParticles.process_material.initial_velocity_min = 50
 				$RunParticles.process_material.initial_velocity_max = 100
@@ -192,3 +200,7 @@ func _on_death_screen_respawn():
 	set_physics_process(true)
 	$CollisionShape2D.disabled = false
 	
+
+
+func _on_sound_timer_timeout():
+	play = true
