@@ -32,8 +32,8 @@ func _process(delta):
 
 
 func _on_death_screen_respawn():
-	gameover = true
-	$AudioStreamPlayer.stop()
+	gameover = false
+	play = true
 	var enemy_nodes = get_tree().get_nodes_in_group("enemy")
 	for enemy in enemy_nodes:
 		enemy.respawn()
@@ -41,3 +41,8 @@ func _on_death_screen_respawn():
 
 func _on_start_screen_start_game():
 	start = true
+
+
+func _on_player_game_over():
+	gameover = true
+	$AudioStreamPlayer.stop()
