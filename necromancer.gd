@@ -16,6 +16,9 @@ var enemy_number
 var direction = 1
 var summonable = false
 var Fireable = true
+var CircleBarragetime = false
+var CircleAattack = true
+var fireballNumber = 5
 func _ready():
 	start_pos = position
 	start_health = health
@@ -36,6 +39,8 @@ func choose_action():
 			velocity = Vector2.ZERO
 			if summonable and summon:
 				state = states.SUMMONER
+			if CircleAattack and CircleBarragetime:
+				state = states.PROJECTILE
 		states.FIREAWAY:
 			velocity = position.direction_to(player.position) * speed * -1
 			if velocity.x != 0:
@@ -65,6 +70,22 @@ func choose_action():
 			
 		states.PROJECTILE:
 			velocity = Vector2.ZERO
+			shoot_direction = Vector2(-1,0)
+			if not CircleBarragetime:
+				$AnimationPlayer.play("Projectile Barrage")
+				print("FIRED")
+				CircleBarragetime = true
+				CircleAattack = false
+				await $AnimationPlayer.animation_finished
+				while counter < fireballNumber:
+					var angle = (2*6.28319) / fireballNumber
+					shoot_direction = shoot_direction.from_angle(angle)
+					#shoot_direction = shoot_direction.rotate(angle)
+					var Projectile = projectile.instantiate()
+					Projectile.start(position, shoot_direction)
+					get_tree().root.add_child(Projectile)
+				$Barrage.start()
+				state = states.IDLE
 			
 		states.SUMMONER:
 			velocity = Vector2.ZERO
@@ -129,3 +150,21 @@ func _on_away_body_exited(body):
 	Fireable = false
 	summonable = true
 	state = states.SUMMONER
+
+
+func _on_barrage_timeout():
+	CircleBarragetime = false
+	CircleAattack = true
+
+
+func _on_project_ring_body_entered(body):
+	Fireable = false
+	CircleAattack = true
+	state = states.PROJECTILE
+	
+
+
+func _on_project_ring_body_exited(body):
+	Fireable = true
+	CircleAattack = false
+	state = states.MOVEAWAY

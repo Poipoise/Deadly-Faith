@@ -275,10 +275,10 @@ _data = {
 radius = 502.1
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qbgmq"]
-radius = 259.002
+radius = 265.002
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ib6an"]
-radius = 85.0059
+radius = 112.112
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bhub3"]
 streams_count = 2
@@ -350,9 +350,14 @@ text = "Idle"
 [node name="Fireball" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_bhub3")
 
+[node name="Barrage" type="Timer" parent="."]
+
 [connection signal="body_entered" from="Summon" to="." method="_on_summon_body_entered"]
 [connection signal="body_exited" from="Summon" to="." method="_on_summon_body_exited"]
 [connection signal="body_entered" from="Away" to="." method="_on_away_body_entered"]
 [connection signal="body_exited" from="Away" to="." method="_on_away_body_exited"]
+[connection signal="body_entered" from="ProjectRing" to="." method="_on_project_ring_body_entered"]
+[connection signal="body_exited" from="ProjectRing" to="." method="_on_project_ring_body_exited"]
 [connection signal="timeout" from="SummonTimer" to="." method="_on_summon_timer_timeout"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="Barrage" to="." method="_on_barrage_timeout"]
