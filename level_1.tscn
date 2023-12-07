@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://c6purqvnh5obf"]
+[gd_scene load_steps=36 format=3 uid="uid://c6purqvnh5obf"]
 
 [ext_resource type="Script" path="res://level_1.gd" id="1_22rws"]
 [ext_resource type="PackedScene" uid="uid://dycinrmvaxssg" path="res://player.tscn" id="1_a16pe"]
@@ -20,6 +20,11 @@
 [ext_resource type="PackedScene" uid="uid://3knmtkrq66j1" path="res://start_screen.tscn" id="14_6wrdx"]
 [ext_resource type="PackedScene" uid="uid://n47lx2mec8fh" path="res://death_screen.tscn" id="15_iip5t"]
 [ext_resource type="PackedScene" uid="uid://bhejo4nwyug7" path="res://necromancer.tscn" id="16_3bj3y"]
+[ext_resource type="AudioStream" uid="uid://dwgqbl6a3o7s2" path="res://SoundTrack/xDeviruchi - Exploring The Unknown.wav" id="21_hw7fr"]
+[ext_resource type="AudioStream" uid="uid://bm0b2n064xa4i" path="res://SoundTrack/Pixel 11.wav" id="22_bsvti"]
+[ext_resource type="AudioStream" uid="uid://bcieg8nbloalc" path="res://SoundTrack/xDeviruchi - The Icy Cave .wav" id="23_gq00h"]
+[ext_resource type="AudioStream" uid="uid://b4x3ddhf74rr8" path="res://SoundTrack/Pixel 3.wav" id="24_0vx26"]
+[ext_resource type="AudioStream" uid="uid://m37c1vi3akke" path="res://SoundTrack/Fearofdark - Scaling The Dragon Fortress.mp3" id="25_32lqn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l2423"]
 texture = ExtResource("2_80435")
@@ -8553,6 +8558,20 @@ sources/5 = SubResource("TileSetAtlasSource_y4le8")
 sources/6 = SubResource("TileSetAtlasSource_s1vqf")
 sources/7 = SubResource("TileSetAtlasSource_c2r55")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bdh1b"]
+streams_count = 5
+playback_mode = 2
+stream_0/stream = ExtResource("21_hw7fr")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("22_bsvti")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("23_gq00h")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("24_0vx26")
+stream_3/weight = 1.0
+stream_4/stream = ExtResource("25_32lqn")
+stream_4/weight = 1.0
+
 [node name="World" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_22rws")
@@ -8620,7 +8639,6 @@ position = Vector2(163, -109)
 position = Vector2(669, 90)
 
 [node name="StartScreen" parent="." instance=ExtResource("14_6wrdx")]
-visible = false
 
 [node name="Ghoul2" parent="." instance=ExtResource("2_k5fgf")]
 position = Vector2(-152, 698)
@@ -8632,7 +8650,12 @@ visible = false
 [node name="Necromancer" parent="." instance=ExtResource("16_3bj3y")]
 position = Vector2(1249, 77)
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_bdh1b")
+volume_db = -12.0
+
 [connection signal="Game_Over" from="Player" to="DeathScreen" method="_on_player_game_over"]
+[connection signal="start_game" from="StartScreen" to="." method="_on_start_screen_start_game"]
 [connection signal="start_game" from="StartScreen" to="Player" method="_on_start_screen_start_game"]
 [connection signal="respawn" from="DeathScreen" to="." method="_on_death_screen_respawn"]
 [connection signal="respawn" from="DeathScreen" to="Player" method="_on_death_screen_respawn"]

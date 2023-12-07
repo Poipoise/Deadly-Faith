@@ -5,6 +5,9 @@ var summon_amount = 0
 var summon_state = false
 var counter = 0
 var direction
+var play = true
+var start = false
+var gameover = false
 func _process(delta):
 	$CanvasLayer/StaminaBar.value = $Player.stamina
 	if summon_state:
@@ -18,9 +21,23 @@ func _process(delta):
 			summons.position = summon_position
 			summons.summon()
 			counter += 1
+			
+	if play and start and not gameover:
+		play = false
+		$AudioStreamPlayer.play()
+		await $AudioStreamPlayer.finished
+		await get_tree().create_timer(0.4).timeout
+		play = true
+		
 
 
 func _on_death_screen_respawn():
+	gameover = true
+	$AudioStreamPlayer.stop()
 	var enemy_nodes = get_tree().get_nodes_in_group("enemy")
 	for enemy in enemy_nodes:
 		enemy.respawn()
+
+
+func _on_start_screen_start_game():
+	start = true

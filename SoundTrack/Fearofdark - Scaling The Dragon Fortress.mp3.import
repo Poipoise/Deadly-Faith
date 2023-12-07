@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://m37c1vi3akke"
+path="res://.godot/imported/Fearofdark - Scaling The Dragon Fortress.mp3-4f56f01a34ca522441a147cf404a30ce.mp3str"
+
+[deps]
+
+source_file="res://SoundTrack/Fearofdark - Scaling The Dragon Fortress.mp3"
+dest_files=["res://.godot/imported/Fearofdark - Scaling The Dragon Fortress.mp3-4f56f01a34ca522441a147cf404a30ce.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
