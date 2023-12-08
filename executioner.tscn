@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://cna0uxyjst32f"]
+
+[ext_resource type="Script" path="res://Executioner.gd" id="1_8xqih"]
+[ext_resource type="Texture2D" uid="uid://dt5soo34tocd2" path="res://Undead executioner/Undead executioner puppet/png/idle2.png" id="2_tqvx5"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gw7fi"]
+radius = 11.0
+height = 60.0
+
+[sub_resource type="Animation" id="Animation_8ry8w"]
+resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_irbt3"]
+resource_name = "attack"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bdhum"]
+_data = {
+"attack": SubResource("Animation_irbt3"),
+"idle": SubResource("Animation_8ry8w")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8foj8"]
+radius = 48.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nln4m"]
+radius = 187.003
+
+[node name="Executioner" type="CharacterBody2D"]
+script = ExtResource("1_8xqih")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_tqvx5")
+hframes = 4
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 10)
+shape = SubResource("CapsuleShape2D_gw7fi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bdhum")
+}
+
+[node name="AttackBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
+shape = SubResource("CircleShape2D_8foj8")
+
+[node name="Chase" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chase"]
+shape = SubResource("CircleShape2D_nln4m")
+
+[node name="Area2D3" type="Area2D" parent="."]
