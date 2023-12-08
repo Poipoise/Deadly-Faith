@@ -272,13 +272,13 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_llfqt"]
-radius = 502.1
+radius = 791.103
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qbgmq"]
-radius = 265.002
+radius = 411.122
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ib6an"]
-radius = 112.112
+radius = 186.003
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bhub3"]
 streams_count = 2

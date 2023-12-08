@@ -15,7 +15,7 @@ func _process(delta):
 		summon_position.x -= 250
 		while counter < summon_amount:
 			var enemy_number = randi_range(-150, 150)
-			summon_position.y = enemy_number
+			summon_position.y += enemy_number
 			var summons = enemy.instantiate()
 			add_child(summons)
 			summons.position = summon_position

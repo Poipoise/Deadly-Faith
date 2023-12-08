@@ -18,7 +18,7 @@ var summonable = false
 var Fireable = true
 var CircleBarragetime = false
 var CircleAattack = true
-var fireballNumber = 5
+var fireballNumber = 13
 func _ready():
 	start_pos = position
 	start_health = health
@@ -79,11 +79,13 @@ func choose_action():
 				await $AnimationPlayer.animation_finished
 				while counter < fireballNumber:
 					var angle = (2*6.28319) / fireballNumber
-					shoot_direction = shoot_direction.from_angle(angle)
-					#shoot_direction = shoot_direction.rotate(angle)
+					#shoot_direction = shoot_direction.from_angle(angle)
+					shoot_direction = shoot_direction.rotated(angle)
+					print(shoot_direction)
 					var Projectile = projectile.instantiate()
 					Projectile.start(position, shoot_direction)
 					get_tree().root.add_child(Projectile)
+					counter += 1
 				$Barrage.start()
 				state = states.IDLE
 			
