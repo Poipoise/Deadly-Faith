@@ -31,7 +31,7 @@ func choose_action():
 	$Label.text = states.keys()[state]
 	match state:
 		states.DEAD:
-			$AnimationPlayer.play("death")
+			$AnimationPlayer.play("Death")
 			set_physics_process(false)
 			$CollisionShape2D.disabled = true
 		states.IDLE:
@@ -110,7 +110,8 @@ func hurt(amount, dir):
 	var prev_state = state
 	state = states.HURT
 	velocity = dir * 100
-	await get_tree().create_timer(0.2).timeout
+	$AnimationPlayer.play("hit")
+	await $AnimationPlayer.animation_finished
 	state = prev_state
 	if health <= 0:
 		state = states.DEAD
