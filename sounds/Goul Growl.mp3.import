@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://3ts8o64u6uli"
+path="res://.godot/imported/Goul Growl.mp3-97c17c0c136dc1782a0c1d268bd454f6.mp3str"
+
+[deps]
+
+source_file="res://sounds/Goul Growl.mp3"
+dest_files=["res://.godot/imported/Goul Growl.mp3-97c17c0c136dc1782a0c1d268bd454f6.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

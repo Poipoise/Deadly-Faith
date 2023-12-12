@@ -22,6 +22,7 @@ func _on_player_game_over():
 
 
 func _on_button_pressed():
+	$AnimatedSprite2D.hide()
 	$Respawn.play()
 	respawn.emit()
 	$AnimationPlayer.play("fade out")

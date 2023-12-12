@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dycinrmvaxssg"]
+[gd_scene load_steps=39 format=3 uid="uid://dycinrmvaxssg"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_nd4kh"]
 [ext_resource type="Texture2D" uid="uid://cj5ti1wg6ry8f" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Idle.png" id="2_h6hpf"]
@@ -20,6 +20,7 @@
 [ext_resource type="AudioStream" uid="uid://dy2wqkb13nqdk" path="res://sounds/slash-21834 (1).mp3" id="18_3hkdw"]
 [ext_resource type="AudioStream" uid="uid://dmelkoimi4gst" path="res://sounds/Swordswing2.wav" id="19_ibgw6"]
 [ext_resource type="AudioStream" uid="uid://cp3ck17ldxnxm" path="res://sounds/SwordSwing.wav" id="20_fup70"]
+[ext_resource type="AudioStream" uid="uid://lkuawtljm2gl" path="res://sounds/hurt_c_08-102842.mp3" id="21_c78ky"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sa2ge"]
 size = Vector2(32, 18.5)
@@ -699,6 +700,10 @@ volume_db = -4.0
 [node name="SoundTimer" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("21_c78ky")
+volume_db = 5.0
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="timeout" from="StaminaCooldown" to="." method="_on_stamina_cooldown_timeout"]

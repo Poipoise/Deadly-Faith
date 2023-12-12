@@ -1,7 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://3od58wh8ejq3"]
+[gd_scene load_steps=18 format=3 uid="uid://3od58wh8ejq3"]
 
 [ext_resource type="Script" path="res://ghoul.gd" id="1_co546"]
 [ext_resource type="Texture2D" uid="uid://bvr8mb1uhhtl8" path="res://Ghoul Sprite Sheet.png" id="1_udybv"]
+[ext_resource type="AudioStream" uid="uid://lkuawtljm2gl" path="res://sounds/hurt_c_08-102842.mp3" id="3_afuku"]
+[ext_resource type="AudioStream" uid="uid://3ts8o64u6uli" path="res://sounds/Goul Growl.mp3" id="4_igdwe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_skhs1"]
 size = Vector2(23, 13)
@@ -247,6 +249,13 @@ offset_left = 11.0
 offset_top = 6.0
 offset_right = 51.0
 offset_bottom = 29.0
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_afuku")
+
+[node name="Growl" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_igdwe")
+volume_db = 3.0
 
 [connection signal="body_entered" from="GhoulHurtBox" to="." method="_on_ghoul_hurt_box_body_entered"]
 [connection signal="body_entered" from="Detect" to="." method="_on_detect_body_entered"]

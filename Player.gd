@@ -151,6 +151,7 @@ func die():
 
 func hurt(amount, dir):
 	if not invincible:
+		$Hit.play()
 		var prev_state = state
 		player_hurt = true
 		state = states.HURT

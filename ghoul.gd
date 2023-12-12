@@ -37,14 +37,17 @@ func choose_action():
 			if velocity.x != 0:
 				transform.x.x = sign(velocity.x)
 		states.ATTACK:
-			velocity = Vector2.ZERO
-			attacking = true
-			$AnimationPlayer.play("attack")
-			transform.x.x = sign(position.direction_to(player.position).x)
-			await $AnimationPlayer.animation_finished
-			attacking = false
+			if not attacking:
+				$Growl.play()
+				velocity = Vector2.ZERO
+				attacking = true
+				$AnimationPlayer.play("attack")
+				transform.x.x = sign(position.direction_to(player.position).x)
+				await get_tree().create_timer(1.1).timeout
+				attacking = false
 	
 func hurt(amount, dir):
+	$Hit.play()
 	health -= amount
 	var prev_state = state
 	state = states.HURT
@@ -98,3 +101,5 @@ func summon():
 	$CollisionShape2D.disabled = false
 	$Detect/CollisionShape2D.disabled = false
 	$Attack/CollisionShape2D.disabled = false
+
+

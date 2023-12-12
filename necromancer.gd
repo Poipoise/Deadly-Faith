@@ -6,7 +6,7 @@ enum states {IDLE, FIREAWAY, PROJECTILE, DEAD, HURT, SUMMONER, MOVEAWAY}
 var state = states.IDLE
 var player
 var attacking = false
-var health = 3
+var health = 10
 var start_pos
 var start_health
 var shoot_direction
@@ -16,8 +16,8 @@ var enemy_number
 var direction = 1
 var summonable = false
 var Fireable = true
-var CircleBarragetime = false
-var CircleAattack = true
+var TIMETOATTACK = true
+var INAREATOBARRAGE = false
 var fireballNumber = 13
 func _ready():
 	start_pos = position
@@ -39,7 +39,7 @@ func choose_action():
 			velocity = Vector2.ZERO
 			if summonable and summon:
 				state = states.SUMMONER
-			if CircleAattack and CircleBarragetime:
+			if INAREATOBARRAGE and TIMETOATTACK:
 				state = states.PROJECTILE
 		states.FIREAWAY:
 			velocity = position.direction_to(player.position) * speed * -1
@@ -71,11 +71,10 @@ func choose_action():
 		states.PROJECTILE:
 			velocity = Vector2.ZERO
 			shoot_direction = Vector2(-1,0)
-			if not CircleBarragetime:
+			if INAREATOBARRAGE and TIMETOATTACK:
 				$AnimationPlayer.play("Projectile Barrage")
 				print("FIRED")
-				CircleBarragetime = true
-				CircleAattack = false
+				TIMETOATTACK = false
 				await $AnimationPlayer.animation_finished
 				while counter < fireballNumber:
 					var angle = (2*6.28319) / fireballNumber
@@ -86,6 +85,7 @@ func choose_action():
 					Projectile.start(position, shoot_direction)
 					get_tree().root.add_child(Projectile)
 					counter += 1
+				counter = 0
 				$Barrage.start()
 				state = states.IDLE
 			
@@ -106,6 +106,7 @@ func choose_action():
 				await $AnimationPlayer.animation_finished
 				state = states.IDLE
 func hurt(amount, dir):
+	$Hit.play()
 	health -= amount
 	var prev_state = state
 	state = states.HURT
@@ -156,18 +157,22 @@ func _on_away_body_exited(body):
 
 
 func _on_barrage_timeout():
-	CircleBarragetime = false
-	CircleAattack = true
+	TIMETOATTACK = true
 
 
 func _on_project_ring_body_entered(body):
 	Fireable = false
-	CircleAattack = true
+	INAREATOBARRAGE = true
 	state = states.PROJECTILE
 	
 
 
 func _on_project_ring_body_exited(body):
 	Fireable = true
-	CircleAattack = false
+	INAREATOBARRAGE = false
 	state = states.MOVEAWAY
+
+func respawn():
+	position = start_pos
+	health = start_health
+	state = states.IDLE

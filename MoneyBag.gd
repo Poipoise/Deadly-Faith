@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var direction
-var speed = 360
+var speed = 380
 var bullet_path
 var throw
 var hit = true

@@ -1,6 +1,6 @@
 extends CharacterBody2D
 @export var projectile : PackedScene
-var speed = 135
+var speed = 140
 enum states {IDLE, CHASE, ATTACK, DEAD, HURT, RUN}
 var state = states.IDLE
 var player
@@ -23,6 +23,7 @@ func choose_action():
 	$Label.text = states.keys()[state]
 	match state:
 		states.DEAD:
+			$Death.play()
 			$AnimationPlayer.play("Death")
 			set_physics_process(false)
 			$CollisionShape2D.disabled = true
@@ -43,6 +44,7 @@ func choose_action():
 				$AnimationPlayer.play("MoneyBagThrow")
 				attacking = true
 				await get_tree().create_timer(0.4).timeout
+				$Throw.play()
 				var Projectile = projectile.instantiate()
 				Projectile.start(position, shoot_direction)
 				get_tree().root.add_child(Projectile)
@@ -50,7 +52,7 @@ func choose_action():
 		states.RUN:
 			if not attacking:
 				$AnimationPlayer.play("BackwardsWalking")
-				velocity = position.direction_to(player.position) * speed * 0.6 * -1
+				velocity = position.direction_to(player.position) * speed * 0.8 * -1
 				if velocity.x != 0:
 					transform.x.x = sign(velocity.x) * -1
 			#transform.x.x = sign(position.direction_to(player.position).x)
@@ -67,6 +69,7 @@ func choose_action():
 			
 	
 func hurt(amount, dir):
+	$Hit.play()
 	health -= amount
 	var prev_state = state
 	state = states.HURT

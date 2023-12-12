@@ -1,8 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://7yhsfa6r54e2"]
+[gd_scene load_steps=24 format=3 uid="uid://7yhsfa6r54e2"]
 
 [ext_resource type="Script" path="res://fat_goblin.gd" id="1_bwe1x"]
 [ext_resource type="Texture2D" uid="uid://bwgqvj3q53o84" path="res://Goblin King Sprite Sheet.png" id="1_woogs"]
 [ext_resource type="PackedScene" uid="uid://cq176c44di6ni" path="res://money_bag.tscn" id="2_5b88d"]
+[ext_resource type="AudioStream" uid="uid://lkuawtljm2gl" path="res://sounds/hurt_c_08-102842.mp3" id="4_vjwma"]
+[ext_resource type="AudioStream" uid="uid://bnky8jxgd42v7" path="res://sounds/mixkit-fantasy-monster-grunt-1977.mp3" id="5_67ryw"]
+[ext_resource type="AudioStream" uid="uid://dam5pcq3w74yx" path="res://sounds/goblin-death.mp3" id="6_sbm1s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5jot2"]
 size = Vector2(55, 15.75)
@@ -346,6 +349,16 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WalkAway"]
 position = Vector2(-1, -35)
 shape = SubResource("CircleShape2D_cnrhu")
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_vjwma")
+
+[node name="Throw" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_67ryw")
+
+[node name="Death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_sbm1s")
+volume_db = 15.0
 
 [connection signal="body_entered" from="Detect" to="." method="_on_detect_body_entered"]
 [connection signal="body_exited" from="Detect" to="." method="_on_detect_body_exited"]
