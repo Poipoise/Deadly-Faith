@@ -9,7 +9,7 @@ var play = true
 var start = false
 var gameover = false
 func _process(delta):
-	$CanvasLayer/StaminaBar.value = $Player.stamina
+	$CanvasLayer/StaminaBar.value = $Level1/Player.stamina
 	if summon_state:
 		summon_state = false
 		summon_position.x -= 250
