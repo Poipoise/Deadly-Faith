@@ -11693,8 +11693,12 @@ layer_2/tile_data = PackedInt32Array(720876, 196614, 12, 720877, 262150, 12, 720
 
 [node name="Player" parent="Level1" instance=ExtResource("1_a16pe")]
 
-[node name="Ghoul" parent="." instance=ExtResource("2_k5fgf")]
-position = Vector2(-696, -89)
+[node name="FatGoblin" parent="Level1" instance=ExtResource("8_jjy12")]
+position = Vector2(-1072, -250.5)
+scale = Vector2(0.5, 0.5)
+
+[node name="Ghoul" parent="Level1" instance=ExtResource("2_k5fgf")]
+position = Vector2(-428.5, 23)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 0
@@ -11707,9 +11711,6 @@ offset_bottom = 595.0
 scale = Vector2(4, 4)
 texture_under = ExtResource("8_g3kjb")
 texture_progress = ExtResource("9_b8p5r")
-
-[node name="FatGoblin" parent="." instance=ExtResource("8_jjy12")]
-position = Vector2(-1021, -60)
 
 [node name="House" parent="." instance=ExtResource("11_m4n4m")]
 position = Vector2(492, -166)
@@ -11730,9 +11731,6 @@ position = Vector2(207, -98)
 position = Vector2(669, 90)
 
 [node name="StartScreen" parent="." instance=ExtResource("14_6wrdx")]
-
-[node name="Ghoul2" parent="." instance=ExtResource("2_k5fgf")]
-position = Vector2(-152, 698)
 
 [node name="DeathScreen" parent="." instance=ExtResource("15_iip5t")]
 layer = 0
