@@ -14,7 +14,7 @@ var start_health
 func _ready():
 	start_pos = position
 	start_health = health
-	
+	print("HI")
 func _physics_process(delta):
 	choose_action()
 	move_and_slide()
@@ -45,6 +45,7 @@ func choose_action():
 				attacking = true
 				await get_tree().create_timer(0.4).timeout
 				$Throw.play()
+				print(position)
 				var Projectile = projectile.instantiate()
 				Projectile.start(position, shoot_direction)
 				get_tree().root.add_child(Projectile)
@@ -90,6 +91,7 @@ func _on_detect_body_exited(body):
 
 func _on_attack_body_entered(body):
 		state = states.ATTACK
+		
 func _on_attack_body_exited(body):
 	state = states.CHASE
 	
@@ -108,3 +110,4 @@ func respawn():
 	position = start_pos
 	health = start_health
 	state = states.IDLE
+	print("done")

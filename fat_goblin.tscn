@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://dam5pcq3w74yx" path="res://sounds/goblin-death.mp3" id="6_sbm1s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5jot2"]
-size = Vector2(55, 15.75)
+size = Vector2(27, 11.875)
 
 [sub_resource type="Animation" id="Animation_hbfvb"]
 resource_name = "BackwardsWalking"
@@ -34,7 +34,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(2.2, 2.2)]
+"values": [Vector2(1.1, 1.1)]
 }
 
 [sub_resource type="Animation" id="Animation_rg0h5"]
@@ -62,7 +62,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(2.2, 2.2)]
+"values": [Vector2(1.1, 1.1)]
 }
 
 [sub_resource type="Animation" id="Animation_g6sol"]
@@ -89,7 +89,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(2.2, 2.2)]
+"values": [Vector2(1.1, 1.1)]
 }
 
 [sub_resource type="Animation" id="Animation_bif2n"]
@@ -117,7 +117,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(2.2, 2.2)]
+"values": [Vector2(1.1, 1.1)]
 }
 
 [sub_resource type="Animation" id="Animation_07mtm"]
@@ -146,7 +146,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(2.2, 2.2)]
+"values": [Vector2(1.1, 1.1)]
 }
 
 [sub_resource type="Animation" id="Animation_3glkb"]
@@ -174,7 +174,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(2.2, 2.2)]
+"values": [Vector2(1.1, 1.1)]
 }
 
 [sub_resource type="Animation" id="Animation_8mavu"]
@@ -202,7 +202,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(2.2, 2.2)]
+"values": [Vector2(1.1, 1.1)]
 }
 
 [sub_resource type="Animation" id="Animation_5seoq"]
@@ -230,7 +230,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(2.2, 2.2)]
+"values": [Vector2(1.1, 1.1)]
 }
 
 [sub_resource type="Animation" id="Animation_lvdby"]
@@ -258,7 +258,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(2.2, 2.2)]
+"values": [Vector2(1.1, 1.1)]
 }
 
 [sub_resource type="Animation" id="Animation_p60jv"]
@@ -285,7 +285,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(2.2, 2.2)]
+"values": [Vector2(1.1, 1.1)]
 }
 
 [sub_resource type="Animation" id="Animation_ooc7v"]
@@ -312,7 +312,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(2.2, 2.2)]
+"values": [Vector2(1.1, 1.1)]
 }
 
 [sub_resource type="Animation" id="Animation_hwmfa"]
@@ -339,7 +339,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(2.2, 2.2)]
+"values": [Vector2(1.1, 1.1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7xsa8"]
@@ -359,13 +359,13 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a68i8"]
-radius = 277.088
+radius = 172.709
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3lru5"]
-radius = 346.013
+radius = 269.067
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cnrhu"]
-radius = 128.062
+radius = 78.0256
 
 [node name="FatGoblin" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 4
@@ -374,14 +374,14 @@ script = ExtResource("1_bwe1x")
 projectile = ExtResource("2_5b88d")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-2, -70)
-scale = Vector2(2.2, 2.2)
+position = Vector2(-2, -35)
+scale = Vector2(1.1, 1.1)
 texture = ExtResource("1_woogs")
 hframes = 16
 vframes = 11
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.5, -8)
+position = Vector2(-1, -7)
 shape = SubResource("RectangleShape2D_5jot2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

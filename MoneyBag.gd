@@ -8,8 +8,11 @@ var hit = true
 # Called when the node enters the scene tree for the first time.
 func start(_position, _direction):
 	bullet_path = _direction
-	position = _position
-	position.y += -40
+	position.x = _position.x
+	position.y = _position.y
+	print(_position)
+	print(position)
+	position.y += -15
 	throw = sign(bullet_path.x) * 30
 	position.x += throw
 	velocity = bullet_path * speed

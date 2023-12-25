@@ -368,13 +368,13 @@ collision_mask = 13
 script = ExtResource("1_co546")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1, -30)
+position = Vector2(2, -16)
 texture = ExtResource("1_udybv")
 hframes = 8
 vframes = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1.5, -17.75)
+position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_skhs1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -388,7 +388,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GhoulHurtBox"]
-position = Vector2(18, -22)
+position = Vector2(18, -16)
 shape = SubResource("CapsuleShape2D_gxy6q")
 disabled = true
 
@@ -397,7 +397,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detect"]
-position = Vector2(2, -20)
+position = Vector2(1, -10)
 shape = SubResource("CircleShape2D_xqayy")
 
 [node name="Attack" type="Area2D" parent="."]
@@ -405,7 +405,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack"]
-position = Vector2(1, -24)
+position = Vector2(2, -10)
 shape = SubResource("CircleShape2D_qxb75")
 
 [node name="Label" type="Label" parent="."]

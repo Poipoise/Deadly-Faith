@@ -11693,12 +11693,11 @@ layer_2/tile_data = PackedInt32Array(720876, 196614, 12, 720877, 262150, 12, 720
 
 [node name="Player" parent="Level1" instance=ExtResource("1_a16pe")]
 
-[node name="FatGoblin" parent="Level1" instance=ExtResource("8_jjy12")]
-position = Vector2(-1072, -250.5)
-scale = Vector2(0.5, 0.5)
-
 [node name="Ghoul" parent="Level1" instance=ExtResource("2_k5fgf")]
 position = Vector2(-428.5, 23)
+
+[node name="FatGoblin" parent="Level1" instance=ExtResource("8_jjy12")]
+position = Vector2(-255, -358.5)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 0

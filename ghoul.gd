@@ -13,6 +13,8 @@ var summoned = false
 func _ready():
 	start_pos = position
 	start_health = health
+	position.x = -255
+	position.y = -373
 	
 func _physics_process(delta):
 	choose_action()

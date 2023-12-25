@@ -672,7 +672,8 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox"]
-position = Vector2(30, 0)
+position = Vector2(18, 1)
+scale = Vector2(0.506531, 0.506531)
 polygon = PackedVector2Array(-6, -5, 60, -6, 67, -20, 67, -43, 47, -74, 24, -85, -22, -85, -59, -72, -4, -62, -3, -26)
 disabled = true
 
