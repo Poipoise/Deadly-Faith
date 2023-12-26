@@ -1,5 +1,6 @@
 extends CharacterBody2D
 @export var projectile : PackedScene
+@onready var Level1 : Node = get_node("/root/World/Level1")
 var speed = 140
 enum states {IDLE, CHASE, ATTACK, DEAD, HURT, RUN}
 var state = states.IDLE
@@ -48,7 +49,7 @@ func choose_action():
 				print(position)
 				var Projectile = projectile.instantiate()
 				Projectile.start(position, shoot_direction)
-				get_tree().root.add_child(Projectile)
+				Level1.add_child(Projectile)
 				$AttackTimer.start()
 		states.RUN:
 			if not attacking:
@@ -107,6 +108,8 @@ func _on_walk_away_body_exited(body):
 	state = states.ATTACK
 
 func respawn():
+	set_physics_process(true)
+	$CollisionShape2D.disabled = false
 	position = start_pos
 	health = start_health
 	state = states.IDLE

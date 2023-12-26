@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://cjnr3fybp6iih" path="res://sounds/fireball-whoosh-2-179126.mp3" id="4_ns22e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7jwvj"]
-size = Vector2(45.5, 53)
+size = Vector2(24, 28.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g3ioy"]
 size = Vector2(14, 4)
@@ -60,7 +60,7 @@ stream_1/weight = 1.0
 script = ExtResource("1_06g0m")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(1.6, 1.6)
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_tsrru")
 hframes = 2
 vframes = 3
@@ -70,11 +70,11 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(11.25, 10.5)
+position = Vector2(5, 5.75)
 shape = SubResource("RectangleShape2D_7jwvj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(10, 3)
+position = Vector2(6, 3)
 shape = SubResource("RectangleShape2D_g3ioy")
 disabled = true
 

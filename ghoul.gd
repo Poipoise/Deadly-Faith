@@ -13,8 +13,6 @@ var summoned = false
 func _ready():
 	start_pos = position
 	start_health = health
-	position.x = -255
-	position.y = -373
 	
 func _physics_process(delta):
 	choose_action()
@@ -82,6 +80,8 @@ func _on_ghoul_hurt_box_body_entered(body):
 
 
 func respawn():
+	set_physics_process(true)
+	$CollisionShape2D.disabled = false
 	position = start_pos
 	health = start_health
 	state = states.IDLE

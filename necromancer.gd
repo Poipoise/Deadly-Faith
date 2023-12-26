@@ -1,6 +1,7 @@
 extends CharacterBody2D
 @export var projectile : PackedScene
 @export var enemy : PackedScene
+@onready var Level1 : Node = get_node("/root/World/Level1")
 var speed = 70
 enum states {IDLE, FIREAWAY, PROJECTILE, DEAD, HURT, SUMMONER, MOVEAWAY}
 var state = states.IDLE
@@ -55,7 +56,7 @@ func choose_action():
 				await $AnimationPlayer.animation_finished
 				var Projectile = projectile.instantiate()
 				Projectile.start(position, shoot_direction)
-				get_tree().root.add_child(Projectile)
+				Level1.add_child(Projectile)
 				$Fireball.play()
 				$AttackTimer.start()
 				state = states.MOVEAWAY
@@ -83,7 +84,7 @@ func choose_action():
 					print(shoot_direction)
 					var Projectile = projectile.instantiate()
 					Projectile.start(position, shoot_direction)
-					get_tree().root.add_child(Projectile)
+					Level1.add_child(Projectile)
 					counter += 1
 				counter = 0
 				$Barrage.start()
@@ -97,7 +98,8 @@ func choose_action():
 				summon = false
 				await get_tree().create_timer(1.3).timeout
 				var enemy_number = randf_range(1, 3)
-				var world_vars = get_node("/root/World")
+				var world_vars = get_node("/root/World/Level1")
+				print(world_vars)
 				world_vars.summon_state = true
 				world_vars.summon_position = position
 				world_vars.summon_amount = enemy_number
@@ -173,6 +175,8 @@ func _on_project_ring_body_exited(body):
 	state = states.MOVEAWAY
 
 func respawn():
+	set_physics_process(true)
+	$CollisionShape2D.disabled = false
 	position = start_pos
 	health = start_health
 	state = states.IDLE

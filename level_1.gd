@@ -10,17 +10,17 @@ var start = false
 var gameover = false
 func _process(delta):
 	$CanvasLayer/StaminaBar.value = $Level1/Player.stamina
-	if summon_state:
-		summon_state = false
-		summon_position.x -= 250
-		while counter < summon_amount:
-			var enemy_number = randi_range(-150, 150)
-			summon_position.y += enemy_number
-			var summons = enemy.instantiate()
-			add_child(summons)
-			summons.position = summon_position
-			summons.summon()
-			counter += 1
+	#if summon_state:
+		#summon_state = false
+		#summon_position.x -= 250
+		#while counter < summon_amount:
+			#var enemy_number = randi_range(-150, 150)
+			#summon_position.y += enemy_number
+			#var summons = enemy.instantiate()
+			#add_child(summons)
+			#summons.position = summon_position
+			#summons.summon()
+			#counter += 1
 			
 	if play and start and not gameover:
 		play = false
