@@ -1,6 +1,5 @@
 extends TileMap
 @export var enemy : PackedScene
-@export var projectile : PackedScene
 var summon_position
 var summon_amount = 0
 var summon_state = false

@@ -1,4 +1,5 @@
 extends ColorRect
+signal Cutscene_finished
 @export var dialogPath = ""
 @export var textSpeed: float = 0.06
 var dialog
@@ -31,6 +32,7 @@ func getDialog() -> Array:
 func nextPhrase() -> void:
 	if phraseNum >= len(dialog):
 		queue_free()
+		Cutscene_finished.emit()
 		return
 	
 	finished = false
