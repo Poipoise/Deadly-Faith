@@ -10,8 +10,6 @@ func start(_position, _direction):
 	bullet_path = _direction
 	position.x = _position.x
 	position.y = _position.y
-	print(_position)
-	print(position)
 	position.y += -15
 	throw = sign(bullet_path.x) * 30
 	position.x += throw

@@ -93,8 +93,6 @@ func summon():
 	$Detect/CollisionShape2D.disabled = true
 	$Attack/CollisionShape2D.disabled = true
 	state = states.SUMMONING
-	#position = pos
-	#position.x -= 100
 	summoned = true
 	state = states.SUMMONING
 	$AnimationPlayer.play("revive")

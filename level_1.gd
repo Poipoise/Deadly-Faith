@@ -8,6 +8,10 @@ var direction
 var play = true
 var start = false
 var gameover = false
+
+func _ready():
+	$Cutscene.hide()
+	
 func _process(delta):
 	$CanvasLayer/StaminaBar.value = $Level1/Player.stamina
 	#if summon_state:
@@ -40,7 +44,9 @@ func _on_death_screen_respawn():
 
 
 func _on_start_screen_start_game():
+	#$Cutscene.show()
 	start = true
+	
 
 
 func _on_player_game_over():

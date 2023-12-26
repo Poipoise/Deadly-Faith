@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://c6purqvnh5obf"]
+[gd_scene load_steps=47 format=3 uid="uid://c6purqvnh5obf"]
 
 [ext_resource type="Script" path="res://level_1.gd" id="1_22rws"]
 [ext_resource type="PackedScene" uid="uid://dycinrmvaxssg" path="res://player.tscn" id="1_a16pe"]
@@ -31,6 +31,7 @@
 [ext_resource type="AudioStream" uid="uid://bcieg8nbloalc" path="res://SoundTrack/xDeviruchi - The Icy Cave .wav" id="23_gq00h"]
 [ext_resource type="AudioStream" uid="uid://b4x3ddhf74rr8" path="res://SoundTrack/Pixel 3.wav" id="24_0vx26"]
 [ext_resource type="AudioStream" uid="uid://m37c1vi3akke" path="res://SoundTrack/Fearofdark - Scaling The Dragon Fortress.mp3" id="25_32lqn"]
+[ext_resource type="PackedScene" uid="uid://b8vqvlwop4ie" path="res://cutscene.tscn" id="32_i2hax"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l2423"]
 texture = ExtResource("2_80435")
@@ -11745,6 +11746,8 @@ layer = 0
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_bdh1b")
 volume_db = -12.0
+
+[node name="Cutscene" parent="." instance=ExtResource("32_i2hax")]
 
 [connection signal="Game_Over" from="Level1/Player" to="." method="_on_player_game_over"]
 [connection signal="Game_Over" from="Level1/Player" to="DeathScreen" method="_on_player_game_over"]
