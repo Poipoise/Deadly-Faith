@@ -705,7 +705,7 @@ one_shot = true
 
 [node name="Hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("21_c78ky")
-volume_db = 5.0
+volume_db = 8.0
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="timeout" from="StaminaCooldown" to="." method="_on_stamina_cooldown_timeout"]

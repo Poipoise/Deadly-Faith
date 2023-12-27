@@ -424,6 +424,7 @@ shape = SubResource("CircleShape2D_cnrhu")
 
 [node name="Hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_vjwma")
+volume_db = 8.0
 
 [node name="Throw" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_67ryw")
