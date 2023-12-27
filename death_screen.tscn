@@ -249,11 +249,10 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_0c2h1")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_aa2ed")
 text = "Respawn"
 
-[node name="DeathMusic" type="AudioStreamPlayer2D" parent="."]
+[node name="DeathMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_oigir")
 
-[node name="Respawn" type="AudioStreamPlayer2D" parent="."]
+[node name="Respawn" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_1edmo")
-volume_db = 7.0
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

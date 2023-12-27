@@ -7,7 +7,7 @@
 size = Vector2(19, 6)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3wkdn"]
-size = Vector2(22, 28.5)
+size = Vector2(22, 29.5)
 
 [sub_resource type="Animation" id="Animation_qky68"]
 resource_name = "Hit"
@@ -64,7 +64,7 @@ _data = {
 "flying": SubResource("Animation_xjhgo")
 }
 
-[node name="MoneyBag" type="CharacterBody2D"]
+[node name="MoneyBag" type="CharacterBody2D" groups=["projectile"]]
 collision_layer = 0
 collision_mask = 10
 script = ExtResource("1_dtckx")
@@ -86,7 +86,7 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-2, 3.75)
+position = Vector2(-2, 4.25)
 shape = SubResource("RectangleShape2D_3wkdn")
 
 [node name="Timer" type="Timer" parent="."]

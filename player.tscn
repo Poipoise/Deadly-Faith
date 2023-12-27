@@ -693,7 +693,7 @@ lifetime = 0.25
 
 [node name="Walking" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_0yuwd")
-volume_db = -5.0
+volume_db = -3.0
 
 [node name="swing" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_lre8w")

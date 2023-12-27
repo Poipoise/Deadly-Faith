@@ -41,6 +41,9 @@ func _on_death_screen_respawn():
 	var enemy_nodes = get_tree().get_nodes_in_group("enemy")
 	for enemy in enemy_nodes:
 		enemy.respawn()
+	var projectile_nodes = get_tree().get_nodes_in_group("projectile")
+	for projectiles in projectile_nodes:
+		projectiles.destroy()
 
 
 func _on_start_screen_start_game():

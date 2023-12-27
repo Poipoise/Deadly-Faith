@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://cjnr3fybp6iih" path="res://sounds/fireball-whoosh-2-179126.mp3" id="4_ns22e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7jwvj"]
-size = Vector2(24, 28.5)
+size = Vector2(24, 40.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g3ioy"]
 size = Vector2(14, 4)
@@ -56,7 +56,7 @@ stream_0/weight = 1.0
 stream_1/stream = ExtResource("4_ns22e")
 stream_1/weight = 1.0
 
-[node name="NecromancerProject" type="CharacterBody2D"]
+[node name="NecromancerProject" type="CharacterBody2D" groups=["projectile"]]
 script = ExtResource("1_06g0m")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -70,7 +70,7 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(5, 5.75)
+position = Vector2(5, 11.75)
 shape = SubResource("RectangleShape2D_7jwvj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

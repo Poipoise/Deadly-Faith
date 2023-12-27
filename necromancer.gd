@@ -50,14 +50,13 @@ func choose_action():
 			transform.x.x = sign(shoot_direction.x)
 			if not attacking:
 				$AnimationPlayer.play("projectile fire")
-				print("played")
 				attacking = true
 				Fireable = false
 				await $AnimationPlayer.animation_finished
+				$Fireball.play()
 				var Projectile = projectile.instantiate()
 				Projectile.start(position, shoot_direction)
 				Level1.add_child(Projectile)
-				$Fireball.play()
 				$AttackTimer.start()
 				state = states.MOVEAWAY
 				
@@ -175,8 +174,17 @@ func _on_project_ring_body_exited(body):
 	state = states.MOVEAWAY
 
 func respawn():
+	
+	player = null
 	set_physics_process(true)
 	$CollisionShape2D.disabled = false
 	position = start_pos
 	health = start_health
+	attacking = false
+	summon = true
+	summonable = false
+	Fireable = true
+	TIMETOATTACK = true
+	INAREATOBARRAGE = false
+	await get_tree().create_timer(0.1).timeout
 	state = states.IDLE

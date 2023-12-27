@@ -23,6 +23,7 @@ var start_pos
 var start_health
 var player_hurt = false
 var play = true
+var game_over = false
 var soundTime = 0.35
 func _ready():
 	start_pos = position
@@ -89,7 +90,8 @@ func _physics_process(delta):
 func _input(event):
 	if gamestart:
 		if event.is_action_pressed("attack") && not attacking && stamina >= 10:
-			$swing.play()
+			if not game_over:
+				$swing.play()
 			state = states.ATTACKING
 			recharging = false
 			attack_number += 1
@@ -111,6 +113,7 @@ func choose_action():
 			$CollisionShape2D.disabled = true
 			await $AnimationPlayer.animation_finished
 			Game_Over.emit()
+			game_over = true
 		states.IDLE:
 			$RunParticles.emitting = false
 			$AnimationPlayer.play("Idle")
@@ -200,7 +203,7 @@ func _on_death_screen_respawn():
 	state = states.IDLE
 	set_physics_process(true)
 	$CollisionShape2D.disabled = false
-	
+	game_over = false
 
 
 func _on_sound_timer_timeout():

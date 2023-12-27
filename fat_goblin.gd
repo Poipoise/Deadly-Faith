@@ -46,7 +46,6 @@ func choose_action():
 				attacking = true
 				await get_tree().create_timer(0.4).timeout
 				$Throw.play()
-				print(position)
 				var Projectile = projectile.instantiate()
 				Projectile.start(position, shoot_direction)
 				Level1.add_child(Projectile)
@@ -112,5 +111,8 @@ func respawn():
 	$CollisionShape2D.disabled = false
 	position = start_pos
 	health = start_health
+	player = null
+	await get_tree().create_timer(0.1).timeout
 	state = states.IDLE
+	
 	print("done")
