@@ -1,5 +1,6 @@
 extends Node2D
 @export var enemy : PackedScene
+@onready var Level1 : Node = get_node("/root/World/Level1")
 var summon_position
 var summon_amount = 0
 var summon_state = false
@@ -14,17 +15,17 @@ func _ready():
 	
 func _process(delta):
 	$CanvasLayer/StaminaBar.value = $Level1/Player.stamina
-	#if summon_state:
-		#summon_state = false
-		#summon_position.x -= 250
-		#while counter < summon_amount:
-			#var enemy_number = randi_range(-150, 150)
-			#summon_position.y += enemy_number
-			#var summons = enemy.instantiate()
-			#add_child(summons)
-			#summons.position = summon_position
-			#summons.summon()
-			#counter += 1
+	if summon_state:
+		summon_state = false
+		summon_position.x -= 250
+		while counter < summon_amount:
+			var enemy_number = randi_range(-120, 120)
+			summon_position.y += enemy_number
+			var summons = enemy.instantiate()
+			Level1.add_child(summons)
+			summons.position = summon_position
+			summons.summon()
+			counter += 1
 			
 	if play and start and not gameover:
 		play = false

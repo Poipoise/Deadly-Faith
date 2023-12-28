@@ -97,7 +97,7 @@ func choose_action():
 				summon = false
 				await get_tree().create_timer(1.3).timeout
 				var enemy_number = randf_range(1, 3)
-				var world_vars = get_node("/root/World/Level1")
+				var world_vars = get_node("/root/World")
 				print(world_vars)
 				world_vars.summon_state = true
 				world_vars.summon_position = position
