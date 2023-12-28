@@ -11746,7 +11746,6 @@ stream = SubResource("AudioStreamRandomizer_bdh1b")
 volume_db = -10.0
 
 [node name="Cutscene" parent="." instance=ExtResource("32_i2hax")]
-cutscene = false
 
 [node name="Beginning" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("32_ck3pv")

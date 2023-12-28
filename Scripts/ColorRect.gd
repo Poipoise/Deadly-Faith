@@ -1,4 +1,4 @@
-extends ColorRect
+extends TextureRect
 signal Cutscene_finished
 @export var dialogPath = ""
 @export var textSpeed: float = 0.06
