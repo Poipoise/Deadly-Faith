@@ -1,7 +1,7 @@
 [gd_scene load_steps=21 format=3 uid="uid://bhejo4nwyug7"]
 
+[ext_resource type="Script" path="res://Scripts/necromancer.gd" id="1_822kn"]
 [ext_resource type="Texture2D" uid="uid://do6gtai3nmkq7" path="res://Necromancer_creativekind-Sheet.png" id="1_cl322"]
-[ext_resource type="Script" path="res://necromancer.gd" id="1_qulxr"]
 [ext_resource type="PackedScene" uid="uid://x1dqtfjt4eic" path="res://necromancer_project.tscn" id="2_r74i8"]
 [ext_resource type="PackedScene" uid="uid://3od58wh8ejq3" path="res://ghoul.tscn" id="3_jpuqj"]
 [ext_resource type="AudioStream" uid="uid://b1535r53p64cy" path="res://sounds/fireball-whoosh-1-179125.mp3" id="5_0j2m7"]
@@ -362,7 +362,7 @@ stream_1/weight = 1.0
 [node name="Necromancer" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 4
 collision_mask = 13
-script = ExtResource("1_qulxr")
+script = ExtResource("1_822kn")
 projectile = ExtResource("2_r74i8")
 enemy = ExtResource("3_jpuqj")
 
@@ -406,7 +406,7 @@ position = Vector2(0, -26)
 shape = SubResource("CircleShape2D_ib6an")
 
 [node name="SummonTimer" type="Timer" parent="."]
-wait_time = 13.0
+wait_time = 11.0
 one_shot = true
 
 [node name="AttackTimer" type="Timer" parent="."]

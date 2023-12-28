@@ -1,8 +1,9 @@
 [gd_scene load_steps=12 format=3 uid="uid://cna0uxyjst32f"]
 
-[ext_resource type="Script" path="res://Executioner.gd" id="1_8xqih"]
+[ext_resource type="Script" path="res://Scripts/Executioner.gd" id="1_8xqih"]
 [ext_resource type="Texture2D" uid="uid://dt5soo34tocd2" path="res://Undead executioner/Undead executioner puppet/png/idle2.png" id="2_tqvx5"]
 [ext_resource type="Texture2D" uid="uid://dmws63onjvtcj" path="res://Undead executioner/Undead executioner puppet/png/attacking.png" id="3_plmjd"]
+
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gw7fi"]
 radius = 11.0

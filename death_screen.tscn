@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://n47lx2mec8fh"]
 
-[ext_resource type="Script" path="res://death_screen.gd" id="1_gdqf4"]
+[ext_resource type="Script" path="res://Scripts/death_screen.gd" id="1_jxdjv"]
 [ext_resource type="AudioStream" uid="uid://8xihlr10k27h" path="res://sounds/Undertale OST_ 011 - Determination.mp3" id="2_oigir"]
 [ext_resource type="Texture2D" uid="uid://cc8ypsp412hdk" path="res://You died screen.png" id="2_ua8ck"]
 [ext_resource type="AudioStream" uid="uid://ddiixpj68xjle" path="res://sounds/084373_heal-36672.mp3" id="3_1edmo"]
@@ -191,7 +191,7 @@ bg_color = Color(0.482353, 0.14902, 0.0705882, 1)
 bg_color = Color(0.235294, 0.0588235, 0.0156863, 1)
 
 [node name="DeathScreen" type="CanvasLayer"]
-script = ExtResource("1_gdqf4")
+script = ExtResource("1_jxdjv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 1

@@ -1,7 +1,7 @@
 [gd_scene load_steps=47 format=3 uid="uid://c6purqvnh5obf"]
 
-[ext_resource type="Script" path="res://level_1.gd" id="1_22rws"]
 [ext_resource type="PackedScene" uid="uid://dycinrmvaxssg" path="res://player.tscn" id="1_a16pe"]
+[ext_resource type="Script" path="res://Scripts/level_1.gd" id="1_vgdc2"]
 [ext_resource type="Texture2D" uid="uid://tlh0o3geeasl" path="res://Forest BETA V3/Forest Tileset (1).png" id="2_80435"]
 [ext_resource type="PackedScene" uid="uid://3od58wh8ejq3" path="res://ghoul.tscn" id="2_k5fgf"]
 [ext_resource type="Texture2D" uid="uid://60ywyl8vsv1n" path="res://Forest BETA V3/Forest Props.png" id="2_su0f8"]
@@ -11668,7 +11668,7 @@ stream_4/weight = 1.0
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_22rws")
+script = ExtResource("1_vgdc2")
 enemy = ExtResource("2_k5fgf")
 
 [node name="Level1" type="TileMap" parent="."]

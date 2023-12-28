@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://x1dqtfjt4eic"]
 
-[ext_resource type="Script" path="res://necromancer_project.gd" id="1_06g0m"]
+[ext_resource type="Script" path="res://Scripts/necromancer_project.gd" id="1_06g0m"]
 [ext_resource type="Texture2D" uid="uid://cruvb1jo8molm" path="res://Magic Orb.png" id="2_tsrru"]
 [ext_resource type="AudioStream" uid="uid://b1535r53p64cy" path="res://sounds/fireball-whoosh-1-179125.mp3" id="3_2uflp"]
 [ext_resource type="AudioStream" uid="uid://cjnr3fybp6iih" path="res://sounds/fireball-whoosh-2-179126.mp3" id="4_ns22e"]

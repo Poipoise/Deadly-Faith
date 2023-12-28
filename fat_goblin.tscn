@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=3 uid="uid://7yhsfa6r54e2"]
 
-[ext_resource type="Script" path="res://fat_goblin.gd" id="1_bwe1x"]
+[ext_resource type="Script" path="res://Scripts/fat_goblin.gd" id="1_gm7tk"]
 [ext_resource type="Texture2D" uid="uid://bwgqvj3q53o84" path="res://Goblin King Sprite Sheet.png" id="1_woogs"]
 [ext_resource type="PackedScene" uid="uid://cq176c44di6ni" path="res://money_bag.tscn" id="2_5b88d"]
 [ext_resource type="AudioStream" uid="uid://lkuawtljm2gl" path="res://sounds/hurt_c_08-102842.mp3" id="4_vjwma"]
@@ -370,7 +370,7 @@ radius = 78.0256
 [node name="FatGoblin" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 4
 collision_mask = 13
-script = ExtResource("1_bwe1x")
+script = ExtResource("1_gm7tk")
 projectile = ExtResource("2_5b88d")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cq176c44di6ni"]
 
-[ext_resource type="Script" path="res://MoneyBag.gd" id="1_dtckx"]
+[ext_resource type="Script" path="res://Scripts/MoneyBag.gd" id="1_dtckx"]
 [ext_resource type="Texture2D" uid="uid://dpw6xsmsqpci6" path="res://Coin Bag Sprite Sheet.png" id="2_au32v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l8bxv"]

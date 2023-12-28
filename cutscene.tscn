@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://b8vqvlwop4ie"]
+[gd_scene load_steps=10 format=3 uid="uid://b8vqvlwop4ie"]
 
-[ext_resource type="Script" path="res://cutscene.gd" id="1_q07od"]
-[ext_resource type="Script" path="res://ColorRect.gd" id="1_uktww"]
+[ext_resource type="Script" path="res://Scripts/cutscene.gd" id="1_cgmnk"]
+[ext_resource type="Script" path="res://Scripts/ColorRect.gd" id="2_tgaak"]
+[ext_resource type="Texture2D" uid="uid://dxg5tkfukh383" path="res://image.png" id="3_af6ve"]
 
 [sub_resource type="Animation" id="Animation_pq2wi"]
 length = 0.001
@@ -102,7 +103,7 @@ _data = {
 }
 
 [node name="Cutscene" type="CanvasLayer"]
-script = ExtResource("1_q07od")
+script = ExtResource("1_cgmnk")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -117,7 +118,7 @@ offset_right = 384.5
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 8
-script = ExtResource("1_uktww")
+script = ExtResource("2_tgaak")
 dialogPath = "res://Dialog.json"
 
 [node name="Name" type="RichTextLabel" parent="ColorRect"]
@@ -165,12 +166,13 @@ scale = Vector2(0.4375, 0.421875)
 [node name="Timer" type="Timer" parent="ColorRect"]
 wait_time = 0.5
 
-[node name="ColorRect2" type="ColorRect" parent="."]
+[node name="ColorRect2" type="TextureRect" parent="."]
 modulate = Color(1, 1, 1, 0)
 z_index = -3
 offset_right = 1152.0
-offset_bottom = 648.0
-color = Color(0, 0, 0, 1)
+offset_bottom = 664.0
+texture = ExtResource("3_af6ve")
+expand_mode = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
