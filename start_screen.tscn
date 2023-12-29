@@ -1,9 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://3knmtkrq66j1"]
+[gd_scene load_steps=13 format=3 uid="uid://3knmtkrq66j1"]
 
 [ext_resource type="Script" path="res://Scripts/start_screen.gd" id="1_fepcu"]
+[ext_resource type="Texture2D" uid="uid://dr1g0gwecuq24" path="res://Buttons Pixel Animation Pack/Buttons Pixel Animation Pack/play/72px/play01.png" id="2_3h7fv"]
 [ext_resource type="AudioStream" uid="uid://hlbpbwwmwl5e" path="res://sounds/Pure Vessel - Hollow Knight OST Extended.mp3" id="2_avu18"]
 [ext_resource type="Texture2D" uid="uid://bibaamwxn682a" path="res://BetterSampleTitleScreen.png" id="3_6uc78"]
+[ext_resource type="Texture2D" uid="uid://duu3fxercf137" path="res://Buttons Pixel Animation Pack/Buttons Pixel Animation Pack/play/72px/play03.png" id="3_r3008"]
+[ext_resource type="Texture2D" uid="uid://b613o1xcwkejp" path="res://Buttons Pixel Animation Pack/Buttons Pixel Animation Pack/play/72px/play02.png" id="4_8w5hp"]
 [ext_resource type="AudioStream" uid="uid://dprjinakf68x5" path="res://sounds/boom-dark-percussive-tomas-herudek-1-00-06.mp3" id="4_30ea8"]
+[ext_resource type="FontFile" uid="uid://bld7hkhcvy8yp" path="res://joystix/joystix monospace.otf" id="6_pw35t"]
+
+[sub_resource type="Theme" id="Theme_xd2xw"]
+default_font = ExtResource("6_pw35t")
 
 [sub_resource type="Animation" id="Animation_3log2"]
 resource_name = "Fade"
@@ -45,17 +52,22 @@ _data = {
 [node name="StartScreen" type="CanvasLayer"]
 script = ExtResource("1_fepcu")
 
-[node name="StartButton" type="Button" parent="."]
-anchors_preset = -1
+[node name="StartButton" type="TextureButton" parent="."]
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.79
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.79
-offset_left = -104.0
-offset_top = -55.92
-offset_right = 109.0
-offset_bottom = 57.08
-text = "START"
+anchor_bottom = 1.0
+offset_left = -152.0
+offset_top = -208.0
+offset_right = 159.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("2_3h7fv")
+texture_pressed = ExtResource("3_r3008")
+texture_hover = ExtResource("4_8w5hp")
+stretch_mode = 6
 
 [node name="TitleScreenMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_avu18")
@@ -63,15 +75,14 @@ volume_db = -5.0
 autoplay = true
 
 [node name="Label" type="Label" parent="."]
-anchors_preset = -1
-anchor_left = 0.504
-anchor_top = 0.062
-anchor_right = 0.504
-anchor_bottom = 0.062
-offset_left = -172.608
-offset_top = -32.176
-offset_right = 173.392
-offset_bottom = 39.824
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -243.0
+offset_right = 243.0
+offset_bottom = 72.0
+grow_horizontal = 2
+theme = SubResource("Theme_xd2xw")
 theme_override_font_sizes/font_size = 50
 text = "DEADLY FAITH"
 

@@ -5,8 +5,6 @@ signal respawn
 func _ready():
 	$AnimatedSprite2D.hide()
 	$Button.hide()
-	
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -28,3 +26,4 @@ func _on_button_pressed():
 	$AnimationPlayer.play("fade out")
 	$Button.hide()
 	$DeathMusic.stop()
+	
