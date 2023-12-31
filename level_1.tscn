@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://c6purqvnh5obf"]
+[gd_scene load_steps=48 format=3 uid="uid://c6purqvnh5obf"]
 
 [ext_resource type="PackedScene" uid="uid://dycinrmvaxssg" path="res://player.tscn" id="1_a16pe"]
 [ext_resource type="Script" path="res://Scripts/level_1.gd" id="1_vgdc2"]
@@ -31,6 +31,7 @@
 [ext_resource type="AudioStream" uid="uid://m37c1vi3akke" path="res://SoundTrack/Fearofdark - Scaling The Dragon Fortress.mp3" id="25_32lqn"]
 [ext_resource type="AudioStream" uid="uid://gdi8qi0cogyi" path="res://SoundTrack/Now-We-Ride(chosic.com).mp3" id="32_ck3pv"]
 [ext_resource type="PackedScene" uid="uid://b8vqvlwop4ie" path="res://cutscene.tscn" id="32_i2hax"]
+[ext_resource type="PackedScene" uid="uid://uf6pmi6gfwi7" path="res://camp_fire.tscn" id="33_cimb1"]
 [ext_resource type="AudioStream" uid="uid://c31bo4mw8jshv" path="res://sounds/open_close_door-47504.mp3" id="33_illoc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l2423"]
@@ -11753,6 +11754,9 @@ stream = ExtResource("32_ck3pv")
 [node name="door" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("33_illoc")
 
+[node name="CampFire" parent="." instance=ExtResource("33_cimb1")]
+position = Vector2(683, -54)
+
 [connection signal="Game_Over" from="Level1/Player" to="." method="_on_player_game_over"]
 [connection signal="Game_Over" from="Level1/Player" to="DeathScreen" method="_on_player_game_over"]
 [connection signal="start_game" from="StartScreen" to="." method="_on_start_screen_start_game"]
@@ -11761,3 +11765,4 @@ stream = ExtResource("33_illoc")
 [connection signal="respawn" from="DeathScreen" to="Level1/Player" method="_on_death_screen_respawn"]
 [connection signal="finished" from="Cutscene" to="." method="_on_cutscene_finished"]
 [connection signal="finished" from="Cutscene" to="Level1/Player" method="_on_start_screen_start_game"]
+[connection signal="set_spawn" from="CampFire" to="Level1/Player" method="_on_camp_fire_set_spawn"]

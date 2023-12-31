@@ -208,3 +208,7 @@ func _on_death_screen_respawn():
 
 func _on_sound_timer_timeout():
 	play = true
+
+
+func _on_camp_fire_set_spawn():
+	start_pos = position

@@ -640,7 +640,7 @@ stream_4/weight = 1.0
 stream_5/stream = ExtResource("20_fup70")
 stream_5/weight = 1.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 13
 script = ExtResource("1_xokv2")
@@ -654,7 +654,6 @@ position = Vector2(0.5, -3.75)
 shape = SubResource("RectangleShape2D_sa2ge")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
