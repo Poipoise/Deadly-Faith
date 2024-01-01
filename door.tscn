@@ -1,0 +1,93 @@
+[gd_scene load_steps=8 format=3 uid="uid://db1ovc4o7s2ut"]
+
+[ext_resource type="Script" path="res://Door.gd" id="1_iyibr"]
+[ext_resource type="Texture2D" uid="uid://woqyswp3wqkd" path="res://Pixel Art Top Down - Basic/Texture/TX Props.png" id="2_3vg5w"]
+[ext_resource type="AudioStream" uid="uid://cdj6mopnaib3f" path="res://sounds/wood-door-slam-46791.mp3" id="3_ugpck"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bntah"]
+size = Vector2(74, 41)
+
+[sub_resource type="Animation" id="Animation_eb08e"]
+resource_name = "DoorClosed"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:region_rect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Rect2(27.8881, 165.403, 39.1907, 54.1679), Rect2(28.6162, 102.996, 37.919, 50.5604)]
+}
+
+[sub_resource type="Animation" id="Animation_tw16r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:region_rect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(27.8881, 165.403, 39.1907, 54.1679)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dgldd"]
+_data = {
+"DoorClosed": SubResource("Animation_eb08e"),
+"RESET": SubResource("Animation_tw16r")
+}
+
+[node name="Door" type="StaticBody2D"]
+script = ExtResource("1_iyibr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -51)
+scale = Vector2(2, 2)
+texture = ExtResource("2_3vg5w")
+region_enabled = true
+region_rect = Rect2(27.8881, 165.403, 39.1907, 54.1679)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -18.5)
+shape = SubResource("RectangleShape2D_bntah")
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_dgldd")
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ugpck")
+volume_db = 8.0

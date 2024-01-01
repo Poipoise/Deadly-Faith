@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bk66083emf2ip"]
+
+[ext_resource type="Script" path="res://Area2D.gd" id="1_cgdvd"]
+
+[node name="DoorDetect" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_cgdvd")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

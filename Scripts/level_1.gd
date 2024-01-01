@@ -50,8 +50,8 @@ func _on_death_screen_respawn():
 func _on_start_screen_start_game():
 	#If you want to skip the beginning dialogue uncomment start = true and comment $Cutscene.show() 
 	#also turn the cutscene variable in the cutscene script to false/off
-	$Cutscene.show()
-	#start = true
+	#$Cutscene.show()
+	start = true
 	$Beginning.play()
 
 
