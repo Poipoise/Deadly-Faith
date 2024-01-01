@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://u0e2v74foaic"]
+
+[ext_resource type="Script" path="res://BossSpawning.gd" id="1_gkmvx"]
+
+[node name="BossSpawning" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_gkmvx")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

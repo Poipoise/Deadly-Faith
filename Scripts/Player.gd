@@ -25,6 +25,8 @@ var player_hurt = false
 var play = true
 var game_over = false
 var soundTime = 0.35
+var boss_position
+var boss_spawing_done = false
 func _ready():
 	start_pos = position
 	start_health = health
@@ -204,6 +206,7 @@ func _on_death_screen_respawn():
 	set_physics_process(true)
 	$CollisionShape2D.disabled = false
 	game_over = false
+	boss_spawing_done = false
 
 
 func _on_sound_timer_timeout():
@@ -212,3 +215,18 @@ func _on_sound_timer_timeout():
 
 func _on_camp_fire_set_spawn():
 	start_pos = position
+
+
+func _on_boss_spawning_boss_time():
+	if not boss_spawing_done:
+		boss_spawing_done = true
+		set_physics_process(false)
+		await get_tree().create_timer(0.1).timeout 
+		boss_position = boss_position - global_position
+		$Camera2D.offset = boss_position
+		await get_tree().create_timer(5).timeout
+		set_physics_process(true)
+		$Camera2D.offset.x = 0
+		$Camera2D.offset.y = 0
+		
+	

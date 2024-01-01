@@ -20,9 +20,13 @@ var Fireable = true
 var TIMETOATTACK = true
 var INAREATOBARRAGE = false
 var fireballNumber = 13
+var boss_intro = false
 func _ready():
 	start_pos = position
 	start_health = health
+	set_physics_process(false)
+	$CollisionShape2D.disabled = true
+	$Sprite2D.hide()
 	
 func _physics_process(delta):
 	choose_action()
@@ -41,6 +45,7 @@ func choose_action():
 			if summonable and summon:
 				state = states.SUMMONER
 			if INAREATOBARRAGE and TIMETOATTACK:
+				print(summonable)
 				state = states.PROJECTILE
 		states.FIREAWAY:
 			velocity = position.direction_to(player.position) * speed * -1
@@ -98,7 +103,6 @@ func choose_action():
 				await get_tree().create_timer(1.3).timeout
 				var enemy_number = randf_range(1, 3)
 				var world_vars = get_node("/root/World")
-				print(world_vars)
 				world_vars.summon_state = true
 				world_vars.summon_position = position
 				world_vars.summon_amount = enemy_number
@@ -148,12 +152,10 @@ func _on_away_body_entered(body):
 	Fireable = true
 	state = states.MOVEAWAY
 	
-
-
-
 func _on_away_body_exited(body):
 	Fireable = false
 	summonable = true
+	await get_tree().create_timer(0.3).timeout
 	state = states.SUMMONER
 
 
@@ -174,10 +176,11 @@ func _on_project_ring_body_exited(body):
 	state = states.MOVEAWAY
 
 func respawn():
-	
+	state = states.IDLE
 	player = null
-	set_physics_process(true)
-	$CollisionShape2D.disabled = false
+	set_physics_process(false)
+	$CollisionShape2D.disabled = true
+	$Sprite2D.hide()
 	position = start_pos
 	health = start_health
 	attacking = false
@@ -186,5 +189,22 @@ func respawn():
 	Fireable = true
 	TIMETOATTACK = true
 	INAREATOBARRAGE = false
-	await get_tree().create_timer(0.1).timeout
-	state = states.IDLE
+	boss_intro = false
+	
+
+
+func _on_boss_spawning_boss_time():
+	if not boss_intro:
+		boss_intro = true
+		$CanvasLayer/Label.show()
+		$Sprite2D.show()
+		var player_vars = get_node("/root/World/Level1/Player")
+		player_vars.boss_position = global_position
+		$AnimationPlayer.play("Spawning")
+		await $AnimationPlayer.animation_finished
+		$AnimationPlayer.play("idle")
+		await get_tree().create_timer(3.8).timeout
+		$CanvasLayer/Label.hide()
+		set_physics_process(true)
+		$CollisionShape2D.disabled = false
+	

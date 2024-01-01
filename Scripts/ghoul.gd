@@ -84,9 +84,9 @@ func respawn():
 	$CollisionShape2D.disabled = false
 	position = start_pos
 	health = start_health
-	player = null
 	await get_tree().create_timer(0.1).timeout
 	state = states.IDLE
+	player = null
 	if summoned:
 		queue_free()
 
