@@ -45,7 +45,6 @@ func choose_action():
 			if summonable and summon:
 				state = states.SUMMONER
 			if INAREATOBARRAGE and TIMETOATTACK:
-				print(summonable)
 				state = states.PROJECTILE
 		states.FIREAWAY:
 			velocity = position.direction_to(player.position) * speed * -1
@@ -56,7 +55,7 @@ func choose_action():
 			if not attacking:
 				$AnimationPlayer.play("projectile fire")
 				attacking = true
-				Fireable = false
+				#Fireable = false
 				await $AnimationPlayer.animation_finished
 				$Fireball.play()
 				var Projectile = projectile.instantiate()
@@ -66,11 +65,14 @@ func choose_action():
 				state = states.MOVEAWAY
 				
 		states.MOVEAWAY:
+			print(summon, summonable, Fireable, attacking)
 			$AnimationPlayer.play("move")
 			velocity = position.direction_to(player.position) * speed * -1
 			if velocity.x != 0:
 				transform.x.x = sign(velocity.x) * -1
-			if not attacking and Fireable:
+			if summonable:
+				state = states.IDLE	
+			elif not attacking and Fireable:
 				state = states.FIREAWAY
 			
 		states.PROJECTILE:
@@ -96,9 +98,10 @@ func choose_action():
 			
 		states.SUMMONER:
 			velocity = Vector2.ZERO
-			if summon:
+			if summon and summonable:
 				$AnimationPlayer.stop()
 				$AnimationPlayer.play("Summoning")
+				$SummonSound.play()
 				summon = false
 				await get_tree().create_timer(1.3).timeout
 				var enemy_number = randf_range(1, 3)
@@ -207,4 +210,5 @@ func _on_boss_spawning_boss_time():
 		$CanvasLayer/Label.hide()
 		set_physics_process(true)
 		$CollisionShape2D.disabled = false
+		state = states.IDLE
 	
