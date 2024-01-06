@@ -27,10 +27,16 @@ func _ready():
 	set_physics_process(false)
 	$CollisionShape2D.disabled = true
 	$Sprite2D.hide()
+	$CanvasLayer/HealthBar.value = health
 	
 func _physics_process(delta):
+	$CanvasLayer/HealthBar.value = health
 	choose_action()
 	move_and_slide()
+	var player_vars = get_node("/root/World/Level1/Player")
+	if player_vars.game_over:
+		$BossMusic.stop()
+		$CanvasLayer/HealthBar.hide()
 	
 func choose_action():
 	$Label.text = states.keys()[state]
@@ -39,6 +45,13 @@ func choose_action():
 			$AnimationPlayer.play("Death")
 			set_physics_process(false)
 			$CollisionShape2D.disabled = true
+			await $AnimationPlayer.animation_finished
+			$CanvasLayer/HealthBar.hide()
+			$BossMusic.stop()
+			await get_tree().create_timer(2.5).timeout
+			var world_vars = get_node("/root/World")
+			world_vars.play = true
+			world_vars.go = true
 		states.IDLE:
 			$AnimationPlayer.play("idle")
 			velocity = Vector2.ZERO
@@ -65,7 +78,6 @@ func choose_action():
 				state = states.MOVEAWAY
 				
 		states.MOVEAWAY:
-			print(summon, summonable, Fireable, attacking)
 			$AnimationPlayer.play("move")
 			velocity = position.direction_to(player.position) * speed * -1
 			if velocity.x != 0:
@@ -200,9 +212,11 @@ func _on_boss_spawning_boss_time():
 	if not boss_intro:
 		boss_intro = true
 		$CanvasLayer/Label.show()
+		$CanvasLayer/HealthBar.show()
 		$Sprite2D.show()
 		var player_vars = get_node("/root/World/Level1/Player")
 		player_vars.boss_position = global_position
+		$BossMusic.play()
 		$AnimationPlayer.play("Spawning")
 		await $AnimationPlayer.animation_finished
 		$AnimationPlayer.play("idle")

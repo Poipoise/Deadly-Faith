@@ -215,6 +215,7 @@ func _on_sound_timer_timeout():
 
 func _on_camp_fire_set_spawn():
 	start_pos = position
+	health = start_health
 
 
 func _on_boss_spawning_boss_time():

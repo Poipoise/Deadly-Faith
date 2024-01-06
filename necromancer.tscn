@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bhejo4nwyug7"]
+[gd_scene load_steps=28 format=3 uid="uid://bhejo4nwyug7"]
 
 [ext_resource type="Script" path="res://Scripts/necromancer.gd" id="1_822kn"]
 [ext_resource type="Texture2D" uid="uid://do6gtai3nmkq7" path="res://Necromancer_creativekind-Sheet.png" id="1_cl322"]
@@ -7,7 +7,10 @@
 [ext_resource type="AudioStream" uid="uid://b1535r53p64cy" path="res://sounds/fireball-whoosh-1-179125.mp3" id="5_0j2m7"]
 [ext_resource type="AudioStream" uid="uid://cjnr3fybp6iih" path="res://sounds/fireball-whoosh-2-179126.mp3" id="6_lvpr5"]
 [ext_resource type="FontFile" uid="uid://bld7hkhcvy8yp" path="res://joystix/joystix monospace.otf" id="7_sg1q7"]
+[ext_resource type="Texture2D" uid="uid://bu2mr8eijp5g8" path="res://Health_bar_UI.png" id="8_7oovc"]
 [ext_resource type="AudioStream" uid="uid://c3oyxvardo35c" path="res://sounds/magic_spell_10-39689.mp3" id="8_qpqlm"]
+[ext_resource type="Texture2D" uid="uid://b7k4ynfycnjxt" path="res://Health_bar(3).png" id="9_2vjw1"]
+[ext_resource type="AudioStream" uid="uid://dl0srxr442aqj" path="res://SoundTrack/xDeviruchi - Decisive Battle.mp3" id="11_miqwr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4mhco"]
 size = Vector2(17.125, 23)
@@ -429,6 +432,7 @@ libraries = {
 }
 
 [node name="Summon" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -437,6 +441,7 @@ position = Vector2(0, -26)
 shape = SubResource("CircleShape2D_llfqt")
 
 [node name="Away" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -445,6 +450,7 @@ position = Vector2(0, -26)
 shape = SubResource("CircleShape2D_qbgmq")
 
 [node name="ProjectRing" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -489,8 +495,28 @@ grow_horizontal = 2
 theme = SubResource("Theme_vt86p")
 text = "The Necromancer"
 
+[node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -240.0
+offset_top = -48.0
+offset_right = 957.0
+offset_bottom = 446.0
+grow_horizontal = 2
+scale = Vector2(0.4, 0.4)
+size_flags_horizontal = 3
+max_value = 10.0
+texture_under = ExtResource("8_7oovc")
+texture_progress = ExtResource("9_2vjw1")
+
 [node name="SummonSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_qpqlm")
+
+[node name="BossMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_miqwr")
+volume_db = -5.0
 
 [connection signal="body_entered" from="Summon" to="." method="_on_summon_body_entered"]
 [connection signal="body_exited" from="Summon" to="." method="_on_summon_body_exited"]

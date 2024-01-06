@@ -9,7 +9,7 @@ var direction
 var play = true
 var start = false
 var gameover = false
-
+var go = true
 func _ready():
 	$Cutscene.hide()
 	
@@ -32,7 +32,8 @@ func _process(delta):
 		$AudioStreamPlayer.play()
 		await $AudioStreamPlayer.finished
 		await get_tree().create_timer(0.4).timeout
-		play = true
+		if go:
+			play = true
 		
 
 
@@ -50,8 +51,8 @@ func _on_death_screen_respawn():
 func _on_start_screen_start_game():
 	#If you want to skip the beginning dialogue uncomment start = true and comment $Cutscene.show() 
 	#also turn the cutscene variable in the cutscene script to false/off
-	#$Cutscene.show()
-	start = true
+	$Cutscene.show()
+	#start = true
 	$Beginning.play()
 
 
@@ -64,4 +65,9 @@ func _on_cutscene_finished():
 	start = true
 	$door.play()
 	$Beginning.stop()
-	#pass
+	
+	
+func Boss_Music_Time():
+	go = false
+	play = false
+	$AudioStreamPlayer.stop()
