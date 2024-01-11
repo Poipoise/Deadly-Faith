@@ -52,7 +52,8 @@ func hurt(amount, dir):
 	var prev_state = state
 	state = states.HURT
 	velocity = dir * 100
-	await get_tree().create_timer(0.2).timeout
+	$AnimationPlayer.play("damaged")
+	await $AnimationPlayer.animation_finished
 	state = prev_state
 	if health <= 0:
 		state = states.DEAD
