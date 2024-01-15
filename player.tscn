@@ -600,13 +600,11 @@ gradient = SubResource("Gradient_b5kp2")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rfbw1"]
 particle_flag_disable_z = true
+angle_max = 75.8
 direction = Vector3(-1, 0, 0)
-gravity = Vector3(0, 10, 0)
 initial_velocity_min = 50.0
 initial_velocity_max = 100.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
-angle_max = 75.8
+gravity = Vector3(0, 10, 0)
 scale_min = 0.01
 scale_max = 0.05
 color_ramp = SubResource("GradientTexture1D_phift")
@@ -656,11 +654,11 @@ shape = SubResource("RectangleShape2D_sa2ge")
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "Idle"
-playback_process_mode = 0
+callback_mode_process = 0
 libraries = {
 "": SubResource("AnimationLibrary_2pm27")
 }
+autoplay = "Idle"
 
 [node name="StateLabel" type="Label" parent="."]
 offset_right = 40.0

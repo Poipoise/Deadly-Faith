@@ -166,10 +166,10 @@ color = Color(0.501961, 0, 0.12549, 1)
 polygon = PackedVector2Array(32, 16, 80, 16, 56, 56)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect/Indicator"]
-autoplay = "bob"
 libraries = {
 "": SubResource("AnimationLibrary_3wa2p")
 }
+autoplay = "bob"
 
 [node name="Portrait" type="Sprite2D" parent="ColorRect"]
 z_index = -1

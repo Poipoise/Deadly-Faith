@@ -1,10 +1,9 @@
 extends CanvasLayer
 signal respawn
-
+var game_over = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$AnimatedSprite2D.hide()
-	$Button.hide()
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -13,17 +12,14 @@ func _process(delta):
 
 
 func _on_player_game_over():
-	$Button.show()
 	$AnimationPlayer.play("Fade in")
-	$AnimatedSprite2D.show()
 	$DeathMusic.play()
+	game_over = true
 
-
-func _on_button_pressed():
-	$AnimatedSprite2D.hide()
-	$Respawn.play()
-	respawn.emit()
-	$AnimationPlayer.play("fade out")
-	$Button.hide()
-	$DeathMusic.stop()
-	
+func _input(event):
+	if event.is_action_pressed("UI_Interaction") and game_over:
+		$Respawn.play()
+		respawn.emit()
+		$AnimationPlayer.play("fade out")
+		$DeathMusic.stop()
+		game_over = false

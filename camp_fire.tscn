@@ -97,17 +97,15 @@ default_font = ExtResource("3_jnnej")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jw4bv"]
 lifetime_randomness = 1.0
+particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 51.23
-particle_flag_disable_z = true
 direction = Vector3(35.21, 0, 0)
 spread = 60.0
 flatness = 0.61
-gravity = Vector3(0, -98, 0)
 initial_velocity_min = 3.0
 initial_velocity_max = 7.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
+gravity = Vector3(0, -98, 0)
 scale_min = 0.01
 scale_max = 0.05
 
@@ -181,10 +179,10 @@ position = Vector2(-1.5, -4)
 shape = SubResource("RectangleShape2D_p53dr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "Burning"
 libraries = {
 "": SubResource("AnimationLibrary_d66vn")
 }
+autoplay = "Burning"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0

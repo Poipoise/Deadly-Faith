@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://v1n83dakvxch"
-path="res://.godot/imported/AlanaNeutral.png-01b6ad1db4b3662d879a7c071b7fb531.ctex"
+uid="uid://csmbd2wbdx3wr"
+path="res://.godot/imported/AstreaNeutral.png-92e2c00a7e46eaeaa3f55160fead4e3f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Portraits/AlanaNeutral.png"
-dest_files=["res://.godot/imported/AlanaNeutral.png-01b6ad1db4b3662d879a7c071b7fb531.ctex"]
+source_file="res://Portraits/AstreaNeutral.png"
+dest_files=["res://.godot/imported/AstreaNeutral.png-92e2c00a7e46eaeaa3f55160fead4e3f.ctex"]
 
 [params]
 

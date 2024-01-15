@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csmbd2wbdx3wr"
-path="res://.godot/imported/GoddessNeutral.png-ee402837b57cb94e39a59dc70d376d07.ctex"
+uid="uid://dgpwhu4i36cjn"
+path="res://.godot/imported/AragornNeutral.png-87988946c3eaadb9a5d4df262ea06160.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Portraits/GoddessNeutral.png"
-dest_files=["res://.godot/imported/GoddessNeutral.png-ee402837b57cb94e39a59dc70d376d07.ctex"]
+source_file="res://Portraits/AragornNeutral.png"
+dest_files=["res://.godot/imported/AragornNeutral.png-87988946c3eaadb9a5d4df262ea06160.ctex"]
 
 [params]
 

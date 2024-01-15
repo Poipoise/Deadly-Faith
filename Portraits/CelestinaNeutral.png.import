@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgpwhu4i36cjn"
-path="res://.godot/imported/KnightNeutral.png-56fb67831bd7bc74ed5db1947eff4b79.ctex"
+uid="uid://v1n83dakvxch"
+path="res://.godot/imported/CelestinaNeutral.png-aaf19b7c9ec072561ec57648a9393927.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Portraits/KnightNeutral.png"
-dest_files=["res://.godot/imported/KnightNeutral.png-56fb67831bd7bc74ed5db1947eff4b79.ctex"]
+source_file="res://Portraits/CelestinaNeutral.png"
+dest_files=["res://.godot/imported/CelestinaNeutral.png-aaf19b7c9ec072561ec57648a9393927.ctex"]
 
 [params]
 
