@@ -1,15 +1,17 @@
 extends CharacterBody2D
 
-var speed = 150
+var speed = 135
 enum states {IDLE, CHASE, ATTACK, DEAD, HURT,SUMMONING}
 var state = states.IDLE
 var player
 var attacking = false
-var health = 3
+var health = 20
 var start_pos
 var start_health
 var death_scene
 var summoned = false
+var prev_state
+var hit
 func _ready():
 	start_pos = position
 	start_health = health
@@ -47,16 +49,23 @@ func choose_action():
 				attacking = false
 	
 func hurt(amount, dir):
-	$Hit.play()
-	health -= amount
-	var prev_state = state
-	state = states.HURT
-	velocity = dir * 100
-	$AnimationPlayer.play("damaged")
-	await $AnimationPlayer.animation_finished
-	state = prev_state
-	if health <= 0:
-		state = states.DEAD
+	if not hit:
+		hit = true
+		$Hit.play()
+		health -= amount
+		prev_state = state
+		state = states.HURT
+		velocity = dir * 100
+		$HitParticle.process_material.direction.y = sign (velocity.x) * -1
+		$AnimationPlayer.play("damaged")
+		$HitParticle.emitting = true
+		await get_tree().create_timer(0.1).timeout
+		$HitParticle.emitting = false
+		await get_tree().create_timer(0.4).timeout
+		hit = false
+		state = prev_state
+		if health <= 0:
+			state = states.DEAD
 
 func _on_detect_body_entered(body):
 	player = body
@@ -69,9 +78,10 @@ func _on_attack_body_entered(body):
 	state = states.ATTACK
 
 func _on_attack_body_exited(body):
-	if attacking:
+	prev_state = states.CHASE
+	if attacking and not hit:
 		await $AnimationPlayer.animation_finished
-	state = states.CHASE
+		state = states.CHASE
 
 
 
