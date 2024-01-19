@@ -61,7 +61,7 @@ func hurt(amount, dir):
 		$HitParticle.emitting = true
 		await get_tree().create_timer(0.1).timeout
 		$HitParticle.emitting = false
-		await get_tree().create_timer(0.4).timeout
+		await get_tree().create_timer(0.2).timeout
 		hit = false
 		state = prev_state
 		if health <= 0:
