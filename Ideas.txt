@@ -1,0 +1,8 @@
+Readable signs
+barriers that pops up messages to prevent player from moving out of map
+hidden boss area
+hidden item?
+possible minboss room
+fix up dialogue for intro
+multi storied type of dungeon look
+chest with something idk

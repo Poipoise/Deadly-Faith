@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://dw3itna4tqcw3"]
+
+[ext_resource type="Texture2D" uid="uid://b7we2k7ce1ciu" path="res://New Piskel.png" id="1_c4gyn"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b8jmr"]
+lifetime_randomness = 0.4
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(5, 5, 1)
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_min = -5.1
+angle_max = 132.1
+direction = Vector3(-20, -10, 0)
+spread = 9.805
+initial_velocity_min = 55.0
+initial_velocity_max = 155.91
+gravity = Vector3(0, 98, 0)
+scale_min = 0.2
+scale_max = 0.5
+
+[node name="HitParticle" type="GPUParticles2D"]
+position = Vector2(-3, -10)
+emitting = false
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_b8jmr")
+texture = ExtResource("1_c4gyn")
+lifetime = 0.7
+preprocess = 0.1
+randomness = 0.24

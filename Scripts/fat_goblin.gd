@@ -11,7 +11,8 @@ var player_pos
 var shoot_direction
 var start_pos
 var start_health
-
+var hit
+var prev_state
 func _ready():
 	start_pos = position
 	start_health = health
@@ -70,16 +71,22 @@ func choose_action():
 			
 	
 func hurt(amount, dir):
-	$Hit.play()
-	health -= amount
-	var prev_state = state
-	state = states.HURT
-	velocity = dir * 100
-	$AnimationPlayer.play("Damage")
-	await $AnimationPlayer.animation_finished
-	state = prev_state
-	if health <= 0:
-		state = states.DEAD
+	if not hit:
+		hit = true
+		$Hit.play()
+		health -= amount
+		prev_state = state
+		state = states.HURT
+		velocity = dir * 100
+		$AnimationPlayer.play("Damage")
+		$HitParticle.emitting = true
+		await get_tree().create_timer(0.1).timeout
+		$HitParticle.emitting = false
+		await $AnimationPlayer.animation_finished
+		hit = false
+		state = prev_state
+		if health <= 0:
+			state = states.DEAD
 
 func _on_detect_body_entered(body):
 	player = body
@@ -93,6 +100,7 @@ func _on_attack_body_entered(body):
 		state = states.ATTACK
 		
 func _on_attack_body_exited(body):
+	prev_state = states.CHASE
 	state = states.CHASE
 	
 func _on_attack_timer_timeout():
@@ -104,6 +112,7 @@ func _on_walk_away_body_entered(body):
 
 
 func _on_walk_away_body_exited(body):
+	prev_state = states.ATTACK
 	state = states.ATTACK
 
 func respawn():

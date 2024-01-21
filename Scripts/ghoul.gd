@@ -5,7 +5,7 @@ enum states {IDLE, CHASE, ATTACK, DEAD, HURT,SUMMONING}
 var state = states.IDLE
 var player
 var attacking = false
-var health = 20
+var health = 3
 var start_pos
 var start_health
 var death_scene
@@ -75,6 +75,7 @@ func _on_detect_body_exited(body):
 	state = states.IDLE
 
 func _on_attack_body_entered(body):
+	prev_state = states.ATTACK
 	state = states.ATTACK
 
 func _on_attack_body_exited(body):
