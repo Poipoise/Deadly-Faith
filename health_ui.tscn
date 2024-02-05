@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://bru8fiaqls7qn"]
+
+[ext_resource type="Script" path="res://health_ui.gd" id="1_h6cxx"]
+[ext_resource type="Texture2D" uid="uid://b70g21gb31tmt" path="res://objects.png" id="2_csbhp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jogq3"]
+atlas = ExtResource("2_csbhp")
+region = Rect2(131, 40, 9, 8)
+
+[node name="Health_UI" type="HBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_h6cxx")
+
+[node name="H" type="TextureRect" parent="."]
+layout_mode = 2
+texture = SubResource("AtlasTexture_jogq3")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="H2" type="TextureRect" parent="."]
+layout_mode = 2
+texture = SubResource("AtlasTexture_jogq3")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="H3" type="TextureRect" parent="."]
+layout_mode = 2
+texture = SubResource("AtlasTexture_jogq3")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="H4" type="TextureRect" parent="."]
+layout_mode = 2
+texture = SubResource("AtlasTexture_jogq3")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="H5" type="TextureRect" parent="."]
+layout_mode = 2
+texture = SubResource("AtlasTexture_jogq3")
+expand_mode = 3
+stretch_mode = 5

@@ -6,3 +6,7 @@ possible minboss room
 fix up dialogue for intro
 multi storied type of dungeon look
 chest with something idk
+
+
+Known bugs that need fixing:
+player doesn't take damage after rolling (seen with fat goblin)

@@ -1,6 +1,7 @@
 extends Node2D
 @export var enemy : PackedScene
 @onready var Level1 : Node = get_node("/root/World/Level1")
+@export var reward : PackedScene
 var summon_position
 var summon_amount = 0
 var summon_state = false
@@ -10,6 +11,8 @@ var play = true
 var start = false
 var gameover = false
 var go = true
+var chest_opened = false
+var chest_position
 func _ready():
 	$Cutscene.hide()
 	
@@ -34,7 +37,13 @@ func _process(delta):
 		await get_tree().create_timer(0.4).timeout
 		if go:
 			play = true
-		
+	
+	if chest_opened:
+		var Potion_reward = reward.instantiate()
+		add_child(Potion_reward)
+		Potion_reward.position.y = chest_position.y + 20
+		Potion_reward.position.x = chest_position.x
+		chest_opened = false
 
 
 func _on_death_screen_respawn():

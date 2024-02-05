@@ -229,5 +229,7 @@ func _on_boss_spawning_boss_time():
 		set_physics_process(true)
 		$Camera2D.offset.x = 0
 		$Camera2D.offset.y = 0
-		
+
+func health_change():
+	health_changed.emit(health)
 	
