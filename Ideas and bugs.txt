@@ -6,6 +6,7 @@ possible minboss room
 fix up dialogue for intro
 multi storied type of dungeon look
 chest with something idk
+next level cutscene
 
 
 Known bugs that need fixing:
