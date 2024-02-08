@@ -1,13 +1,16 @@
 Readable signs
+outside tilemap
 barriers that pops up messages to prevent player from moving out of map
 hidden boss area
 hidden item?
 possible minboss room
 fix up dialogue for intro
-multi storied type of dungeon look
-chest with something idk
 next level cutscene
 
+
+
+Crazy Ideas:
+Some sort of day night cycle. Just for asthetic
 
 Known bugs that need fixing:
 player doesn't take damage after rolling (seen with fat goblin)
