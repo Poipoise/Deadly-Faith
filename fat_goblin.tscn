@@ -535,6 +535,7 @@ libraries = {
 }
 
 [node name="Detect" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -544,6 +545,7 @@ scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_a68i8")
 
 [node name="Attack" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -560,6 +562,7 @@ wait_time = 1.2
 one_shot = true
 
 [node name="WalkAway" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
