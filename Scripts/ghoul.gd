@@ -57,11 +57,12 @@ func hurt(amount, dir):
 		state = states.HURT
 		velocity = dir * 100
 		$HitParticle.process_material.direction.y = sign (velocity.x) * -1
-		$AnimationPlayer.play("damaged")
+		$Sprite2D.material.set_shader_parameter("active", true)
 		$HitParticle.emitting = true
 		await get_tree().create_timer(0.1).timeout
 		$HitParticle.emitting = false
 		await get_tree().create_timer(0.2).timeout
+		$Sprite2D.material.set_shader_parameter("active", false)
 		hit = false
 		state = prev_state
 		if health <= 0:

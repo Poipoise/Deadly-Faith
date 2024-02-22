@@ -37,6 +37,11 @@ func _physics_process(delta):
 	if player_vars.game_over:
 		$BossMusic.stop()
 		$CanvasLayer/HealthBar.hide()
+		
+		# Comment bellow if changed to only one boss song
+		if boss_intro and states != state.DEAD:
+			if $AudioStreamPlayer.finished:
+				$BossMusic.play()
 	
 func choose_action():
 	$Label.text = states.keys()[state]

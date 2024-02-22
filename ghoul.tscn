@@ -1,10 +1,16 @@
-[gd_scene load_steps=20 format=3 uid="uid://3od58wh8ejq3"]
+[gd_scene load_steps=22 format=3 uid="uid://3od58wh8ejq3"]
 
 [ext_resource type="Script" path="res://Scripts/ghoul.gd" id="1_kjjhg"]
 [ext_resource type="Texture2D" uid="uid://bvr8mb1uhhtl8" path="res://Ghoul Sprite Sheet.png" id="1_udybv"]
+[ext_resource type="Shader" path="res://Hit_Flash.gdshader" id="2_2nr5j"]
 [ext_resource type="AudioStream" uid="uid://lkuawtljm2gl" path="res://sounds/hurt_c_08-102842.mp3" id="3_afuku"]
 [ext_resource type="AudioStream" uid="uid://3ts8o64u6uli" path="res://sounds/Goul Growl.mp3" id="4_igdwe"]
 [ext_resource type="PackedScene" uid="uid://dw3itna4tqcw3" path="res://hit_particle.tscn" id="5_3ctq8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ruaer"]
+shader = ExtResource("2_2nr5j")
+shader_parameter/active = false
+shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_skhs1"]
 size = Vector2(13, 6.5)
@@ -494,6 +500,7 @@ collision_mask = 13
 script = ExtResource("1_kjjhg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ruaer")
 position = Vector2(2, -16)
 texture = ExtResource("1_udybv")
 hframes = 8

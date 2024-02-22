@@ -30,8 +30,9 @@ func _on_area_2d_body_entered(body):
 	else:
 		$AnimationPlayer.play("Hit")
 		await $AnimationPlayer.animation_finished
+		if body.is_in_group("player"):
+			body.hurt(1, position.direction_to(body.position))
 		queue_free()
-		body.hurt(1, position.direction_to(body.position))
 
 
 func _on_timer_timeout():

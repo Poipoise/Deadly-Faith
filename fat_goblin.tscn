@@ -1,12 +1,18 @@
-[gd_scene load_steps=25 format=3 uid="uid://7yhsfa6r54e2"]
+[gd_scene load_steps=27 format=3 uid="uid://7yhsfa6r54e2"]
 
 [ext_resource type="Script" path="res://Scripts/fat_goblin.gd" id="1_gm7tk"]
 [ext_resource type="Texture2D" uid="uid://bwgqvj3q53o84" path="res://Goblin King Sprite Sheet.png" id="1_woogs"]
 [ext_resource type="PackedScene" uid="uid://cq176c44di6ni" path="res://money_bag.tscn" id="2_5b88d"]
+[ext_resource type="Shader" path="res://Hit_Flash.gdshader" id="3_6pn81"]
 [ext_resource type="AudioStream" uid="uid://lkuawtljm2gl" path="res://sounds/hurt_c_08-102842.mp3" id="4_vjwma"]
 [ext_resource type="AudioStream" uid="uid://bnky8jxgd42v7" path="res://sounds/mixkit-fantasy-monster-grunt-1977.mp3" id="5_67ryw"]
 [ext_resource type="AudioStream" uid="uid://dam5pcq3w74yx" path="res://sounds/goblin-death.mp3" id="6_sbm1s"]
 [ext_resource type="PackedScene" uid="uid://dw3itna4tqcw3" path="res://hit_particle.tscn" id="7_kcjtf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wibbt"]
+shader = ExtResource("3_6pn81")
+shader_parameter/active = false
+shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5jot2"]
 size = Vector2(27, 11.875)
@@ -519,6 +525,7 @@ script = ExtResource("1_gm7tk")
 projectile = ExtResource("2_5b88d")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_wibbt")
 position = Vector2(-2, -35)
 scale = Vector2(1.1, 1.1)
 texture = ExtResource("1_woogs")
