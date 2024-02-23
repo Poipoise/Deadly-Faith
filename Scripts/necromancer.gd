@@ -2,6 +2,7 @@ extends CharacterBody2D
 @export var projectile : PackedScene
 @export var enemy : PackedScene
 @onready var Level1 : Node = get_node("/root/World/Level1")
+signal Died
 var speed = 70
 enum states {IDLE, FIREAWAY, PROJECTILE, DEAD, HURT, SUMMONER, MOVEAWAY}
 var state = states.IDLE
@@ -145,6 +146,7 @@ func hurt(amount, dir):
 	await $AnimationPlayer.animation_finished
 	state = prev_state
 	if health <= 0:
+		Died.emit()
 		state = states.DEAD
 
 

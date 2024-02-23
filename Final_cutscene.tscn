@@ -1,0 +1,196 @@
+[gd_scene load_steps=14 format=3 uid="uid://bxbgklvjsdqs"]
+
+[ext_resource type="Texture2D" uid="uid://sfbg15rpy6ye" path="res://10_basic_message_boxes_by_CharlesGabriel(1).png" id="1_4fxps"]
+[ext_resource type="Script" path="res://Final_cutscene.gd" id="1_wmkyy"]
+[ext_resource type="FontFile" uid="uid://de24cssv2vwp1" path="res://darib/DavysRibbons.ttf" id="2_4tkyl"]
+[ext_resource type="Script" path="res://ColorRect.gd" id="2_7kmid"]
+[ext_resource type="FontFile" uid="uid://c4i33lcdn4b41" path="res://blackchancery/BLKCHCRY.TTF" id="3_fiqrt"]
+
+[sub_resource type="Theme" id="Theme_u5yg3"]
+default_font = ExtResource("2_4tkyl")
+
+[sub_resource type="Theme" id="Theme_vqqup"]
+default_font = ExtResource("3_fiqrt")
+
+[sub_resource type="Animation" id="Animation_pq2wi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_bva0o"]
+resource_name = "bob"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -20)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3wa2p"]
+_data = {
+"RESET": SubResource("Animation_pq2wi"),
+"bob": SubResource("Animation_bva0o")
+}
+
+[sub_resource type="Animation" id="Animation_elhds"]
+resource_name = "Fade in"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_6s0ug"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_206c6"]
+_data = {
+"Fade in": SubResource("Animation_elhds"),
+"RESET": SubResource("Animation_6s0ug")
+}
+
+[node name="Final_Cutscene" type="CanvasLayer"]
+script = ExtResource("1_wmkyy")
+
+[node name="ColorRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -384.5
+offset_top = -221.0
+offset_right = 384.5
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+texture = ExtResource("1_4fxps")
+expand_mode = 3
+script = ExtResource("2_7kmid")
+metadata/_edit_use_anchors_ = true
+
+[node name="Name" type="RichTextLabel" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.076
+anchor_top = 0.131
+anchor_right = 0.076
+anchor_bottom = 0.131
+offset_left = -49.976
+offset_top = -15.951
+offset_right = 711.024
+offset_bottom = 47.049
+theme = SubResource("Theme_u5yg3")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 55
+text = "Name"
+
+[node name="Text" type="RichTextLabel" parent="ColorRect"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 61.0
+offset_right = 891.0
+offset_bottom = 205.0
+theme = SubResource("Theme_vqqup")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 35
+text = "BLAH BLAH BLAH"
+
+[node name="Indicator" type="Polygon2D" parent="ColorRect"]
+position = Vector2(842.5, 173)
+scale = Vector2(0.492159, 0.492159)
+color = Color(0.501961, 0, 0.12549, 1)
+polygon = PackedVector2Array(32, 16, 80, 16, 56, 56)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect/Indicator"]
+libraries = {
+"": SubResource("AnimationLibrary_3wa2p")
+}
+autoplay = "bob"
+
+[node name="Portrait" type="Sprite2D" parent="ColorRect"]
+z_index = -1
+position = Vector2(96.5, -11)
+scale = Vector2(0.4375, 0.421875)
+
+[node name="Timer" type="Timer" parent="ColorRect"]
+wait_time = 0.5
+
+[node name="ColorRect2" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+z_index = -3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_206c6")
+}
+
+[connection signal="Cutscene_finished" from="ColorRect" to="." method="_on_color_rect_cutscene_finished"]
