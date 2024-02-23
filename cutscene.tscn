@@ -182,8 +182,11 @@ wait_time = 0.5
 [node name="ColorRect2" type="TextureRect" parent="."]
 modulate = Color(1, 1, 1, 0)
 z_index = -3
-offset_right = 1152.0
-offset_bottom = 664.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("3_af6ve")
 expand_mode = 3
 

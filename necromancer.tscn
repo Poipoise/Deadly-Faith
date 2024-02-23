@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bhejo4nwyug7"]
+[gd_scene load_steps=30 format=3 uid="uid://bhejo4nwyug7"]
 
 [ext_resource type="Script" path="res://Scripts/necromancer.gd" id="1_822kn"]
 [ext_resource type="Texture2D" uid="uid://do6gtai3nmkq7" path="res://Necromancer_creativekind-Sheet.png" id="1_cl322"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://bu2mr8eijp5g8" path="res://Health_bar_UI.png" id="8_7oovc"]
 [ext_resource type="AudioStream" uid="uid://c3oyxvardo35c" path="res://sounds/magic_spell_10-39689.mp3" id="8_qpqlm"]
 [ext_resource type="Texture2D" uid="uid://b7k4ynfycnjxt" path="res://Health_bar(3).png" id="9_2vjw1"]
+[ext_resource type="AudioStream" uid="uid://dl0srxr442aqj" path="res://SoundTrack/xDeviruchi - Decisive Battle.mp3" id="11_yjmym"]
+[ext_resource type="AudioStream" uid="uid://c71ehwa48x4aj" path="res://SoundTrack/Drift King INST.wav" id="12_34pxi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4mhco"]
 size = Vector2(17.125, 23)
@@ -56,7 +58,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_a77fa"]
 resource_name = "Projectile Barrage"
-length = 2.0
+length = 2.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -64,7 +66,7 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
+"times": PackedFloat32Array(0, 2.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [51, 63]
@@ -409,6 +411,12 @@ default_font = ExtResource("7_sg1q7")
 default_font_size = 50
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_46yfs"]
+playback_mode = 2
+streams_count = 2
+stream_0/stream = ExtResource("11_yjmym")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("12_34pxi")
+stream_1/weight = 1.0
 
 [node name="Necromancer" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 4

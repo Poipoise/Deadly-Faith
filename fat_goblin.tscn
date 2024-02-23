@@ -3,14 +3,31 @@
 [ext_resource type="Script" path="res://Scripts/fat_goblin.gd" id="1_gm7tk"]
 [ext_resource type="Texture2D" uid="uid://bwgqvj3q53o84" path="res://Goblin King Sprite Sheet.png" id="1_woogs"]
 [ext_resource type="PackedScene" uid="uid://cq176c44di6ni" path="res://money_bag.tscn" id="2_5b88d"]
-[ext_resource type="Shader" path="res://Hit_Flash.gdshader" id="3_6pn81"]
 [ext_resource type="AudioStream" uid="uid://lkuawtljm2gl" path="res://sounds/hurt_c_08-102842.mp3" id="4_vjwma"]
 [ext_resource type="AudioStream" uid="uid://bnky8jxgd42v7" path="res://sounds/mixkit-fantasy-monster-grunt-1977.mp3" id="5_67ryw"]
 [ext_resource type="AudioStream" uid="uid://dam5pcq3w74yx" path="res://sounds/goblin-death.mp3" id="6_sbm1s"]
 [ext_resource type="PackedScene" uid="uid://dw3itna4tqcw3" path="res://hit_particle.tscn" id="7_kcjtf"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wibbt"]
-shader = ExtResource("3_6pn81")
+[sub_resource type="Shader" id="Shader_67awa"]
+code = "shader_type canvas_item;
+
+uniform bool active = false;
+uniform vec4 tint : source_color = vec4(1., 1., 0., 1);
+
+void fragment() {
+	vec4 tint_copy = tint;
+	vec4 previous_color = texture(TEXTURE, UV);
+	
+	if (active == true)
+	{
+		tint_copy.a = previous_color.a;
+		COLOR = tint_copy;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mckqh"]
+resource_local_to_scene = true
+shader = SubResource("Shader_67awa")
 shader_parameter/active = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
@@ -82,18 +99,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1.1, 1.1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:self_modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 0, 0.0235294, 1), Color(1, 0, 0.0235294, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_g6sol"]
@@ -510,10 +515,10 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a68i8"]
-radius = 172.709
+radius = 270.185
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3lru5"]
-radius = 269.067
+radius = 172.026
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cnrhu"]
 radius = 78.0256
@@ -525,7 +530,7 @@ script = ExtResource("1_gm7tk")
 projectile = ExtResource("2_5b88d")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_wibbt")
+material = SubResource("ShaderMaterial_mckqh")
 position = Vector2(-2, -35)
 scale = Vector2(1.1, 1.1)
 texture = ExtResource("1_woogs")
@@ -542,22 +547,19 @@ libraries = {
 }
 
 [node name="Detect" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detect"]
 position = Vector2(0, -21)
-scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_a68i8")
 
 [node name="Attack" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack"]
-position = Vector2(-1, -35)
+position = Vector2(-5.96046e-08, -19)
 shape = SubResource("CircleShape2D_3lru5")
 
 [node name="Label" type="Label" parent="."]
@@ -569,12 +571,11 @@ wait_time = 1.2
 one_shot = true
 
 [node name="WalkAway" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WalkAway"]
-position = Vector2(-1, -35)
+position = Vector2(1, -21)
 shape = SubResource("CircleShape2D_cnrhu")
 
 [node name="Hit" type="AudioStreamPlayer2D" parent="."]

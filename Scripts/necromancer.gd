@@ -19,8 +19,9 @@ var summonable = false
 var Fireable = true
 var TIMETOATTACK = true
 var INAREATOBARRAGE = false
-var fireballNumber = 13
+var fireballNumber = 10
 var boss_intro = false
+var song_time = false
 func _ready():
 	start_pos = position
 	start_health = health
@@ -38,15 +39,19 @@ func _physics_process(delta):
 		$BossMusic.stop()
 		$CanvasLayer/HealthBar.hide()
 		
-		# Comment bellow if changed to only one boss song
-		if boss_intro and states != state.DEAD:
-			if $AudioStreamPlayer.finished:
-				$BossMusic.play()
+	# Comment bellow if changed to only one boss song
+	if song_time:
+		song_time = false
+		await $BossMusic.finished
+		$BossMusic.play()
+		song_time = true
+			
 	
 func choose_action():
 	$Label.text = states.keys()[state]
 	match state:
 		states.DEAD:
+			song_time = false
 			$AnimationPlayer.play("Death")
 			set_physics_process(false)
 			$CollisionShape2D.disabled = true
@@ -97,14 +102,14 @@ func choose_action():
 			shoot_direction = Vector2(-1,0)
 			if INAREATOBARRAGE and TIMETOATTACK:
 				$AnimationPlayer.play("Projectile Barrage")
-				print("FIRED")
+				#print("FIRED")
 				TIMETOATTACK = false
 				await $AnimationPlayer.animation_finished
 				while counter < fireballNumber:
 					var angle = (2*6.28319) / fireballNumber
 					#shoot_direction = shoot_direction.from_angle(angle)
 					shoot_direction = shoot_direction.rotated(angle)
-					print(shoot_direction)
+					#print(shoot_direction)
 					var Projectile = projectile.instantiate()
 					Projectile.start(position, shoot_direction)
 					Level1.add_child(Projectile)
@@ -210,6 +215,7 @@ func respawn():
 	TIMETOATTACK = true
 	INAREATOBARRAGE = false
 	boss_intro = false
+	state = states.IDLE
 	
 
 
@@ -222,6 +228,7 @@ func _on_boss_spawning_boss_time():
 		var player_vars = get_node("/root/World/Level1/Player")
 		player_vars.boss_position = global_position
 		$BossMusic.play()
+		song_time = true
 		$AnimationPlayer.play("Spawning")
 		await $AnimationPlayer.animation_finished
 		$AnimationPlayer.play("idle")

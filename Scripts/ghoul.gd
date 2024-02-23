@@ -58,6 +58,7 @@ func hurt(amount, dir):
 		velocity = dir * 100
 		$HitParticle.process_material.direction.y = sign (velocity.x) * -1
 		$Sprite2D.material.set_shader_parameter("active", true)
+		#$AnimationPlayer.play("damaged")
 		$HitParticle.emitting = true
 		await get_tree().create_timer(0.1).timeout
 		$HitParticle.emitting = false

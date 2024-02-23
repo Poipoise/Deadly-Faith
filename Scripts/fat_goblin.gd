@@ -16,7 +16,6 @@ var prev_state
 func _ready():
 	start_pos = position
 	start_health = health
-	print("HI")
 func _physics_process(delta):
 	choose_action()
 	move_and_slide()
@@ -79,10 +78,11 @@ func hurt(amount, dir):
 		state = states.HURT
 		velocity = dir * 100
 		$Sprite2D.material.set_shader_parameter("active", true)
+		$AnimationPlayer.play("Damage")
 		$HitParticle.emitting = true
 		await get_tree().create_timer(0.1).timeout
 		$HitParticle.emitting = false
-		await get_tree().create_timer(0.2).timeout
+		await get_tree().create_timer(0.5).timeout
 		$Sprite2D.material.set_shader_parameter("active", false)
 		hit = false
 		state = prev_state

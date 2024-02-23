@@ -182,7 +182,7 @@ func set_stamina(val):
 		$StaminaCooldown.start()
 
 func _on_empty_stamina_cooldown_timeout():
-	print("recharging")
+	#print("recharging")
 	recharging = true
 
 func _on_stamina_cooldown_timeout():
@@ -190,7 +190,7 @@ func _on_stamina_cooldown_timeout():
 
 
 func _on_hurtbox_body_entered(body):
-	print("attacked!")
+	#print("attacked!")
 	body.hurt(1, position.direction_to(body.position))
 
 

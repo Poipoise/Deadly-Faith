@@ -1,7 +1,7 @@
 extends TextureRect
 signal Cutscene_finished
 @export var dialogPath = ""
-@export var textSpeed: float = 0.06
+@export var textSpeed: float = 0.05
 var dialog
  
 var phraseNum = 0
@@ -15,7 +15,7 @@ func _ready():
  
 func _process(_delta):
 	$Indicator.visible = finished
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("ui_accept") and $/root/World/Cutscene.cutscene_started:
 		if finished:
 			nextPhrase()
 		else:

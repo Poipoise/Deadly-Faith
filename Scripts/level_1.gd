@@ -55,6 +55,7 @@ func _on_death_screen_respawn():
 	var projectile_nodes = get_tree().get_nodes_in_group("projectile")
 	for projectiles in projectile_nodes:
 		projectiles.destroy()
+	
 
 
 func _on_start_screen_start_game():
@@ -67,6 +68,7 @@ func _on_start_screen_start_game():
 
 func _on_player_game_over():
 	gameover = true
+	$Level1/Necromancer.song_time = false
 	$AudioStreamPlayer.stop()
 
 

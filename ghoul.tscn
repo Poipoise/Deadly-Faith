@@ -2,13 +2,30 @@
 
 [ext_resource type="Script" path="res://Scripts/ghoul.gd" id="1_kjjhg"]
 [ext_resource type="Texture2D" uid="uid://bvr8mb1uhhtl8" path="res://Ghoul Sprite Sheet.png" id="1_udybv"]
-[ext_resource type="Shader" path="res://Hit_Flash.gdshader" id="2_2nr5j"]
 [ext_resource type="AudioStream" uid="uid://lkuawtljm2gl" path="res://sounds/hurt_c_08-102842.mp3" id="3_afuku"]
 [ext_resource type="AudioStream" uid="uid://3ts8o64u6uli" path="res://sounds/Goul Growl.mp3" id="4_igdwe"]
 [ext_resource type="PackedScene" uid="uid://dw3itna4tqcw3" path="res://hit_particle.tscn" id="5_3ctq8"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ruaer"]
-shader = ExtResource("2_2nr5j")
+[sub_resource type="Shader" id="Shader_gg2lo"]
+code = "shader_type canvas_item;
+
+uniform bool active = false;
+uniform vec4 tint : source_color = vec4(1., 1., 0., 1);
+
+void fragment() {
+	vec4 tint_copy = tint;
+	vec4 previous_color = texture(TEXTURE, UV);
+	
+	if (active == true)
+	{
+		tint_copy.a = previous_color.a;
+		COLOR = tint_copy;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_21d8t"]
+resource_local_to_scene = true
+shader = SubResource("Shader_gg2lo")
 shader_parameter/active = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
@@ -489,7 +506,7 @@ radius = 12.0
 height = 34.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xqayy"]
-radius = 241.075
+radius = 172.047
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qxb75"]
 radius = 20.0
@@ -500,7 +517,7 @@ collision_mask = 13
 script = ExtResource("1_kjjhg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_ruaer")
+material = SubResource("ShaderMaterial_21d8t")
 position = Vector2(2, -16)
 texture = ExtResource("1_udybv")
 hframes = 8
@@ -526,7 +543,6 @@ shape = SubResource("CapsuleShape2D_gxy6q")
 disabled = true
 
 [node name="Detect" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 2
 

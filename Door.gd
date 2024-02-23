@@ -9,3 +9,8 @@ func _on_door_detect_player_entered():
 		$AudioStreamPlayer2D.play()
 
 
+
+
+func _on_death_screen_respawn():
+	done = false
+	$AnimationPlayer.play("Door Open")

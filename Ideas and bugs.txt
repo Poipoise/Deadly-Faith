@@ -14,3 +14,6 @@ Some sort of day night cycle. Just for asthetic
 
 Known bugs that need fixing:
 player doesn't take damage after rolling (seen with fat goblin)
+player sword hit box doesn't deactivate allowing player to hit enemies constantly without swinging sword
+Necromancer doesn't change back to idle state once player respawns
+When an enemy of a certain type flashes due to getting hit all other enemies of the same type also flash
