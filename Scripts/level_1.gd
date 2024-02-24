@@ -61,8 +61,8 @@ func _on_death_screen_respawn():
 func _on_start_screen_start_game():
 	#If you want to skip the beginning dialogue uncomment start = true and comment $Cutscene.show() 
 	#also turn the cutscene variable in the cutscene script to false/off
-	#$Cutscene.show()
-	start = true
+	$Cutscene.show()
+	#start = true
 	$Beginning.play()
 
 
@@ -82,3 +82,15 @@ func Boss_Music_Time():
 	go = false
 	play = false
 	$AudioStreamPlayer.stop()
+
+
+
+func _on_level_finished_cutscene_starter_start_cutscene():
+	go = false
+	play = false
+	$AudioStreamPlayer.stop()
+	$Final_cutscene_ambience.play()
+
+
+func _on_final_cutscene_finished():
+	$Final_cutscene_ambience.stop()

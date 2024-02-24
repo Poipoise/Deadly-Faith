@@ -27,12 +27,13 @@ var game_over = false
 var soundTime = 0.35
 var boss_position
 var boss_spawing_done = false
+var movement_allowed = true
 func _ready():
 	start_pos = position
 	start_health = health
 	
 func _physics_process(delta):
-	if gamestart:
+	if gamestart and movement_allowed:
 		if not player_hurt:
 			choose_action()
 		if stamina == 0 && stamina_empty:
@@ -90,7 +91,7 @@ func _physics_process(delta):
 		move_and_slide()
 	
 func _input(event):
-	if gamestart:
+	if gamestart and movement_allowed:
 		if event.is_action_pressed("attack") && not attacking && stamina >= 10:
 			if not game_over:
 				$swing.play()
@@ -233,3 +234,7 @@ func _on_boss_spawning_boss_time():
 func health_change():
 	health_changed.emit(health)
 	
+	
+func _on_level_finished_cutscene_starter_start_cutscene():
+	movement_allowed = false
+	$AnimationPlayer.play("Idle")

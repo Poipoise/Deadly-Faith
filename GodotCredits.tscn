@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://cnrunh2l2kpah"]
+
+[ext_resource type="Script" path="res://GodotCredits.gd" id="1"]
+[ext_resource type="FontFile" uid="uid://bld7hkhcvy8yp" path="res://joystix/joystix monospace.otf" id="2_5tooa"]
+[ext_resource type="AudioStream" uid="uid://ba1cljlikqtyw" path="res://SoundTrack/Hollow Knight OST - Enter Hallownest.mp3" id="3_lbng4"]
+[ext_resource type="AudioStream" uid="uid://dr628p3cla7nu" path="res://SoundTrack/Dark Souls 3 OST - Epilogue [HQ].mp3" id="4_btfcf"]
+
+[sub_resource type="Theme" id="Theme_yhoa8"]
+default_font = ExtResource("2_5tooa")
+default_font_size = 30
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_iokc1"]
+playback_mode = 2
+streams_count = 2
+stream_0/stream = ExtResource("3_lbng4")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("4_btfcf")
+stream_1/weight = 1.0
+
+[node name="GodotCredits" type="CanvasLayer"]
+script = ExtResource("1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CreditsContainer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Line" type="Label" parent="CreditsContainer"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -152.0
+offset_top = -8.0
+offset_right = 146.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+theme = SubResource("Theme_yhoa8")
+text = "Credits line"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_iokc1")

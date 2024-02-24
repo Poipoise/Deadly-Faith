@@ -4,3 +4,5 @@
 
 [node name="Level_finished_cutscene_starter" type="Area2D"]
 script = ExtResource("1_mnebh")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

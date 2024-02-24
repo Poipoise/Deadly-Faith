@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dr628p3cla7nu"
+path="res://.godot/imported/Dark Souls 3 OST - Epilogue [HQ].mp3-803077cd8b5bb4a8ba2e30e0cba9f5f5.mp3str"
+
+[deps]
+
+source_file="res://SoundTrack/Dark Souls 3 OST - Epilogue [HQ].mp3"
+dest_files=["res://.godot/imported/Dark Souls 3 OST - Epilogue [HQ].mp3-803077cd8b5bb4a8ba2e30e0cba9f5f5.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
