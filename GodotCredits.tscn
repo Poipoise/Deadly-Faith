@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cnrunh2l2kpah"]
+[gd_scene load_steps=11 format=3 uid="uid://cnrunh2l2kpah"]
 
 [ext_resource type="Script" path="res://GodotCredits.gd" id="1"]
 [ext_resource type="FontFile" uid="uid://bld7hkhcvy8yp" path="res://joystix/joystix monospace.otf" id="2_5tooa"]
@@ -16,6 +16,47 @@ stream_0/stream = ExtResource("3_lbng4")
 stream_0/weight = 1.0
 stream_1/stream = ExtResource("4_btfcf")
 stream_1/weight = 1.0
+
+[sub_resource type="Theme" id="Theme_rhvx7"]
+default_font = ExtResource("2_5tooa")
+default_font_size = 100
+
+[sub_resource type="Animation" id="Animation_xgff2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ThankYou:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0l50b"]
+resource_name = "Thank_You_fade_in"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ThankYou:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jful5"]
+_data = {
+"RESET": SubResource("Animation_xgff2"),
+"Thank_You_fade_in": SubResource("Animation_0l50b")
+}
 
 [node name="GodotCredits" type="CanvasLayer"]
 script = ExtResource("1")
@@ -55,3 +96,27 @@ text = "Credits line"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_iokc1")
+volume_db = -5.0
+
+[node name="ThankYou" type="Label" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_rhvx7")
+text = "Thank You
+for Playing"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jful5")
+}

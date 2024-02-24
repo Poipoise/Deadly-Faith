@@ -4,7 +4,7 @@ const section_time := 2.0
 const line_time := 0.3
 const base_speed := 100
 const speed_up_multiplier := 10.0
-const title_color := Color.BLUE_VIOLET
+const title_color := Color.YELLOW
 
 # var scroll_speed := base_speed
 var speed_up := false
@@ -29,32 +29,33 @@ var credits = [
 		"Andrew Palchevskiy"
 	],[
 		"Art",
-		"Zahra Reaves",
-		"Namatnieks",
-		"Cainos",
 		"Anokolisa",
-		"PixiVan",
+		"Cainos",
 		"CreativeKind",
-		"Elthen"
+		"Elthen",
+		"Namatnieks",
+		"PixiVan",
+		"Zahra Reaves"
 	],[
 		"Music",
-		"xDeviruchi",
-		"Christopher Larkin"
+		"AlkaKrab",
+		"Christopher Larkin",
+		"Toby Fox",
+		"Yuka Kitamura",
+		"xDeviruchi"
 	],[
 		"Sound Effects",
-		"SFX Name"
+		"Retrieved from Pixabay"
 	],[
 		"Testers",
-		"Name 1",
-		"Name 2",
-		"Name 3"
+		"Who needs them"
 	],[
 		"Tools used",
 		"Developed with Godot Engine",
 		"https://godotengine.org/license",
 		"",
-		"Art created with My Favourite Art Program",
-		"https://myfavouriteartprogram.com"
+		"Some art created with Piskel",
+		"https://www.piskelapp.com/"
 	],[
 		"Special thanks",
 		"My parents",
@@ -114,6 +115,7 @@ func finish():
 	if not finished:
 		finished = true
 		# This is called when the credits finish and returns to the main menu
+		$AnimationPlayer.play("Thank_You_fade_in")
 		#get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 
