@@ -20,7 +20,7 @@ var summonable = false
 var Fireable = true
 var TIMETOATTACK = true
 var INAREATOBARRAGE = false
-var fireballNumber = 10
+var fireballNumber = 18
 var boss_intro = false
 var song_time = false
 func _ready():
