@@ -45,11 +45,11 @@ func _physics_process(delta):
 				stamina = stamina + stamina_depletion
 			else:
 				recharging = false
-		if velocity.length() != 0 and play:
-			play = false
-			$Walking.play()
-			await get_tree().create_timer(soundTime).timeout
-			play = true
+		#if velocity.length() != 0 and play:
+			#play = false
+			#$Walking.play()
+			#await get_tree().create_timer(soundTime).timeout
+			#play = true
 
 		if attacking:
 			$AnimationPlayer.speed_scale = 1

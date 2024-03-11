@@ -94,3 +94,11 @@ func _on_level_finished_cutscene_starter_start_cutscene():
 
 func _on_final_cutscene_finished():
 	$Final_cutscene_ambience.stop()
+
+
+func _on_boundary_collision_body_entered(body):
+	$CanvasLayer/Boundary_message.visible = true
+
+
+func _on_boundary_collision_body_exited(body):
+	$CanvasLayer/Boundary_message.visible = false

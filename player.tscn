@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://dycinrmvaxssg"]
+[gd_scene load_steps=37 format=3 uid="uid://dycinrmvaxssg"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_xokv2"]
 [ext_resource type="Texture2D" uid="uid://cj5ti1wg6ry8f" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Idle.png" id="2_h6hpf"]
@@ -9,11 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://b63xtpnmjmnr2" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Attack2NoMovement.png" id="5_shmv3"]
 [ext_resource type="Texture2D" uid="uid://gqeh5wtomm17" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Death.png" id="7_won8o"]
 [ext_resource type="Texture2D" uid="uid://btw3p6ehdlxka" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Hit.png" id="8_y0wdp"]
-[ext_resource type="AudioStream" uid="uid://wjsayo7uiau1" path="res://sounds/Step(1).wav" id="10_4x3p2"]
-[ext_resource type="AudioStream" uid="uid://ky2ca2gcbnrh" path="res://sounds/step(2).wav" id="11_xq6nl"]
-[ext_resource type="AudioStream" uid="uid://lx4jraie7c3u" path="res://sounds/step(3).wav" id="12_rq2p3"]
-[ext_resource type="AudioStream" uid="uid://dkpuuknheppys" path="res://sounds/step(4).wav" id="13_gfqd4"]
-[ext_resource type="AudioStream" uid="uid://5u3aihkf4t6x" path="res://sounds/step(5).wav" id="14_1imvr"]
+[ext_resource type="AudioStream" uid="uid://bkdg7yn6sgak0" path="res://sounds/armor plate sound 1.mp3" id="10_6j07b"]
+[ext_resource type="AudioStream" uid="uid://c5da2pen05y7c" path="res://sounds/armor plate sound 2.mp3" id="11_l05j1"]
+[ext_resource type="AudioStream" uid="uid://dlw0ux6g8yccr" path="res://sounds/armor plate sound 3.mp3" id="12_dn447"]
 [ext_resource type="AudioStream" uid="uid://bwpbv53uufvom" path="res://sounds/HeavySwordSwing.wav" id="15_k21me"]
 [ext_resource type="AudioStream" uid="uid://dcg5n525fjyh7" path="res://sounds/mixkit-fast-sword-whoosh-2792.wav" id="16_cghf2"]
 [ext_resource type="AudioStream" uid="uid://whnmlrbvusdc" path="res://sounds/QuickSwordSwing.wav" id="17_87l4c"]
@@ -611,17 +609,16 @@ color_ramp = SubResource("GradientTexture1D_phift")
 anim_speed_curve = SubResource("CurveTexture_kpvqm")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0yuwd"]
-streams_count = 5
-stream_0/stream = ExtResource("10_4x3p2")
+playback_mode = 1
+random_pitch = 1.42
+random_volume_offset_db = 2.62
+streams_count = 3
+stream_0/stream = ExtResource("10_6j07b")
 stream_0/weight = 1.0
-stream_1/stream = ExtResource("11_xq6nl")
+stream_1/stream = ExtResource("11_l05j1")
 stream_1/weight = 1.0
-stream_2/stream = ExtResource("12_rq2p3")
+stream_2/stream = ExtResource("12_dn447")
 stream_2/weight = 1.0
-stream_3/stream = ExtResource("13_gfqd4")
-stream_3/weight = 1.0
-stream_4/stream = ExtResource("14_1imvr")
-stream_4/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_lre8w"]
 streams_count = 6
@@ -690,14 +687,14 @@ lifetime = 0.25
 
 [node name="Walking" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_0yuwd")
-volume_db = -3.0
+volume_db = 3.0
 
 [node name="swing" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_lre8w")
 volume_db = -4.0
 
 [node name="SoundTimer" type="Timer" parent="."]
-wait_time = 0.3
+wait_time = 0.5
 one_shot = true
 
 [node name="Hit" type="AudioStreamPlayer2D" parent="."]
