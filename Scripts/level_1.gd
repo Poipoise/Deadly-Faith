@@ -13,6 +13,14 @@ var gameover = false
 var go = true
 var chest_opened = false
 var chest_position
+var done = false
+var dummy_hit = false
+var tutorial = false
+var walked = false
+var attacked = false
+var run = false
+var tutorial_done = false
+signal tutorial_next
 func _ready():
 	$Cutscene.hide()
 	
@@ -44,7 +52,25 @@ func _process(delta):
 		Potion_reward.position.y = chest_position.y + 20
 		Potion_reward.position.x = chest_position.x
 		chest_opened = false
-
+	
+	if tutorial:
+		if (Input.is_action_just_pressed("left") or Input.is_action_just_pressed("right") or Input.is_action_just_pressed("down") or Input.is_action_just_pressed("up")) and not walked:
+			print("WASD TRIGGER")
+			walked = true
+			tutorial_next.emit()
+		if (Input.is_action_pressed("sprint") and (Input.is_action_just_pressed("left") or Input.is_action_just_pressed("right") or Input.is_action_just_pressed("down") or Input.is_action_just_pressed("up"))) and not run and walked:
+			run = true
+			tutorial_next.emit()
+			
+		if dummy_hit and run and not attacked:
+			print("DUMMY HIT TRIGGER")
+			attacked = true
+			tutorial_next.emit()
+		if attacked and not tutorial_done:
+			tutorial_done = true
+			print("DODGE TRIGGER")
+			await get_tree().create_timer(30).timeout
+			tutorial_next.emit()
 
 func _on_death_screen_respawn():
 	gameover = false
@@ -61,8 +87,10 @@ func _on_death_screen_respawn():
 func _on_start_screen_start_game():
 	#If you want to skip the beginning dialogue uncomment start = true and comment $Cutscene.show() 
 	#also turn the cutscene variable in the cutscene script to false/off
-	$Cutscene.show()
-	#start = true
+	#$Cutscene.show()
+	
+	#If you wish to skip tutorial comment tutorial = true in _on_cutscene_finished and turn off cutscene variabble in tutorial cutscene script
+	start = true
 	$Beginning.play()
 
 
@@ -76,6 +104,7 @@ func _on_cutscene_finished():
 	start = true
 	$door.play()
 	$Beginning.stop()
+	#tutorial = true
 	
 	
 func Boss_Music_Time():
@@ -102,3 +131,13 @@ func _on_boundary_collision_body_entered(body):
 
 func _on_boundary_collision_body_exited(body):
 	$CanvasLayer/Boundary_message.visible = false
+
+
+func _on_area_2d_body_entered(body):
+	if not done:
+		done = true
+		$Level1/Player.start_pos = body.position
+		
+func _on_dummy_dummy_hit():
+	dummy_hit = true
+	print("DUMMY HIT")

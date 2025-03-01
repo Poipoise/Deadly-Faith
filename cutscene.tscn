@@ -113,6 +113,7 @@ _data = {
 
 [node name="Cutscene" type="CanvasLayer"]
 script = ExtResource("1_cgmnk")
+cutscene = false
 
 [node name="ColorRect" type="TextureRect" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -173,8 +174,8 @@ autoplay = "bob"
 
 [node name="Portrait" type="Sprite2D" parent="ColorRect"]
 z_index = -1
-position = Vector2(96.5, -11)
-scale = Vector2(0.4375, 0.421875)
+position = Vector2(210.5, -163)
+scale = Vector2(0.6, 0.578)
 
 [node name="Timer" type="Timer" parent="ColorRect"]
 wait_time = 0.5

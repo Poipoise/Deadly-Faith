@@ -15,7 +15,7 @@ func _ready():
  
 func _process(_delta):
 	$Indicator.visible = finished
-	if Input.is_action_just_pressed("ui_accept") and $/root/World/Final_Cutscene.cutscene_started:
+	if Input.is_action_just_pressed("UI_Interaction") and $/root/World/Final_Cutscene.cutscene_started:
 		if finished:
 			nextPhrase()
 		else:

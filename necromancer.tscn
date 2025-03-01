@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bhejo4nwyug7"]
+[gd_scene load_steps=31 format=3 uid="uid://bhejo4nwyug7"]
 
 [ext_resource type="Script" path="res://Scripts/necromancer.gd" id="1_822kn"]
 [ext_resource type="Texture2D" uid="uid://do6gtai3nmkq7" path="res://Necromancer_creativekind-Sheet.png" id="1_cl322"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://b7k4ynfycnjxt" path="res://Health_bar(3).png" id="9_2vjw1"]
 [ext_resource type="AudioStream" uid="uid://dl0srxr442aqj" path="res://SoundTrack/xDeviruchi - Decisive Battle.mp3" id="11_yjmym"]
 [ext_resource type="AudioStream" uid="uid://c71ehwa48x4aj" path="res://SoundTrack/Drift King INST.wav" id="12_34pxi"]
+[ext_resource type="AudioStream" uid="uid://cgn2ibrhiolv5" path="res://sounds/Necromancer_death.mp3" id="13_bbuxj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4mhco"]
 size = Vector2(17.125, 23)
@@ -472,10 +473,11 @@ wait_time = 11.0
 one_shot = true
 
 [node name="AttackTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 1.3
 one_shot = true
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Idle"
@@ -484,6 +486,7 @@ text = "Idle"
 stream = SubResource("AudioStreamRandomizer_bhub3")
 
 [node name="Barrage" type="Timer" parent="."]
+wait_time = 1.5
 
 [node name="Hit" type="AudioStreamPlayer2D" parent="."]
 
@@ -526,6 +529,10 @@ stream = ExtResource("8_qpqlm")
 [node name="BossMusic" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_46yfs")
 volume_db = -5.0
+
+[node name="Death_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_bbuxj")
+volume_db = 7.0
 
 [connection signal="body_entered" from="Summon" to="." method="_on_summon_body_entered"]
 [connection signal="body_exited" from="Summon" to="." method="_on_summon_body_exited"]

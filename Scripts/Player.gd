@@ -4,6 +4,8 @@ signal health_changed
 signal Game_Over
 @export var invincible = false
 @export var roll_speed = 250
+var playerData = PlayerData.new()
+
 var run_speed = 125
 var sprint_speed = 250
 var attacking = false
@@ -12,7 +14,7 @@ enum states {IDLE, MOVING, ATTACKING, DEAD, HURT, ROLLING}
 var state = states.IDLE
 var input
 var rolling = false
-var stamina = 100:
+var stamina = 150:
 	set = set_stamina
 var stamina_empty = true
 var recharging = false
@@ -24,7 +26,6 @@ var start_health
 var player_hurt = false
 var play = true
 var game_over = false
-var soundTime = 0.35
 var boss_position
 var boss_spawing_done = false
 var movement_allowed = true
@@ -33,6 +34,12 @@ func _ready():
 	start_health = health
 	
 func _physics_process(delta):
+	if recharging:
+		if stamina < 100:
+			stamina = stamina + stamina_depletion
+		else:
+			recharging = false
+	
 	if gamestart and movement_allowed:
 		if not player_hurt:
 			choose_action()
@@ -40,11 +47,7 @@ func _physics_process(delta):
 			stamina_check()
 		input = Input.get_vector("left", "right", "up", "down")
 	
-		if recharging:
-			if stamina < 100:
-				stamina = stamina + stamina_depletion
-			else:
-				recharging = false
+		
 		#if velocity.length() != 0 and play:
 			#play = false
 			#$Walking.play()
@@ -59,7 +62,6 @@ func _physics_process(delta):
 			velocity = input * roll_speed
 		elif Input.is_action_pressed("sprint"):
 			if stamina > 0:
-				soundTime = 0.6
 				$RunParticles.amount = 20
 				$RunParticles.process_material.initial_velocity_min = 50
 				$RunParticles.process_material.initial_velocity_max = 100
@@ -68,7 +70,6 @@ func _physics_process(delta):
 				velocity = input * sprint_speed
 				stamina = stamina - stamina_depletion
 			else:
-				soundTime = 0.35
 				$RunParticles.amount = 4
 				$RunParticles.process_material.initial_velocity_min = 50
 				$RunParticles.process_material.initial_velocity_max = 100
@@ -215,7 +216,7 @@ func _on_sound_timer_timeout():
 
 
 func _on_camp_fire_set_spawn():
-	start_pos = position
+	playerData.change_Savepos(position)
 	health = start_health
 
 

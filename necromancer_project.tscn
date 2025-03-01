@@ -57,6 +57,7 @@ stream_1/stream = ExtResource("4_ns22e")
 stream_1/weight = 1.0
 
 [node name="NecromancerProject" type="CharacterBody2D" groups=["projectile"]]
+collision_mask = 2
 script = ExtResource("1_06g0m")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

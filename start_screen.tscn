@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://3knmtkrq66j1"]
 
 [ext_resource type="Script" path="res://Scripts/start_screen.gd" id="1_fepcu"]
-[ext_resource type="AudioStream" uid="uid://hlbpbwwmwl5e" path="res://sounds/Pure Vessel - Hollow Knight OST Extended.mp3" id="2_avu18"]
+[ext_resource type="AudioStream" uid="uid://yi2ghqghlc6e" path="res://SoundTrack/Ascension.mp3" id="2_nvgde"]
 [ext_resource type="Texture2D" uid="uid://bibaamwxn682a" path="res://BetterSampleTitleScreen.png" id="3_6uc78"]
 [ext_resource type="AudioStream" uid="uid://dprjinakf68x5" path="res://sounds/boom-dark-percussive-tomas-herudek-1-00-06.mp3" id="4_30ea8"]
 [ext_resource type="FontFile" uid="uid://bld7hkhcvy8yp" path="res://joystix/joystix monospace.otf" id="6_pw35t"]
@@ -83,8 +83,7 @@ default_font = ExtResource("6_pw35t")
 script = ExtResource("1_fepcu")
 
 [node name="TitleScreenMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_avu18")
-volume_db = -5.0
+stream = ExtResource("2_nvgde")
 autoplay = true
 
 [node name="Label" type="Label" parent="."]

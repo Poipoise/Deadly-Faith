@@ -19,6 +19,11 @@ config/icon="res://icon.svg"
 
 InteractionManager="*res://interaction_manager.tscn"
 
+[display]
+
+window/size/mode=2
+window/stretch/mode="viewport"
+
 [input]
 
 up={

@@ -35,7 +35,6 @@ var credits = [
 		"Elthen",
 		"Namatnieks",
 		"PixiVan",
-		"Zahra Reaves"
 	],[
 		"Music",
 		"AlkaKrab",
@@ -51,6 +50,7 @@ var credits = [
 		"Who needs them"
 	],[
 		"Tools used",
+		"Stable Diffusion",
 		"Developed with Godot Engine",
 		"https://godotengine.org/license",
 		"",

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://7yhsfa6r54e2"]
+[gd_scene load_steps=28 format=3 uid="uid://7yhsfa6r54e2"]
 
 [ext_resource type="Script" path="res://Scripts/fat_goblin.gd" id="1_gm7tk"]
 [ext_resource type="Texture2D" uid="uid://bwgqvj3q53o84" path="res://Goblin King Sprite Sheet.png" id="1_woogs"]
@@ -521,7 +521,10 @@ radius = 270.185
 radius = 172.026
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cnrhu"]
-radius = 78.0256
+radius = 93.0054
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c8uv8"]
+size = Vector2(279.25, 194)
 
 [node name="FatGoblin" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 4
@@ -592,6 +595,18 @@ volume_db = 15.0
 [node name="HitParticle" parent="." instance=ExtResource("7_kcjtf")]
 position = Vector2(-3, -18)
 
+[node name="Jump_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Jump_area"]
+position = Vector2(1.625, -18)
+shape = SubResource("RectangleShape2D_c8uv8")
+
+[node name="Run_timer" type="Timer" parent="."]
+wait_time = 3.5
+one_shot = true
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+
 [connection signal="body_entered" from="Detect" to="." method="_on_detect_body_entered"]
 [connection signal="body_exited" from="Detect" to="." method="_on_detect_body_exited"]
 [connection signal="body_entered" from="Attack" to="." method="_on_attack_body_entered"]
@@ -599,3 +614,4 @@ position = Vector2(-3, -18)
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="body_entered" from="WalkAway" to="." method="_on_walk_away_body_entered"]
 [connection signal="body_exited" from="WalkAway" to="." method="_on_walk_away_body_exited"]
+[connection signal="timeout" from="Run_timer" to="." method="_on_run_timer_timeout"]

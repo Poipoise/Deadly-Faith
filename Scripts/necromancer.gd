@@ -20,7 +20,7 @@ var summonable = false
 var Fireable = true
 var TIMETOATTACK = true
 var INAREATOBARRAGE = false
-var fireballNumber = 18
+var fireballNumber = 30
 var boss_intro = false
 var song_time = false
 func _ready():
@@ -53,6 +53,7 @@ func choose_action():
 	match state:
 		states.DEAD:
 			song_time = false
+			$Death_sound.play()
 			$AnimationPlayer.play("Death")
 			set_physics_process(false)
 			$CollisionShape2D.disabled = true
@@ -103,11 +104,12 @@ func choose_action():
 			shoot_direction = Vector2(-1,0)
 			if INAREATOBARRAGE and TIMETOATTACK:
 				$AnimationPlayer.play("Projectile Barrage")
+				var r = deg_to_rad(360)
 				#print("FIRED")
 				TIMETOATTACK = false
 				await $AnimationPlayer.animation_finished
 				while counter < fireballNumber:
-					var angle = (2*6.28319) / fireballNumber
+					var angle = (r) / fireballNumber
 					#shoot_direction = shoot_direction.from_angle(angle)
 					shoot_direction = shoot_direction.rotated(angle)
 					#print(shoot_direction)
