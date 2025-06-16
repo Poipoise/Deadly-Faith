@@ -8,7 +8,6 @@ var attacking = false
 var health = 3
 var start_pos
 var start_health
-var death_scene
 var summoned = false
 var prev_state
 var hit

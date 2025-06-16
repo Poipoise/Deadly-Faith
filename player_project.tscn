@@ -1,0 +1,83 @@
+[gd_scene load_steps=8 format=3 uid="uid://cd2w4vto3nrvy"]
+
+[ext_resource type="Script" path="res://player_project.gd" id="1_uhfv7"]
+[ext_resource type="Texture2D" uid="uid://cruvb1jo8molm" path="res://Magic Orb.png" id="2_i5pvu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dsevn"]
+size = Vector2(24, 40.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h5chv"]
+size = Vector2(14, 4)
+
+[sub_resource type="Animation" id="Animation_ndrgr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_l0a3e"]
+resource_name = "flying"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_17tgx"]
+_data = {
+"RESET": SubResource("Animation_ndrgr"),
+"flying": SubResource("Animation_l0a3e")
+}
+
+[node name="player_project" type="CharacterBody2D"]
+collision_mask = 11
+script = ExtResource("1_uhfv7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_i5pvu")
+hframes = 2
+vframes = 3
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 29
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(5, 11.75)
+shape = SubResource("RectangleShape2D_dsevn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(6, 3)
+shape = SubResource("RectangleShape2D_h5chv")
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_17tgx")
+}
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

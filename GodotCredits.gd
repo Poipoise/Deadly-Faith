@@ -58,7 +58,7 @@ var credits = [
 		"https://www.piskelapp.com/"
 	],[
 		"Special thanks",
-		"My parents",
+		"People who provide free assets",
 		"My friends",
 		"YOU"
 	]

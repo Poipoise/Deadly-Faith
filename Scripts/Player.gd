@@ -4,13 +4,15 @@ signal health_changed
 signal Game_Over
 @export var invincible = false
 @export var roll_speed = 250
+@export var projectile : PackedScene
+@onready var Level1 : Node = get_node("/root/World/Level1")
 var playerData = PlayerData.new()
 
 var run_speed = 125
 var sprint_speed = 250
 var attacking = false
 var health = 5
-enum states {IDLE, MOVING, ATTACKING, DEAD, HURT, ROLLING}
+enum states {IDLE, MOVING, ATTACKING, DEAD, HURT, ROLLING, FIREBALL}
 var state = states.IDLE
 var input
 var rolling = false
@@ -105,6 +107,16 @@ func _input(event):
 			recharging = false
 			state = states.ROLLING
 			stamina = stamina - 15
+		if event.is_action("Fireball") and stamina >= 25 and not attacking:
+			state = states.FIREBALL
+			var mouse_pos = get_global_mouse_position()
+			var shoot_direction = (mouse_pos - global_position).normalized()
+			var Projectile = projectile.instantiate()
+			Projectile.start(position, shoot_direction)
+			Level1.add_child(Projectile)
+			recharging = false
+			stamina = stamina - 25
+			
 		
 func choose_action():
 	$StateLabel.text = states.keys()[state]
@@ -152,6 +164,17 @@ func choose_action():
 				state = states.MOVING
 			if velocity.length() == 0:
 				state = states.IDLE
+		states.FIREBALL:
+			$RunParticles.emitting = false
+			attacking = true
+			$AnimationPlayer.play("Fireball")
+			await $AnimationPlayer.animation_finished
+			attacking = false
+			if velocity.length() > 0:
+				state = states.MOVING
+			if velocity.length() == 0:
+				state = states.IDLE
+			
 func die():
 	velocity = Vector2.ZERO
 	$AnimationPlayer.play("death")

@@ -1,6 +1,7 @@
-[gd_scene load_steps=37 format=3 uid="uid://dycinrmvaxssg"]
+[gd_scene load_steps=40 format=3 uid="uid://dycinrmvaxssg"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_xokv2"]
+[ext_resource type="PackedScene" uid="uid://cd2w4vto3nrvy" path="res://player_project.tscn" id="2_88tyu"]
 [ext_resource type="Texture2D" uid="uid://cj5ti1wg6ry8f" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Idle.png" id="2_h6hpf"]
 [ext_resource type="Texture2D" uid="uid://bvtwjq8s0a7ga" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Roll.png" id="3_52pjx"]
 [ext_resource type="Texture2D" uid="uid://dgib3vkg5vq0l" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Run.png" id="4_1sk1w"]
@@ -9,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b63xtpnmjmnr2" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Attack2NoMovement.png" id="5_shmv3"]
 [ext_resource type="Texture2D" uid="uid://gqeh5wtomm17" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Death.png" id="7_won8o"]
 [ext_resource type="Texture2D" uid="uid://btw3p6ehdlxka" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Hit.png" id="8_y0wdp"]
+[ext_resource type="Texture2D" uid="uid://kmfqc5pq04ug" path="res://ElementalAttack1.png" id="9_xirek"]
 [ext_resource type="AudioStream" uid="uid://bkdg7yn6sgak0" path="res://sounds/armor plate sound 1.mp3" id="10_6j07b"]
 [ext_resource type="AudioStream" uid="uid://c5da2pen05y7c" path="res://sounds/armor plate sound 2.mp3" id="11_l05j1"]
 [ext_resource type="AudioStream" uid="uid://dlw0ux6g8yccr" path="res://sounds/armor plate sound 3.mp3" id="12_dn447"]
@@ -22,6 +24,70 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sa2ge"]
 size = Vector2(13, 8.5)
+
+[sub_resource type="Animation" id="Animation_xv3dn"]
+resource_name = "Fireball"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_xirek")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [4, 7]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_c6spk"]
 resource_name = "Idle"
@@ -284,6 +350,18 @@ tracks/5/keys = {
 "update": 1,
 "values": [13, 9, 13]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite2D:vframes")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
 
 [sub_resource type="Animation" id="Animation_y2d6i"]
 resource_name = "attack1"
@@ -343,7 +421,7 @@ tracks/4/path = NodePath("Sprite2D:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.4),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1, 1)]
@@ -412,6 +490,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [true, false, true]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:vframes")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
 
 [sub_resource type="Animation" id="Animation_iu7nq"]
 resource_name = "death"
@@ -452,6 +542,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [0, 9]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:vframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
 
 [sub_resource type="Animation" id="Animation_c6vn2"]
 resource_name = "hurt"
@@ -487,7 +589,7 @@ tracks/2/path = NodePath("Sprite2D:hframes")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.1),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [1]
@@ -515,6 +617,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D:vframes")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
 }
 
 [sub_resource type="Animation" id="Animation_41evh"]
@@ -569,9 +683,22 @@ tracks/3/keys = {
 "update": 1,
 "values": [10]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:vframes")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2pm27"]
 _data = {
+"Fireball": SubResource("Animation_xv3dn"),
 "Idle": SubResource("Animation_c6spk"),
 "RESET": SubResource("Animation_f65bp"),
 "Roll": SubResource("Animation_oo8p0"),
@@ -639,6 +766,7 @@ stream_5/weight = 1.0
 collision_layer = 2
 collision_mask = 13
 script = ExtResource("1_xokv2")
+projectile = ExtResource("2_88tyu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(5, -40)

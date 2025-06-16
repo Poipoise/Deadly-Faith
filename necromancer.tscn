@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bhejo4nwyug7"]
+[gd_scene load_steps=32 format=3 uid="uid://bhejo4nwyug7"]
 
 [ext_resource type="Script" path="res://Scripts/necromancer.gd" id="1_822kn"]
 [ext_resource type="Texture2D" uid="uid://do6gtai3nmkq7" path="res://Necromancer_creativekind-Sheet.png" id="1_cl322"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://3od58wh8ejq3" path="res://ghoul.tscn" id="3_jpuqj"]
 [ext_resource type="AudioStream" uid="uid://b1535r53p64cy" path="res://sounds/fireball-whoosh-1-179125.mp3" id="5_0j2m7"]
 [ext_resource type="AudioStream" uid="uid://cjnr3fybp6iih" path="res://sounds/fireball-whoosh-2-179126.mp3" id="6_lvpr5"]
+[ext_resource type="AudioStream" uid="uid://lkuawtljm2gl" path="res://sounds/hurt_c_08-102842.mp3" id="7_kscqr"]
 [ext_resource type="FontFile" uid="uid://bld7hkhcvy8yp" path="res://joystix/joystix monospace.otf" id="7_sg1q7"]
 [ext_resource type="Texture2D" uid="uid://bu2mr8eijp5g8" path="res://Health_bar_UI.png" id="8_7oovc"]
 [ext_resource type="AudioStream" uid="uid://c3oyxvardo35c" path="res://sounds/magic_spell_10-39689.mp3" id="8_qpqlm"]
@@ -489,6 +490,8 @@ stream = SubResource("AudioStreamRandomizer_bhub3")
 wait_time = 1.5
 
 [node name="Hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_kscqr")
+volume_db = 8.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
