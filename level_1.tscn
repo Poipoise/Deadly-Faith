@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://c6purqvnh5obf"]
+[gd_scene load_steps=89 format=3 uid="uid://c6purqvnh5obf"]
 
 [ext_resource type="PackedScene" uid="uid://dycinrmvaxssg" path="res://player.tscn" id="1_a16pe"]
 [ext_resource type="Script" path="res://Scripts/level_1.gd" id="1_vgdc2"]
@@ -58,6 +58,7 @@
 [ext_resource type="AudioStream" uid="uid://5fv2jft410b5" path="res://SoundTrack/serious-dark-ambient-atmosphere-116115.mp3" id="49_xi3tb"]
 [ext_resource type="PackedScene" uid="uid://cnrunh2l2kpah" path="res://GodotCredits.tscn" id="50_0ujla"]
 [ext_resource type="PackedScene" uid="uid://xh337hwrmm1u" path="res://tutorial_cutscene.tscn" id="54_68x7r"]
+[ext_resource type="Script" path="res://Golem_spawning.gd" id="59_5sqjn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l2423"]
 texture = ExtResource("2_80435")
@@ -43197,6 +43198,9 @@ size = Vector2(260, 35)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_12ota"]
 size = Vector2(101, 217)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uuyjw"]
+size = Vector2(99, 391)
+
 [node name="World" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_vgdc2")
@@ -43384,7 +43388,7 @@ position = Vector2(428, -622.5)
 position = Vector2(744.5, -389.5)
 
 [node name="Golem_Boss" parent="Level1" instance=ExtResource("29_2tf8h")]
-position = Vector2(83, -188.5)
+position = Vector2(-77, -282)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 0
@@ -43484,10 +43488,10 @@ position = Vector2(2224, -6563)
 [node name="Door2" parent="." instance=ExtResource("35_ka7jd")]
 position = Vector2(3726, -6917)
 
-[node name="BossSpawning" parent="." instance=ExtResource("29_llpjs")]
+[node name="NecromancerSpawning" parent="." instance=ExtResource("29_llpjs")]
 position = Vector2(2726, -1553)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BossSpawning"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NecromancerSpawning"]
 position = Vector2(1483, -5461)
 shape = SubResource("RectangleShape2D_vxmhp")
 
@@ -43563,6 +43567,15 @@ shape = SubResource("RectangleShape2D_12ota")
 
 [node name="Tutorial_cutscene" parent="." instance=ExtResource("54_68x7r")]
 
+[node name="Golem_spawning" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("59_5sqjn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Golem_spawning"]
+position = Vector2(328, -444)
+shape = SubResource("RectangleShape2D_uuyjw")
+
 [connection signal="tutorial_next" from="." to="Tutorial_cutscene" method="next_chat"]
 [connection signal="Game_Over" from="Level1/Player" to="." method="_on_player_game_over"]
 [connection signal="Game_Over" from="Level1/Player" to="DeathScreen" method="_on_player_game_over"]
@@ -43582,9 +43595,9 @@ shape = SubResource("RectangleShape2D_12ota")
 [connection signal="set_spawn" from="CampFire" to="Level1/Player" method="_on_camp_fire_set_spawn"]
 [connection signal="player_entered" from="DoorDetect" to="Door" method="_on_door_detect_player_entered"]
 [connection signal="player_entered" from="DoorDetect2" to="Door2" method="_on_door_detect_player_entered"]
-[connection signal="boss_time" from="BossSpawning" to="." method="Boss_Music_Time"]
-[connection signal="boss_time" from="BossSpawning" to="Level1/Player" method="_on_boss_spawning_boss_time"]
-[connection signal="boss_time" from="BossSpawning" to="Level1/Necromancer" method="_on_boss_spawning_boss_time"]
+[connection signal="boss_time" from="NecromancerSpawning" to="." method="Boss_Music_Time"]
+[connection signal="boss_time" from="NecromancerSpawning" to="Level1/Player" method="_on_boss_spawning_boss_time"]
+[connection signal="boss_time" from="NecromancerSpawning" to="Level1/Necromancer" method="_on_boss_spawning_boss_time"]
 [connection signal="start_cutscene" from="Level_finished_cutscene_starter" to="." method="_on_level_finished_cutscene_starter_start_cutscene"]
 [connection signal="start_cutscene" from="Level_finished_cutscene_starter" to="Level1/Player" method="_on_level_finished_cutscene_starter_start_cutscene"]
 [connection signal="start_cutscene" from="Level_finished_cutscene_starter" to="Final_Cutscene" method="_on_start_screen_start_game"]
@@ -43594,3 +43607,7 @@ shape = SubResource("RectangleShape2D_12ota")
 [connection signal="body_entered" from="Boundary_collision" to="." method="_on_boundary_collision_body_entered"]
 [connection signal="body_exited" from="Boundary_collision" to="." method="_on_boundary_collision_body_exited"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="Golem_time" from="Golem_spawning" to="." method="Boss_Music_Time"]
+[connection signal="Golem_time" from="Golem_spawning" to="Level1/Player" method="_on_boss_spawning_boss_time"]
+[connection signal="Golem_time" from="Golem_spawning" to="Level1/Golem_Boss" method="_on_boss_spawning_boss_time"]
+[connection signal="body_entered" from="Golem_spawning" to="Golem_spawning" method="_on_body_entered"]

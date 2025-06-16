@@ -18,9 +18,13 @@ var doing_action = false
 var action_wait = 2
 var dead = false
 var shield1 = false
+var boss_intro = false
+var song_time = false
 func _ready():
 	start_pos = position
 	start_health = health
+	set_physics_process(false)
+	$CollisionShape2D.disabled = true
 	
 func _physics_process(delta):
 	var player_position = $"../Player".global_position
@@ -106,6 +110,7 @@ func pulse_state(delta):
 	for i in range(pulse_num):
 		if not dead:
 			$AnimationPlayer.play("Body_glow")
+			$Golem_pulse.play()
 			await get_tree().create_timer(0.3).timeout
 			var pulse = pulse.instantiate()
 			pulse.position = position
@@ -120,6 +125,8 @@ func Melee_attack(delta):
 	velocity = Vector2.ZERO
 	$AnimationPlayer.play("Melee_attack")
 	transform.x.x = sign(position.direction_to(player.position).x)
+	await get_tree().create_timer(0.3).timeout
+	$Golem_melee.play()
 	await $AnimationPlayer.animation_finished
 	await get_tree().create_timer(0.3).timeout
 	action_wait = 2
@@ -132,6 +139,7 @@ func shoot_attack(delta):
 		if not dead:
 			$AnimationPlayer.play("arm_cannon")
 			await get_tree().create_timer(0.8).timeout
+			$shot_sound.play()
 			var base_dir = (player.global_position - global_position).normalized()
 			var angles = [0, deg_to_rad(10), deg_to_rad(-10)]
 			for angle in angles:
@@ -143,7 +151,7 @@ func shoot_attack(delta):
 				projectile.rotation = spread_dir.angle()
 			await $AnimationPlayer.animation_finished
 			await get_tree().create_timer(0.4).timeout
-	action_wait = 2
+	action_wait = 1
 	action_started = false
 	
 func lazer_attack(delta):
@@ -165,16 +173,16 @@ func lazer_attack(delta):
 	action_started = false
 	
 func shield(delta):
-	action_wait = 2
+	action_wait = 1
 	velocity = Vector2.ZERO
 	$AnimationPlayer.play("armor")
+	weights[4] = 0
 	$Golem_shield.play()
 	collision_layer = (collision_layer | (1 << 4)) & ~(1 << 2)
 	$shield_timer.start()
 	await $AnimationPlayer.animation_finished
 	if shield1:
 		action_wait = 4
-		pass
 	
 	action_started = false
 	
@@ -190,6 +198,8 @@ func unshield(delta):
 		collision_layer = (collision_layer | ~(1 << 4)) & (1 << 2)
 		$AnimationPlayer.play("de_armor")
 		weights[5] = 0
+		await get_tree().create_timer(0.6).timeout
+		$Golem_unshield.play()
 		await $AnimationPlayer.animation_finished
 	action_wait = 2
 	action_started = false
@@ -209,3 +219,24 @@ func weighted_random_choice(options: Array, weights: Array) -> Variant:
 			return options[i]
 
 	return options[-1]  # fallback
+	
+
+
+func _on_boss_spawning_boss_time():
+	if not boss_intro:
+		boss_intro = true
+		$CanvasLayer/Label.show()
+		$CanvasLayer/HealthBar.show()
+		#$Sprite2D.show()
+		var player_vars = get_node("/root/World/Level1/Player")
+		player_vars.boss_position = global_position
+		#$BossMusic.play()
+		song_time = true
+		$AnimationPlayer.play("Spawning")
+		await $AnimationPlayer.animation_finished
+		$AnimationPlayer.play("Idle")
+		await get_tree().create_timer(3.8).timeout
+		$CanvasLayer/Label.hide()
+		set_physics_process(true)
+		$CollisionShape2D.disabled = false
+		state = states.IDLE

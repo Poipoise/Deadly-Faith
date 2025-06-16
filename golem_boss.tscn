@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bayttf12xyhcj"]
+[gd_scene load_steps=35 format=3 uid="uid://bayttf12xyhcj"]
 
 [ext_resource type="Texture2D" uid="uid://bqjxdqkggqseb" path="res://Mech_Stone.png" id="1_0ewhg"]
 [ext_resource type="Script" path="res://golem_boss.gd" id="1_nonsc"]
@@ -10,6 +10,13 @@
 [ext_resource type="AudioStream" uid="uid://23bpeiccdvr0" path="res://sounds/lazer_charging.mp3" id="8_21pao"]
 [ext_resource type="AudioStream" uid="uid://dmh2bet7fe1io" path="res://sounds/laser_burst.mp3" id="9_tubgk"]
 [ext_resource type="AudioStream" uid="uid://cc6r3pp77john" path="res://sounds/Golem_shield.mp3" id="10_gpif6"]
+[ext_resource type="AudioStream" uid="uid://43bv1dlmwdr" path="res://sounds/golem_shot.mp3" id="11_0762s"]
+[ext_resource type="AudioStream" uid="uid://yoo8kms4qdrd" path="res://sounds/golem_melee.mp3" id="12_rekyl"]
+[ext_resource type="AudioStream" uid="uid://jumgk4sppj0q" path="res://sounds/Golem_shockwave.mp3" id="13_ip1uh"]
+[ext_resource type="AudioStream" uid="uid://chi3jg03th61k" path="res://sounds/Golem_deshield.mp3" id="14_tridk"]
+[ext_resource type="FontFile" uid="uid://bld7hkhcvy8yp" path="res://joystix/joystix monospace.otf" id="15_6myaf"]
+[ext_resource type="Texture2D" uid="uid://bu2mr8eijp5g8" path="res://Health_bar_UI.png" id="16_nwwmp"]
+[ext_resource type="Texture2D" uid="uid://b7k4ynfycnjxt" path="res://Health_bar(3).png" id="17_aev6a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_umyqi"]
 resource_local_to_scene = true
@@ -186,6 +193,22 @@ tracks/0/keys = {
 "values": [70, 83]
 }
 
+[sub_resource type="Animation" id="Animation_72tfe"]
+resource_name = "Spawning"
+length = 1.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [83, 70]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xbffc"]
 _data = {
 "Body_glow": SubResource("Animation_ln2q3"),
@@ -194,6 +217,7 @@ _data = {
 "Melee_attack": SubResource("Animation_spnlt"),
 "RESET": SubResource("Animation_xvydm"),
 "Sleep": SubResource("Animation_yshiq"),
+"Spawning": SubResource("Animation_72tfe"),
 "arm_cannon": SubResource("Animation_qa3ej"),
 "armor": SubResource("Animation_t2hq8"),
 "de_armor": SubResource("Animation_ey31o"),
@@ -208,6 +232,10 @@ radius = 200.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3fsc7"]
 radius = 40.1123
+
+[sub_resource type="Theme" id="Theme_jvgrv"]
+default_font = ExtResource("15_6myaf")
+default_font_size = 50
 
 [node name="Golem_Boss" type="CharacterBody2D"]
 collision_layer = 4
@@ -268,5 +296,46 @@ stream = ExtResource("9_tubgk")
 [node name="Golem_shield" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_gpif6")
 volume_db = 3.0
+
+[node name="shot_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_0762s")
+volume_db = 5.0
+
+[node name="Golem_melee" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_rekyl")
+
+[node name="Golem_pulse" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_ip1uh")
+
+[node name="Golem_unshield" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_tridk")
+volume_db = 3.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -368.0
+offset_top = 136.0
+offset_right = 368.0
+offset_bottom = 196.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme = SubResource("Theme_jvgrv")
+text = "Forgotten Guardian"
+
+[node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer"]
+visible = false
+offset_left = 336.0
+offset_top = -48.0
+offset_right = 1533.0
+offset_bottom = 446.0
+scale = Vector2(0.4, 0.4)
+texture_under = ExtResource("16_nwwmp")
+texture_progress = ExtResource("17_aev6a")
 
 [connection signal="timeout" from="shield_timer" to="." method="_on_shield_timer_timeout"]
