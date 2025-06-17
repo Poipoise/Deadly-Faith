@@ -5,7 +5,6 @@ extends CharacterBody2D
 @onready var Level1 : Node = get_node("/root/World/Level1")
 enum states {IDLE, SHOOTING, ATTACK, DEAD, HURT, PULSE, BEAM, SHIELD, UNSHIELD}
 var state = states.IDLE
-var player
 var health = 15
 var start_pos
 var start_health
@@ -25,8 +24,23 @@ func _ready():
 	start_health = health
 	set_physics_process(false)
 	$CollisionShape2D.disabled = true
+	$CanvasLayer/HealthBar.value = health
 	
 func _physics_process(delta):
+	$CanvasLayer/HealthBar.value = health
+	if $"../Player".game_over:
+		print("dead")
+		$BossMusic.stop()
+		$CanvasLayer/HealthBar.hide()
+		set_physics_process(false)
+		$CollisionShape2D.disabled = true
+	
+	if song_time:
+		song_time = false
+		await $BossMusic.finished
+		$BossMusic.play()
+		song_time = true
+		
 	var player_position = $"../Player".global_position
 	var distance = global_position.distance_to(player_position)
 	if distance <= 80:
@@ -186,8 +200,6 @@ func shield(delta):
 	
 	action_started = false
 	
-	
-	
 
 func _on_shield_timer_timeout():
 	weights[5] = 100
@@ -218,8 +230,7 @@ func weighted_random_choice(options: Array, weights: Array) -> Variant:
 		if rand < running_sum:
 			return options[i]
 
-	return options[-1]  # fallback
-	
+	return options[-1]
 
 
 func _on_boss_spawning_boss_time():
@@ -227,10 +238,9 @@ func _on_boss_spawning_boss_time():
 		boss_intro = true
 		$CanvasLayer/Label.show()
 		$CanvasLayer/HealthBar.show()
-		#$Sprite2D.show()
 		var player_vars = get_node("/root/World/Level1/Player")
 		player_vars.boss_position = global_position
-		#$BossMusic.play()
+		$BossMusic.play()
 		song_time = true
 		$AnimationPlayer.play("Spawning")
 		await $AnimationPlayer.animation_finished
@@ -240,3 +250,19 @@ func _on_boss_spawning_boss_time():
 		set_physics_process(true)
 		$CollisionShape2D.disabled = false
 		state = states.IDLE
+
+
+func respawn():
+	state = states.IDLE
+	set_physics_process(false)
+	$CollisionShape2D.disabled = true
+	position = start_pos
+	health = start_health
+	action_started = false
+	weights = [27, 0, 19, 27, 27, 0]
+	doing_action = false
+	action_wait = 2
+	dead = false
+	shield1 = false
+	boss_intro = false
+	state = states.IDLE

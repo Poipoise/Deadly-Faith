@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bayttf12xyhcj"]
+[gd_scene load_steps=39 format=3 uid="uid://bayttf12xyhcj"]
 
 [ext_resource type="Texture2D" uid="uid://bqjxdqkggqseb" path="res://Mech_Stone.png" id="1_0ewhg"]
 [ext_resource type="Script" path="res://golem_boss.gd" id="1_nonsc"]
@@ -17,6 +17,8 @@
 [ext_resource type="FontFile" uid="uid://bld7hkhcvy8yp" path="res://joystix/joystix monospace.otf" id="15_6myaf"]
 [ext_resource type="Texture2D" uid="uid://bu2mr8eijp5g8" path="res://Health_bar_UI.png" id="16_nwwmp"]
 [ext_resource type="Texture2D" uid="uid://b7k4ynfycnjxt" path="res://Health_bar(3).png" id="17_aev6a"]
+[ext_resource type="AudioStream" uid="uid://dph4nln3yry18" path="res://SoundTrack/Overdrive.wav" id="18_eko1l"]
+[ext_resource type="AudioStream" uid="uid://2d0j08qxtqjs" path="res://SoundTrack/Double-Shift.wav" id="19_unw1f"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_umyqi"]
 resource_local_to_scene = true
@@ -37,6 +39,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [10, 17]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Melee_collision/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_jd7wa"]
@@ -64,6 +78,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(),
 "values": []
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Melee_collision/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_cn5so"]
 resource_name = "Idle"
@@ -81,6 +107,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [0, 3]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Melee_collision/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_spnlt"]
 resource_name = "Melee_attack"
@@ -97,6 +135,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [40, 46]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Melee_collision/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
 
 [sub_resource type="Animation" id="Animation_xvydm"]
 length = 0.001
@@ -112,6 +162,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Melee_collision/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_yshiq"]
 resource_name = "Sleep"
@@ -126,6 +188,46 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [30, 37]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Melee_collision/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_72tfe"]
+resource_name = "Spawning"
+length = 1.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [83, 70]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Melee_collision/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_qa3ej"]
@@ -144,6 +246,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [20, 28]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Melee_collision/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_t2hq8"]
 resource_name = "armor"
@@ -159,6 +273,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [60, 69]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Melee_collision/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_ey31o"]
@@ -176,6 +302,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [69, 60]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Melee_collision/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_rt5jb"]
 resource_name = "death"
@@ -192,21 +330,17 @@ tracks/0/keys = {
 "update": 0,
 "values": [70, 83]
 }
-
-[sub_resource type="Animation" id="Animation_72tfe"]
-resource_name = "Spawning"
-length = 1.7
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.7),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [83, 70]
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Melee_collision/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xbffc"]
@@ -237,7 +371,18 @@ radius = 40.1123
 default_font = ExtResource("15_6myaf")
 default_font_size = 50
 
-[node name="Golem_Boss" type="CharacterBody2D"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2laem"]
+playback_mode = 2
+streams_count = 2
+stream_0/stream = ExtResource("18_eko1l")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("19_unw1f")
+stream_1/weight = 1.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0siqw"]
+height = 48.0
+
+[node name="Golem_Boss" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 4
 collision_mask = 13
 script = ExtResource("1_nonsc")
@@ -270,6 +415,7 @@ stream = ExtResource("3_mbh1y")
 volume_db = 8.0
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 0
 
@@ -281,6 +427,7 @@ wait_time = 5.0
 one_shot = true
 
 [node name="Area2D2" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 0
 
@@ -335,7 +482,20 @@ offset_top = -48.0
 offset_right = 1533.0
 offset_bottom = 446.0
 scale = Vector2(0.4, 0.4)
+max_value = 15.0
 texture_under = ExtResource("16_nwwmp")
 texture_progress = ExtResource("17_aev6a")
+
+[node name="BossMusic" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_2laem")
+
+[node name="Melee_collision" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Melee_collision"]
+position = Vector2(25, -18)
+shape = SubResource("CapsuleShape2D_0siqw")
+disabled = true
 
 [connection signal="timeout" from="shield_timer" to="." method="_on_shield_timer_timeout"]

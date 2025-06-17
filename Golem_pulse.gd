@@ -1,7 +1,7 @@
 extends Area2D
 
 @export var max_radius := 100.0
-@export var grow_speed := 50.0
+@export var grow_speed := 63.0
 @export var segments := 64
 @export var thickness := 4.0
 @export var base_color := Color(1, 1, 1)

@@ -12,8 +12,8 @@
 [ext_resource type="AudioStream" uid="uid://c3oyxvardo35c" path="res://sounds/magic_spell_10-39689.mp3" id="8_qpqlm"]
 [ext_resource type="Texture2D" uid="uid://b7k4ynfycnjxt" path="res://Health_bar(3).png" id="9_2vjw1"]
 [ext_resource type="AudioStream" uid="uid://dl0srxr442aqj" path="res://SoundTrack/xDeviruchi - Decisive Battle.mp3" id="11_yjmym"]
-[ext_resource type="AudioStream" uid="uid://c71ehwa48x4aj" path="res://SoundTrack/Drift King INST.wav" id="12_34pxi"]
 [ext_resource type="AudioStream" uid="uid://cgn2ibrhiolv5" path="res://sounds/Necromancer_death.mp3" id="13_bbuxj"]
+[ext_resource type="AudioStream" uid="uid://dph4nln3yry18" path="res://SoundTrack/Overdrive.wav" id="13_bjo0k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4mhco"]
 size = Vector2(17.125, 23)
@@ -417,7 +417,7 @@ playback_mode = 2
 streams_count = 2
 stream_0/stream = ExtResource("11_yjmym")
 stream_0/weight = 1.0
-stream_1/stream = ExtResource("12_34pxi")
+stream_1/stream = ExtResource("13_bjo0k")
 stream_1/weight = 1.0
 
 [node name="Necromancer" type="CharacterBody2D" groups=["enemy"]]
