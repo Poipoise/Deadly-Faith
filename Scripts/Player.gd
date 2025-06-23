@@ -8,7 +8,7 @@ signal Game_Over
 @onready var Level1 : Node = get_node("/root/World/Level1")
 var playerData = PlayerData.new()
 
-var run_speed = 125
+var run_speed = 135
 var sprint_speed = 250
 var attacking = false
 var health = 5

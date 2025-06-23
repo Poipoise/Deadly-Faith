@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://cnrunh2l2kpah"]
+[gd_scene load_steps=10 format=3 uid="uid://cnrunh2l2kpah"]
 
 [ext_resource type="Script" path="res://GodotCredits.gd" id="1"]
 [ext_resource type="FontFile" uid="uid://bld7hkhcvy8yp" path="res://joystix/joystix monospace.otf" id="2_5tooa"]
-[ext_resource type="AudioStream" uid="uid://ba1cljlikqtyw" path="res://SoundTrack/Hollow Knight OST - Enter Hallownest.mp3" id="3_lbng4"]
-[ext_resource type="AudioStream" uid="uid://dr628p3cla7nu" path="res://SoundTrack/Dark Souls 3 OST - Epilogue [HQ].mp3" id="4_btfcf"]
+[ext_resource type="AudioStream" uid="uid://bs1wgxxw3an7x" path="res://SoundTrack/Ghostrifter-Official-Demised-To-Shield(chosic.com).mp3" id="3_l711y"]
 
 [sub_resource type="Theme" id="Theme_yhoa8"]
 default_font = ExtResource("2_5tooa")
@@ -11,11 +10,9 @@ default_font_size = 30
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_iokc1"]
 playback_mode = 2
-streams_count = 2
-stream_0/stream = ExtResource("3_lbng4")
+streams_count = 1
+stream_0/stream = ExtResource("3_l711y")
 stream_0/weight = 1.0
-stream_1/stream = ExtResource("4_btfcf")
-stream_1/weight = 1.0
 
 [sub_resource type="Theme" id="Theme_rhvx7"]
 default_font = ExtResource("2_5tooa")
