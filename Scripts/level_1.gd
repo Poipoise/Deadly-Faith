@@ -114,15 +114,18 @@ func Boss_Music_Time():
 
 
 
-func _on_level_finished_cutscene_starter_start_cutscene():
+func _on_level_finished_cutscene_starter_start_cutscene(placeholder, placeholder2):
 	go = false
 	play = false
 	$AudioStreamPlayer.stop()
 	$Final_cutscene_ambience.play()
 
 
-func _on_final_cutscene_finished():
+func _on_final_cutscene_finished(placeholder):
 	$Final_cutscene_ambience.stop()
+	await get_tree().create_timer(1.3).timeout
+	play = true
+	go = true
 
 
 func _on_boundary_collision_body_entered(body):

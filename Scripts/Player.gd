@@ -207,7 +207,6 @@ func set_stamina(val):
 		$StaminaCooldown.start()
 
 func _on_empty_stamina_cooldown_timeout():
-	#print("recharging")
 	recharging = true
 
 func _on_stamina_cooldown_timeout():
@@ -215,7 +214,6 @@ func _on_stamina_cooldown_timeout():
 
 
 func _on_hurtbox_body_entered(body):
-	#print("attacked!")
 	body.hurt(1, position.direction_to(body.position))
 
 
@@ -259,6 +257,11 @@ func health_change():
 	health_changed.emit(health)
 	
 	
-func _on_level_finished_cutscene_starter_start_cutscene():
+func _on_level_finished_cutscene_starter_start_cutscene(placeholder, placeholder2):
 	movement_allowed = false
 	$AnimationPlayer.play("Idle")
+
+
+func _on_Ruins_finished(location):
+	movement_allowed = true
+	position = location

@@ -134,7 +134,7 @@ size_flags_vertical = 8
 texture = ExtResource("2_27qfo")
 expand_mode = 3
 script = ExtResource("2_uubw3")
-dialogPath = "res://Tutorial.json"
+dialogPath = "res://cutscenes/Tutorial.json"
 
 [node name="Name" type="RichTextLabel" parent="ColorRect"]
 layout_mode = 1

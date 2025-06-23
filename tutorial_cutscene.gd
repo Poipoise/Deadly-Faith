@@ -16,6 +16,7 @@ func _on_cutscene_finished():
 		$AnimationPlayer.play("Fade in")
 		cutscene_next = true
 	if not cutscene:
+		queue_free()
 		finished.emit()
 		
 func next_chat():

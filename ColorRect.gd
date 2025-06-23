@@ -7,11 +7,6 @@ var dialog
 var phraseNum = 0
 var finished = false
  
-func _ready():
-	$Timer.wait_time = textSpeed
-	dialog = getDialog()
-	assert(dialog, "Dialog not found")
-	nextPhrase()
  
 func _process(_delta):
 	$Indicator.visible = finished
@@ -31,7 +26,7 @@ func getDialog() -> Array:
  
 func nextPhrase() -> void:
 	if phraseNum >= len(dialog):
-		queue_free()
+		#queue_free()
 		Cutscene_finished.emit()
 		return
 	
@@ -56,3 +51,12 @@ func nextPhrase() -> void:
 	finished = true
 	phraseNum += 1
 	return
+
+func cutscene_setup(file_path):
+	phraseNum = 0
+	finished = false
+	$Timer.wait_time = textSpeed
+	self.dialogPath = file_path
+	dialog = getDialog()
+	assert(dialog, "Dialog not found")
+	nextPhrase()

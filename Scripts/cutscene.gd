@@ -13,4 +13,5 @@ func _on_title_page_finished():
 	$AnimationPlayer.play("Fade in")
 	cutscene_started = true
 	if not cutscene:
+		queue_free()
 		finished.emit()
