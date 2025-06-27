@@ -95,7 +95,7 @@ func choose_action(delta):
 		states.UNSHIELD:
 			unshield(delta)
 	
-func hurt(amount, dir):
+func hurt(amount, _dir):
 	if not hit:
 		hit = true
 		$Hit.play()
@@ -116,7 +116,7 @@ func hurt(amount, dir):
 			dead = true
 			state = states.DEAD
 
-func pulse_state(delta):
+func pulse_state(_delta):
 	velocity = Vector2.ZERO
 	$AnimationPlayer.play("Idle")
 	await get_tree().create_timer(0.1).timeout
@@ -134,7 +134,7 @@ func pulse_state(delta):
 	action_wait = 2
 	action_started = false
 
-func Melee_attack(delta):
+func Melee_attack(_delta):
 	var player = $"../Player"
 	velocity = Vector2.ZERO
 	$AnimationPlayer.play("Melee_attack")
@@ -146,7 +146,7 @@ func Melee_attack(delta):
 	action_wait = 2
 	action_started = false
 	
-func shoot_attack(delta):
+func shoot_attack(_delta):
 	var player = $"../Player"
 	velocity = Vector2.ZERO
 	for i in range(randi_range(1, 3)):
@@ -168,7 +168,7 @@ func shoot_attack(delta):
 	action_wait = 1
 	action_started = false
 	
-func lazer_attack(delta):
+func lazer_attack(_delta):
 	var timer = randi_range(4, 6)
 	velocity = Vector2.ZERO
 	$AnimationPlayer.play("Face_glow")
@@ -186,7 +186,7 @@ func lazer_attack(delta):
 	action_wait = 2
 	action_started = false
 	
-func shield(delta):
+func shield(_delta):
 	action_wait = 1
 	velocity = Vector2.ZERO
 	$AnimationPlayer.play("armor")
@@ -205,7 +205,7 @@ func _on_shield_timer_timeout():
 	weights[5] = 100
 	
 	
-func unshield(delta):
+func unshield(_delta):
 	if not dead:
 		collision_layer = (collision_layer | ~(1 << 4)) & (1 << 2)
 		$AnimationPlayer.play("de_armor")

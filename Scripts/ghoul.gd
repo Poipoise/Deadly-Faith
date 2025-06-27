@@ -15,7 +15,7 @@ func _ready():
 	start_pos = position
 	start_health = health
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	choose_action()
 	move_and_slide()
 	
@@ -72,14 +72,14 @@ func _on_detect_body_entered(body):
 	player = body
 	state = states.CHASE
 
-func _on_detect_body_exited(body):
+func _on_detect_body_exited(_body):
 	state = states.IDLE
 
-func _on_attack_body_entered(body):
+func _on_attack_body_entered(_body):
 	prev_state = states.ATTACK
 	state = states.ATTACK
 
-func _on_attack_body_exited(body):
+func _on_attack_body_exited(_body):
 	prev_state = states.CHASE
 	if attacking and not hit:
 		await $AnimationPlayer.animation_finished

@@ -24,7 +24,7 @@ signal tutorial_next
 func _ready():
 	$Cutscene.hide()
 	
-func _process(delta):
+func _process(_delta):
 	$CanvasLayer/StaminaBar.value = $Level1/Player.stamina
 	if summon_state:
 		summon_state = false
@@ -76,8 +76,8 @@ func _on_death_screen_respawn():
 	gameover = false
 	play = true
 	var enemy_nodes = get_tree().get_nodes_in_group("enemy")
-	for enemy in enemy_nodes:
-		enemy.respawn()
+	for enemy_ruin in enemy_nodes:
+		enemy_ruin.respawn()
 	var projectile_nodes = get_tree().get_nodes_in_group("projectile")
 	for projectiles in projectile_nodes:
 		projectiles.destroy()
@@ -114,25 +114,28 @@ func Boss_Music_Time():
 
 
 
-func _on_level_finished_cutscene_starter_start_cutscene(placeholder, placeholder2):
+func _on_level_finished_cutscene_starter_start_cutscene(_placeholder, _placeholder2):
 	go = false
 	play = false
 	$AudioStreamPlayer.stop()
 	$Final_cutscene_ambience.play()
 
 
-func _on_final_cutscene_finished(placeholder):
+func _on_final_cutscene_finished(_placeholder):
 	$Final_cutscene_ambience.stop()
+	for ruin_enemy in get_tree().get_nodes_in_group("ruins_enemy"):
+		ruin_enemy.queue_free()
+		print("Done")
 	await get_tree().create_timer(1.3).timeout
 	play = true
 	go = true
 
 
-func _on_boundary_collision_body_entered(body):
+func _on_boundary_collision_body_entered(_body):
 	$CanvasLayer/Boundary_message.visible = true
 
 
-func _on_boundary_collision_body_exited(body):
+func _on_boundary_collision_body_exited(_body):
 	$CanvasLayer/Boundary_message.visible = false
 
 
@@ -144,3 +147,9 @@ func _on_area_2d_body_entered(body):
 func _on_dummy_dummy_hit():
 	dummy_hit = true
 	print("DUMMY HIT")
+
+
+func _on_necromancer_died():
+	$CanvasLayer/Magic_explanation.visible = true
+	await get_tree().create_timer(8).timeout
+	$CanvasLayer/Magic_explanation.visible = false

@@ -5,8 +5,9 @@ signal Game_Over
 @export var invincible = false
 @export var roll_speed = 250
 @export var projectile : PackedScene
+@export var magic_ability = false
 @onready var Level1 : Node = get_node("/root/World/Level1")
-var playerData = PlayerData.new()
+#var playerData = PlayerData.new()
 
 var run_speed = 135
 var sprint_speed = 250
@@ -31,11 +32,13 @@ var game_over = false
 var boss_position
 var boss_spawing_done = false
 var movement_allowed = true
+var fireball = false
+
 func _ready():
 	start_pos = position
 	start_health = health
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	if recharging:
 		if stamina < 100:
 			stamina = stamina + stamina_depletion
@@ -107,7 +110,7 @@ func _input(event):
 			recharging = false
 			state = states.ROLLING
 			stamina = stamina - 15
-		if event.is_action("Fireball") and stamina >= 25 and not attacking:
+		if event.is_action("Fireball") and stamina >= 25 and not attacking and magic_ability:
 			state = states.FIREBALL
 			var mouse_pos = get_global_mouse_position()
 			var shoot_direction = (mouse_pos - global_position).normalized()
@@ -237,7 +240,7 @@ func _on_sound_timer_timeout():
 
 
 func _on_camp_fire_set_spawn():
-	playerData.change_Savepos(position)
+	start_pos = position
 	health = start_health
 
 
@@ -257,7 +260,7 @@ func health_change():
 	health_changed.emit(health)
 	
 	
-func _on_level_finished_cutscene_starter_start_cutscene(placeholder, placeholder2):
+func _on_level_finished_cutscene_starter_start_cutscene(_placeholder, _placeholder2):
 	movement_allowed = false
 	$AnimationPlayer.play("Idle")
 
@@ -265,3 +268,9 @@ func _on_level_finished_cutscene_starter_start_cutscene(placeholder, placeholder
 func _on_Ruins_finished(location):
 	movement_allowed = true
 	position = location
+	_on_camp_fire_set_spawn()
+	
+
+
+func _on_necromancer_died():
+	magic_ability = true

@@ -1,6 +1,9 @@
 [
-	{"Name":"Aragorn", "Emotion": "Neutral", "Text":"I think that was the last of them. Though this only just the entrance."},
-	{"Name":"Aragorn", "Emotion": "Neutral", "Text":"I can't imagine what lays further in the catacombs of these ruins."},
-	{"Name":"Aragorn", "Emotion": "Neutral", "Text":"This is going to be a tiresome ordeal but I must continue for Celestina."},
-	{"Name":"Aragorn", "Emotion": "Neutral", "Text":"Okay just got to keep moving forward. Lets see what lies ahead."},
+	{"Name":"Astrea", "Emotion": "Cheerful", "Text":"Ho Ho ho. Well done knight! You just managed to survive."},
+	{"Name":"Astrea", "Emotion": "Neutral", "Text":"That old zealot certainly gave you trouble. I'm glad I'll be no longer hearing his prayers."},
+	{"Name":"Aragorn", "Emotion": "Neutral", "Text":"Please tell me that was the last of them. I think I need to sit down for a minute."},
+	{"Name":"Aragorn", "Emotion": "Neutral", "Text":"This is no time to rest! You still must descend into the catacombs of this castle. You can rest when your dead."},
+	{"Name":"Aragorn", "Emotion": "Neutral", "Text":"You are right. I have to keep going and face what lies ahead."},
+	{"Name":"Astrea", "Emotion": "Neutral", "Text":"Good! Now move forward and put your new magical ability to use!"},
+	
 ]

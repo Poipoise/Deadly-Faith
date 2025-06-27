@@ -2,7 +2,7 @@ extends StaticBody2D
 var open = false
 @export var reward : PackedScene
 
-func _on_area_2d_body_entered(body):
+func _on_area_2d_body_entered(_body):
 	if not open:
 		open = true
 		$AnimationPlayer.play("Opening")

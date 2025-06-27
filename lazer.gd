@@ -28,7 +28,7 @@ func _process(delta):
 
 	update_laser(delta)
 
-func update_laser(delta):
+func update_laser(_delta):
 	raycast.force_raycast_update()
 	line.visible = true
 

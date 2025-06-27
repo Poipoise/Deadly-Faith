@@ -20,7 +20,7 @@ var summonable = false
 var Fireable = true
 var TIMETOATTACK = true
 var INAREATOBARRAGE = false
-var fireballNumber = 30
+var fireballNumber = 8
 var boss_intro = false
 var song_time = false
 func _ready():
@@ -31,7 +31,7 @@ func _ready():
 	$Sprite2D.hide()
 	$CanvasLayer/HealthBar.value = health
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	$CanvasLayer/HealthBar.value = health
 	choose_action()
 	move_and_slide()
@@ -116,6 +116,7 @@ func choose_action():
 					var Projectile = projectile.instantiate()
 					Projectile.start(position, shoot_direction)
 					Level1.add_child(Projectile)
+					$Fireball.play()
 					counter += 1
 				counter = 0
 				$Barrage.start()
@@ -164,7 +165,7 @@ func _on_summon_body_entered(body):
 
 
 
-func _on_summon_body_exited(body):
+func _on_summon_body_exited(_body):
 	summonable = false
 	state = states.IDLE
 
@@ -181,7 +182,7 @@ func _on_away_body_entered(body):
 	Fireable = true
 	state = states.MOVEAWAY
 	
-func _on_away_body_exited(body):
+func _on_away_body_exited(_body):
 	Fireable = false
 	summonable = true
 	await get_tree().create_timer(0.3).timeout
@@ -192,14 +193,14 @@ func _on_barrage_timeout():
 	TIMETOATTACK = true
 
 
-func _on_project_ring_body_entered(body):
+func _on_project_ring_body_entered(_body):
 	Fireable = false
 	INAREATOBARRAGE = true
 	state = states.PROJECTILE
 	
 
 
-func _on_project_ring_body_exited(body):
+func _on_project_ring_body_exited(_body):
 	Fireable = true
 	INAREATOBARRAGE = false
 	state = states.MOVEAWAY

@@ -18,7 +18,7 @@ func start(_position, _direction):
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _physics_process(_delta):
 	move_and_slide()
 	transform.x.x = sign(velocity.x)
 	

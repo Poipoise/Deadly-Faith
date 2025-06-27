@@ -17,7 +17,7 @@ func _ready():
 	start_pos = position
 	start_health = health
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	choose_action()
 	move_and_slide()
 	
@@ -103,18 +103,18 @@ func _on_detect_body_entered(body):
 		state = states.CHASE
 
 
-func _on_detect_body_exited(body):
+func _on_detect_body_exited(_body):
 	if state != states.DASH:
 		state = states.IDLE
 
 
-func _on_attack_detect_body_entered(body):
+func _on_attack_detect_body_entered(_body):
 	if not dashing and state != states.DASH:
 		
 		state = states.ATTACK
 
 
-func _on_attack_detect_body_exited(body):
+func _on_attack_detect_body_exited(_body):
 	if attacking and not hit and state != states.DASH:
 		await $AnimationPlayer.animation_finished
 		await get_tree().create_timer(0.2).timeout
@@ -139,19 +139,19 @@ func _on_hitbox_body_entered(body):
 	body.hurt(1, position.direction_to(body.position))
 
 
-func _on_dash_left_body_entered(body):
+func _on_dash_left_body_entered(_body):
 	if state != states.DASH:
 		dash_direction = "left"
 		state = states.DASH
 
 
-func _on_dash_right_body_entered(body):
+func _on_dash_right_body_entered(_body):
 	if state != states.DASH:
 		dash_direction = "right"
 		state = states.DASH
 
 
-func _on_dash_up_body_entered(body):
+func _on_dash_up_body_entered(_body):
 	if state != states.DASH:
 		dash_direction = "up"
 		state = states.DASH
@@ -159,14 +159,14 @@ func _on_dash_up_body_entered(body):
 
 
 
-func _on_dash_down_body_entered(body):
+func _on_dash_down_body_entered(_body):
 	if state != states.DASH:
 		dash_direction = "down"
 		state = states.DASH
 	
 
 
-func _on_dash_left_body_exited(body):
+func _on_dash_left_body_exited(_body):
 	if dashing and state != states.DASH:
 		await $AnimationPlayer.animation_finished
 		state = states.CHASE

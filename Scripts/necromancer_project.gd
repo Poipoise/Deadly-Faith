@@ -12,13 +12,12 @@ func start(_position, _direction):
 	throw = sign(bullet_path.x) * 30
 	position.x += throw
 	velocity = bullet_path * speed
-	$Fireball.play()
-
+	scale.x = sign(velocity.x)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _physics_process(_delta):
 	move_and_slide()
-	transform.x.x = sign(velocity.x)
+	
 	$AnimationPlayer.play("flying")
 	
 
