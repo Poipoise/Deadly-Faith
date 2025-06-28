@@ -8,7 +8,6 @@ func _input(event):
 		game_start = false
 		$Boom.play()
 		$TitleScreenMusic.stop()
-		$Label.hide()
 		$RichTextLabel.hide()
 		$AnimationPlayer.play("Fade")
 		await get_tree().create_timer(2).timeout

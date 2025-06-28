@@ -1,0 +1,121 @@
+[gd_scene load_steps=11 format=3 uid="uid://debhe2hulkw75"]
+
+[ext_resource type="Script" path="res://flying_brain_monster.gd" id="1_cw8cn"]
+[ext_resource type="Texture2D" uid="uid://bxyuk65q373p3" path="res://FlyingBrainMonster_spriteSheet.png" id="1_ydg2g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_46im3"]
+size = Vector2(14, 5)
+
+[sub_resource type="Animation" id="Animation_7l3vn"]
+resource_name = "Idle"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 3]
+}
+
+[sub_resource type="Animation" id="Animation_rqrr8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_obg2t"]
+resource_name = "bite"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [7, 10]
+}
+
+[sub_resource type="Animation" id="Animation_lnwe1"]
+resource_name = "hit"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [14, 17]
+}
+
+[sub_resource type="Animation" id="Animation_731xb"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [21, 27]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i1iiu"]
+_data = {
+"Idle": SubResource("Animation_7l3vn"),
+"RESET": SubResource("Animation_rqrr8"),
+"bite": SubResource("Animation_obg2t"),
+"death": SubResource("Animation_731xb"),
+"hit": SubResource("Animation_lnwe1")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cf6kk"]
+radius = 165.0
+
+[node name="FlyingBrainMonster" type="CharacterBody2D"]
+script = ExtResource("1_cw8cn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, -11)
+texture = ExtResource("1_ydg2g")
+hframes = 7
+vframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -4)
+shape = SubResource("RectangleShape2D_46im3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_i1iiu")
+}
+
+[node name="DetectArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectArea"]
+shape = SubResource("CircleShape2D_cf6kk")
