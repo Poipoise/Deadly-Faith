@@ -12,7 +12,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_88haq"]
 shader = ExtResource("2_hfwbx")
-shader_parameter/active = false
+shader_parameter/active = true
 shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_jg2f8"]

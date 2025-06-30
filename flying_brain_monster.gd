@@ -5,7 +5,7 @@ enum states {IDLE, CHASE, ATTACK, DEAD, HURT,SUMMONING}
 var state = states.IDLE
 var player
 var attacking = false
-var health = 3
+var health = 5
 var start_pos
 var start_health
 var summoned = false
@@ -27,25 +27,33 @@ func choose_action():
 			set_physics_process(false)
 			$CollisionShape2D.disabled = true
 			await $AnimationPlayer.animation_finished
-			await get_tree().create_timer(3).timeout
-			$AnimationPlayer.play("disapear")
+			$Sprite2D.hide()
 		states.IDLE:
-			$AnimationPlayer.play("idle")
+			$AnimationPlayer.play("Idle")
 			velocity = Vector2.ZERO
 		states.CHASE:
-			$AnimationPlayer.play("run")
+			$AnimationPlayer.play("Idle")
 			velocity = position.direction_to(player.position) * speed
 			if velocity.x != 0:
 				transform.x.x = sign(velocity.x)
+			var player_pos = player.global_position
+			var distance = global_position.distance_to(player_pos)
+			if distance < 170:
+				state = states.ATTACK
 		states.ATTACK:
 			if not attacking:
-				$Growl.play()
-				velocity = Vector2.ZERO
 				attacking = true
-				$AnimationPlayer.play("attack")
-				transform.x.x = sign(position.direction_to(player.position).x)
-				await get_tree().create_timer(1.1).timeout
+				velocity = Vector2.ZERO
+				await get_tree().create_timer(0.5).timeout
+				velocity = position.direction_to(player.position) * speed * 2.5
+				$AnimationPlayer.play("bite")
+				await $AnimationPlayer.animation_finished
+				$AnimationPlayer.play("Idle")
+				velocity = Vector2.ZERO
+				await get_tree().create_timer(0.8).timeout
 				attacking = false
+				state = states.CHASE
+			
 	
 func hurt(amount, dir):
 	if not hit:
@@ -57,7 +65,6 @@ func hurt(amount, dir):
 		velocity = dir * 100
 		$HitParticle.process_material.direction.y = sign (velocity.x) * -1
 		$Sprite2D.material.set_shader_parameter("active", true)
-		#$AnimationPlayer.play("damaged")
 		$HitParticle.emitting = true
 		await get_tree().create_timer(0.1).timeout
 		$HitParticle.emitting = false
@@ -67,3 +74,25 @@ func hurt(amount, dir):
 		state = prev_state
 		if health <= 0:
 			state = states.DEAD
+
+
+func _on_detect_area_body_entered(body):
+	player = body
+	state = states.CHASE
+
+
+func _on_detect_area_body_exited(body):
+	state= states.IDLE
+
+
+func _on_area_2d_body_entered(body):
+	body.hurt(1, position.direction_to(body.position))
+
+func respawn():
+	set_physics_process(true)
+	$CollisionShape2D.disabled = false
+	position = start_pos
+	health = start_health
+	await get_tree().create_timer(0.1).timeout
+	state = states.IDLE
+	player = null

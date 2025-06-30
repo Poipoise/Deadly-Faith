@@ -5,7 +5,7 @@ signal Game_Over
 @export var invincible = false
 @export var roll_speed = 250
 @export var projectile : PackedScene
-@export var magic_ability = false
+@export var magic_ability = true
 @onready var Level1 : Node = get_node("/root/World/Level1")
 #var playerData = PlayerData.new()
 

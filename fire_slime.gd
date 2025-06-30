@@ -130,9 +130,13 @@ func respawn():
 	$CollisionShape2D.disabled = false
 	position = start_pos
 	health = start_health
+	stun = false
+	dashing = false
+	attacking = false
 	await get_tree().create_timer(0.1).timeout
 	state = states.IDLE
 	player = null
+	
 
 
 func _on_hitbox_body_entered(body):
