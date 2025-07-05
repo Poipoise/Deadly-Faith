@@ -13,7 +13,6 @@ var hit
 var action_started = false
 var actions = ["Shooting", "Attack", "Pulse", "Beam", "shield", "Unshield"]
 var weights = [27, 0, 19, 27, 27, 0]
-var doing_action = false
 var action_wait = 2
 var dead = false
 var shield1 = false
@@ -29,7 +28,6 @@ func _ready():
 func _physics_process(delta):
 	$CanvasLayer/HealthBar.value = health
 	if $"../Player".game_over:
-		print("dead")
 		$BossMusic.stop()
 		$CanvasLayer/HealthBar.hide()
 		set_physics_process(false)
@@ -54,7 +52,6 @@ func _physics_process(delta):
 		choose_action(delta)
 		await get_tree().create_timer(action_wait).timeout
 		var action = weighted_random_choice(actions, weights)
-		#print("ATTACKING")
 		if action == "Shooting" and not dead:
 			state = states.SHOOTING
 		elif action == "Attack" and not dead:
@@ -76,9 +73,17 @@ func choose_action(delta):
 	
 	match state:
 		states.DEAD:
+			song_time = false
 			$AnimationPlayer.play("death")
 			set_physics_process(false)
 			$CollisionShape2D.disabled = true
+			await $AnimationPlayer.animation_finished
+			$CanvasLayer/HealthBar.hide()
+			$BossMusic.stop()
+			await get_tree().create_timer(2.5).timeout
+			var world_vars = get_node("/root/World")
+			world_vars.play = true
+			world_vars.go = true
 		states.IDLE:
 			$AnimationPlayer.play("Idle")
 			velocity = Vector2.ZERO
@@ -102,21 +107,21 @@ func hurt(amount, _dir):
 		health -= amount
 		prev_state = state
 		state = states.HURT
-		#$HitParticle.process_material.direction.y = sign (velocity.x) * -1
+		$HitParticle.process_material.direction.y = sign (velocity.x) * -1
 		$Sprite2D.material.set_shader_parameter("active", true)
-		#$HitParticle.emitting = true
+		$HitParticle.emitting = true
 		await get_tree().create_timer(0.1).timeout
 		#$HitParticle.emitting = false
 		await get_tree().create_timer(0.2).timeout
 		$Sprite2D.material.set_shader_parameter("active", false)
 		hit = false
 		state = prev_state
-		print(health)
 		if health <= 0:
 			dead = true
 			state = states.DEAD
 
 func pulse_state(_delta):
+	action_started = true
 	velocity = Vector2.ZERO
 	$AnimationPlayer.play("Idle")
 	await get_tree().create_timer(0.1).timeout
@@ -135,6 +140,7 @@ func pulse_state(_delta):
 	action_started = false
 
 func Melee_attack(_delta):
+	action_started = true
 	var player = $"../Player"
 	velocity = Vector2.ZERO
 	$AnimationPlayer.play("Melee_attack")
@@ -147,6 +153,7 @@ func Melee_attack(_delta):
 	action_started = false
 	
 func shoot_attack(_delta):
+	action_started = true
 	var player = $"../Player"
 	velocity = Vector2.ZERO
 	for i in range(randi_range(1, 3)):
@@ -169,6 +176,7 @@ func shoot_attack(_delta):
 	action_started = false
 	
 func lazer_attack(_delta):
+	action_started = true
 	var timer = randi_range(4, 6)
 	velocity = Vector2.ZERO
 	$AnimationPlayer.play("Face_glow")
@@ -187,6 +195,7 @@ func lazer_attack(_delta):
 	action_started = false
 	
 func shield(_delta):
+	action_started = true
 	action_wait = 1
 	velocity = Vector2.ZERO
 	$AnimationPlayer.play("armor")
@@ -207,6 +216,7 @@ func _on_shield_timer_timeout():
 	
 func unshield(_delta):
 	if not dead:
+		action_started = true
 		collision_layer = (collision_layer | ~(1 << 4)) & (1 << 2)
 		$AnimationPlayer.play("de_armor")
 		weights[5] = 0
@@ -260,9 +270,12 @@ func respawn():
 	health = start_health
 	action_started = false
 	weights = [27, 0, 19, 27, 27, 0]
-	doing_action = false
 	action_wait = 2
 	dead = false
 	shield1 = false
 	boss_intro = false
 	state = states.IDLE
+
+
+func _on_melee_collision_body_entered(body):
+	body.hurt(1, position.direction_to(body.position))

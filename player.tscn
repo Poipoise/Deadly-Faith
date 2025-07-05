@@ -23,7 +23,7 @@
 [ext_resource type="AudioStream" uid="uid://lkuawtljm2gl" path="res://sounds/hurt_c_08-102842.mp3" id="21_c78ky"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sa2ge"]
-size = Vector2(13, 8.5)
+size = Vector2(13, 10.5)
 
 [sub_resource type="Animation" id="Animation_xv3dn"]
 resource_name = "Fireball"
@@ -773,7 +773,7 @@ position = Vector2(5, -40)
 hframes = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, -3.75)
+position = Vector2(0.5, -4.75)
 shape = SubResource("RectangleShape2D_sa2ge")
 
 [node name="Camera2D" type="Camera2D" parent="."]

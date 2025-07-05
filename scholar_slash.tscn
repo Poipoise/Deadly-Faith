@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cu4yiaydeel03"]
+
+[ext_resource type="Script" path="res://Scholar_slash.gd" id="1_vspol"]
+[ext_resource type="Texture2D" uid="uid://b82v8q4n74qr6" path="res://dark scholar/Scholar_Attack1.png" id="2_e267y"]
+
+[node name="Scholar_slash" type="Area2D"]
+collision_layer = 4
+collision_mask = 11
+script = ExtResource("1_vspol")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-16.4, -37.6)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_e267y")
+region_enabled = true
+region_rect = Rect2(2076, 94, 306, 423)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-16.4, 18.4)
+polygon = PackedVector2Array(0, -16, 15, -26, 25, -45, 26, -60, 15, -83, 0, -94, 14, -66, 14, -40)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

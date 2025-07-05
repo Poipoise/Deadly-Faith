@@ -12,7 +12,7 @@ signal Game_Over
 var run_speed = 135
 var sprint_speed = 250
 var attacking = false
-var health = 5
+var health = 50
 enum states {IDLE, MOVING, ATTACKING, DEAD, HURT, ROLLING, FIREBALL}
 var state = states.IDLE
 var input
