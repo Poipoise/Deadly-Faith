@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://cy6evjsn61xav"]
+[gd_scene load_steps=13 format=3 uid="uid://cy6evjsn61xav"]
 
 [ext_resource type="Script" path="res://dummy.gd" id="1_6rrjs"]
 [ext_resource type="Texture2D" uid="uid://olqiia1prilu" path="res://Training Dummy Sprite Sheet.png" id="1_qh7fa"]
 [ext_resource type="Shader" path="res://Hit_Flash.gdshader" id="2_sledt"]
 [ext_resource type="PackedScene" uid="uid://dw3itna4tqcw3" path="res://hit_particle.tscn" id="4_rki0e"]
+[ext_resource type="AudioStream" uid="uid://lkuawtljm2gl" path="res://sounds/hurt_c_08-102842.mp3" id="5_vxq23"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4tp58"]
 shader = ExtResource("2_sledt")
@@ -107,3 +108,7 @@ position = Vector2(1, -6)
 shape = SubResource("RectangleShape2D_fcy6q")
 
 [node name="HitParticle" parent="." instance=ExtResource("4_rki0e")]
+
+[node name="hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_vxq23")
+volume_db = 8.0

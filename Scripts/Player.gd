@@ -12,7 +12,7 @@ signal Game_Over
 var run_speed = 135
 var sprint_speed = 250
 var attacking = false
-var health = 50
+var health = 5
 enum states {IDLE, MOVING, ATTACKING, DEAD, HURT, ROLLING, FIREBALL}
 var state = states.IDLE
 var input
@@ -40,7 +40,7 @@ func _ready():
 	
 func _physics_process(_delta):
 	if recharging:
-		if stamina < 100:
+		if stamina < 150:
 			stamina = stamina + stamina_depletion
 		else:
 			recharging = false
@@ -274,3 +274,7 @@ func _on_Ruins_finished(location):
 
 func _on_necromancer_died():
 	magic_ability = true
+
+
+func _on_tutorial_cutscene_finished():
+	position = Vector2(1088, -62)

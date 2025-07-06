@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=3 uid="uid://dm4yflx63tsst"]
+
+[ext_resource type="Script" path="res://light_orb.gd" id="1_5qte7"]
+[ext_resource type="Texture2D" uid="uid://cruvb1jo8molm" path="res://Magic Orb.png" id="1_46da5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_is363"]
+radius = 9.05539
+
+[sub_resource type="Animation" id="Animation_d8nrp"]
+resource_name = "flying"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 4]
+}
+
+[sub_resource type="Animation" id="Animation_shybv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7iqfs"]
+_data = {
+"RESET": SubResource("Animation_shybv"),
+"flying": SubResource("Animation_d8nrp")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s2wn2"]
+size = Vector2(24, 40.5)
+
+[node name="light_orb" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 11
+script = ExtResource("1_5qte7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-8, -8)
+texture = ExtResource("1_46da5")
+hframes = 2
+vframes = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, -10)
+shape = SubResource("CircleShape2D_is363")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7iqfs")
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 11
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(3, 1)
+shape = SubResource("RectangleShape2D_s2wn2")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

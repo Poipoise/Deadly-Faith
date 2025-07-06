@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://n47lx2mec8fh"]
+[gd_scene load_steps=19 format=3 uid="uid://n47lx2mec8fh"]
 
 [ext_resource type="Script" path="res://Scripts/death_screen.gd" id="1_jxdjv"]
-[ext_resource type="AudioStream" uid="uid://8xihlr10k27h" path="res://sounds/Undertale OST_ 011 - Determination.mp3" id="2_oigir"]
 [ext_resource type="Texture2D" uid="uid://cc8ypsp412hdk" path="res://You died screen.png" id="2_ua8ck"]
 [ext_resource type="AudioStream" uid="uid://ddiixpj68xjle" path="res://sounds/084373_heal-36672.mp3" id="3_1edmo"]
 [ext_resource type="FontFile" uid="uid://bld7hkhcvy8yp" path="res://joystix/joystix monospace.otf" id="3_03t2i"]
+[ext_resource type="AudioStream" uid="uid://bawifeh1y2nlb" path="res://SoundTrack/28 15 game over INITIAL.mp3" id="4_xgsm2"]
+[ext_resource type="AudioStream" uid="uid://c81rqucq1bqxf" path="res://SoundTrack/29 15 game over LOOP.mp3" id="6_b7hie"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_by4tf"]
 atlas = ExtResource("2_ua8ck")
@@ -226,7 +227,10 @@ theme_override_font_sizes/normal_font_size = 55
 text = "Press Enter to try again..."
 
 [node name="DeathMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_oigir")
+stream = ExtResource("4_xgsm2")
 
 [node name="Respawn" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_1edmo")
+
+[node name="DeathMusicloop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_b7hie")

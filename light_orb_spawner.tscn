@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://vqybn7lrw27n"]
+
+[ext_resource type="Script" path="res://light_orb_spawner.gd" id="1_lsh8w"]
+[ext_resource type="PackedScene" uid="uid://dm4yflx63tsst" path="res://light_orb.tscn" id="2_l3lsr"]
+
+[node name="light_orb_spawner" type="Node2D"]
+script = ExtResource("1_lsh8w")
+light_orb = ExtResource("2_l3lsr")

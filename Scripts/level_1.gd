@@ -20,7 +20,10 @@ var walked = false
 var attacked = false
 var run = false
 var tutorial_done = false
+var dodge_done = false
+var tutorial_over = false
 signal tutorial_next
+signal orb_spawner
 func _ready():
 	$Cutscene.hide()
 	
@@ -54,8 +57,7 @@ func _process(_delta):
 		chest_opened = false
 	
 	if tutorial:
-		if (Input.is_action_just_pressed("left") or Input.is_action_just_pressed("right") or Input.is_action_just_pressed("down") or Input.is_action_just_pressed("up")) and not walked:
-			print("WASD TRIGGER")
+		if (Input.is_action_just_pressed("left") or Input.is_action_just_pressed("right") or Input.is_action_just_pressed("down") or Input.is_action_just_pressed("up")) and not walked and $Tutorial_cutscene.first_dialog_done:
 			walked = true
 			tutorial_next.emit()
 		if (Input.is_action_pressed("sprint") and (Input.is_action_just_pressed("left") or Input.is_action_just_pressed("right") or Input.is_action_just_pressed("down") or Input.is_action_just_pressed("up"))) and not run and walked:
@@ -63,13 +65,20 @@ func _process(_delta):
 			tutorial_next.emit()
 			
 		if dummy_hit and run and not attacked:
-			print("DUMMY HIT TRIGGER")
 			attacked = true
 			tutorial_next.emit()
-		if attacked and not tutorial_done:
+			await get_tree().create_timer(7).timeout
+			orb_spawner.emit()
+			
+		if attacked and not dodge_done and Input.is_action_just_pressed("roll"):
+			dodge_done = true
+			await get_tree().create_timer(10).timeout
 			tutorial_done = true
-			print("DODGE TRIGGER")
-			await get_tree().create_timer(30).timeout
+			tutorial_next.emit()
+			
+		if tutorial_done and not tutorial_over:
+			tutorial_over = true
+			await get_tree().create_timer(10).timeout
 			tutorial_next.emit()
 
 func _on_death_screen_respawn():
@@ -104,7 +113,7 @@ func _on_cutscene_finished():
 	start = true
 	$door.play()
 	$Beginning.stop()
-	#tutorial = true
+	tutorial = true
 	
 	
 func Boss_Music_Time():
@@ -153,3 +162,4 @@ func _on_necromancer_died():
 	$CanvasLayer/Magic_explanation.visible = true
 	await get_tree().create_timer(8).timeout
 	$CanvasLayer/Magic_explanation.visible = false
+

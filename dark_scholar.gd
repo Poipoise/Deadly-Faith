@@ -28,8 +28,8 @@ var invincible = false
 func _ready():
 	start_pos = position
 	start_health = health
-	#set_physics_process(false)
-	#$CollisionShape2D.disabled = true
+	set_physics_process(false)
+	$CollisionShape2D.disabled = true
 	$CanvasLayer/HealthBar.value = health
 	player = $"../Player"
 	
@@ -246,8 +246,6 @@ func hurt(amount, _dir):
 		$Hit.play()
 		$AnimationPlayer.play("hit")
 		health -= amount
-		prev_state = state
-		state = states.HURT
 		$Sprite2D.material.set_shader_parameter("active", true)
 		$HitParticle.emitting = true
 		await get_tree().create_timer(0.1).timeout
@@ -255,7 +253,6 @@ func hurt(amount, _dir):
 		await get_tree().create_timer(0.2).timeout
 		$Sprite2D.material.set_shader_parameter("active", false)
 		hit = false
-		state = prev_state
 		if health <= 0:
 			dead = true
 			state = states.DEAD
@@ -297,3 +294,21 @@ func _on_boss_spawning_boss_time():
 		set_physics_process(true)
 		$CollisionShape2D.disabled = false
 		state = states.CHASE
+
+
+func respawn():
+	state = states.IDLE
+	set_physics_process(false)
+	$CollisionShape2D.disabled = true
+	position = start_pos
+	health = start_health
+	action_started = false
+	weights = [30, 0, 15, 25, 30]
+	action_wait = 2
+	dead = false
+	boss_intro = false
+	doing_run_attack1 = false
+	select_new_action = true
+	song_time = false
+	invincible = false
+	state = states.IDLE

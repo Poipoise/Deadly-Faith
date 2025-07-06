@@ -1,8 +1,8 @@
 [
 	{"Name":"Astrea", "Emotion": "Neutral", "Text":"Before you set off lets go over some basics."},
 	{"Name":"Astrea", "Emotion": "Neutral", "Text":"Use WASD in order to move around the world."},
-	{"Name":"Astrea", "Emotion": "Cheerful", "Text":"Good. If you wish to move faster hold SHIFT while moving. This consumes your stanima seen at the bottom left. Don't worry this will refill slowly after you stop running"},
-	{"Name":"Astrea", "Emotion": "Neutral", "Text":"Great! Now, see that dummy over there? Attack it by pressing left click. This takes stamina. Get a few good swings."},
-	{"Name":"Astrea", "Emotion": "Neutral", "Text":"Excellent, however, you will often face retaliation from monster you intend to attack. Pressing SPACE allows you to dodge enemy attacks, depleting stamina. Practice against these light orbs."},
-	{"Name":"Astrea", "Emotion": "Cheerful", "Text":"Amazing job my knight. Your sufficiently prepared."}
+	{"Name":"Astrea", "Emotion": "Cheerful", "Text":"Good. If you wish to move faster hold SHIFT while moving. This consumes your stamina seen at the bottom left. Don't worry your stamina refills slowly after some time."},
+	{"Name":"Astrea", "Emotion": "Neutral", "Text":"Great! Now, see that dummy over there? Attack it by pressing left click. This also consumes stamina. Get a few good swings."},
+	{"Name":"Astrea", "Emotion": "Neutral", "Text":"Excellent, however, you will often face retaliation from monster you intend to attack. Pressing SPACE consumes allows you to dodge enemy attacks. Practice against these light orbs."},
+	{"Name":"Astrea", "Emotion": "Cheerful", "Text":"Amazing job my knight. You're sufficiently prepared. As long as you remember these teaching and hold your faith in me you will make it to the end."}
 ]

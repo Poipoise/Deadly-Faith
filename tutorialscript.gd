@@ -18,6 +18,8 @@ func _process(_delta):
 	#print($/root/World/Tutorial_cutscene.cutscene_next)
 	if $/root/World/Tutorial_cutscene.cutscene_next:
 		if finished :
+			if phraseNum == 1:
+				$/root/World/Tutorial_cutscene.first_dialog_done = true
 			nextPhrase()
 		else:
 			$Text.visible_characters = len($Text.text)
@@ -53,7 +55,7 @@ func nextPhrase() -> void:
 		
 		$Timer.start()
 		await $Timer.timeout
-	await get_tree().create_timer(10.0).timeout
+	await get_tree().create_timer(7.0).timeout
 	finished = true
 	phraseNum += 1
 	return

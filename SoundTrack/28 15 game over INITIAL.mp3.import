@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bawifeh1y2nlb"
+path="res://.godot/imported/28 15 game over INITIAL.mp3-58390dd00b89966e597919f84935c308.mp3str"
+
+[deps]
+
+source_file="res://SoundTrack/28 15 game over INITIAL.mp3"
+dest_files=["res://.godot/imported/28 15 game over INITIAL.mp3-58390dd00b89966e597919f84935c308.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
