@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var pulse: PackedScene
 @export var lazer: PackedScene
 @onready var Level1 : Node = get_node("/root/World/Level1")
+signal Golem_dead
 enum states {IDLE, SHOOTING, ATTACK, DEAD, HURT, PULSE, BEAM, SHIELD, UNSHIELD}
 var state = states.IDLE
 var health = 15
@@ -18,14 +19,17 @@ var dead = false
 var shield1 = false
 var boss_intro = false
 var song_time = false
+var player
 func _ready():
 	start_pos = position
 	start_health = health
 	set_physics_process(false)
 	$CollisionShape2D.disabled = true
 	$CanvasLayer/HealthBar.value = health
+	player = $"../Player"
 	
 func _physics_process(delta):
+	transform.x.x = sign(position.direction_to(player.position).x)
 	$CanvasLayer/HealthBar.value = health
 	if $"../Player".game_over:
 		$BossMusic.stop()
@@ -39,7 +43,7 @@ func _physics_process(delta):
 		$BossMusic.play()
 		song_time = true
 		
-	var player_position = $"../Player".global_position
+	var player_position = player.global_position
 	var distance = global_position.distance_to(player_position)
 	if distance <= 80:
 		weights[1] = 80
@@ -111,12 +115,13 @@ func hurt(amount, _dir):
 		$Sprite2D.material.set_shader_parameter("active", true)
 		$HitParticle.emitting = true
 		await get_tree().create_timer(0.1).timeout
-		#$HitParticle.emitting = false
+		$HitParticle.emitting = false
 		await get_tree().create_timer(0.2).timeout
 		$Sprite2D.material.set_shader_parameter("active", false)
 		hit = false
 		state = prev_state
 		if health <= 0:
+			Golem_dead.emit()
 			dead = true
 			state = states.DEAD
 
@@ -188,7 +193,7 @@ func lazer_attack(_delta):
 	Level1.add_child(lazer)
 	lazer.position = position
 	lazer.position.y -= 37
-	lazer.position.x += 2
+	lazer.position.x += 2 * sign(position.direction_to(player.position).x)
 	await get_tree().create_timer(timer).timeout
 	lazer.queue_free()
 	action_wait = 2

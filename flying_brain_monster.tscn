@@ -204,7 +204,7 @@ radius = 207.022
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_amuuj"]
 
-[node name="FlyingBrainMonster" type="CharacterBody2D"]
+[node name="FlyingBrainMonster" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 16
 collision_mask = 13
 script = ExtResource("1_cw8cn")

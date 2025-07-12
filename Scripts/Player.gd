@@ -7,7 +7,6 @@ signal Game_Over
 @export var projectile : PackedScene
 @export var magic_ability = true
 @onready var Level1 : Node = get_node("/root/World/Level1")
-#var playerData = PlayerData.new()
 
 var run_speed = 135
 var sprint_speed = 250
@@ -33,12 +32,18 @@ var boss_position
 var boss_spawing_done = false
 var movement_allowed = true
 var fireball = false
+var potion_timer = false
+var time_passed = 0
+var Duration = 90.0
+var potion = false
 
 func _ready():
 	start_pos = position
 	start_health = health
+	health_changed.emit(health)
+	$CanvasLayer/healing_bar.value = $CanvasLayer/healing_bar.max_value
 	
-func _physics_process(_delta):
+func _physics_process(delta):
 	if recharging:
 		if stamina < 150:
 			stamina = stamina + stamina_depletion
@@ -53,11 +58,15 @@ func _physics_process(_delta):
 		input = Input.get_vector("left", "right", "up", "down")
 	
 		
-		#if velocity.length() != 0 and play:
-			#play = false
-			#$Walking.play()
-			#await get_tree().create_timer(soundTime).timeout
-			#play = true
+		if potion_timer and potion:
+			time_passed += delta
+			$CanvasLayer/healing_bar.value = (time_passed / Duration) * $CanvasLayer/healing_bar.max_value
+			$CanvasLayer/timer_label.visible = true
+			$CanvasLayer/timer_label.text = str(round((Duration - time_passed) * 10.0) / 10.0)
+			if time_passed >= Duration:
+				$CanvasLayer/timer_label.visible = false
+				time_passed = 0
+				potion_timer = false
 
 		if attacking:
 			$AnimationPlayer.speed_scale = 1
@@ -105,12 +114,12 @@ func _input(event):
 			recharging = false
 			attack_number += 1
 			stamina = stamina - 10
-		if event.is_action_pressed("roll") && stamina >= 15 && not rolling:
+		if event.is_action_pressed("roll") && stamina >= 25 && not rolling:
 			rolling = false
 			recharging = false
 			state = states.ROLLING
-			stamina = stamina - 15
-		if event.is_action("Fireball") and stamina >= 25 and not attacking and magic_ability:
+			stamina = stamina - 25
+		if event.is_action("Fireball") and stamina >= 35 and not attacking and magic_ability:
 			state = states.FIREBALL
 			var mouse_pos = get_global_mouse_position()
 			var shoot_direction = (mouse_pos - global_position).normalized()
@@ -118,7 +127,12 @@ func _input(event):
 			Projectile.start(position, shoot_direction)
 			Level1.add_child(Projectile)
 			recharging = false
-			stamina = stamina - 25
+			stamina = stamina - 35
+		if event.is_action("heal") and $CanvasLayer/healing_bar.value == $CanvasLayer/healing_bar.max_value and potion:
+			$CanvasLayer/healing_bar.value = 0
+			health = start_health
+			stamina = 150
+			potion_timer = true
 			
 		
 func choose_action():
@@ -140,7 +154,6 @@ func choose_action():
 		states.MOVING:
 			$RunParticles.emitting = true
 			$AnimationPlayer.play("run")
-			#$Walking.play()
 			if velocity.x != 0:
 				transform.x.x = sign(velocity.x) 
 		states.ATTACKING:
@@ -242,6 +255,7 @@ func _on_sound_timer_timeout():
 func _on_camp_fire_set_spawn():
 	start_pos = position
 	health = start_health
+	$CanvasLayer/healing_bar.value = $CanvasLayer/healing_bar.max_value
 
 
 func _on_boss_spawning_boss_time():
@@ -277,4 +291,13 @@ func _on_necromancer_died():
 
 
 func _on_tutorial_cutscene_finished():
-	position = Vector2(1088, -62)
+	#position = Vector2(1088, -62)
+	pass
+
+
+func _on_golem_boss_golem_dead():
+	health = 10
+	start_health = health
+	health_changed.emit(health)
+	potion = true
+	$CanvasLayer.visible = true

@@ -41,3 +41,27 @@ layout_mode = 2
 texture = SubResource("AtlasTexture_jogq3")
 expand_mode = 3
 stretch_mode = 5
+
+[node name="H6" type="TextureRect" parent="."]
+layout_mode = 2
+texture = SubResource("AtlasTexture_jogq3")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="H7" type="TextureRect" parent="."]
+layout_mode = 2
+texture = SubResource("AtlasTexture_jogq3")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="H8" type="TextureRect" parent="."]
+layout_mode = 2
+texture = SubResource("AtlasTexture_jogq3")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="H9" type="TextureRect" parent="."]
+layout_mode = 2
+texture = SubResource("AtlasTexture_jogq3")
+expand_mode = 3
+stretch_mode = 5

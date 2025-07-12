@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://x1dqtfjt4eic"]
 
 [ext_resource type="Script" path="res://Scripts/necromancer_project.gd" id="1_06g0m"]
-[ext_resource type="Texture2D" uid="uid://cruvb1jo8molm" path="res://Magic Orb.png" id="2_tsrru"]
+[ext_resource type="Texture2D" uid="uid://drhyxuglc2sqc" path="res://Magic Orb.png" id="2_tsrru"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7jwvj"]
 size = Vector2(24, 40.5)

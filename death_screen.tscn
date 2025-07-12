@@ -228,9 +228,11 @@ text = "Press Enter to try again..."
 
 [node name="DeathMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_xgsm2")
+volume_db = -8.0
 
 [node name="Respawn" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_1edmo")
 
 [node name="DeathMusicloop" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_b7hie")
+volume_db = -3.0

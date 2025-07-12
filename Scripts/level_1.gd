@@ -82,6 +82,7 @@ func _process(_delta):
 			tutorial_next.emit()
 
 func _on_death_screen_respawn():
+	$Golem_boss_room_collision/CollisionShape2D.set_deferred("disabled", true)
 	gameover = false
 	play = true
 	var enemy_nodes = get_tree().get_nodes_in_group("enemy")
@@ -113,7 +114,7 @@ func _on_cutscene_finished():
 	start = true
 	$door.play()
 	$Beginning.stop()
-	tutorial = true
+	#tutorial = true
 	
 	
 func Boss_Music_Time():
@@ -134,7 +135,6 @@ func _on_final_cutscene_finished(_placeholder):
 	$Final_cutscene_ambience.stop()
 	for ruin_enemy in get_tree().get_nodes_in_group("ruins_enemy"):
 		ruin_enemy.queue_free()
-		print("Done")
 	await get_tree().create_timer(1.3).timeout
 	play = true
 	go = true
@@ -155,7 +155,6 @@ func _on_area_2d_body_entered(body):
 		
 func _on_dummy_dummy_hit():
 	dummy_hit = true
-	print("DUMMY HIT")
 
 
 func _on_necromancer_died():
@@ -163,3 +162,21 @@ func _on_necromancer_died():
 	await get_tree().create_timer(8).timeout
 	$CanvasLayer/Magic_explanation.visible = false
 
+
+
+func _on_end_credits_body_entered(body):
+	go = false
+	play = false
+	$AudioStreamPlayer.stop()
+
+
+func _on_golem_spawning_golem_time():
+	$Golem_boss_room_collision/CollisionShape2D.set_deferred("disabled", false)
+
+
+func _on_golem_boss_golem_dead():
+	$CanvasLayer/Heal_potion_explanation.visible = true
+	await get_tree().create_timer(15).timeout
+	$CanvasLayer/Heal_potion_explanation.visible = false
+	
+	

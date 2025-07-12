@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://dycinrmvaxssg"]
+[gd_scene load_steps=44 format=3 uid="uid://dycinrmvaxssg"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_xokv2"]
 [ext_resource type="PackedScene" uid="uid://cd2w4vto3nrvy" path="res://player_project.tscn" id="2_88tyu"]
@@ -21,6 +21,8 @@
 [ext_resource type="AudioStream" uid="uid://dmelkoimi4gst" path="res://sounds/Swordswing2.wav" id="19_ibgw6"]
 [ext_resource type="AudioStream" uid="uid://cp3ck17ldxnxm" path="res://sounds/SwordSwing.wav" id="20_fup70"]
 [ext_resource type="AudioStream" uid="uid://lkuawtljm2gl" path="res://sounds/hurt_c_08-102842.mp3" id="21_c78ky"]
+[ext_resource type="Texture2D" uid="uid://byavgxvoyc0ji" path="res://potion_sprite_sheet.png" id="22_8vvjv"]
+[ext_resource type="FontFile" uid="uid://bld7hkhcvy8yp" path="res://joystix/joystix monospace.otf" id="23_chx0s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sa2ge"]
 size = Vector2(13, 10.5)
@@ -762,6 +764,14 @@ stream_4/weight = 1.0
 stream_5/stream = ExtResource("20_fup70")
 stream_5/weight = 1.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_phjhb"]
+atlas = ExtResource("22_8vvjv")
+region = Rect2(33, 34, 29, 28)
+
+[sub_resource type="Theme" id="Theme_ypw03"]
+default_font = ExtResource("23_chx0s")
+default_font_size = 16
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 13
@@ -829,6 +839,35 @@ one_shot = true
 [node name="Hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("21_c78ky")
 volume_db = 8.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="healing_bar" type="TextureProgressBar" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -91.0
+offset_top = -87.0
+offset_right = -51.0
+offset_bottom = -47.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(3, 3)
+max_value = 90.0
+value = 90.0
+fill_mode = 4
+texture_progress = SubResource("AtlasTexture_phjhb")
+
+[node name="timer_label" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 1073.0
+offset_top = 595.0
+offset_right = 1129.0
+offset_bottom = 641.0
+theme = SubResource("Theme_ypw03")
+text = "90"
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="timeout" from="StaminaCooldown" to="." method="_on_stamina_cooldown_timeout"]

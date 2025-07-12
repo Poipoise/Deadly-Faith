@@ -1,5 +1,5 @@
 extends Area2D
-var active = true
+var active = false
 signal start_cutscene
 
 func _on_necromancer_died():
