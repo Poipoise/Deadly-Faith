@@ -60,7 +60,6 @@ func _physics_process(delta):
 		choose_action()
 		if select_new_action:
 			select_new_action = false
-			print("Action being decided")
 			var action = weighted_random_choice(actions, weights)
 			if (action == "Attack1" or action == "Attack2") and distance < 200 and state != states.DASH:
 				action_started = true
@@ -82,7 +81,6 @@ func _physics_process(delta):
 					state = states.ATTACK1
 				elif action == "shoot":
 					state = states.SHOOT
-				print("ACTION", action)
 				choose_action()
 	if dead:
 		choose_action()
@@ -232,6 +230,7 @@ func shoot_attack():
 			var orb = magic_orb.instantiate()
 			get_parent().add_child(orb)
 			orb.global_position = global_position
+			orb.global_position.y -= 120
 			$magic_orb.play()
 			var base_dir = (player.global_position - orb.global_position).normalized()
 			orb.velocity = base_dir * orb.speed
@@ -245,13 +244,11 @@ func hurt(amount, _dir):
 		hit = true
 		$Hit.play()
 		$AnimationPlayer.play("hit")
-		health -= amount
-		$Sprite2D.material.set_shader_parameter("active", true)
+		health -= amount 
 		$HitParticle.emitting = true
 		await get_tree().create_timer(0.1).timeout
 		$HitParticle.emitting = false
 		await get_tree().create_timer(0.2).timeout
-		$Sprite2D.material.set_shader_parameter("active", false)
 		hit = false
 		if health <= 0:
 			dead = true

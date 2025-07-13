@@ -1,0 +1,96 @@
+[gd_scene load_steps=9 format=3 uid="uid://4s71bj0elb3"]
+
+[ext_resource type="Script" path="res://astrea_projectile.gd" id="1_khc8m"]
+[ext_resource type="Texture2D" uid="uid://beinwpdp0ti77" path="res://lightning ball-Sheet.png" id="1_t8ksq"]
+
+[sub_resource type="Animation" id="Animation_owlq3"]
+resource_name = "flying"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 3]
+}
+
+[sub_resource type="Animation" id="Animation_fbv5k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_kc422"]
+resource_name = "hit"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [4, 8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tqvds"]
+_data = {
+"RESET": SubResource("Animation_fbv5k"),
+"flying": SubResource("Animation_owlq3"),
+"hit": SubResource("Animation_kc422")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5273u"]
+size = Vector2(15.5, 22)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_blpf4"]
+radius = 5.09902
+
+[node name="Astrea_projectile" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 11
+script = ExtResource("1_khc8m")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_t8ksq")
+hframes = 9
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_tqvds")
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 11
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1.75, 4)
+shape = SubResource("RectangleShape2D_5273u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_blpf4")
+
+[node name="Timer" type="Timer" parent="." groups=["projectile"]]
+wait_time = 5.0
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

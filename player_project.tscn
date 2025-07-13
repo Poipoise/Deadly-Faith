@@ -47,7 +47,7 @@ _data = {
 "flying": SubResource("Animation_l0a3e")
 }
 
-[node name="player_project" type="CharacterBody2D"]
+[node name="player_project" type="CharacterBody2D" groups=["projectile"]]
 collision_mask = 11
 script = ExtResource("1_uhfv7")
 
