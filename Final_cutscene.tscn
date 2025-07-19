@@ -237,7 +237,7 @@ autoplay = "bob"
 
 [node name="Portrait" type="Sprite2D" parent="ColorRect"]
 z_index = -1
-position = Vector2(154.5, -99)
+position = Vector2(154.5, -131)
 scale = Vector2(0.4375, 0.421875)
 
 [node name="Timer" type="Timer" parent="ColorRect"]

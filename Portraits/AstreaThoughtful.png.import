@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dn3drvyult4xu"
-path="res://.godot/imported/AstreaBattle.png-a4390e70715010115af20c33a99f60cb.ctex"
+uid="uid://bkq3uj4htt1io"
+path="res://.godot/imported/AstreaThoughtful.png-99d8612077e2b29e9620f6d125c99378.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Portraits/AstreaBattle.png"
-dest_files=["res://.godot/imported/AstreaBattle.png-a4390e70715010115af20c33a99f60cb.ctex"]
+source_file="res://Portraits/AstreaThoughtful.png"
+dest_files=["res://.godot/imported/AstreaThoughtful.png-99d8612077e2b29e9620f6d125c99378.ctex"]
 
 [params]
 

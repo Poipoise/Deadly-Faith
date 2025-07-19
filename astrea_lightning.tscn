@@ -1,0 +1,266 @@
+[gd_scene load_steps=11 format=3 uid="uid://d0fnno31nc6da"]
+
+[ext_resource type="Script" path="res://astrea_lightning.gd" id="1_7rvo1"]
+[ext_resource type="Texture2D" uid="uid://dlv7y4foeagif" path="res://lightning_strike.png" id="1_bdkhu"]
+[ext_resource type="Texture2D" uid="uid://m6mlvhvahsix" path="res://lightning_strick (1).png" id="2_if58i"]
+[ext_resource type="Texture2D" uid="uid://b14ngkcbxu5j" path="res://Target_circle.png" id="2_neq23"]
+[ext_resource type="AudioStream" uid="uid://drngdbmiv0pdl" path="res://sounds/Astrea_lightning.mp3" id="5_a6bub"]
+
+[sub_resource type="Animation" id="Animation_jnhuc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_bdkhu")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -42)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CollisionShape2D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_1l563"]
+resource_name = "lightning"
+length = 0.4
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_if58i")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 3]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(6, -83)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CollisionShape2D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.01, 0.21),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_jhf1u"]
+resource_name = "target_circle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_neq23")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -4)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oom51"]
+_data = {
+"RESET": SubResource("Animation_jnhuc"),
+"lightning": SubResource("Animation_1l563"),
+"target_circle": SubResource("Animation_jhf1u")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oxknj"]
+size = Vector2(90, 50)
+
+[node name="Astrea_Lightning" type="Area2D"]
+scale = Vector2(0.6, 0.6)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_7rvo1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(0, -42)
+texture = ExtResource("1_bdkhu")
+hframes = 2
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_oom51")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_oxknj")
+disabled = true
+
+[node name="Lock_on_timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="lightning_hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_a6bub")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Lock_on_timer" to="." method="_on_lock_on_timer_timeout"]

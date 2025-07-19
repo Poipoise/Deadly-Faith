@@ -1,7 +1,8 @@
-[gd_scene load_steps=35 format=3 uid="uid://ci6qc3myvc8ld"]
+[gd_scene load_steps=52 format=3 uid="uid://ci6qc3myvc8ld"]
 
 [ext_resource type="Texture2D" uid="uid://4glwubyobptj" path="res://Spearwoman(lightning spear)-Sheet.png" id="1_el2fk"]
 [ext_resource type="Script" path="res://atrea_boss.gd" id="1_lypkx"]
+[ext_resource type="PackedScene" uid="uid://d0fnno31nc6da" path="res://astrea_lightning.tscn" id="2_0a44y"]
 [ext_resource type="PackedScene" uid="uid://4s71bj0elb3" path="res://astrea_projectile.tscn" id="2_17tst"]
 [ext_resource type="AudioStream" uid="uid://bvvkfa4os3ao" path="res://SoundTrack/Astrea_phase1_first_song-the-great-battle(chosic.com).mp3" id="4_qin7k"]
 [ext_resource type="AudioStream" uid="uid://c71ehwa48x4aj" path="res://SoundTrack/Drift King INST.wav" id="5_47yty"]
@@ -9,6 +10,19 @@
 [ext_resource type="AudioStream" uid="uid://b8e55oyhvr7p1" path="res://SoundTrack/Astrea_phase2_first_songEpicBattle_J(chosic.com).mp3" id="7_j774b"]
 [ext_resource type="AudioStream" uid="uid://k2ea3i4gtm8o" path="res://SoundTrack/Astrea_phase2-Charlotte(chosic.com).mp3" id="8_pr7em"]
 [ext_resource type="AudioStream" uid="uid://fdu1rovejdwj" path="res://SoundTrack/Astrea_phase2_final_song_RideTheWind-chosic.com_.mp3" id="9_cre3e"]
+[ext_resource type="AudioStream" uid="uid://drngdbmiv0pdl" path="res://sounds/Astrea_lightning.mp3" id="11_xhqk8"]
+[ext_resource type="AudioStream" uid="uid://h7lq7rpvem1p" path="res://sounds/Astrea_electric_hit1mp3.mp3" id="12_4q6o8"]
+[ext_resource type="AudioStream" uid="uid://cffueoguqlqk8" path="res://sounds/Astrea_charging_electricity.mp3" id="12_s5ysj"]
+[ext_resource type="AudioStream" uid="uid://bse22sqx0fraa" path="res://sounds/Astrea_electric_hit2.mp3" id="13_2j5o5"]
+[ext_resource type="AudioStream" uid="uid://bnlddlmymiqlg" path="res://sounds/Astrea_electric_hit3.mp3" id="14_uun35"]
+[ext_resource type="AudioStream" uid="uid://bx7hkldpmn8f6" path="res://sounds/Astrea_lightning_up.mp3" id="16_symny"]
+[ext_resource type="AudioStream" uid="uid://whnmlrbvusdc" path="res://sounds/QuickSwordSwing.wav" id="17_8ebsv"]
+[ext_resource type="AudioStream" uid="uid://cp3ck17ldxnxm" path="res://sounds/SwordSwing.wav" id="18_6as2s"]
+[ext_resource type="AudioStream" uid="uid://bwpbv53uufvom" path="res://sounds/HeavySwordSwing.wav" id="19_fcuda"]
+[ext_resource type="AudioStream" uid="uid://dx8jkcuvvswq4" path="res://sounds/Astrea_block.mp3" id="20_rqgf1"]
+[ext_resource type="FontFile" uid="uid://bld7hkhcvy8yp" path="res://joystix/joystix monospace.otf" id="21_1t51a"]
+[ext_resource type="Texture2D" uid="uid://bu2mr8eijp5g8" path="res://Health_bar_UI.png" id="22_ugto5"]
+[ext_resource type="Texture2D" uid="uid://b7k4ynfycnjxt" path="res://Health_bar(3).png" id="23_dg74m"]
 
 [sub_resource type="Animation" id="Animation_dcsau"]
 resource_name = "Dash"
@@ -254,6 +268,30 @@ tracks/6/keys = {
 "update": 1,
 "values": [true, false, true]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Astrea_melee_hits:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.2, 0.7, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Melee_swings:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.2, 0.7, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, true]
+}
 
 [sub_resource type="Animation" id="Animation_dfhpy"]
 length = 0.001
@@ -389,6 +427,102 @@ tracks/10/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Astrea_lightning_down:playing")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Astrea_melee_hits:playing")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("lightning_projectile:playing")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("electricity_charge_up:playing")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("lightning_spell:playing")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("lightning_up:playing")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Melee_swings:playing")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("block:playing")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_sb8om"]
 resource_name = "Spell_casting"
@@ -441,6 +575,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [15]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("lightning_spell:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_urvix"]
 resource_name = "block"
@@ -492,6 +638,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [15]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("block:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_1e2xl"]
@@ -665,6 +823,7 @@ tracks/3/keys = {
 [sub_resource type="Animation" id="Animation_njebm"]
 resource_name = "jab_attack"
 length = 0.9
+step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -720,10 +879,34 @@ tracks/4/path = NodePath("Melee_collision/first_hit/CollisionShape2D:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.8),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.28, 0.42, 0.57, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false, true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Astrea_melee_hits:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.1, 0.28, 0.57),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [true, false, true]
+"values": [true, true, true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Melee_swings:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.1, 0.33, 0.57),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, true]
 }
 
 [sub_resource type="Animation" id="Animation_a7odt"]
@@ -836,15 +1019,40 @@ tracks/4/path = NodePath("jump_attack/CollisionPolygon2D:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.5),
+"times": PackedFloat32Array(0, 0.2, 0.7),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Astrea_melee_hits:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Melee_swings:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_lrmxg"]
 resource_name = "jump_lightning"
 length = 2.3
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -917,6 +1125,30 @@ tracks/5/keys = {
 "update": 0,
 "values": [Vector2(32, 27), Vector2(32, 27), Vector2(46, 27)]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Astrea_lightning_down:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.95),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("lightning_up:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_fmww5"]
 resource_name = "projectile_attack"
@@ -968,6 +1200,30 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [15]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("lightning_projectile:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("electricity_charge_up:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_ge7fc"]
@@ -1150,10 +1406,10 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dsbbd"]
-size = Vector2(15, 12)
+size = Vector2(15, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w0b3w"]
-size = Vector2(46, 22.5)
+size = Vector2(46, 28.1364)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cwcer"]
 size = Vector2(32, 27)
@@ -1181,9 +1437,34 @@ stream_1/weight = 1.0
 stream_2/stream = ExtResource("9_cre3e")
 stream_2/weight = 1.0
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mhfv0"]
+streams_count = 3
+stream_0/stream = ExtResource("12_4q6o8")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("13_2j5o5")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("14_uun35")
+stream_2/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_jpe2e"]
+streams_count = 3
+stream_0/stream = ExtResource("17_8ebsv")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("18_6as2s")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("19_fcuda")
+stream_2/weight = 1.0
+
+[sub_resource type="Theme" id="Theme_1pmgw"]
+default_font = ExtResource("21_1t51a")
+default_font_size = 50
+
 [node name="Atrea_boss" type="CharacterBody2D"]
 scale = Vector2(1.1, 1.1)
+collision_layer = 4
+collision_mask = 13
 script = ExtResource("1_lypkx")
+lightning_attack = ExtResource("2_0a44y")
 magic_orb = ExtResource("2_17tst")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -1198,33 +1479,42 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -6)
+position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_dsbbd")
+disabled = true
 
 [node name="Melee_collision" type="Node2D" parent="."]
-visible = false
 
 [node name="first_hit" type="Area2D" parent="Melee_collision"]
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Melee_collision/first_hit"]
-position = Vector2(35, -23.25)
+position = Vector2(35, -20.4318)
 shape = SubResource("RectangleShape2D_w0b3w")
 disabled = true
 
 [node name="second_hit" type="Area2D" parent="Melee_collision"]
+visible = false
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Melee_collision/second_hit"]
 polygon = PackedVector2Array(11, -47, 27, -24, 28, -10, 33, 0, 47, -2, 35, -29, 22, -47)
 disabled = true
 
 [node name="third_hit" type="Area2D" parent="Melee_collision"]
+visible = false
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Melee_collision/third_hit"]
-polygon = PackedVector2Array(34, -37, 39, -30, 27, -21, 10, -18, -8, -20, -17, -28, -26, -28, -34, -22, -26, -13, -12, -8, 23, -8, 37, -10, 49, -21, 50, -29, 38, -37)
+polygon = PackedVector2Array(34, -37, 35.4545, -29.0909, 25.4545, -22.7273, 10, -20, -8.18182, -21.8182, -16.3636, -30, -27.2727, -30, -35.4545, -21.8182, -28.1818, -10, -12.7273, -6.36364, 22.7273, -6.36364, 37.2727, -8.18182, 50.9091, -20, 51.8182, -29.0909, 38, -37)
 disabled = true
 
 [node name="Lightning_hitbox" type="Area2D" parent="."]
-visible = false
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Lightning_hitbox"]
 position = Vector2(7, -13.5)
@@ -1232,11 +1522,12 @@ shape = SubResource("RectangleShape2D_cwcer")
 disabled = true
 
 [node name="Idle_timer" type="Timer" parent="."]
+wait_time = 2.3
+one_shot = true
 
 [node name="Chase_timer" type="Timer" parent="."]
 
 [node name="crouch_attack" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="crouch_attack"]
 position = Vector2(30, -16)
@@ -1244,9 +1535,12 @@ shape = SubResource("RectangleShape2D_4xtv7")
 disabled = true
 
 [node name="jump_attack" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="jump_attack"]
-polygon = PackedVector2Array(24.5455, -40, 29.0909, -33.6364, 16.3636, -24.5455, -5.45455, -20.9091, -23.6364, -26.3636, -27.2727, -30, -34.5455, -30.9091, -43.6364, -25.4545, -44.5455, -21.8182, -23.6364, -10.9091, 0, -10.9091, 19.0909, -10.9091, 34.5455, -16.3636, 40.9091, -26.3636, 36.3636, -37.2727)
+polygon = PackedVector2Array(23.6364, -40.9091, 29.0909, -33.6364, 16.3636, -25.4545, -5.45455, -23.6364, -22.7273, -28.1818, -27.2727, -30.9091, -36.3636, -32.7273, -44.5455, -26.3636, -45.4545, -20.9091, -25.4545, -8.18182, 0.909091, -6.36364, 20.9091, -9.09091, 37.2727, -15.4545, 43.6364, -27.2727, 38.1818, -38.1818)
 disabled = true
 
 [node name="BossMusicPhase1" type="AudioStreamPlayer" parent="."]
@@ -1256,3 +1550,67 @@ volume_db = -5.0
 [node name="BossMusicPhase2" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_bx7d5")
 volume_db = -5.0
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Astrea_lightning_down" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_xhqk8")
+
+[node name="lightning_spell" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_s5ysj")
+
+[node name="Astrea_melee_hits" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_mhfv0")
+
+[node name="lightning_projectile" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_2j5o5")
+
+[node name="electricity_charge_up" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_s5ysj")
+
+[node name="lightning_up" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_symny")
+
+[node name="Melee_swings" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_jpe2e")
+
+[node name="block" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("20_rqgf1")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -368.0
+offset_top = 136.0
+offset_right = 368.0
+offset_bottom = 196.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme = SubResource("Theme_1pmgw")
+text = "Goddess Astrea"
+
+[node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer"]
+visible = false
+offset_left = 336.0
+offset_top = -48.0
+offset_right = 1533.0
+offset_bottom = 446.0
+scale = Vector2(0.4, 0.4)
+max_value = 18.0
+texture_under = ExtResource("22_ugto5")
+texture_progress = ExtResource("23_dg74m")
+
+[connection signal="body_entered" from="Melee_collision/first_hit" to="." method="_on_first_hit_body_entered"]
+[connection signal="body_entered" from="Melee_collision/second_hit" to="." method="_on_first_hit_body_entered"]
+[connection signal="body_entered" from="Melee_collision/third_hit" to="." method="_on_first_hit_body_entered"]
+[connection signal="body_entered" from="Lightning_hitbox" to="." method="_on_lightning_hitbox_body_entered"]
+[connection signal="timeout" from="Idle_timer" to="." method="_on_idle_timer_timeout"]
+[connection signal="body_entered" from="crouch_attack" to="." method="_on_first_hit_body_entered"]
+[connection signal="body_entered" from="jump_attack" to="." method="_on_first_hit_body_entered"]

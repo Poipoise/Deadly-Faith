@@ -90,7 +90,7 @@ func _on_death_screen_respawn():
 		enemy_ruin.respawn()
 	var projectile_nodes = get_tree().get_nodes_in_group("projectile")
 	for projectiles in projectile_nodes:
-		projectiles.destroy()
+		projectiles.queue_free()
 	
 
 
@@ -106,7 +106,8 @@ func _on_start_screen_start_game():
 
 func _on_player_game_over():
 	gameover = true
-	$Level1/Necromancer.song_time = false
+	if $Level1/Necromancer != null:
+		$Level1/Necromancer.song_time = false
 	$AudioStreamPlayer.stop()
 
 
@@ -129,12 +130,11 @@ func _on_level_finished_cutscene_starter_start_cutscene(_placeholder, _placehold
 	play = false
 	$AudioStreamPlayer.stop()
 	$Final_cutscene_ambience.play()
-
+	for ruin_enemy in get_tree().get_nodes_in_group("ruins_enemy"):
+		ruin_enemy.queue_free()
 
 func _on_final_cutscene_finished(_placeholder):
 	$Final_cutscene_ambience.stop()
-	for ruin_enemy in get_tree().get_nodes_in_group("ruins_enemy"):
-		ruin_enemy.queue_free()
 	await get_tree().create_timer(1.3).timeout
 	play = true
 	go = true
@@ -180,3 +180,12 @@ func _on_golem_boss_golem_dead():
 	$CanvasLayer/Heal_potion_explanation.visible = false
 	
 	
+
+
+func _on_cave_finish_start_cutscene(_placeholder1, _placeholder2):
+	go = false
+	play = false
+	$AudioStreamPlayer.stop()
+	$Final_cutscene_ambience.play()
+	for cave_enemy in get_tree().get_nodes_in_group("cave_enemy"):
+		cave_enemy.queue_free()

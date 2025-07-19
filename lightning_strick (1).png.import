@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqrurm5tottpd"
-path="res://.godot/imported/AstreaNeutral.png-92e2c00a7e46eaeaa3f55160fead4e3f.ctex"
+uid="uid://m6mlvhvahsix"
+path="res://.godot/imported/lightning_strick (1).png-2e47afd0f68685799c811d5f1176a3d3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Portraits/AstreaNeutral.png"
-dest_files=["res://.godot/imported/AstreaNeutral.png-92e2c00a7e46eaeaa3f55160fead4e3f.ctex"]
+source_file="res://lightning_strick (1).png"
+dest_files=["res://.godot/imported/lightning_strick (1).png-2e47afd0f68685799c811d5f1176a3d3.ctex"]
 
 [params]
 

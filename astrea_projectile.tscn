@@ -3,6 +3,21 @@
 [ext_resource type="Script" path="res://astrea_projectile.gd" id="1_khc8m"]
 [ext_resource type="Texture2D" uid="uid://beinwpdp0ti77" path="res://lightning ball-Sheet.png" id="1_t8ksq"]
 
+[sub_resource type="Animation" id="Animation_fbv5k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_owlq3"]
 resource_name = "flying"
 length = 0.4
@@ -18,21 +33,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0, 3]
-}
-
-[sub_resource type="Animation" id="Animation_fbv5k"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_kc422"]
@@ -64,7 +64,7 @@ size = Vector2(15.5, 22)
 [sub_resource type="CircleShape2D" id="CircleShape2D_blpf4"]
 radius = 5.09902
 
-[node name="Astrea_projectile" type="CharacterBody2D"]
+[node name="Astrea_projectile" type="CharacterBody2D" groups=["projectile"]]
 collision_layer = 0
 collision_mask = 11
 script = ExtResource("1_khc8m")
@@ -89,7 +89,7 @@ shape = SubResource("RectangleShape2D_5273u")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_blpf4")
 
-[node name="Timer" type="Timer" parent="." groups=["projectile"]]
+[node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

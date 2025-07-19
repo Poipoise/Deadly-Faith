@@ -1,11 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://xh337hwrmm1u"]
+[gd_scene load_steps=15 format=3 uid="uid://xh337hwrmm1u"]
 
 [ext_resource type="Script" path="res://tutorial_cutscene.gd" id="1_4pe04"]
 [ext_resource type="Texture2D" uid="uid://sfbg15rpy6ye" path="res://10_basic_message_boxes_by_CharlesGabriel(1).png" id="2_27qfo"]
 [ext_resource type="Script" path="res://tutorialscript.gd" id="2_uubw3"]
 [ext_resource type="FontFile" uid="uid://de24cssv2vwp1" path="res://darib/DavysRibbons.ttf" id="4_dddcm"]
 [ext_resource type="FontFile" uid="uid://c4i33lcdn4b41" path="res://blackchancery/BLKCHCRY.TTF" id="5_82c32"]
-[ext_resource type="Texture2D" uid="uid://2rk3arees2sw" path="res://Portraits/AstreaNeutral.png" id="6_0jdxn"]
 
 [sub_resource type="Theme" id="Theme_u5yg3"]
 default_font = ExtResource("4_dddcm")
@@ -244,7 +243,6 @@ autoplay = "bob"
 z_index = -1
 position = Vector2(720, -171.429)
 scale = Vector2(0.6, 0.578)
-texture = ExtResource("6_0jdxn")
 
 [node name="Timer" type="Timer" parent="ColorRect"]
 wait_time = 0.5

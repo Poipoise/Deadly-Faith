@@ -62,7 +62,7 @@ func _physics_process(delta):
 			time_passed += delta
 			$CanvasLayer/healing_bar.value = (time_passed / Duration) * $CanvasLayer/healing_bar.max_value
 			$CanvasLayer/timer_label.visible = true
-			$CanvasLayer/timer_label.text = str(round((Duration - time_passed) * 10.0) / 10.0)
+			$CanvasLayer/timer_label.text = str(round((Duration - time_passed)))
 			if time_passed >= Duration:
 				$CanvasLayer/timer_label.visible = false
 				time_passed = 0
