@@ -13,10 +13,12 @@ func _physics_process(delta):
 
 func _on_lock_on_timer_timeout():
 	lock_on = false
+	$lightning_hit.play()
 	await get_tree().create_timer(0.3).timeout
 	$AnimationPlayer.play("lightning")
-	$lightning_hit.play()
 	await $AnimationPlayer.animation_finished
+	$Sprite2D.visible = false
+	await get_tree().create_timer(3.1).timeout
 	queue_free()
 
 

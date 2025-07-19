@@ -11,7 +11,8 @@ signal Game_Over
 var run_speed = 135
 var sprint_speed = 250
 var attacking = false
-var health = 5
+#var health = 5
+var health = 10
 enum states {IDLE, MOVING, ATTACKING, DEAD, HURT, ROLLING, FIREBALL}
 var state = states.IDLE
 var input
@@ -35,7 +36,8 @@ var fireball = false
 var potion_timer = false
 var time_passed = 0
 var Duration = 90.0
-var potion = false
+#var potion = false
+var potion = true
 
 func _ready():
 	start_pos = position
@@ -63,7 +65,7 @@ func _physics_process(delta):
 			$CanvasLayer/healing_bar.value = (time_passed / Duration) * $CanvasLayer/healing_bar.max_value
 			$CanvasLayer/timer_label.visible = true
 			$CanvasLayer/timer_label.text = str(round((Duration - time_passed)))
-			if time_passed >= Duration:
+			if $CanvasLayer/healing_bar.value == $CanvasLayer/healing_bar.max_value:
 				$CanvasLayer/timer_label.visible = false
 				time_passed = 0
 				potion_timer = false
@@ -131,6 +133,7 @@ func _input(event):
 		if event.is_action("heal") and $CanvasLayer/healing_bar.value == $CanvasLayer/healing_bar.max_value and potion:
 			$CanvasLayer/healing_bar.value = 0
 			health = start_health
+			health_changed.emit(health)
 			stamina = 150
 			potion_timer = true
 			
@@ -145,6 +148,7 @@ func choose_action():
 			velocity = Vector2.ZERO
 			$CollisionShape2D.disabled = true
 			await $AnimationPlayer.animation_finished
+			$CanvasLayer.visible = false
 			Game_Over.emit()
 			game_over = true
 		states.IDLE:
@@ -241,11 +245,14 @@ func _on_death_screen_respawn():
 	position = start_pos
 	health = start_health
 	health_changed.emit(health)
+	stamina = 150
 	state = states.IDLE
 	set_physics_process(true)
 	$CollisionShape2D.disabled = false
 	game_over = false
 	boss_spawing_done = false
+	if potion:
+		$CanvasLayer.visible = true
 
 
 func _on_sound_timer_timeout():
@@ -255,11 +262,13 @@ func _on_sound_timer_timeout():
 func _on_camp_fire_set_spawn():
 	start_pos = position
 	health = start_health
+	health_changed.emit(health)
 	$CanvasLayer/healing_bar.value = $CanvasLayer/healing_bar.max_value
 
 
 func _on_boss_spawning_boss_time():
 	if not boss_spawing_done:
+		invincible = true
 		boss_spawing_done = true
 		set_physics_process(false)
 		await get_tree().create_timer(0.1).timeout 
@@ -269,6 +278,7 @@ func _on_boss_spawning_boss_time():
 		set_physics_process(true)
 		$Camera2D.offset.x = 0
 		$Camera2D.offset.y = 0
+		invincible = false
 
 func health_change():
 	health_changed.emit(health)
@@ -301,3 +311,13 @@ func _on_golem_boss_golem_dead():
 	health_changed.emit(health)
 	potion = true
 	$CanvasLayer.visible = true
+
+
+func _on_astrea_starter_astrea_time():
+	start_pos = Vector2(4987, 1130)
+	health = 10
+	health_changed.emit(health)
+	$CanvasLayer/healing_bar.value = $CanvasLayer/healing_bar.max_value
+	$CanvasLayer/timer_label.visible = false
+	time_passed = 0
+	potion_timer = false

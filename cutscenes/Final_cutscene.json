@@ -1,9 +1,9 @@
 [
 	{"Name":"Astrea", "Emotion": "Cheerful", "Text":"Ho Ho ho. Well done knight! You scraped by through these ruins."},
-	{"Name":"Astrea", "Emotion": "Neutral", "Text":"That old zealot certainly gave you trouble. His prayers were getting quite vexing."},
+	{"Name":"Astrea", "Emotion": "Smile", "Text":"That old zealot certainly gave you trouble. His prayers were getting quite vexing."},
 	{"Name":"Aragorn", "Emotion": "Neutral", "Text":"I never imagined such a sorcerer existed. I think I need to sit down for a minute."},
 	{"Name":"Astrea", "Emotion": "Neutral", "Text":"This is no time to rest! You still must descend into the catacombs of this castle. You can rest when your dead or would you rather wish Celestina die instead."},
 	{"Name":"Aragorn", "Emotion": "Concern", "Text":"I'll never allow that to happen. My love, my life, wait for me. I have to keep going and face what lies ahead."},
-	{"Name":"Astrea", "Emotion": "Neutral", "Text":"Good, there is no turning back! Now go forward and put your new magical ability to use on those flying monsters!"},
+	{"Name":"Astrea", "Emotion": "Cheerful", "Text":"Good, there is no turning back! Now go forward and put your new magical ability to use on those flying monsters!"},
 	
 ]

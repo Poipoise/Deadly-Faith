@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var scholar_lazer: PackedScene
 @export var magic_fire: PackedScene
 @export var magic_orb: PackedScene
+signal Astrea_intro
 enum states {IDLE, MELEE_COMBO, JUMP_LIGHTNING, JAB_ATTACK, JUMP_ATTACK, SPELL_CAST, CHASE, DEAD, HURT, SHOOT}
 var state = states.IDLE
 var speed = 126
@@ -14,10 +15,9 @@ var prev_state
 var hit
 var action_started = false
 var actions = ["melee_combo", "jump_lightning", "jab_attack", "jump_attack", "spell_cast", "shoot"]
-var weights = [0, 0, 0, 0, 1, 0]
-#var weights = [0, 25, 0, 15, 30, 30]
+#var weights = [0, 0, 0, 0, 1, 0]
+var weights = [0, 25, 0, 22, 28, 25]
 var doing_run_attack1 = false
-var action_wait = 2
 var dead = false
 var select_new_action = true
 var boss_intro = false
@@ -25,6 +25,7 @@ var song_time = false
 var lightning_check = false
 var action_cooldown = false
 var phase = 1
+var fight_started = false
 
 func _ready():
 	start_pos = position
@@ -38,7 +39,7 @@ func _ready():
 func _physics_process(delta):
 	$CanvasLayer/HealthBar.value = health
 	if player.game_over:
-		$BossMusic.stop()
+		$BossMusicPhase1.stop()
 		$CanvasLayer/HealthBar.hide()
 		set_physics_process(false)
 		$CollisionShape2D.disabled = true
@@ -51,10 +52,9 @@ func _physics_process(delta):
 		
 	var player_position = player.global_position
 	var distance = global_position.distance_to(player_position)
-	if distance <= 200:
-		weights[0] = 40
-		weights[2] = 35
-		print(action_started)
+	if distance <= 150:
+		weights[0] = 30
+		weights[2] = 30
 	else:
 		weights[0] = 0
 		weights[2] = 0
@@ -66,7 +66,7 @@ func _physics_process(delta):
 	if not action_started and not dead and not action_cooldown and phase == 1:
 		action_started = true
 		action_decider()
-	elif not dead and action_cooldown:
+	elif not dead and action_cooldown and not hit:
 		state = states.IDLE
 		choose_action()
 		
@@ -90,17 +90,17 @@ func action_decider():
 	choose_action()
 
 func choose_action():
-	$Label.text = states.keys()[state]
+	#$Label.text = states.keys()[state]
 	
 	match state:
 		states.DEAD:
 			song_time = false
-			$AnimationPlayer.play("death")
+			$AnimationPlayer.play("Death")
 			set_physics_process(false)
 			$CollisionShape2D.disabled = true
 			await $AnimationPlayer.animation_finished
 			$CanvasLayer/HealthBar.hide()
-			$BossMusic.stop()
+			$BossMusicPhase1.stop()
 			await get_tree().create_timer(2.5).timeout
 			var world_vars = get_node("/root/World")
 			world_vars.play = true
@@ -134,7 +134,6 @@ func shoot_attack():
 			orb.global_position = global_position
 			orb.global_position.y += -66
 			orb.global_position.x += 40 * sign(position.direction_to(player.position).x)
-			#$magic_orb.play()
 			var base_dir = (player.global_position - orb.global_position).normalized()
 			orb.velocity = base_dir * orb.speed
 			await $AnimationPlayer.animation_finished
@@ -219,13 +218,20 @@ func hurt(amount, _dir):
 	if not hit:
 		hit = true
 		if randf() < 0.30 and state == states.IDLE:
+			state = states.HURT
+			choose_action()
 			$AnimationPlayer.play("block")
+			await $AnimationPlayer.animation_finished
 		else:
-			#$Hit.play()
-			$AnimationPlayer.play("hit")
+			$Hit.play()
 			health -= amount
+			$HitParticle.process_material.direction.y = sign (velocity.x) * -1
+			$Sprite2D.material.set_shader_parameter("active", true)
+			$HitParticle.emitting = true
 			await get_tree().create_timer(0.1).timeout
+			$HitParticle.emitting = false
 			await get_tree().create_timer(0.2).timeout
+			$Sprite2D.material.set_shader_parameter("active", false)
 			if health <= 0:
 				if phase == 1:
 					phase_two_set_up()
@@ -252,12 +258,15 @@ func weighted_random_choice(options: Array, weights: Array) -> Variant:
 	
 	
 func phase_two_set_up():
-	pass
+	dead = true
+	state = states.DEAD
+	choose_action()
 	
 	
 func _on_boss_spawning_boss_time():
 	if not boss_intro:
 		boss_intro = true
+		fight_started = true
 		$CanvasLayer/Label.show()
 		$CanvasLayer/HealthBar.show()
 		var player_vars = get_node("/root/World/Level1/Player")
@@ -265,7 +274,7 @@ func _on_boss_spawning_boss_time():
 		$BossMusicPhase1.play()
 		song_time = true
 		$AnimationPlayer.play("Idle")
-		await get_tree().create_timer(3.8).timeout
+		await get_tree().create_timer(5.4).timeout
 		$CanvasLayer/Label.hide()
 		set_physics_process(true)
 		$CollisionShape2D.disabled = false
@@ -286,3 +295,21 @@ func _on_idle_timer_timeout():
 	action_cooldown = false
 	
 
+func respawn():
+	state = states.IDLE
+	set_physics_process(false)
+	$CollisionShape2D.disabled = true
+	position = start_pos
+	health = start_health
+	action_started = false
+	weights = [0, 25, 0, 22, 28, 25]
+	select_new_action = true
+	doing_run_attack1 = false
+	lightning_check = false
+	dead = false
+	boss_intro = false
+	state = states.IDLE
+	if phase == 1 and fight_started:
+		await get_tree().create_timer(0.4).timeout
+		Astrea_intro.emit()
+		_on_boss_spawning_boss_time()

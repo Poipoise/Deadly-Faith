@@ -12,7 +12,7 @@ func start(_position, _direction):
 
 func _physics_process(_delta):
 	move_and_slide()
-	transform.x.x = sign(velocity.x)
+	self.rotation = velocity.angle()
 	$AnimationPlayer.play("flying")
 	
 	

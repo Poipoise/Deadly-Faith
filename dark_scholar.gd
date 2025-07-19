@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var magic_fire: PackedScene
 @export var magic_orb: PackedScene
 @onready var Level1 : Node = get_node("/root/World/Level1")
+signal scholar_death
 enum states {IDLE, ATTACK1, ATTACK2, CHASE, DEAD, HURT, DASH, RUN_ATTACK1, RUN_ATTACK2, SHOOT}
 var state = states.IDLE
 var speed = 126
@@ -18,12 +19,13 @@ var actions = ["Attack1", "Attack2", "run_attack1", "run_attack2", "shoot"]
 #var weights = [0, 0, 0, 25, 0]
 var weights = [30, 0, 15, 25, 30]
 var doing_run_attack1 = false
-var action_wait = 2
+var action_wait = 1.8
 var dead = false
 var select_new_action = true
 var boss_intro = false
 var song_time = false
 var invincible = false
+
 
 func _ready():
 	start_pos = position
@@ -99,9 +101,17 @@ func choose_action():
 	
 	match state:
 		states.DEAD:
+			song_time = false
 			$AnimationPlayer.play("death")
 			set_physics_process(false)
 			$CollisionShape2D.disabled = true
+			await $AnimationPlayer.animation_finished
+			$CanvasLayer/HealthBar.hide()
+			$BossMusic.stop()
+			await get_tree().create_timer(2.5).timeout
+			var world_vars = get_node("/root/World")
+			world_vars.play = true
+			world_vars.go = true
 		states.IDLE:
 			$AnimationPlayer.play("Idle")
 			velocity = Vector2.ZERO
@@ -149,6 +159,7 @@ func choose_action():
 			state = states.IDLE
 			choose_action()
 		states.RUN_ATTACK2:
+			
 			action_started = true
 			velocity = Vector2.ZERO
 			$AnimationPlayer.play("Idle")
@@ -243,15 +254,18 @@ func hurt(amount, _dir):
 	if not hit and not invincible:
 		hit = true
 		$Hit.play()
-		$AnimationPlayer.play("hit")
-		health -= amount 
+		health -= amount
+		$HitParticle.process_material.direction.y = sign (velocity.x) * -1
+		$Sprite2D.material.set_shader_parameter("active", true) 
 		$HitParticle.emitting = true
 		await get_tree().create_timer(0.1).timeout
 		$HitParticle.emitting = false
 		await get_tree().create_timer(0.2).timeout
+		$Sprite2D.material.set_shader_parameter("active", false)
 		hit = false
 		if health <= 0:
 			dead = true
+			scholar_death.emit()
 			state = states.DEAD
 
 
@@ -286,7 +300,7 @@ func _on_boss_spawning_boss_time():
 		$BossMusic.play()
 		song_time = true
 		$AnimationPlayer.play("Idle")
-		await get_tree().create_timer(3.8).timeout
+		await get_tree().create_timer(5).timeout
 		$CanvasLayer/Label.hide()
 		set_physics_process(true)
 		$CollisionShape2D.disabled = false

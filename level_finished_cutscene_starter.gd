@@ -8,5 +8,4 @@ func _on_necromancer_died():
 
 func _on_body_entered(_body):
 	if active:
-		
 		start_cutscene.emit("res://cutscenes/Final_cutscene.json", Vector2(4702, -604))

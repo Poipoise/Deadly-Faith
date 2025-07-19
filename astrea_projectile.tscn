@@ -65,6 +65,7 @@ size = Vector2(15.5, 22)
 radius = 5.09902
 
 [node name="Astrea_projectile" type="CharacterBody2D" groups=["projectile"]]
+scale = Vector2(2, 2)
 collision_layer = 0
 collision_mask = 11
 script = ExtResource("1_khc8m")

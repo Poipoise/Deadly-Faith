@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://co16mp41bo6hh"]
+[gd_scene load_steps=45 format=3 uid="uid://co16mp41bo6hh"]
 
 [ext_resource type="Script" path="res://dark_scholar.gd" id="1_5f06b"]
 [ext_resource type="Texture2D" uid="uid://blcpkdsi462kl" path="res://dark scholar/scholar_Idle.png" id="1_wgkgw"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://d4hako8xmahbd" path="res://scholar_projectile.tscn" id="5_o3as4"]
 [ext_resource type="Texture2D" uid="uid://6emqybjedoni" path="res://dark scholar/scholar_hit.png" id="5_t4n63"]
 [ext_resource type="Texture2D" uid="uid://bkbwdb0tmic40" path="res://dark scholar/scholar_death.png" id="6_ivaw2"]
+[ext_resource type="Shader" path="res://Hit_Flash.gdshader" id="6_sumia"]
 [ext_resource type="Texture2D" uid="uid://i637dnkgdh7d" path="res://dark scholar/scholar_run1.png" id="7_w21vw"]
 [ext_resource type="Texture2D" uid="uid://didvpbp0tab7f" path="res://dark scholar/Scholar_run2.png" id="8_6yvj8"]
 [ext_resource type="Texture2D" uid="uid://cyoaxcjgv1bsk" path="res://dark scholar/Scholar_walk.png" id="10_q8kkn"]
@@ -28,6 +29,12 @@
 [ext_resource type="AudioStream" uid="uid://cjnr3fybp6iih" path="res://sounds/fireball-whoosh-2-179126.mp3" id="26_stqqb"]
 [ext_resource type="AudioStream" uid="uid://b1535r53p64cy" path="res://sounds/fireball-whoosh-1-179125.mp3" id="27_ig3d5"]
 [ext_resource type="AudioStream" uid="uid://bamb004reyrip" path="res://sounds/scholar_death.mp3" id="28_du163"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vx6c8"]
+resource_local_to_scene = true
+shader = ExtResource("6_sumia")
+shader_parameter/active = false
+shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_shgv0"]
 resource_name = "Attack1"
@@ -833,7 +840,7 @@ size = Vector2(18, 15.5)
 
 [sub_resource type="Theme" id="Theme_ckf2q"]
 default_font = ExtResource("11_yukex")
-default_font_size = 50
+default_font_size = 60
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6xkws"]
 playback_mode = 2
@@ -843,7 +850,7 @@ stream_0/weight = 1.0
 stream_1/stream = ExtResource("21_obcb4")
 stream_1/weight = 1.0
 
-[node name="Dark_Scholar" type="CharacterBody2D"]
+[node name="Dark_Scholar" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 4
 collision_mask = 13
 script = ExtResource("1_5f06b")
@@ -853,6 +860,7 @@ magic_fire = ExtResource("4_dsykb")
 magic_orb = ExtResource("5_o3as4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_vx6c8")
 position = Vector2(0, -37)
 scale = Vector2(0.26, 0.26)
 texture = ExtResource("1_wgkgw")
@@ -879,10 +887,10 @@ visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -368.0
-offset_top = 136.0
-offset_right = 368.0
-offset_bottom = 196.0
+offset_left = -296.0
+offset_top = 154.0
+offset_right = 304.0
+offset_bottom = 226.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
@@ -891,10 +899,10 @@ text = "Dark Scholar"
 
 [node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer"]
 visible = false
-offset_left = 336.0
-offset_top = -48.0
-offset_right = 1533.0
-offset_bottom = 446.0
+offset_left = 341.0
+offset_top = -10.0
+offset_right = 1538.0
+offset_bottom = 484.0
 scale = Vector2(0.4, 0.4)
 max_value = 18.0
 texture_under = ExtResource("12_00uqx")

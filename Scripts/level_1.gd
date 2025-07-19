@@ -83,6 +83,10 @@ func _process(_delta):
 
 func _on_death_screen_respawn():
 	$Golem_boss_room_collision/CollisionShape2D.set_deferred("disabled", true)
+	$Arena_exit_blocker/CollisionShape2D.set_deferred("disabled", true)
+	$Arena_exit_blocker/Sprite2D.visible = false
+	$Arena_exit_blocker2/CollisionShape2D.set_deferred("disabled", true)
+	$Arena_exit_blocker2/Sprite2D.visible = false
 	gameover = false
 	play = true
 	var enemy_nodes = get_tree().get_nodes_in_group("enemy")
@@ -189,3 +193,22 @@ func _on_cave_finish_start_cutscene(_placeholder1, _placeholder2):
 	$Final_cutscene_ambience.play()
 	for cave_enemy in get_tree().get_nodes_in_group("cave_enemy"):
 		cave_enemy.queue_free()
+
+
+func _on_scholar_starter_scholar_time():
+	await get_tree().create_timer(0.1).timeout
+	$Arena_exit_blocker/CollisionShape2D.set_deferred("disabled", false)
+	$Arena_exit_blocker2/CollisionShape2D.set_deferred("disabled", false)
+	$Arena_exit_blocker/Sprite2D.visible = true
+	$Arena_exit_blocker2/Sprite2D.visible = true
+
+
+func _on_dark_scholar_scholar_death():
+	$Arena_exit_blocker3/CollisionShape2D.set_deferred("disabled", true)
+	$Arena_exit_blocker3/Sprite2D.visible = false
+
+
+func _on_astrea_starter_astrea_time():
+	await get_tree().create_timer(0.1).timeout
+	$Arena_exit_blocker4/CollisionShape2D.set_deferred("disabled", false)
+	$Arena_exit_blocker4/Sprite2D.visible = true

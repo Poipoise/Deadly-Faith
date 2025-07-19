@@ -187,6 +187,7 @@ _data = {
 default_font = ExtResource("3_03t2i")
 
 [node name="DeathScreen" type="CanvasLayer"]
+layer = 2
 script = ExtResource("1_jxdjv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
