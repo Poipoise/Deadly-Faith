@@ -17,7 +17,7 @@ enum states {IDLE, MOVING, ATTACKING, DEAD, HURT, ROLLING, FIREBALL}
 var state = states.IDLE
 var input
 var rolling = false
-var stamina = 150:
+var stamina = 160:
 	set = set_stamina
 var stamina_empty = true
 var recharging = false
@@ -38,6 +38,7 @@ var time_passed = 0
 var Duration = 90.0
 #var potion = false
 var potion = true
+var cutscene = false
 
 func _ready():
 	start_pos = position
@@ -47,7 +48,7 @@ func _ready():
 	
 func _physics_process(delta):
 	if recharging:
-		if stamina < 150:
+		if stamina < 160:
 			stamina = stamina + stamina_depletion
 		else:
 			recharging = false
@@ -200,7 +201,7 @@ func die():
 	$AnimationPlayer.play("death")
 
 func hurt(amount, dir):
-	if not invincible:
+	if not invincible and not cutscene:
 		$Hit.play()
 		var prev_state = state
 		player_hurt = true
@@ -252,7 +253,11 @@ func _on_death_screen_respawn():
 	game_over = false
 	boss_spawing_done = false
 	if potion:
-		$CanvasLayer.visible = true
+		$CanvasLayer/healing_bar.visible = true
+		$CanvasLayer/healing_bar.value = $CanvasLayer/healing_bar.max_value
+		$CanvasLayer/timer_label.visible = false
+		time_passed = 0
+		potion_timer = false
 
 
 func _on_sound_timer_timeout():
@@ -264,11 +269,14 @@ func _on_camp_fire_set_spawn():
 	health = start_health
 	health_changed.emit(health)
 	$CanvasLayer/healing_bar.value = $CanvasLayer/healing_bar.max_value
+	$CanvasLayer/timer_label.visible = false
+	time_passed = 0
+	potion_timer = false
 
 
 func _on_boss_spawning_boss_time():
 	if not boss_spawing_done:
-		invincible = true
+		cutscene = true
 		boss_spawing_done = true
 		set_physics_process(false)
 		await get_tree().create_timer(0.1).timeout 
@@ -278,7 +286,7 @@ func _on_boss_spawning_boss_time():
 		set_physics_process(true)
 		$Camera2D.offset.x = 0
 		$Camera2D.offset.y = 0
-		invincible = false
+		cutscene = false
 
 func health_change():
 	health_changed.emit(health)
@@ -310,7 +318,7 @@ func _on_golem_boss_golem_dead():
 	start_health = health
 	health_changed.emit(health)
 	potion = true
-	$CanvasLayer.visible = true
+	$CanvasLayer/healing_bar.visible = true
 
 
 func _on_astrea_starter_astrea_time():
@@ -321,3 +329,17 @@ func _on_astrea_starter_astrea_time():
 	$CanvasLayer/timer_label.visible = false
 	time_passed = 0
 	potion_timer = false
+
+func Asrea_phase_change():
+	cutscene = true
+	set_physics_process(false)
+	position = Vector2(4987, 1130)
+	await get_tree().create_timer(0.1).timeout 
+	boss_position = boss_position - global_position
+	$Camera2D.offset = boss_position
+	await get_tree().create_timer(5.7).timeout
+	set_physics_process(true)
+	$Camera2D.offset.x = 0
+	$Camera2D.offset.y = 0
+	cutscene = false
+	

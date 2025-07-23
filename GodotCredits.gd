@@ -90,7 +90,13 @@ var credits = [
 		"by Sucart",
 		"",
 		"mystic_woods_free",
-		"by Game Endeavor"
+		"by Game Endeavor",
+		"",
+		"Spearwoman sprite",
+		"by Dreamir",
+		"",
+		"Women Knight Portrait",
+		"by CaptainSkolot"
 		
 	],[
 		"Music",
@@ -108,6 +114,9 @@ var credits = [
 		"by AlkaKrab",
 		"",
 		"8-bit Fantasy & Adventure Music",
+		"by xDeviruchi",
+		"",
+		"6-Bit Fantasy & Adventure Music Pack",
 		"by xDeviruchi",
 		"",
 		"INFINITY CRYSTAL: AWAKENING",

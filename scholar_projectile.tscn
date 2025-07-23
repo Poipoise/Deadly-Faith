@@ -66,6 +66,7 @@ shape = SubResource("CircleShape2D_4ekjf")
 libraries = {
 "": SubResource("AnimationLibrary_qmt7l")
 }
+autoplay = "flying"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4

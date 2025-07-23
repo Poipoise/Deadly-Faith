@@ -96,3 +96,17 @@ func respawn():
 	await get_tree().create_timer(0.1).timeout
 	state = states.IDLE
 	player = null
+	if summoned:
+		queue_free()
+
+func summon():
+	$CollisionShape2D.disabled = true
+	$DetectArea/CollisionShape2D.disabled = true
+	state = states.SUMMONING
+	summoned = true
+	state = states.SUMMONING
+	$AnimationPlayer.play("revive")
+	await $AnimationPlayer.animation_finished
+	state = states.IDLE 
+	$CollisionShape2D.disabled = false
+	$DetectArea/CollisionShape2D.disabled = false

@@ -209,8 +209,11 @@ func shield(_delta):
 	collision_layer = (collision_layer | (1 << 4)) & ~(1 << 2)
 	$shield_timer.start()
 	await $AnimationPlayer.animation_finished
-	if shield1:
-		action_wait = 4
+	if not shield1:
+		shield1 = true
+		$CanvasLayer/Label2.visible = true
+		$Timer.start()
+		action_wait = 3
 	
 	action_started = false
 	
@@ -284,3 +287,7 @@ func respawn():
 
 func _on_melee_collision_body_entered(body):
 	body.hurt(1, position.direction_to(body.position))
+
+
+func _on_timer_timeout():
+	$CanvasLayer/Label2.visible = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://debhe2hulkw75"]
+[gd_scene load_steps=17 format=3 uid="uid://debhe2hulkw75"]
 
 [ext_resource type="Script" path="res://flying_brain_monster.gd" id="1_cw8cn"]
 [ext_resource type="Texture2D" uid="uid://bxyuk65q373p3" path="res://FlyingBrainMonster_spriteSheet.png" id="1_ydg2g"]
@@ -190,13 +190,29 @@ tracks/0/keys = {
 "values": [14, 17]
 }
 
+[sub_resource type="Animation" id="Animation_g7v12"]
+resource_name = "revive"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [27, 21]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i1iiu"]
 _data = {
 "Idle": SubResource("Animation_7l3vn"),
 "RESET": SubResource("Animation_rqrr8"),
 "bite": SubResource("Animation_obg2t"),
 "death": SubResource("Animation_731xb"),
-"hit": SubResource("Animation_lnwe1")
+"hit": SubResource("Animation_lnwe1"),
+"revive": SubResource("Animation_g7v12")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cf6kk"]
@@ -238,8 +254,6 @@ offset_left = 11.0
 offset_top = 6.0
 offset_right = 51.0
 offset_bottom = 29.0
-
-[node name="Sprite2D2" type="Sprite2D" parent="."]
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0

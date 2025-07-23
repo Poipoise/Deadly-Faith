@@ -1,7 +1,8 @@
 extends Node2D
 @export var enemy : PackedScene
 @onready var Level1 : Node = get_node("/root/World/Level1")
-@export var reward : PackedScene
+@export var enemy2 : PackedScene
+@export var hand : PackedScene
 var summon_position
 var summon_amount = 0
 var summon_state = false
@@ -19,9 +20,11 @@ var tutorial = false
 var walked = false
 var attacked = false
 var run = false
-var tutorial_done = false
+var tutorial_rol_done = false
 var dodge_done = false
 var tutorial_over = false
+var tutorial_done = false
+var tutorial_ending = false
 signal tutorial_next
 signal orb_spawner
 func _ready():
@@ -49,13 +52,6 @@ func _process(_delta):
 		if go:
 			play = true
 	
-	if chest_opened:
-		var Potion_reward = reward.instantiate()
-		add_child(Potion_reward)
-		Potion_reward.position.y = chest_position.y + 20
-		Potion_reward.position.x = chest_position.x
-		chest_opened = false
-	
 	if tutorial:
 		if (Input.is_action_just_pressed("left") or Input.is_action_just_pressed("right") or Input.is_action_just_pressed("down") or Input.is_action_just_pressed("up")) and not walked and $Tutorial_cutscene.first_dialog_done:
 			walked = true
@@ -73,13 +69,20 @@ func _process(_delta):
 		if attacked and not dodge_done and Input.is_action_just_pressed("roll"):
 			dodge_done = true
 			await get_tree().create_timer(10).timeout
-			tutorial_done = true
+			tutorial_rol_done = true
 			tutorial_next.emit()
 			
-		if tutorial_done and not tutorial_over:
+		if tutorial_rol_done and not tutorial_over:
 			tutorial_over = true
+			tutorial_next.emit()
+			$tutorial_CampFire.doing_tutorial = true
+		
+		if tutorial_done and not tutorial_ending:
+			tutorial_ending = true
+			tutorial_next.emit()
 			await get_tree().create_timer(10).timeout
 			tutorial_next.emit()
+			
 
 func _on_death_screen_respawn():
 	$Golem_boss_room_collision/CollisionShape2D.set_deferred("disabled", true)
@@ -101,7 +104,7 @@ func _on_death_screen_respawn():
 func _on_start_screen_start_game():
 	#If you want to skip the beginning dialogue uncomment start = true and comment $Cutscene.show() 
 	#also turn the cutscene variable in the cutscene script to false/off
-	# q$Cutscene.show()
+	#$Cutscene.show()
 	
 	#If you wish to skip tutorial comment tutorial = true in _on_cutscene_finished and turn off cutscene variabble in tutorial cutscene script
 	start = true
@@ -209,6 +212,47 @@ func _on_dark_scholar_scholar_death():
 
 
 func _on_astrea_starter_astrea_time():
+	for crypt_enemy in get_tree().get_nodes_in_group("crypt_enemy"):
+		crypt_enemy.queue_free()
 	await get_tree().create_timer(0.1).timeout
 	$Arena_exit_blocker4/CollisionShape2D.set_deferred("disabled", false)
 	$Arena_exit_blocker4/Sprite2D.visible = true
+
+
+func _on_tutorial_camp_fire_camp_fire_tutorial_done():
+	tutorial_done = true
+
+func Astrea_summons():
+	var summons_num = randi_range(2, 4)
+	var shape = $Astrea_summon_area/CollisionShape2D.shape as RectangleShape2D
+	var rect_size = shape.extents * 2
+	for i in range(summons_num):
+		var enemy_position = Vector2(
+			randf_range(-shape.extents.x, shape.extents.x),
+			randf_range(-shape.extents.y, shape.extents.y)
+		)
+		var enemy_pos = $Astrea_summon_area.global_position + enemy_position
+		var summons
+		if randf() > 0.50:
+			summons = enemy.instantiate()
+		else:
+			summons = enemy2.instantiate()
+		Level1.add_child(summons)
+		summons.global_position = enemy_pos
+		summons.health = 3
+		summons.summon()
+
+func Astrea_mud_hands():
+	var shape = $Mud_hand_spawn/CollisionShape2D.shape as RectangleShape2D
+	var rect_size = shape.extents * 2
+	for i in range(8):
+		var enemy_position = Vector2(
+			randf_range(-shape.extents.x, shape.extents.x),
+			randf_range(-shape.extents.y, shape.extents.y)
+		)
+		var hand_pos = $Mud_hand_spawn.global_position + enemy_position
+		var hand = hand.instantiate()
+		Level1.add_child(hand)
+		hand.global_position = hand_pos
+		await get_tree().create_timer(0.5).timeout
+		

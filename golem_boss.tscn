@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://bayttf12xyhcj"]
+[gd_scene load_steps=43 format=3 uid="uid://bayttf12xyhcj"]
 
 [ext_resource type="Texture2D" uid="uid://bqjxdqkggqseb" path="res://Mech_Stone.png" id="1_0ewhg"]
 [ext_resource type="Script" path="res://golem_boss.gd" id="1_nonsc"]
@@ -422,6 +422,10 @@ radius = 40.1123
 default_font = ExtResource("15_6myaf")
 default_font_size = 50
 
+[sub_resource type="Theme" id="Theme_aq8eb"]
+default_font = ExtResource("15_6myaf")
+default_font_size = 30
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2laem"]
 playback_mode = 2
 streams_count = 2
@@ -538,6 +542,24 @@ max_value = 15.0
 texture_under = ExtResource("16_nwwmp")
 texture_progress = ExtResource("17_aev6a")
 
+[node name="Label2" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = -1
+anchor_left = 0.502
+anchor_top = 0.811
+anchor_right = 0.502
+anchor_bottom = 0.811
+offset_left = -362.304
+offset_top = -37.528
+offset_right = 362.696
+offset_bottom = 37.472
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_aq8eb")
+text = "The Enemy has shielded itself
+Melee attacks won't work"
+horizontal_alignment = 1
+
 [node name="BossMusic" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_2laem")
 
@@ -560,5 +582,10 @@ volume_db = -2.0
 stream = ExtResource("22_il2fk")
 volume_db = -2.0
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [connection signal="timeout" from="shield_timer" to="." method="_on_shield_timer_timeout"]
 [connection signal="body_entered" from="Melee_collision" to="." method="_on_melee_collision_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

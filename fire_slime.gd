@@ -78,6 +78,7 @@ func choose_action():
 
 func hurt(amount, dir):
 	if not hit:
+		print("hit")
 		hit = true
 		$Hit.play()
 		health -= amount

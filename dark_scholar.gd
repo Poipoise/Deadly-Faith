@@ -60,7 +60,7 @@ func _physics_process(delta):
 	if not action_started and not dead:
 		state = states.CHASE
 		choose_action()
-		if select_new_action:
+		if select_new_action and not dead:
 			select_new_action = false
 			var action = weighted_random_choice(actions, weights)
 			if (action == "Attack1" or action == "Attack2") and distance < 200 and state != states.DASH:
@@ -70,18 +70,18 @@ func _physics_process(delta):
 				elif action == "Attack2":
 					state = states.ATTACK2
 				choose_action()
-			elif state != states.DASH:
+			elif state != states.DASH and not dead:
 				await get_tree().create_timer(action_wait).timeout
 				action_started = true
-				if action == "run_attack1":
+				if action == "run_attack1" and not dead:
 					state = states.RUN_ATTACK1
-				elif action == "run_attack2":
+				elif action == "run_attack2" and not dead:
 					state = states.RUN_ATTACK2
-				elif action == "Attack2":
+				elif action == "Attack2" and not dead:
 					state = states.ATTACK2
-				elif action == "Attack1":
+				elif action == "Attack1" and not dead:
 					state = states.ATTACK1
-				elif action == "shoot":
+				elif action == "shoot" and not dead:
 					state = states.SHOOT
 				choose_action()
 	if dead:
@@ -102,7 +102,7 @@ func choose_action():
 	match state:
 		states.DEAD:
 			song_time = false
-			$AnimationPlayer.play("death")
+			$AnimationPlayer.play("Death")
 			set_physics_process(false)
 			$CollisionShape2D.disabled = true
 			await $AnimationPlayer.animation_finished
@@ -144,8 +144,9 @@ func choose_action():
 			velocity = Vector2(-1 * cos(deg_to_rad(36)), -1 * sin(deg_to_rad(36))) * speed * 4
 			transform.x.x = sign(velocity.x)
 			await get_tree().create_timer(1.2).timeout
-			state = states.IDLE
-			choose_action()
+			if not dead:
+				state = states.IDLE
+				choose_action()
 			await get_tree().create_timer(0.9).timeout
 		states.DASH:
 			action_started = true
@@ -156,10 +157,10 @@ func choose_action():
 				transform.x.x = sign(velocity.x)
 			await get_tree().create_timer(0.6).timeout
 			invincible = false
-			state = states.IDLE
-			choose_action()
+			if not dead:
+				state = states.IDLE
+				choose_action()
 		states.RUN_ATTACK2:
-			
 			action_started = true
 			velocity = Vector2.ZERO
 			$AnimationPlayer.play("Idle")
@@ -174,6 +175,7 @@ func choose_action():
 			else:
 				velocity = Vector2.LEFT * speed * 3.5
 			$AnimationPlayer.play("run2")
+			collision_layer = (collision_layer | 0) & ~(1 << 2)
 			if velocity.x != 0:
 				transform.x.x = sign(velocity.x)
 			var lazer = scholar_lazer.instantiate()
@@ -191,8 +193,10 @@ func choose_action():
 			await get_tree().create_timer(1.3).timeout
 			lazer.queue_free()
 			lazer2.queue_free()
-			state = states.IDLE
-			choose_action()
+			collision_layer = collision_layer | (1 << 2)
+			if not dead:
+				state = states.IDLE
+				choose_action()
 		states.SHOOT:
 			shoot_attack()
 			
@@ -218,8 +222,9 @@ func attack1():
 	var base_dir = (projectile.global_position - global_position).normalized()
 	projectile.velocity = base_dir * projectile.speed
 	await $AnimationPlayer.animation_finished
-	state = states.IDLE
-	choose_action()
+	if not dead:
+		state = states.IDLE
+		choose_action()
 
 func attack2():
 	velocity = Vector2.ZERO
@@ -229,8 +234,9 @@ func attack2():
 	$attack2.play()
 	transform.x.x = sign(position.direction_to(player.position).x)
 	await $AnimationPlayer.animation_finished
-	state = states.IDLE
-	choose_action()
+	if not dead:
+		state = states.IDLE
+		choose_action()
 
 func shoot_attack():
 	velocity = Vector2.ZERO
@@ -246,8 +252,9 @@ func shoot_attack():
 			var base_dir = (player.global_position - orb.global_position).normalized()
 			orb.velocity = base_dir * orb.speed
 			await get_tree().create_timer(0.5).timeout
-	state = states.IDLE
-	choose_action()
+	if not dead:
+		state = states.IDLE
+		choose_action()
 
 
 func hurt(amount, _dir):
