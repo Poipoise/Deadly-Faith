@@ -876,10 +876,6 @@ libraries = {
 position = Vector2(-2, -9.25)
 shape = SubResource("RectangleShape2D_l3pmj")
 
-[node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Label" type="Label" parent="CanvasLayer"]

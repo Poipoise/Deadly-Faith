@@ -4,7 +4,6 @@ signal finished
 @export var cutscene_next = false
 @export var first_dialog_done = false
 func _on_color_rect_cutscene_finished():
-	print("WE DONE")
 	$AnimationPlayer.play("black_out")
 	await get_tree().create_timer(0.7).timeout
 	finished.emit()
@@ -17,7 +16,6 @@ func _on_color_rect_cutscene_finished():
 func _on_cutscene_finished():
 	if cutscene:
 		await get_tree().create_timer(1).timeout
-		print("Its time")
 		$AnimationPlayer.play("Fade in")
 		cutscene_next = true
 	if not cutscene:

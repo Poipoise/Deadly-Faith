@@ -4,6 +4,6 @@
 	{"Name":"Astrea", "Emotion": "Cheerful", "Text":"Good. If you wish to move faster hold SHIFT while moving. This consumes your stamina seen at the bottom left. Don't worry your stamina refills slowly after some time."},
 	{"Name":"Astrea", "Emotion": "Smile", "Text":"Great! Now, see that dummy over there? Attack it by pressing left click. This also consumes stamina. Get a few good swings."},
 	{"Name":"Astrea", "Emotion": "Smile", "Text":"Excellent, however, you will often face retaliation from monster you intend to attack. Pressing SPACE consumes allows you to dodge enemy attacks. Practice against these light orbs."},
-	{"Name":"Astrea", "Emotion": "Smile", "Text":"Throughout your journey you are likely to get hurt. Campfires like the one to your left can be used to heal and save your progress. Try it now."},
+	{"Name":"Astrea", "Emotion": "Smile", "Text":"Throughout your journey you are likely to get hurt. Campfires like the one to your left can be used to heal and save your progress. Press 'E' to use a campfire. Try it now."},
 	{"Name":"Astrea", "Emotion": "Cheerful", "Text":"Amazing job my knight. You're sufficiently prepared. As long as you remember these teaching and hold your faith in me you will make it to the end."}
 ]

@@ -4,7 +4,6 @@ signal finished
 @export var cutscene_started = false
 func _on_color_rect_cutscene_finished():
 	finished.emit()
-	print("Finished emitted")
 	queue_free()
 
 

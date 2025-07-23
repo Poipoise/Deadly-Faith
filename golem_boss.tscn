@@ -462,10 +462,6 @@ libraries = {
 position = Vector2(-0.5, -5)
 shape = SubResource("RectangleShape2D_gdnst")
 
-[node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
-
 [node name="Hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_mbh1y")
 volume_db = 8.0

@@ -1,0 +1,175 @@
+[gd_scene load_steps=16 format=3 uid="uid://clrea3xn4mlhq"]
+
+[ext_resource type="Script" path="res://betrayal_cutscene.gd" id="1_iucjf"]
+[ext_resource type="Texture2D" uid="uid://sfbg15rpy6ye" path="res://10_basic_message_boxes_by_CharlesGabriel(1).png" id="2_hh67m"]
+[ext_resource type="Script" path="res://Betrayal_cutscene_logic.gd" id="3_nhup0"]
+[ext_resource type="FontFile" uid="uid://de24cssv2vwp1" path="res://darib/DavysRibbons.ttf" id="4_lkbwy"]
+[ext_resource type="FontFile" uid="uid://c4i33lcdn4b41" path="res://blackchancery/BLKCHCRY.TTF" id="5_nkp1q"]
+[ext_resource type="AudioStream" uid="uid://28gr5rf2eoj2" path="res://SoundTrack/Astrea_betrayal_EyesInTheVoid-chosic.com_.mp3" id="6_r8skj"]
+[ext_resource type="AudioStream" uid="uid://c0m2urxkws22m" path="res://SoundTrack/16 - The Calm Before The Storm.mp3" id="7_7xce3"]
+
+[sub_resource type="Theme" id="Theme_u5yg3"]
+default_font = ExtResource("4_lkbwy")
+
+[sub_resource type="Theme" id="Theme_vqqup"]
+default_font = ExtResource("5_nkp1q")
+
+[sub_resource type="Animation" id="Animation_pq2wi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_bva0o"]
+resource_name = "bob"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -20)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3wa2p"]
+_data = {
+"RESET": SubResource("Animation_pq2wi"),
+"bob": SubResource("Animation_bva0o")
+}
+
+[sub_resource type="Animation" id="Animation_elhds"]
+resource_name = "Fade in"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_6s0ug"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_206c6"]
+_data = {
+"Fade in": SubResource("Animation_elhds"),
+"RESET": SubResource("Animation_6s0ug")
+}
+
+[node name="BetrayalCutscene" type="CanvasLayer"]
+script = ExtResource("1_iucjf")
+
+[node name="ColorRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -384.5
+offset_top = -221.0
+offset_right = 384.5
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+texture = ExtResource("2_hh67m")
+expand_mode = 3
+script = ExtResource("3_nhup0")
+dialogPath = "res://cutscenes/Scholar_death.json"
+
+[node name="Name" type="RichTextLabel" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.076
+anchor_top = 0.131
+anchor_right = 0.076
+anchor_bottom = 0.131
+offset_left = -49.976
+offset_top = -15.951
+offset_right = 711.024
+offset_bottom = 47.049
+theme = SubResource("Theme_u5yg3")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 55
+text = "Name"
+
+[node name="Text" type="RichTextLabel" parent="ColorRect"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 61.0
+offset_right = 891.0
+offset_bottom = 205.0
+theme = SubResource("Theme_vqqup")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 35
+text = "BLAH BLAH BLAH"
+
+[node name="Indicator" type="Polygon2D" parent="ColorRect"]
+position = Vector2(842.5, 173)
+scale = Vector2(0.492159, 0.492159)
+color = Color(0.501961, 0, 0.12549, 1)
+polygon = PackedVector2Array(32, 16, 80, 16, 56, 56)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect/Indicator"]
+libraries = {
+"": SubResource("AnimationLibrary_3wa2p")
+}
+autoplay = "bob"
+
+[node name="Portrait" type="Sprite2D" parent="ColorRect"]
+z_index = -1
+position = Vector2(210.5, -163)
+scale = Vector2(0.6, 0.578)
+
+[node name="Timer" type="Timer" parent="ColorRect"]
+wait_time = 0.5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_206c6")
+}
+
+[node name="background_music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_r8skj")
+volume_db = -8.0
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_7xce3")
+volume_db = -15.0
+
+[connection signal="Cutscene_finished" from="ColorRect" to="." method="_on_color_rect_cutscene_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -28,7 +28,6 @@ func _physics_process(_delta):
 		state = states.DEAD
 	
 func choose_action():
-	$Label.text = states.keys()[state]
 	match state:
 		states.DEAD:
 			$Death.play()
@@ -67,7 +66,6 @@ func choose_action():
 			while not jumping:
 				jumping = true
 				jump_interupt = true
-				print("ENTERING JUMp")
 				var area = $Detect
 				var collision_shape = area.get_node("CollisionShape2D")
 				var shape = collision_shape.shape
@@ -80,7 +78,6 @@ func choose_action():
 				raycast.global_position = global_position
 				if not attacking:
 					for i in range(30):
-						print("Trying to find jump")
 						random_position = area_position + Vector2(
 							randi_range(-radius, radius),
 							randi_range(-radius, radius)
@@ -104,7 +101,6 @@ func choose_action():
 							continue
 						
 						jumped = true
-						print("FOUND YOU")
 						$AnimationPlayer.play("Jump")
 						await $AnimationPlayer.animation_finished
 						self.visible = false
@@ -114,12 +110,10 @@ func choose_action():
 						$AnimationPlayer.play("Landing")
 						await $AnimationPlayer.animation_finished
 						# If there’s no collision at the random position, teleport there
-						print("prosition FOUND")
 						jump_interupt = false
 						state = states.ATTACK
 						break
 					if not jumped:
-						print("Jump not found")
 						$Run_timer.start()
 						jump_interupt = false
 						state = states.RUN
@@ -185,10 +179,8 @@ func respawn():
 	player = null
 	dead = false
 	jump_interupt = false
-	print("done")
 
 
 func _on_run_timer_timeout():
-	print("TOO CLOSE")
 	jumping = false
 	state = states.JUMP

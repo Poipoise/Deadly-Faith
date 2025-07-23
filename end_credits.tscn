@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bote4vp66vu3m"]
+[gd_scene load_steps=16 format=3 uid="uid://bote4vp66vu3m"]
 
 [ext_resource type="Script" path="res://end_credits.gd" id="1_hgkrl"]
 [ext_resource type="FontFile" uid="uid://bld7hkhcvy8yp" path="res://joystix/joystix monospace.otf" id="1_nvfh4"]
 [ext_resource type="AudioStream" uid="uid://d2xhht223xeag" path="res://sounds/boom-geomorphism-cinematic-trailer-sound-effects-123876.mp3" id="3_7cp3l"]
+[ext_resource type="Texture2D" uid="uid://cptpa1lmmfyc2" path="res://Deadly Faith title.png" id="4_y8er6"]
 
 [sub_resource type="Animation" id="Animation_76dif"]
 resource_name = "Fade_in"
@@ -22,11 +23,11 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("GameTitle:visible")
+tracks/1/path = NodePath("OurNames:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.9, 3.5),
+"times": PackedFloat32Array(0, 3.5, 6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -34,11 +35,11 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("OurNames:visible")
+tracks/2/path = NodePath("AnimatedSprite2D:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 3.5, 6),
+"times": PackedFloat32Array(0, 0.9, 3.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -61,7 +62,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("GameTitle:visible")
+tracks/1/path = NodePath("OurNames:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -73,7 +74,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("OurNames:visible")
+tracks/2/path = NodePath("AnimatedSprite2D:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -89,13 +90,64 @@ _data = {
 "RESET": SubResource("Animation_ckwon")
 }
 
-[sub_resource type="Theme" id="Theme_y016o"]
-default_font = ExtResource("1_nvfh4")
-default_font_size = 100
-
 [sub_resource type="Theme" id="Theme_n1ukn"]
 default_font = ExtResource("1_nvfh4")
 default_font_size = 70
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tl56m"]
+atlas = ExtResource("4_y8er6")
+region = Rect2(0, 0, 1600, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mki10"]
+atlas = ExtResource("4_y8er6")
+region = Rect2(1600, 0, 1600, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crg00"]
+atlas = ExtResource("4_y8er6")
+region = Rect2(0, 800, 1600, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e6l7g"]
+atlas = ExtResource("4_y8er6")
+region = Rect2(1600, 800, 1600, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eqp1c"]
+atlas = ExtResource("4_y8er6")
+region = Rect2(0, 1600, 1600, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ioyk"]
+atlas = ExtResource("4_y8er6")
+region = Rect2(1600, 1600, 1600, 800)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_htikx"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tl56m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mki10")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crg00")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e6l7g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eqp1c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ioyk")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
 
 [node name="EndCredits" type="CanvasLayer"]
 script = ExtResource("1_hgkrl")
@@ -114,24 +166,6 @@ libraries = {
 "": SubResource("AnimationLibrary_5l1cx")
 }
 
-[node name="GameTitle" type="Label" parent="."]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -491.5
-offset_top = -60.0
-offset_right = 491.5
-offset_bottom = 60.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource("Theme_y016o")
-theme_override_colors/font_color = Color(0.8, 0, 0, 1)
-text = "Deadly Faith"
-horizontal_alignment = 1
-
 [node name="OurNames" type="Label" parent="."]
 visible = false
 anchors_preset = 8
@@ -147,10 +181,19 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_n1ukn")
 text = "By
-Anthony Melgar
+Anthony
 &
-Andrew Palchevskiy"
+Andrew"
 horizontal_alignment = 1
 
 [node name="Boom" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_7cp3l")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(614, 359)
+scale = Vector2(1.015, 1.03375)
+sprite_frames = SubResource("SpriteFrames_htikx")
+animation = &"new_animation"
+autoplay = "new_animation"
+frame_progress = 0.735833

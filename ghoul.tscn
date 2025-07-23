@@ -558,12 +558,6 @@ collision_mask = 2
 position = Vector2(2, -10)
 shape = SubResource("CircleShape2D_qxb75")
 
-[node name="Label" type="Label" parent="."]
-offset_left = 11.0
-offset_top = 6.0
-offset_right = 51.0
-offset_bottom = 29.0
-
 [node name="Hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_afuku")
 volume_db = 8.0

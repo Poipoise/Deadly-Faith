@@ -52,7 +52,6 @@ func nextPhrase() -> void:
 	
 	while $Text.visible_characters < len($Text.text):
 		$Text.visible_characters += 1
-		
 		$Timer.start()
 		await $Timer.timeout
 	await get_tree().create_timer(7.0).timeout

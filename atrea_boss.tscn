@@ -2794,7 +2794,6 @@ shape = SubResource("RectangleShape2D_dsbbd")
 disabled = true
 
 [node name="Melee_collision" type="Node2D" parent="."]
-visible = false
 
 [node name="first_hit" type="Area2D" parent="Melee_collision"]
 collision_layer = 0
@@ -2822,7 +2821,6 @@ polygon = PackedVector2Array(34, -37, 35.4545, -29.0909, 25.4545, -22.7273, 10, 
 disabled = true
 
 [node name="Lightning_hitbox" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -2836,7 +2834,6 @@ wait_time = 1.7
 one_shot = true
 
 [node name="crouch_attack" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -2846,7 +2843,6 @@ shape = SubResource("RectangleShape2D_4xtv7")
 disabled = true
 
 [node name="jump_attack" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -2861,10 +2857,6 @@ volume_db = -7.0
 [node name="BossMusicPhase2" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_bx7d5")
 volume_db = -10.0
-
-[node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
 
 [node name="Astrea_lightning_down" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_xhqk8")

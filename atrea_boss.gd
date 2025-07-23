@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var pulse: PackedScene
 signal Astrea_intro
 signal shield_start
+signal Ending
 enum states {IDLE, MELEE_COMBO, JUMP_LIGHTNING, JAB_ATTACK, JUMP_ATTACK, SPELL_CAST, DEAD, HURT, SHOOT, SCREAM, DASH_COMBO, PULSE, MUD_HANDS, MONSTER_ATTACK2}
 var state = states.IDLE
 var speed = 126
@@ -15,7 +16,6 @@ var prev_state
 var hit
 var action_started = false
 var actions = ["melee_combo", "jump_lightning", "jab_attack", "jump_attack", "spell_cast", "shoot"]
-#var weights = [0, 0, 0, 0, 1, 0]
 var weights = [0, 25, 0, 22, 28, 25]
 var weights_phase2 = [0, 10, 0, 8, 10, 12, 0, 23, 20, 15, 0]
 var actions_phase2 = ["melee_combo", "jump_lightning", "jab_attack", "jump_attack", "spell_cast", "shoot", "scream", "dash_combo", "pulse", "mud_hands", "monster_attack2"]
@@ -108,7 +108,6 @@ func _physics_process(delta):
 		choose_action()
 	
 	if not action_started and not dead and not action_cooldown and phase == 2 and not cutscene:
-		print("Next Action")
 		action_started = true
 		action_decider_phase2()
 
@@ -156,21 +155,16 @@ func action_decider_phase2():
 	choose_action()
 
 func choose_action():
-	$Label.text = states.keys()[state]
-	
 	match state:
 		states.DEAD:
 			song_time = false
+			$BossMusicPhase2.stop()
 			$AnimationPlayer.play("Death")
 			set_physics_process(false)
 			$CollisionShape2D.disabled = true
-			await $AnimationPlayer.animation_finished
 			$CanvasLayer/HealthBar.hide()
 			$BossMusicPhase1.stop()
-			await get_tree().create_timer(2.5).timeout
-			var world_vars = get_node("/root/World")
-			world_vars.play = true
-			world_vars.go = true
+			Ending.emit()
 		states.IDLE:
 			if phase == 1:
 				$AnimationPlayer.play("Idle")
@@ -222,19 +216,20 @@ func shoot_attack():
 	$Idle_timer.start()
 	
 func melee_combo():
-	velocity = Vector2.ZERO
-	$AnimationPlayer.play("Idle")
-	await get_tree().create_timer(0.4).timeout
-	transform.x.x = sign(position.direction_to(player.position).x)
-	$AnimationPlayer.play("Melee_attack_combo")
-	await $AnimationPlayer.animation_finished
-	action_started = false
-	action_cooldown = true
-	$Idle_timer.wait_time = 2
-	$Idle_timer.start()
+	if not dead:
+		velocity = Vector2.ZERO
+		$AnimationPlayer.play("Idle")
+		await get_tree().create_timer(0.4).timeout
+		transform.x.x = sign(position.direction_to(player.position).x)
+		$AnimationPlayer.play("Melee_attack_combo")
+		await $AnimationPlayer.animation_finished
+		action_started = false
+		action_cooldown = true
+		$Idle_timer.wait_time = 2
+		$Idle_timer.start()
 
 func jump_lightning():
-	if not cutscene:
+	if not cutscene and not dead:
 		velocity = Vector2.ZERO
 		$AnimationPlayer.play("jump_lightning")
 		await get_tree().create_timer(0.3).timeout
@@ -253,7 +248,7 @@ func jump_lightning():
 	
 
 func jump_attack():
-	if not cutscene:
+	if not cutscene and not dead:
 		velocity = Vector2.ZERO
 		$AnimationPlayer.play("jump_attack")
 		velocity = position.direction_to(player.position) * speed * 5
@@ -269,14 +264,15 @@ func jump_attack():
 
 
 func jab_attack():
-	velocity = Vector2.ZERO
-	transform.x.x = sign(position.direction_to(player.position).x)
-	$AnimationPlayer.play("jab_attack")
-	await $AnimationPlayer.animation_finished
-	action_started = false
-	action_cooldown = true
-	$Idle_timer.wait_time = 2
-	$Idle_timer.start()
+	if not dead:
+		velocity = Vector2.ZERO
+		transform.x.x = sign(position.direction_to(player.position).x)
+		$AnimationPlayer.play("jab_attack")
+		await $AnimationPlayer.animation_finished
+		action_started = false
+		action_cooldown = true
+		$Idle_timer.wait_time = 2
+		$Idle_timer.start()
 
 func spell_casting():
 	velocity = Vector2.ZERO
@@ -296,44 +292,46 @@ func spell_casting():
 	$Idle_timer.start()
 
 func scream():
-	velocity = Vector2.ZERO
-	transform.x.x = sign(position.direction_to(player.position).x)
-	$AnimationPlayer.play("monster_scream")
-	var world_vars = get_node("/root/World")
-	world_vars.Astrea_summons()
-	await $AnimationPlayer.animation_finished
-	action_started = false
-	action_cooldown = true
-	$Idle_timer.wait_time = 4
-	$Idle_timer.start()
-	$scream_timer.start()
-	weights_phase2[6] = 0
-	print("Scream finished")
+	if not dead:
+		velocity = Vector2.ZERO
+		transform.x.x = sign(position.direction_to(player.position).x)
+		$AnimationPlayer.play("monster_scream")
+		var world_vars = get_node("/root/World")
+		world_vars.Astrea_summons()
+		await $AnimationPlayer.animation_finished
+		action_started = false
+		action_cooldown = true
+		$Idle_timer.wait_time = 4
+		$Idle_timer.start()
+		$scream_timer.start()
+		weights_phase2[6] = 0
 
 func Monster_attack2():
-	velocity = Vector2.ZERO
-	transform.x.x = sign(position.direction_to(player.position).x)
-	$AnimationPlayer.play("Monster_attack2")
-	await $AnimationPlayer.animation_finished
-	action_started = false
-	action_cooldown = true
-	$Idle_timer.wait_time = 2
-	$Idle_timer.start()
+	if not dead:
+		velocity = Vector2.ZERO
+		transform.x.x = sign(position.direction_to(player.position).x)
+		$AnimationPlayer.play("Monster_attack2")
+		await $AnimationPlayer.animation_finished
+		action_started = false
+		action_cooldown = true
+		$Idle_timer.wait_time = 2
+		$Idle_timer.start()
 
 func Monster_dash_combo():
 	velocity = Vector2.ZERO
 	for i in range(3):
-		$AnimationPlayer.play("Monster_attack3")
-		await get_tree().create_timer(0.3).timeout
-		collision_layer = (collision_layer | 0) & ~(1 << 2)
-		velocity = position.direction_to(player.position) * speed * 6
-		if velocity.x != 0:
-			transform.x.x = sign(velocity.x)
-		await $AnimationPlayer.animation_finished
-		velocity = Vector2.ZERO
-		collision_layer = collision_layer | (1 << 2)
-		$AnimationPlayer.play("Idle_monster")
-		await get_tree().create_timer(0.5).timeout
+		if not dead:
+			$AnimationPlayer.play("Monster_attack3")
+			await get_tree().create_timer(0.3).timeout
+			collision_layer = (collision_layer | 0) & ~(1 << 2)
+			velocity = position.direction_to(player.position) * speed * 6
+			if velocity.x != 0:
+				transform.x.x = sign(velocity.x)
+			await $AnimationPlayer.animation_finished
+			velocity = Vector2.ZERO
+			collision_layer = collision_layer | (1 << 2)
+			$AnimationPlayer.play("Idle_monster")
+			await get_tree().create_timer(0.5).timeout
 	action_started = false
 	action_cooldown = true
 	$Idle_timer.wait_time = 2
@@ -344,27 +342,29 @@ func Monster_pulse():
 	$AnimationPlayer.play("monster_idle2")
 	var pulse_num = randi_range(3, 6)
 	for i in range(pulse_num):
-		var pulse = pulse.instantiate()
-		pulse.position = position
-		pulse.base_color = Color(0.259, 0.188, 0.325)
-		get_parent().add_child(pulse)
-		await get_tree().create_timer(1.5).timeout
+		if not dead:
+			var pulse = pulse.instantiate()
+			pulse.position = position
+			pulse.base_color = Color(0.259, 0.188, 0.325)
+			get_parent().add_child(pulse)
+			await get_tree().create_timer(1.5).timeout
 	action_started = false
 	action_cooldown = true
 	$Idle_timer.wait_time = 2
 	$Idle_timer.start()
 
 func spawn_mud_hands():
-	velocity = Vector2.ZERO
-	transform.x.x = sign(position.direction_to(player.position).x)
-	$AnimationPlayer.play("Monster_attack1")
-	var world_vars = get_node("/root/World")
-	world_vars.Astrea_mud_hands()
-	await $AnimationPlayer.animation_finished
-	action_started = false
-	action_cooldown = true
-	$Idle_timer.wait_time = 2.5
-	$Idle_timer.start()
+	if not dead:
+		velocity = Vector2.ZERO
+		transform.x.x = sign(position.direction_to(player.position).x)
+		$AnimationPlayer.play("Monster_attack1")
+		var world_vars = get_node("/root/World")
+		world_vars.Astrea_mud_hands()
+		await $AnimationPlayer.animation_finished
+		action_started = false
+		action_cooldown = true
+		$Idle_timer.wait_time = 2.5
+		$Idle_timer.start()
 
 func hurt(amount, _dir):
 	if not hit:
@@ -433,20 +433,15 @@ func phase_two_set_up():
 	$BossMusicPhase2.play()
 	song_time = true
 	$AnimationPlayer.play("monster_scream")
-	print("scream 1")
 	shield_start.emit()
 	invincible = true
-	print("Stopped at idle?")
 	await $AnimationPlayer.animation_finished
-	print("Nope")
 	state = states.IDLE
 	choose_action()
 	await get_tree().create_timer(3.3).timeout
-	print("scream 2")
 	state = states.SCREAM
 	choose_action()
 	await get_tree().create_timer(1).timeout
-	print("showtime")
 	cutscene = false
 	
 	
@@ -488,31 +483,32 @@ func crystal_broken():
 	
 
 func respawn():
-	state = states.IDLE
-	set_physics_process(false)
-	$CollisionShape2D.disabled = true
-	position = start_pos
-	health = start_health
-	action_started = false
-	select_new_action = true
-	doing_run_attack1 = false
-	lightning_check = false
-	dead = false
-	boss_intro = false
-	state = states.IDLE
-	if phase == 1 and fight_started:
-		weights = [0, 25, 0, 22, 28, 25]
-		await get_tree().create_timer(0.4).timeout
-		Astrea_intro.emit()
-		_on_boss_spawning_boss_time()
-	if phase == 2:
-		invincible = false
-		broken_crystals = 0
-		weights_phase2 = [0, 10, 0, 8, 10, 12, 0, 23, 20, 15, 0]
-		await get_tree().create_timer(0.4).timeout
-		var world_vars = get_node("/root/World")
-		world_vars.Boss_Music_Time()
-		phase_two_set_up()
+	if not dead:
+		state = states.IDLE
+		set_physics_process(false)
+		$CollisionShape2D.disabled = true
+		position = start_pos
+		health = start_health
+		action_started = false
+		select_new_action = true
+		doing_run_attack1 = false
+		lightning_check = false
+		dead = false
+		boss_intro = false
+		state = states.IDLE
+		if phase == 1 and fight_started:
+			weights = [0, 25, 0, 22, 28, 25]
+			await get_tree().create_timer(0.4).timeout
+			Astrea_intro.emit()
+			_on_boss_spawning_boss_time()
+		if phase == 2:
+			invincible = false
+			broken_crystals = 0
+			weights_phase2 = [0, 10, 0, 8, 10, 12, 0, 23, 20, 15, 0]
+			await get_tree().create_timer(0.4).timeout
+			var world_vars = get_node("/root/World")
+			world_vars.Boss_Music_Time()
+			phase_two_set_up()
 
 
 func _on_scream_timer_timeout():

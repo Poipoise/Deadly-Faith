@@ -16,7 +16,6 @@ var prev_state
 var hit
 var action_started = false
 var actions = ["Attack1", "Attack2", "run_attack1", "run_attack2", "shoot"]
-#var weights = [0, 0, 0, 25, 0]
 var weights = [30, 0, 15, 25, 30]
 var doing_run_attack1 = false
 var action_wait = 1.8
@@ -97,7 +96,6 @@ func _physics_process(delta):
 		doing_run_attack1 = false
 
 func choose_action():
-	$Label.text = states.keys()[state]
 	
 	match state:
 		states.DEAD:

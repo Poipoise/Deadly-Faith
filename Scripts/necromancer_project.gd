@@ -25,7 +25,6 @@ func _on_area_2d_body_entered(body):
 	if body.is_in_group("enemy"):
 		pass
 	else:
-		#await $AnimationPlayer.animation_finished
 		body.hurt(1, position.direction_to(body.position))
 		queue_free()
 		

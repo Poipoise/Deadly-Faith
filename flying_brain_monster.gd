@@ -20,7 +20,6 @@ func _physics_process(_delta):
 	move_and_slide()
 	
 func choose_action():
-	$Label.text = states.keys()[state]
 	match state:
 		states.DEAD:
 			$AnimationPlayer.play("death")

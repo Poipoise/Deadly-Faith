@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dr4nxue40qgor"]
+[gd_scene load_steps=34 format=3 uid="uid://dr4nxue40qgor"]
 
 [ext_resource type="Script" path="res://fire_slime.gd" id="1_oip4t"]
 [ext_resource type="Texture2D" uid="uid://cnuajn70toahe" path="res://Slime3_Idle_body.png" id="1_q178r"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://oiwbe4v2jlvo" path="res://Slime3_Walk_body.png" id="7_n6pe4"]
 [ext_resource type="PackedScene" uid="uid://dw3itna4tqcw3" path="res://hit_particle.tscn" id="7_u7he8"]
 [ext_resource type="AudioStream" uid="uid://lkuawtljm2gl" path="res://sounds/hurt_c_08-102842.mp3" id="9_5ji55"]
+[ext_resource type="AudioStream" uid="uid://7mtxh1ybhme0" path="res://sounds/Slime_fire_whoosh.mp3" id="10_lmpn0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_88haq"]
 shader = ExtResource("2_hfwbx")
@@ -1000,6 +1001,18 @@ tracks/7/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Fire_whoosh:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_nfhte"]
 resource_name = "fireattack"
@@ -1094,6 +1107,18 @@ tracks/7/path = NodePath("DashHit/CollisionShape2D:disabled")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Fire_whoosh:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -1285,12 +1310,6 @@ collision_mask = 2
 position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_4l24c")
 
-[node name="Label" type="Label" parent="."]
-offset_left = 11.0
-offset_top = 6.0
-offset_right = 51.0
-offset_bottom = 29.0
-
 [node name="Hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_5ji55")
 volume_db = 8.0
@@ -1348,6 +1367,10 @@ collision_mask = 2
 position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_vk5cj")
 disabled = true
+
+[node name="Fire_whoosh" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_lmpn0")
+volume_db = 3.0
 
 [connection signal="body_entered" from="Detect" to="." method="_on_detect_body_entered"]
 [connection signal="body_exited" from="Detect" to="." method="_on_detect_body_exited"]

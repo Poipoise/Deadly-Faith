@@ -5,14 +5,14 @@ signal Game_Over
 @export var invincible = false
 @export var roll_speed = 250
 @export var projectile : PackedScene
-@export var magic_ability = true
+@export var magic_ability = false
 @onready var Level1 : Node = get_node("/root/World/Level1")
 
 var run_speed = 135
 var sprint_speed = 250
 var attacking = false
-#var health = 5
-var health = 10
+var health = 5
+#var health = 10
 enum states {IDLE, MOVING, ATTACKING, DEAD, HURT, ROLLING, FIREBALL}
 var state = states.IDLE
 var input
@@ -27,7 +27,6 @@ var gamestart = false
 var start_pos
 var start_health
 var player_hurt = false
-var play = true
 var game_over = false
 var boss_position
 var boss_spawing_done = false
@@ -36,8 +35,8 @@ var fireball = false
 var potion_timer = false
 var time_passed = 0
 var Duration = 90.0
-#var potion = false
-var potion = true
+var potion = false
+#var potion = true
 var cutscene = false
 
 func _ready():
@@ -140,7 +139,6 @@ func _input(event):
 			
 		
 func choose_action():
-	$StateLabel.text = states.keys()[state]
 	match state:
 		states.DEAD:
 			$RunParticles.emitting = false
@@ -214,6 +212,7 @@ func hurt(amount, dir):
 		player_hurt = false
 		state = prev_state
 		if health <= 0:
+			$CanvasLayer/Label.visible = false
 			state = states.DEAD
 			
 func stamina_check():
@@ -261,7 +260,7 @@ func _on_death_screen_respawn():
 
 
 func _on_sound_timer_timeout():
-	play = true
+	$CanvasLayer/Label.visible = false
 
 
 func _on_camp_fire_set_spawn():
@@ -293,11 +292,13 @@ func health_change():
 	
 	
 func _on_level_finished_cutscene_starter_start_cutscene(_placeholder, _placeholder2):
+	cutscene = true
 	movement_allowed = false
 	$AnimationPlayer.play("Idle")
 
 
 func _on_Ruins_finished(location):
+	cutscene = false
 	movement_allowed = true
 	position = location
 	_on_camp_fire_set_spawn()
@@ -309,8 +310,7 @@ func _on_necromancer_died():
 
 
 func _on_tutorial_cutscene_finished():
-	#position = Vector2(1088, -62)
-	pass
+	position = Vector2(1088, -62)
 
 
 func _on_golem_boss_golem_dead():
@@ -342,4 +342,21 @@ func Asrea_phase_change():
 	$Camera2D.offset.x = 0
 	$Camera2D.offset.y = 0
 	cutscene = false
+	$CanvasLayer/Label.visible = true
+	$LabelTimer.start()
 	
+
+
+func Astrea_cutscene():
+	movement_allowed = false
+	$AnimationPlayer.play("Idle")
+
+
+func _on_betrayal_cutscene_finished():
+	movement_allowed = true
+
+
+func _on_atrea_boss_ending():
+	cutscene = true
+	movement_allowed = false
+	$AnimationPlayer.play("Idle")

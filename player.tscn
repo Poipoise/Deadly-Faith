@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://dycinrmvaxssg"]
+[gd_scene load_steps=45 format=3 uid="uid://dycinrmvaxssg"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_xokv2"]
 [ext_resource type="PackedScene" uid="uid://cd2w4vto3nrvy" path="res://player_project.tscn" id="2_88tyu"]
@@ -988,6 +988,10 @@ region = Rect2(33, 34, 29, 28)
 default_font = ExtResource("23_chx0s")
 default_font_size = 16
 
+[sub_resource type="Theme" id="Theme_bg854"]
+default_font = ExtResource("23_chx0s")
+default_font_size = 30
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 13
@@ -1010,11 +1014,6 @@ libraries = {
 "": SubResource("AnimationLibrary_2pm27")
 }
 autoplay = "Idle"
-
-[node name="StateLabel" type="Label" parent="."]
-visible = false
-offset_right = 40.0
-offset_bottom = 23.0
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 0
@@ -1048,8 +1047,8 @@ volume_db = 3.0
 stream = SubResource("AudioStreamRandomizer_lre8w")
 volume_db = -4.0
 
-[node name="SoundTimer" type="Timer" parent="."]
-wait_time = 0.5
+[node name="LabelTimer" type="Timer" parent="."]
+wait_time = 5.0
 one_shot = true
 
 [node name="Hit" type="AudioStreamPlayer2D" parent="."]
@@ -1060,6 +1059,7 @@ volume_db = 8.0
 layer = 0
 
 [node name="healing_bar" type="TextureProgressBar" parent="CanvasLayer"]
+visible = false
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -1086,7 +1086,25 @@ offset_bottom = 645.0
 theme = SubResource("Theme_ypw03")
 text = "90"
 
+[node name="Label" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -401.0
+offset_top = -164.0
+offset_right = 393.0
+offset_bottom = -89.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_bg854")
+text = "Destroy the four crystals
+to disable Astrea's invulnerable"
+horizontal_alignment = 1
+
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="timeout" from="StaminaCooldown" to="." method="_on_stamina_cooldown_timeout"]
 [connection signal="timeout" from="EmptyStaminaCooldown" to="." method="_on_empty_stamina_cooldown_timeout"]
-[connection signal="timeout" from="SoundTimer" to="." method="_on_sound_timer_timeout"]
+[connection signal="timeout" from="LabelTimer" to="." method="_on_sound_timer_timeout"]

@@ -1,6 +1,8 @@
 extends CharacterBody2D
 @export var speed = 350.0
 
+func _ready():
+	$Timer.start()
 
 func _physics_process(delta):
 	var collision = move_and_collide(velocity * delta)

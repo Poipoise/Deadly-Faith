@@ -40,7 +40,6 @@ func _physics_process(_delta):
 		$BossMusic.stop()
 		$CanvasLayer/HealthBar.hide()
 		
-	# Comment bellow if changed to only one boss song
 	if song_time:
 		song_time = false
 		await $BossMusic.finished
@@ -49,7 +48,6 @@ func _physics_process(_delta):
 			
 	
 func choose_action():
-	$Label.text = states.keys()[state]
 	match state:
 		states.DEAD:
 			song_time = false
@@ -80,7 +78,6 @@ func choose_action():
 			if not attacking:
 				$AnimationPlayer.play("projectile fire")
 				attacking = true
-				#Fireable = false
 				await $AnimationPlayer.animation_finished
 				$Fireball.play()
 				var Projectile = projectile.instantiate()
@@ -105,14 +102,11 @@ func choose_action():
 			if INAREATOBARRAGE and TIMETOATTACK:
 				$AnimationPlayer.play("Projectile Barrage")
 				var r = deg_to_rad(360)
-				#print("FIRED")
 				TIMETOATTACK = false
 				await $AnimationPlayer.animation_finished
 				while counter < fireballNumber:
 					var angle = (r) / fireballNumber
-					#shoot_direction = shoot_direction.from_angle(angle)
 					shoot_direction = shoot_direction.rotated(angle)
-					#print(shoot_direction)
 					var Projectile = projectile.instantiate()
 					Projectile.start(position, shoot_direction)
 					Level1.add_child(Projectile)

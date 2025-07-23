@@ -49,10 +49,8 @@ func nextPhrase() -> void:
 	
 	while $Text.visible_characters < len($Text.text):
 		$Text.visible_characters += 1
-		
 		$Timer.start()
 		await $Timer.timeout
-	
 	finished = true
 	phraseNum += 1
 	return

@@ -73,8 +73,6 @@ func _physics_process(delta):
 		choose_action(delta)
 	
 func choose_action(delta):
-	$Label.text = states.keys()[state]
-	
 	match state:
 		states.DEAD:
 			song_time = false

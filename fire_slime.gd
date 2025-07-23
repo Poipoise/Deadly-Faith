@@ -22,7 +22,6 @@ func _physics_process(_delta):
 	move_and_slide()
 	
 func choose_action():
-	$Label.text = states.keys()[state]
 	match state:
 		states.DEAD:
 			$AnimationPlayer.play("Death")
@@ -37,7 +36,6 @@ func choose_action():
 			velocity = position.direction_to(player.position) * speed
 		states.ATTACK:
 			if not attacking:
-				#$Growl.play()
 				velocity = Vector2.ZERO
 				attacking = true
 				$AnimationPlayer.play("fireattack")
@@ -78,7 +76,6 @@ func choose_action():
 
 func hurt(amount, dir):
 	if not hit:
-		print("hit")
 		hit = true
 		$Hit.play()
 		health -= amount

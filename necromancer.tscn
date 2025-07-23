@@ -474,11 +474,6 @@ one_shot = true
 wait_time = 1.3
 one_shot = true
 
-[node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Idle"
-
 [node name="Fireball" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_bhub3")
 

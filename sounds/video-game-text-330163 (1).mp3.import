@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dyqxb2y17w8q1"
+path="res://.godot/imported/video-game-text-330163 (1).mp3-9b4f7c6b4edb9b128854a2bc8f50ebcf.mp3str"
+
+[deps]
+
+source_file="res://sounds/video-game-text-330163 (1).mp3"
+dest_files=["res://.godot/imported/video-game-text-330163 (1).mp3-9b4f7c6b4edb9b128854a2bc8f50ebcf.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

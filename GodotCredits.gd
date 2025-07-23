@@ -25,8 +25,11 @@ var credits = [
 		"Deadly Faith"
 	],[
 		"Programming",
-		"Anthony Melgar",
-		"Andrew Palchevskiy"
+		"Anthony",
+		"Andrew"
+	],[
+		"Level Design",
+		"Anthony"
 	],[
 		"Art",
 		"RF_Catacombs",
@@ -96,7 +99,10 @@ var credits = [
 		"by Dreamir",
 		"",
 		"Women Knight Portrait",
-		"by CaptainSkolot"
+		"by CaptainSkolot",
+		"",
+		"Gorgon Pixel Character",
+		"by Free Game Assets (GUI, Sprite, Tilesets)"
 		
 	],[
 		"Music",
@@ -166,11 +172,7 @@ var credits = [
 		"Sound Effects",
 		"Retrieved from Pixabay"
 	],[
-		"Testers",
-		"Who needs them"
-	],[
 		"Tools used",
-		"Stable Diffusion",
 		"Developed with Godot Engine",
 		"https://godotengine.org/license",
 		"",
@@ -234,9 +236,7 @@ func _process(delta):
 func finish():
 	if not finished:
 		finished = true
-		# This is called when the credits finish and returns to the main menu
 		$AnimationPlayer.play("Thank_You_fade_in")
-		#get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 
 func add_line():
@@ -244,7 +244,6 @@ func add_line():
 	new_line.text = section.pop_front()
 	lines.append(new_line)
 	if curr_line == 0:
-		# new_line.add_color_override("font_color", title_color)
 		new_line.set("theme_override_colors/font_color", title_color)
 	$CreditsContainer.add_child(new_line)
 	
@@ -253,16 +252,6 @@ func add_line():
 		section_next = false
 	else:
 		section_next = true
-
-
-#func _unhandled_input(event):
-	#if event.is_action_pressed("ui_cancel"):
-		#finish()
-	#if event.is_action_pressed("ui_down") and !event.is_echo():
-		#speed_up = true
-	#if event.is_action_released("ui_down") and !event.is_echo():
-		#speed_up = false
-
 
 func _on_end_credits_done():
 	Activate = true

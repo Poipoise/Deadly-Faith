@@ -104,10 +104,10 @@ func _on_death_screen_respawn():
 func _on_start_screen_start_game():
 	#If you want to skip the beginning dialogue uncomment start = true and comment $Cutscene.show() 
 	#also turn the cutscene variable in the cutscene script to false/off
-	#$Cutscene.show()
+	$Cutscene.show()
 	
 	#If you wish to skip tutorial comment tutorial = true in _on_cutscene_finished and turn off cutscene variabble in tutorial cutscene script
-	start = true
+	#start = true
 	$Beginning.play()
 
 
@@ -122,7 +122,7 @@ func _on_cutscene_finished():
 	start = true
 	$door.play()
 	$Beginning.stop()
-	#tutorial = true
+	tutorial = true
 	
 	
 func Boss_Music_Time():
@@ -256,3 +256,12 @@ func Astrea_mud_hands():
 		hand.global_position = hand_pos
 		await get_tree().create_timer(0.5).timeout
 		
+
+
+func _on_atrea_boss_ending():
+	var enemy_nodes = get_tree().get_nodes_in_group("enemy")
+	for enemy in enemy_nodes:
+		enemy.respawn()
+	var projectile_nodes = get_tree().get_nodes_in_group("projectile")
+	for projectiles in projectile_nodes:
+		projectiles.queue_free()
