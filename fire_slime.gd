@@ -32,10 +32,12 @@ func choose_action():
 			$AnimationPlayer.play("Idlefront")
 			velocity = Vector2.ZERO
 		states.CHASE:
+			collision_layer = collision_layer | (1 << 2)
 			$AnimationPlayer.play("walk")
 			velocity = position.direction_to(player.position) * speed
 		states.ATTACK:
 			if not attacking:
+				collision_layer = collision_layer | (1 << 2)
 				velocity = Vector2.ZERO
 				attacking = true
 				$AnimationPlayer.play("fireattack")
@@ -50,6 +52,7 @@ func choose_action():
 				if not dashing:
 					dashing = true
 					velocity = Vector2.ZERO
+					collision_layer = (collision_layer | 0) & ~(1 << 2)
 					if dash_direction == "left":
 						$AnimationPlayer.play("Dashleft")
 						await get_tree().create_timer(0.3).timeout
@@ -67,6 +70,7 @@ func choose_action():
 						await get_tree().create_timer(0.3).timeout
 						velocity.y = 1 * speed * 8
 					await get_tree().create_timer(0.7).timeout
+					collision_layer = collision_layer | (1 << 2)
 					$AnimationPlayer.play("Idlefront")
 					velocity.x = 0
 					velocity.y = 0
@@ -108,7 +112,6 @@ func _on_detect_body_exited(_body):
 
 func _on_attack_detect_body_entered(_body):
 	if not dashing and state != states.DASH:
-		
 		state = states.ATTACK
 
 

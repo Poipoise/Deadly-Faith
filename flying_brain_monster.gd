@@ -5,7 +5,7 @@ enum states {IDLE, CHASE, ATTACK, DEAD, HURT,SUMMONING}
 var state = states.IDLE
 var player
 var attacking = false
-var health = 5
+var health = 4
 var start_pos
 var start_health
 var summoned = false

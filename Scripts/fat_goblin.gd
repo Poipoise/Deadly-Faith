@@ -16,6 +16,7 @@ var prev_state
 var jumping
 var dead = false
 var jump_interupt = false
+var invincible = false
 
 func _ready():
 	start_pos = position
@@ -58,72 +59,20 @@ func choose_action():
 				$AttackTimer.start()
 		states.RUN:
 			if not attacking:
+				invincible = false
 				$AnimationPlayer.play("BackwardsWalking")
 				velocity = position.direction_to(player.position) * speed * 0.9 * -1
 				if velocity.x != 0:
 					transform.x.x = sign(velocity.x) * -1
 		states.JUMP:
-			while not jumping and not dead:
-				jumping = true
-				jump_interupt = true
-				var area = $Detect
-				var collision_shape = area.get_node("CollisionShape2D")
-				var shape = collision_shape.shape
-				var area_position = area.global_position
-				var random_position : Vector2
-				var radius = shape.radius
-				var raycast : RayCast2D = $RayCast2D
-				var jumped = false
-				var space_state = get_world_2d().direct_space_state
-				raycast.global_position = global_position
-				if not attacking and not dead:
-					for i in range(30):
-						random_position = area_position + Vector2(
-							randi_range(-radius, radius),
-							randi_range(-radius, radius)
-						)
-						var radius2 = $WalkAway/CollisionShape2D.shape.radius  
-						if random_position.distance_to(player.global_position) < radius2:
-							continue 
-						var query = PhysicsPointQueryParameters2D.new()
-						query.position = random_position
-						query.collision_mask = 1  
-						var result = space_state.intersect_point(query)
-						if result.size() > 0:
-							continue
-						
-						
-						raycast.look_at(random_position)  
-						raycast.force_raycast_update()  
-						var ray_query = PhysicsRayQueryParameters2D.create(global_position, random_position)
-						var ray_result = space_state.intersect_ray(ray_query)
-						if ray_result:
-							continue
-						
-						jumped = true
-						$CollisionShape2D.disabled = true
-						$AnimationPlayer.play("Jump")
-						await $AnimationPlayer.animation_finished
-						self.visible = false
-						await get_tree().create_timer(2).timeout
-						global_position = random_position
-						self.visible = true
-						$AnimationPlayer.play("Landing")
-						await $AnimationPlayer.animation_finished
-						$CollisionShape2D.disabled = false
-						# If there’s no collision at the random position, teleport there
-						jump_interupt = false
-						state = states.ATTACK
-						break
-					if not jumped and not dead:
-						$Run_timer.start()
-						jump_interupt = false
-						state = states.RUN
+			velocity = Vector2.ZERO
+			if not jumping and not dead:
+				perform_jump()
 						
 
 
 func hurt(amount, dir):
-	if not hit:
+	if not hit and not invincible:
 		hit = true
 		$Hit.play()
 		health -= amount
@@ -181,8 +130,76 @@ func respawn():
 	player = null
 	dead = false
 	jump_interupt = false
+	invincible = false
 
 
 func _on_run_timer_timeout():
 	jumping = false
 	state = states.JUMP
+
+
+func perform_jump():
+	jumping = true
+	jump_interupt = true
+
+	var area: Area2D = $Detect
+	var collision_shape: CollisionShape2D = area.get_node("CollisionShape2D")
+	var shape := collision_shape.shape as CircleShape2D
+	var area_position: Vector2 = area.global_position
+	var radius: float = shape.radius
+
+	var space_state: PhysicsDirectSpaceState2D = get_world_2d().direct_space_state
+	var jumped: bool = false
+
+	for i in range(30):
+		var angle := randf_range(0.0, TAU)
+		var distance := randf_range(0.0, radius)
+		var offset := Vector2(cos(angle), sin(angle)) * distance
+		var random_position: Vector2 = area_position + offset
+
+		var player_distance_limit: float = ($WalkAway.get_node("CollisionShape2D").shape as CircleShape2D).radius
+		if random_position.distance_to(player.global_position) < player_distance_limit:
+			continue
+
+		var point_query := PhysicsPointQueryParameters2D.new()
+		point_query.position = random_position
+		point_query.collision_mask = 1
+		var point_result := space_state.intersect_point(point_query)
+		if point_result.size() > 0:
+			continue
+
+		var ray_query := PhysicsRayQueryParameters2D.new()
+		ray_query.from = global_position
+		ray_query.to = random_position
+		ray_query.exclude = [self]
+		ray_query.collision_mask = 1
+		var ray_result := space_state.intersect_ray(ray_query)
+		if ray_result:
+			continue
+
+		# Jump!
+		jumped = true
+		invincible = true
+		$AnimationPlayer.play("Jump")
+		await $AnimationPlayer.animation_finished
+
+		self.visible = false
+		await get_tree().create_timer(2.0).timeout
+		global_position = random_position
+		self.visible = true
+
+		$AnimationPlayer.play("Landing")
+		await $AnimationPlayer.animation_finished
+
+		invincible = false
+		jump_interupt = false
+		state = states.ATTACK
+		jumping = false
+		return
+
+# If no valid location found after 30 tries
+	if not jumped and not dead:
+		$Run_timer.start()
+		jump_interupt = false
+		state = states.RUN
+		jumping = false

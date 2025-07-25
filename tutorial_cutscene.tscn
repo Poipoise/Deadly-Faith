@@ -179,6 +179,7 @@ _data = {
 scale = Vector2(0.75, 0.75)
 transform = Transform2D(0.75, 0, 0, 0.75, 0, 0)
 script = ExtResource("1_4pe04")
+cutscene = false
 
 [node name="ColorRect" type="TextureRect" parent="."]
 modulate = Color(1, 1, 1, 0)

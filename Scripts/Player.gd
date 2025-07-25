@@ -310,7 +310,8 @@ func _on_necromancer_died():
 
 
 func _on_tutorial_cutscene_finished():
-	position = Vector2(1088, -62)
+	#position = Vector2(1088, -62)
+	pass
 
 
 func _on_golem_boss_golem_dead():

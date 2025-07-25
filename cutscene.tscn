@@ -113,6 +113,7 @@ _data = {
 
 [node name="Cutscene" type="CanvasLayer"]
 script = ExtResource("1_cgmnk")
+cutscene = false
 
 [node name="ColorRect" type="TextureRect" parent="."]
 modulate = Color(1, 1, 1, 0)
