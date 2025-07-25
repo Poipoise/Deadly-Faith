@@ -1,4 +1,4 @@
-[gd_scene load_steps=110 format=3 uid="uid://c6purqvnh5obf"]
+[gd_scene load_steps=109 format=3 uid="uid://c6purqvnh5obf"]
 
 [ext_resource type="PackedScene" uid="uid://dycinrmvaxssg" path="res://player.tscn" id="1_a16pe"]
 [ext_resource type="Script" path="res://Scripts/level_1.gd" id="1_vgdc2"]
@@ -73,7 +73,6 @@
 [ext_resource type="PackedScene" uid="uid://di45x2fe4o06m" path="res://astrea_shield_generator.tscn" id="71_g7dhm"]
 [ext_resource type="PackedScene" uid="uid://clrea3xn4mlhq" path="res://betrayal_cutscene.tscn" id="72_e8r08"]
 [ext_resource type="PackedScene" uid="uid://ciob5jp0h0p7i" path="res://ending_cutscene.tscn" id="74_lhb70"]
-[ext_resource type="Script" path="res://Node2D.gd" id="74_xt72b"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l2423"]
 texture = ExtResource("2_80435")
@@ -42375,9 +42374,6 @@ shape = SubResource("RectangleShape2D_4k702")
 
 [node name="EndingCutscene" parent="." instance=ExtResource("74_lhb70")]
 
-[node name="Node2D" type="Node2D" parent="."]
-script = ExtResource("74_xt72b")
-
 [connection signal="orb_spawner" from="." to="Level1/light_orb_spawner" method="_on_world_orb_spawner"]
 [connection signal="tutorial_next" from="." to="Tutorial_cutscene" method="next_chat"]
 [connection signal="Game_Over" from="Level1/Player" to="." method="_on_player_game_over"]
@@ -42393,8 +42389,8 @@ script = ExtResource("74_xt72b")
 [connection signal="Golem_dead" from="Level1/Golem_Boss" to="Golem_exit_door" method="_on_golem_boss_golem_dead"]
 [connection signal="scholar_death" from="Level1/Dark_Scholar" to="." method="_on_dark_scholar_scholar_death"]
 [connection signal="Astrea_intro" from="Level1/Atrea_boss" to="." method="Boss_Music_Time"]
-[connection signal="Astrea_intro" from="Level1/Atrea_boss" to="Level1/Player" method="_on_boss_spawning_boss_time"]
 [connection signal="Astrea_intro" from="Level1/Atrea_boss" to="Level1/Player" method="_on_astrea_starter_astrea_time"]
+[connection signal="Astrea_intro" from="Level1/Atrea_boss" to="Level1/Player" method="_on_boss_spawning_boss_time"]
 [connection signal="Ending" from="Level1/Atrea_boss" to="." method="_on_atrea_boss_ending"]
 [connection signal="Ending" from="Level1/Atrea_boss" to="Level1/Player" method="_on_atrea_boss_ending"]
 [connection signal="Ending" from="Level1/Atrea_boss" to="EndingCutscene" method="_Astrea_ending_start"]
@@ -42457,9 +42453,9 @@ script = ExtResource("74_xt72b")
 [connection signal="crystal_destroyed" from="Astrea_shield_generator3" to="Level1/Atrea_boss" method="crystal_broken"]
 [connection signal="crystal_destroyed" from="Astrea_shield_generator4" to="Level1/Atrea_boss" method="crystal_broken"]
 [connection signal="finished" from="BetrayalCutscene" to="." method="_on_astrea_starter_astrea_time"]
-[connection signal="finished" from="BetrayalCutscene" to="Level1/Player" method="_on_boss_spawning_boss_time"]
 [connection signal="finished" from="BetrayalCutscene" to="Level1/Player" method="_on_astrea_starter_astrea_time"]
 [connection signal="finished" from="BetrayalCutscene" to="Level1/Player" method="_on_betrayal_cutscene_finished"]
+[connection signal="finished" from="BetrayalCutscene" to="Level1/Player" method="_on_boss_spawning_boss_time"]
 [connection signal="finished" from="BetrayalCutscene" to="Level1/Atrea_boss" method="_on_boss_spawning_boss_time"]
 [connection signal="finished" from="EndingCutscene" to="EndCredits" method="_on_final_cutscene_finished"]
 
