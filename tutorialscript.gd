@@ -46,7 +46,7 @@ func nextPhrase() -> void:
 	$Text.visible_characters = 0
 	
 	var img = "res://Portraits/" + dialog[phraseNum]["Name"] + dialog[phraseNum]["Emotion"] + ".png"
-	if FileAccess.file_exists(img):
+	if ResourceLoader.exists(img):
 		$Portrait.texture = load(img)
 	else: $Portrait.texture = null
 	

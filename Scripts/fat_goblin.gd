@@ -63,7 +63,7 @@ func choose_action():
 				if velocity.x != 0:
 					transform.x.x = sign(velocity.x) * -1
 		states.JUMP:
-			while not jumping:
+			while not jumping and not dead:
 				jumping = true
 				jump_interupt = true
 				var area = $Detect
@@ -76,7 +76,7 @@ func choose_action():
 				var jumped = false
 				var space_state = get_world_2d().direct_space_state
 				raycast.global_position = global_position
-				if not attacking:
+				if not attacking and not dead:
 					for i in range(30):
 						random_position = area_position + Vector2(
 							randi_range(-radius, radius),
@@ -101,6 +101,7 @@ func choose_action():
 							continue
 						
 						jumped = true
+						$CollisionShape2D.disabled = true
 						$AnimationPlayer.play("Jump")
 						await $AnimationPlayer.animation_finished
 						self.visible = false
@@ -109,11 +110,12 @@ func choose_action():
 						self.visible = true
 						$AnimationPlayer.play("Landing")
 						await $AnimationPlayer.animation_finished
+						$CollisionShape2D.disabled = false
 						# If there’s no collision at the random position, teleport there
 						jump_interupt = false
 						state = states.ATTACK
 						break
-					if not jumped:
+					if not jumped and not dead:
 						$Run_timer.start()
 						jump_interupt = false
 						state = states.RUN

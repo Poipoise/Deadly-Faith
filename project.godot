@@ -13,7 +13,7 @@ config_version=5
 config/name="Deadly Faith"
 run/main_scene="res://level_1.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://Portraits/AstreaSmile.png"
 
 [display]
 

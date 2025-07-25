@@ -16,6 +16,6 @@
 	{"Name":"Aragorn", "Emotion": "Joy", "Text":"OF COURSE! It is my duty to walk this path. Every foe in my way will be struck down for my sword has known battle and it will now be swung for a greater purpose."},
 	{"Name":"Celestina", "Emotion": "Concern", "Text":"Honey *cough* it's not your fault. You don't have got to those ruins. I would rather prefer you *cough* here at home than out in a battle."},
 	{"Name":"Aragorn", "Emotion": "Tears1", "Text":"But I have to go! I can't just sit here and watch you die! Now that the Goddess it will all be alright. I just need to have faith in Goddess Astrea."},
-	{"Name":"Astrea", "Emotion": "cheerful", "Text":"Ho ho. You are correct. Just hold your faith in me and you will make it to the end of your quest."},
-	{"Name":"Astrea", "Emotion": "Neutral", "Text":"Now lets set you off on your journey!"},
+	{"Name":"Astrea", "Emotion": "Cheerful", "Text":"Ho ho. You are correct. Just hold your faith in me and you will make it to the end of your quest."},
+	{"Name":"Astrea", "Emotion": "Neutral", "Text":"Now lets set you off on your journey!"}
 ]
