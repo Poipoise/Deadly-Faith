@@ -147,7 +147,8 @@ func choose_action():
 			velocity = Vector2.ZERO
 			$CollisionShape2D.disabled = true
 			await $AnimationPlayer.animation_finished
-			$CanvasLayer.visible = false
+			$CanvasLayer/healing_bar.visible = false
+			$CanvasLayer/timer_label.visible = false
 			Game_Over.emit()
 			game_over = true
 		states.IDLE:
@@ -298,6 +299,7 @@ func _on_level_finished_cutscene_starter_start_cutscene(_placeholder, _placehold
 
 
 func _on_Ruins_finished(location):
+	boss_spawing_done = false
 	cutscene = false
 	movement_allowed = true
 	position = location
@@ -310,7 +312,9 @@ func _on_necromancer_died():
 
 
 func _on_tutorial_cutscene_finished():
-	position = Vector2(1088, -62)
+	#position = Vector2(1088, -62)
+	#position = Vector2(1613, -3387)
+	pass
 
 
 func _on_golem_boss_golem_dead():
@@ -348,6 +352,7 @@ func Asrea_phase_change():
 
 
 func Astrea_cutscene():
+	boss_spawing_done = false
 	movement_allowed = false
 	$AnimationPlayer.play("Idle")
 

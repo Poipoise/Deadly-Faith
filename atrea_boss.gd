@@ -375,6 +375,7 @@ func hurt(amount, _dir):
 			transform.x.x = sign(position.direction_to(player.position).x)
 			$AnimationPlayer.play("block")
 			await $AnimationPlayer.animation_finished
+			action_started = false
 		elif not invincible:
 			$Hit.play()
 			health -= amount

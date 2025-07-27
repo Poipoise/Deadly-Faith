@@ -152,50 +152,51 @@ func perform_jump():
 	var jumped: bool = false
 
 	for i in range(30):
-		var angle := randf_range(0.0, TAU)
-		var distance := randf_range(0.0, radius)
-		var offset := Vector2(cos(angle), sin(angle)) * distance
-		var random_position: Vector2 = area_position + offset
+		if not dead:
+			var angle := randf_range(0.0, TAU)
+			var distance := randf_range(0.0, radius)
+			var offset := Vector2(cos(angle), sin(angle)) * distance
+			var random_position: Vector2 = area_position + offset
 
-		var player_distance_limit: float = ($WalkAway.get_node("CollisionShape2D").shape as CircleShape2D).radius
-		if random_position.distance_to(player.global_position) < player_distance_limit:
-			continue
+			var player_distance_limit: float = ($WalkAway.get_node("CollisionShape2D").shape as CircleShape2D).radius
+			if random_position.distance_to(player.global_position) < player_distance_limit:
+				continue
 
-		var point_query := PhysicsPointQueryParameters2D.new()
-		point_query.position = random_position
-		point_query.collision_mask = 1
-		var point_result := space_state.intersect_point(point_query)
-		if point_result.size() > 0:
-			continue
+			var point_query := PhysicsPointQueryParameters2D.new()
+			point_query.position = random_position
+			point_query.collision_mask = 1
+			var point_result := space_state.intersect_point(point_query)
+			if point_result.size() > 0:
+				continue
 
-		var ray_query := PhysicsRayQueryParameters2D.new()
-		ray_query.from = global_position
-		ray_query.to = random_position
-		ray_query.exclude = [self]
-		ray_query.collision_mask = 1
-		var ray_result := space_state.intersect_ray(ray_query)
-		if ray_result:
-			continue
+			var ray_query := PhysicsRayQueryParameters2D.new()
+			ray_query.from = global_position
+			ray_query.to = random_position
+			ray_query.exclude = [self]
+			ray_query.collision_mask = 1
+			var ray_result := space_state.intersect_ray(ray_query)
+			if ray_result:
+				continue
 
-		# Jump!
-		jumped = true
-		invincible = true
-		$AnimationPlayer.play("Jump")
-		await $AnimationPlayer.animation_finished
+			# Jump!
+			jumped = true
+			invincible = true
+			$AnimationPlayer.play("Jump")
+			await $AnimationPlayer.animation_finished
 
-		self.visible = false
-		await get_tree().create_timer(2.0).timeout
-		global_position = random_position
-		self.visible = true
+			self.visible = false
+			await get_tree().create_timer(2.0).timeout
+			global_position = random_position
+			self.visible = true
 
-		$AnimationPlayer.play("Landing")
-		await $AnimationPlayer.animation_finished
+			$AnimationPlayer.play("Landing")
+			await $AnimationPlayer.animation_finished
 
-		invincible = false
-		jump_interupt = false
-		state = states.ATTACK
-		jumping = false
-		return
+			invincible = false
+			jump_interupt = false
+			state = states.ATTACK
+			jumping = false
+			return
 
 # If no valid location found after 30 tries
 	if not jumped and not dead:

@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://debhe2hulkw75"]
+[gd_scene load_steps=18 format=3 uid="uid://debhe2hulkw75"]
 
 [ext_resource type="Script" path="res://flying_brain_monster.gd" id="1_cw8cn"]
 [ext_resource type="Texture2D" uid="uid://bxyuk65q373p3" path="res://FlyingBrainMonster_spriteSheet.png" id="1_ydg2g"]
 [ext_resource type="Shader" path="res://Hit_Flash.gdshader" id="2_rqmpy"]
 [ext_resource type="AudioStream" uid="uid://lkuawtljm2gl" path="res://sounds/hurt_c_08-102842.mp3" id="3_oif2n"]
 [ext_resource type="PackedScene" uid="uid://dw3itna4tqcw3" path="res://hit_particle.tscn" id="5_0ju47"]
+[ext_resource type="AudioStream" uid="uid://smy5x3mtmdm4" path="res://sounds/Astrea_growl.mp3" id="6_jx0tk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bffc7"]
 resource_local_to_scene = true
@@ -66,6 +67,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_rqrr8"]
@@ -130,6 +143,18 @@ tracks/4/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("growl:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_obg2t"]
 resource_name = "bite"
@@ -158,6 +183,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [true, false, true]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("growl:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_731xb"]
 resource_name = "death"
@@ -172,6 +209,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [21, 27]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_lnwe1"]
@@ -263,6 +312,9 @@ stream = ExtResource("3_oif2n")
 volume_db = 8.0
 
 [node name="HitParticle" parent="." instance=ExtResource("5_0ju47")]
+
+[node name="growl" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_jx0tk")
 
 [connection signal="body_entered" from="DetectArea" to="." method="_on_detect_area_body_entered"]
 [connection signal="body_exited" from="DetectArea" to="." method="_on_detect_area_body_exited"]

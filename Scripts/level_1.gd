@@ -63,7 +63,7 @@ func _process(_delta):
 		if dummy_hit and run and not attacked:
 			attacked = true
 			tutorial_next.emit()
-			await get_tree().create_timer(7).timeout
+			await get_tree().create_timer(15).timeout
 			orb_spawner.emit()
 			
 		if attacked and not dodge_done and Input.is_action_just_pressed("roll"):

@@ -11,6 +11,7 @@ var start_health
 var summoned = false
 var prev_state
 var hit
+var dead = false
 func _ready():
 	start_pos = position
 	start_health = health
@@ -40,7 +41,7 @@ func choose_action():
 			if distance < 170:
 				state = states.ATTACK
 		states.ATTACK:
-			if not attacking:
+			if not attacking and not dead:
 				attacking = true
 				velocity = Vector2.ZERO
 				await get_tree().create_timer(0.5).timeout
@@ -72,6 +73,7 @@ func hurt(amount, dir):
 		hit = false
 		state = prev_state
 		if health <= 0:
+			dead = true
 			state = states.DEAD
 
 
@@ -90,8 +92,10 @@ func _on_area_2d_body_entered(body):
 func respawn():
 	set_physics_process(true)
 	$CollisionShape2D.disabled = false
+	$Sprite2D.show()
 	position = start_pos
 	health = start_health
+	dead = false
 	await get_tree().create_timer(0.1).timeout
 	state = states.IDLE
 	player = null
